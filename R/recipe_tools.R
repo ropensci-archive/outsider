@@ -1,11 +1,13 @@
-download <- function(url) {
+download <- function(url, dr) {
   # download to temporary folder
+  download.file(url = url, destfile = file.path(dr, 'download'))
 }
 
-setup <- function() {
-  # extract
-  # build
-  # place in libs
+bash <- function(scrpt_pth, variables) {
+  script <- infuser::infuse(file_or_string = scrpt_pth, variables)
+  write(x = script, file = file.path(variables[['tmpdr']], 'script.sh'))
+  sys::exec_wait(cmd = 'bash', args = file.path(variables[['tmpdr']],
+                                                'script.sh'))
 }
 
 args_extract <- function(cmd, help_arg = '-help') {
@@ -19,4 +21,38 @@ args_extract <- function(cmd, help_arg = '-help') {
   args <- help_lines[grepl(pattern = '^\\s?-', x = help_lines)]
   args <- sub(pattern = '^\\s?-', replacement = '', x = args)
   sub(pattern = '\\s.*$', replacement = '', x = args)
+}
+
+ostype_get <- function() {
+  sysinfo <- Sys.info()
+  if (grepl(x = sysinfo[['sysname']], pattern = 'linux', ignore.case = TRUE)) {
+    if (grepl(x = sysinfo[['machine']], pattern = '64')) {
+      res <- 'linux64'
+    } else {
+      res <- 'linux32'
+    }
+  } else if (grepl(x = sysinfo[['sysname']], pattern = 'darwin',
+                   ignore.case = TRUE)) {
+    res <- 'osx'
+  } else {
+    stop('Unsupported OS.')
+  }
+  res
+}
+
+variables_get <- function(rcppth, lbpth) {
+  tmpdr <- tempdir()
+  if (!dir.exists(tmpdr)) dir.create(tmpdr)
+  variables <- yaml::read_yaml(file = file.path(rcppth, 'variables.yml'))
+  # check for OS type
+  variables[['ostype']] <- variables[['ostype']][[ostype_get()]]
+  variables <- c(variables, list('lbpth' = lbpth, 'tmpdr' = tmpdr))
+  variables
+}
+
+meta_get <- function(rcppth, variables) {
+  meta <- infuser::infuse(file_or_string = file.path(rcppth, 'meta.yml'),
+                          variables)
+  meta <- yaml::read_yaml(text = meta)
+  meta
 }

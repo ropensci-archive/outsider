@@ -1,16 +1,22 @@
 
 
-flpth <- '/home/dom/Desktop/cmdr'
-lbpth <- file.path(flpth, 'lib')
+recipe_install <- function() {
+  # paths
+  lbpth <- '/home/dom/Desktop/cmdr/lib'
+  rcppth <- file.path('recipes', 'blast')
+  # variables
+  variables <- variables_get(rcppth = rcppth, lbpth = lbpth)
+  # meta
+  meta <- meta_get(rcppth = rcppth, variables = variables)
+  # download
+  download(url = meta[['source']][['url']], dr = variables[['tmpdr']])
+  # build
+  bash(scrpt_pth = file.path(rcppth, 'build.sh'), variables = variables)
+  # test
+  bash(scrpt_pth = file.path(rcppth, 'test.sh'), variables = variables)
+  # clean up
+  unlink(x = variables[['tmpdr']], recursive = TRUE, force = TRUE)
+  dir.create(tempdir())
+}
 
-url <- 'ftp://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/LATEST/ncbi-blast-2.7.1+-x64-linux.tar.gz'
-download.file(url = url, destfile = file.path(lbpth, 'blast'))
 
-sys::exec_wait(cmd = 'tar', args = c('zxf', file.path(lbpth, 'blast'), '-C',
-                                     lbpth))
-file.remove(file.path())
-sys::exec_wait(cmd = 'mv', args = c('zxf', file.path(lbpth, 'blast'), '-C',
-                                     lbpth))
-
-
-cmd <- file.path(lbpth, 'blastn')

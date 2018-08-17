@@ -1,0 +1,13 @@
+package:
+  name: blast tools
+  version: {{ version }}
+  cmd:
+    - blastn
+    - makeblastdb
+
+source:
+  url: ftp://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/{{ version }}/ncbi-blast-{{ version }}+-{{ ostype }}.tar.gz
+
+build: build.sh
+
+test: test.sh
