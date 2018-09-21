@@ -1,7 +1,7 @@
-Package: cmdr
+Package: outsider
 Type: Package
 Title: Install and Run External Programs in R
-Version: 0.1.0
+Version: 0.0.0
 Author: D.J. Bennett
 Maintainer: D.J. Bennett <dominic.john.bennett@gmail.com>
 Description: TODO
