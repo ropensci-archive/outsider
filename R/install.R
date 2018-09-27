@@ -9,3 +9,12 @@ import <- function(fname, repo) {
   pkgnm <- repo_to_pkgnm(repo)
   getFromNamespace(x = fname, ns = pkgnm)
 }
+
+module_help <- function(repo, fname = NULL) {
+  pkgnm <- repo_to_pkgnm(repo)
+  if (is.null(fname)) {
+    utils::help(package = (pkgnm))
+  } else {
+    utils::help(package = (pkgnm), topic = (fname))
+  }
+}
