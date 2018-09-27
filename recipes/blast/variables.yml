@@ -1,6 +1,0 @@
-# update these values when needed
-version: 2.7.1
-ostype:
-  linux32: ia32-linux
-  linux64: x64-linux
-  osx: universal-macosx
