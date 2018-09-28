@@ -3,9 +3,20 @@ module_install <- function(repo) {
                            repo, '/master/Dockerfile')
   docker_build(img_id = repo, url = dockerfile_url)
   devtools::install_github(repo = repo)
+  pkgnm <- repo_to_pkgnm(repo)
+  invisible(pkgnm %in% installed.packages())
 }
 
-import <- function(fname, repo) {
+module_uninstall <- function(repo) {
+  pkgnm <- repo_to_pkgnm(repo)
+  if (pkgnm %in% installed.packages()) {
+    docker_rm(img_id = repo)
+    suppressMessages(utils::remove.packages(pkgs = pkgnm))
+  }
+  invisible(!pkgnm %in% installed.packages())
+}
+
+module_import <- function(fname, repo) {
   pkgnm <- repo_to_pkgnm(repo)
   getFromNamespace(x = fname, ns = pkgnm)
 }

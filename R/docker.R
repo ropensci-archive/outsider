@@ -3,6 +3,11 @@ docker_cmd <- function(args) {
   res == 0
 }
 
+docker_rm <- function(img_id) {
+  args <- c('image', 'rm', img_id)
+  docker_cmd(args)
+}
+
 docker_build <- function(img_id, url) {
   args <- c('build', '-t', img_id, url)
   docker_cmd(args = args)
