@@ -83,6 +83,19 @@
               std_err = log_get('program_err'))
 }
 
+#' @name .docker_cp
+#' @title Copy files to and from container
+#' @description Copy files to and from running Docker container
+#' @details Container foldes are indicated with
+#' \code{[container_id]:[filepath]}.
+#' @return Logical
+#' @export
+.docker_cp <- function(origin, dest) {
+  args <- c('cp', origin, dest)
+  .docker_cmd(args = args, std_out = log_get('docker_out'),
+              std_err = log_get('docker_err'))
+}
+
 #' @name .docker_ps_count
 #' @title Count docker processes
 #' @description Count the number of running docker containers.
