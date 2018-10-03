@@ -12,12 +12,32 @@ Run programs outside of R <img src="logo.png" height="200" align="right"/>
 Installation
 ------------
 
-**Nothing to install yet**
+To install the development version of the package ...
+
+``` r
+devtools::install_github('AntonelliLab/outsider')
+```
+
+Additionally, you will also need to install **Docker desktop**. To install Docker visit the Docker website and follow the instructions for your operating system: [Install Docker](https://www.docker.com/products/docker-desktop).
 
 Quick examples
 --------------
 
-**They're on their way**
+``` r
+library(outsider)
+# outsider modules are hosted on GitHub
+# this repo is a demonstration outsider module
+# it contains a function for printing 'Hello World!' in Ubuntu 18.04
+repo <- 'dombennett/om..hello.world..1.0'
+module_install(repo = repo)
+# look up the help files for the module
+module_help(repo = repo)
+# import the 'hello_world' function
+hello_world <- module_import(fname = 'hello_world', repo = repo)
+# run the imported function
+hello_world()
+#> Hello World!
+```
 
 Available external programs
 ---------------------------
@@ -31,7 +51,7 @@ How does it work?
 
 Things can a get a little existentialist when coding. Not everything works; bugs, errors and failures. This can be especially true when you're forced to pull code together from multiple programs and on different operating systems. But even during these darkest moments, there can be light.
 
-The light in this case is a big, blue whale called [docker](https://www.docker.com/).
+The light in this case comes from a big, blue whale called [docker](https://www.docker.com/) and a weird cephalopod-mammal hybrid called [GitHub](https://github.com/).
 
 Version
 -------

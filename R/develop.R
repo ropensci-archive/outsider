@@ -7,41 +7,61 @@
 #' @param ... Command and arguments
 #' @return Logical
 #' @export
-.run <- function(pkgnm, files_to_send, files_to_retrieve, ...) {
+.run <- function(pkgnm, files_to_send, ...) {
   ids <- .ids_get(pkgnm = pkgnm)
   # launch container
   .docker_start(cntnr_id = ids[['cntnr_id']], img_id = ids[['img_id']])
-  copy_to_docker(cntnr_id = ids[['cntnr_id']], cntnr_dir = , host_flpths)
+  # close container after function has completed
   on.exit(.docker_stop(cntnr_id = ids[['cntnr_id']]))
+  # copy files_to_send to container
+  .copy_to_docker(cntnr_id = ids[['cntnr_id']], host_flpths = files_to_send)
   # run command
-  invisible(.docker_exec(cntnr_id = ids[['cntnr_id']], ...))
+  success <- .docker_exec(cntnr_id = ids[['cntnr_id']], ...)
+  # retrieve files
+  .copy_from_docker(cntnr_id = ids[['cntnr_id']])
+  invisible(success)
 }
 
+#' @name .args_parse
+#' @title Parse arguments
+#' @description Parse arguments.
+#' @param ... Command and arguments
+#' @return Character vector
+#' @export
+.args_parse <- function(...) {
+  args <- unlist(as.list(match.call())[-1])
+  if (any(grepl(pattern = '\\s', x = args))) {
+    msg <- paste0('Arguments should be separate elements without spaces.\n',
+                  'e.g. c("-a", "1", "-d", "2"), not "-a 1 -d 2"')
+    stop(msg, .call = FALSE)
+  }
+  args
+}
+
+#' @name .which_args_are_filepaths
+#' @title Determine which args are filepaths
+#' @description Return filepaths from args.
+#' @param args Character vector of arguments
+#' @return Character vector
+#' @export
 .which_args_are_filepaths <- function(args) {
   files_and_folders <- vapply(X = args, FUN = function(x) file.exists(x) ||
                                 dir.exists(x), FUN.VALUE = logical(1))
   names(files_and_folders)[files_and_folders]
 }
 
-copy_to_docker <- function(cntnr_id, cntnr_dir, host_flpths) {
+.copy_to_docker <- function(cntnr_id, host_flpths) {
   for (host_flpth in host_flpths) {
     outsider::.docker_cp(origin = host_flpth,
-                         dest = paste0(cntnr_id, ':', cntnr_dir))
+                         dest = paste0(cntnr_id, ':', '/working_dir/'))
   }
 }
 
-copy_from_docker <- function(cntnr_id, host_dir, cntnr_flpths) {
-  for (cntnr_flpth in cntnr_flpths) {
-    outsider::.docker_cp(origin = host_flpth,
-                         dest = paste0(cntnr_id, ':', cntnr_dir))
-  }
+.copy_from_docker <- function(cntnr_id) {
+  outsider::.docker_cp(origin = paste0(cntnr_id, ':', '/working_dir/.'),
+                       dest = '.')
 }
 
 args_check <- function(arg_vctr) {
-  if (any(grepl(pattern = '\\s', x = arg_vctr))) {
-    msg <- paste0('Arguments should be separate elements without spaces.\n',
-                  'e.g. c("-a", "1", "-d", "2"), not "-a 1 -d 2"')
-    stop(msg, .call = FALSE)
-  }
+  
 }
-

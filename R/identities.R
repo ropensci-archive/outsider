@@ -31,7 +31,8 @@
 #' @export
 .pkgnm_to_repo <- function(pkgnm) {
   prts <- strsplit(x = pkgnm, split = '\\.\\.')[[1]]
-  paste0(prts[[3]], '/', prts[[1]], '..', prts[[2]])
+  paste0(prts[[length(prts)]], '/', paste0(prts[-1*length(prts)],
+                                           collapse = '..'))
 }
 
 #' @name .repo_to_pkgnm

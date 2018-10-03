@@ -4,7 +4,7 @@
 \alias{.run}
 \title{Run a command from a docker image}
 \usage{
-.run(pkgnm, ...)
+.run(pkgnm, files_to_send, ...)
 }
 \arguments{
 \item{pkgnm}{Package name}

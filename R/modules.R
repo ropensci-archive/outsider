@@ -15,11 +15,15 @@ module_install <- function(repo) {
   if (!is_docker_available()) {
     stop('Docker is not available. Have you installed it? And is it running?')
   }
+  pkgnm <- .repo_to_pkgnm(repo)
+  if (pkgnm %in% installed.packages()) {
+    stop(repo, ' already installed. Use `module_uninstall()` to remove',
+         ' before installing again.', call. = FALSE)
+  }
   dockerfile_url <- paste0('https://raw.githubusercontent.com/', repo,
                            '/master/Dockerfile')
   .docker_build(img_id = .repo_to_img(repo), url = dockerfile_url)
-  devtools::install_github(repo = repo)
-  pkgnm <- .repo_to_pkgnm(repo)
+  suppressMessages(devtools::install_github(repo = repo))
   invisible(pkgnm %in% installed.packages())
 }
 
