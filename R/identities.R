@@ -20,6 +20,7 @@
 #' @return Logical
 #' @export
 .repo_to_img <- function(repo) {
+  repo <- tolower(repo)
   gsub(pattern = '\\.\\.', replacement = '_', x = repo)
 }
 
@@ -42,6 +43,7 @@
 #' @return Logical
 #' @export
 .repo_to_pkgnm <- function(repo) {
+  repo <- tolower(repo)
   prts <- strsplit(x = repo, split = '/')[[1]]
   paste0(prts[[2]], '..', prts[[1]])
 }
