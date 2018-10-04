@@ -2,8 +2,10 @@
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 <!-- devtools::rmarkdown::render("README.Rmd") -->
 <!-- Rscript -e "library(knitr); knit('README.Rmd')" -->
-Run programs outside of R <img src="logo.png" height="200" align="right"/>
-==========================================================================
+Run programs, outside of R, inside of R <img src="logo.png" height="200" align="right"/>
+========================================================================================
+
+[![Build Status](https://travis-ci.org/AntonelliLab/outsider.svg?branch=master)](https://travis-ci.org/AntonelliLab/outsider) [![Coverage Status](https://coveralls.io/repos/github/AntonelliLab/outsider/badge.svg?branch=master)](https://coveralls.io/github/AntonelliLab/outsider?branch=master)
 
 > The Outsider is always unhappy, but he is an agent that ensures the happiness for millions of 'Insiders'.<br><br> *[The Outsider, Wilson, 1956](https://en.wikipedia.org/wiki/The_Outsider_(Colin_Wilson)).*
 
