@@ -1,5 +1,5 @@
 repo <- 'dombennett/om..revbayes'
-repo <- 'dombennett/om..hello.world..0.0.0'
+repo <- 'dombennett/om..hello.world..1.0'
 repo <- 'dombennett/om..mafft..7.407.wextensions'
 repo <- 'dombennett/om..raxml..8.2.12.sse3.pthreads'
 repo <- 'dombennett/om..pyrate'
@@ -22,9 +22,9 @@ pyrate <- module_import(fname = 'pyrate', repo = repo)
 pyrate(help = TRUE)
 module_uninstall(repo = repo)
 
-
-
-
+repo <- 'dombennett/om..hello.world..1.0'
+library(outsider)
+module_test(repo)
 
 
 

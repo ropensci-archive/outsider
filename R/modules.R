@@ -38,7 +38,7 @@ module_install <- function(repo) {
 module_uninstall <- function(repo) {
   pkgnm <- .repo_to_pkgnm(repo)
   if (pkgnm %in% installed.packages()) {
-    .docker_img_rm(img_id = repo)
+    .docker_img_rm(img_id = .repo_to_img(repo = repo))
     suppressMessages(utils::remove.packages(pkgs = pkgnm))
   }
   invisible(!pkgnm %in% installed.packages())
@@ -73,4 +73,23 @@ module_help <- function(repo, fname = NULL) {
   } else {
     utils::help(package = (pkgnm), topic = (fname))
   }
+}
+
+#' @name module_test
+#' @title Test an outsider module
+#' @description Ensure an outsider module builds and imports correctly and meets
+#' certain criteria.
+#' @param repo Module repo
+#' @return Logical
+#' @export
+module_test <- function(repo) {
+  res <- tryCatch(test_install(repo = repo), error = function(e) {
+    message('Unable to install module! See error below:\n\n')
+    stop(e, call. = FALSE)
+  })
+  res <- tryCatch(test_import(repo = repo), error = function(e) {
+    message('Unable to import module functions! See error below:\n\n')
+    stop(e, call. = FALSE)
+  })
+  invisible(res)
 }
