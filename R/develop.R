@@ -66,3 +66,12 @@
 args_check <- function(arg_vctr) {
   
 }
+
+.travis.yml_gen <- function(repo) {
+  url <- paste0('https://raw.githubusercontent.com/DomBennett/',
+                'om..hello.world..1.0/master/.travis.yml')
+  travis_text <- paste0(readLines(url), collapse = '\n')
+  travis_text <- sub(pattern = 'DomBennett/om\\.\\.hello\\.world\\.\\.1\\.0',
+                     replacement = repo, x = travis_text)
+  write(x = travis_text, file = '.travis.yml')
+}
