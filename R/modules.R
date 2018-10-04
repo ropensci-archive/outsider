@@ -22,8 +22,10 @@ module_install <- function(repo) {
   }
   dockerfile_url <- paste0('https://raw.githubusercontent.com/', repo,
                            '/master/Dockerfile')
-  .docker_build(img_id = .repo_to_img(repo), url = dockerfile_url)
-  suppressMessages(devtools::install_github(repo = repo))
+  success <- .docker_build(img_id = .repo_to_img(repo), url = dockerfile_url)
+  if (success) {
+    suppressMessages(devtools::install_github(repo = repo))
+  }
   invisible(pkgnm %in% utils::installed.packages())
 }
 
@@ -84,6 +86,7 @@ module_help <- function(repo, fname = NULL) {
 #' @return Logical
 #' @export
 module_test <- function(repo) {
+  on.exit(module_uninstall(repo = repo))
   res <- tryCatch(test_install(repo = repo), error = function(e) {
     message('Unable to install module! See error below:\n\n')
     stop(e, call. = FALSE)
