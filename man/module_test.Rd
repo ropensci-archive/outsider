@@ -13,6 +13,6 @@ module_test(repo)
 Logical
 }
 \description{
-Ensure an outsider module builds correctly and meets certain
-criteria.
+Ensure an outsider module builds and imports correctly and meets
+certain criteria.
 }

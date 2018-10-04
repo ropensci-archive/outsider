@@ -88,6 +88,8 @@
 #' @description Copy files to and from running Docker container
 #' @details Container foldes are indicated with
 #' \code{[container_id]:[filepath]}.
+#' @param origin Origin filepath
+#' @param dest Destination filepath
 #' @return Logical
 #' @export
 .docker_cp <- function(origin, dest) {

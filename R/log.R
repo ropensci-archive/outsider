@@ -4,8 +4,6 @@
 #' modules.
 #' @param log Output stream one of 
 #' @param val Either logcal, file or connection.
-#' @param std_err if and where to direct child process STDERR.
-#' See \code{\link[sys]{exec}}.
 #' @details
 #' See \code{\link[sys]{exec}}.
 #' @return NULL

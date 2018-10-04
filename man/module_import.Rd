@@ -7,6 +7,8 @@
 module_import(fname, repo)
 }
 \arguments{
+\item{fname}{Function name to import}
+
 \item{repo}{Module repo}
 }
 \value{

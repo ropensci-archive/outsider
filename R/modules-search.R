@@ -36,7 +36,7 @@ modules_yaml <- function(repos) {
     yaml_url <- paste0('https://raw.githubusercontent.com/', repo,
                         '/master/om.yml')
     success <- tryCatch(expr = {
-      tmp <- yaml::read_yaml(yaml_url)
+      tmp <- #yaml::read_yaml(yaml_url)
       all(names(tmp) %in% c("program", "flavour", "details"))
     }, error = function(e) {
       FALSE

@@ -4,6 +4,7 @@
 #' will start a container, run the command and after completion stop and remove
 #' the container.
 #' @param pkgnm Package name
+#' @param files_to_send Filepaths on host to send to module container
 #' @param ... Command and arguments
 #' @return Logical
 #' @export

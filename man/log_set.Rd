@@ -10,9 +10,6 @@ log_set(log, val)
 \item{log}{Output stream one of}
 
 \item{val}{Either logcal, file or connection.}
-
-\item{std_err}{if and where to direct child process STDERR.
-See \code{\link[sys]{exec}}.}
 }
 \description{
 Set if and where to send the console streams of the outsider

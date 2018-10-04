@@ -9,6 +9,8 @@
 \arguments{
 \item{pkgnm}{Package name}
 
+\item{files_to_send}{Filepaths on host to send to module container}
+
 \item{...}{Command and arguments}
 }
 \value{

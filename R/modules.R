@@ -16,7 +16,7 @@ module_install <- function(repo) {
     stop('Docker is not available. Have you installed it? And is it running?')
   }
   pkgnm <- .repo_to_pkgnm(repo)
-  if (pkgnm %in% installed.packages()) {
+  if (pkgnm %in% utils::installed.packages()) {
     stop(repo, ' already installed. Use `module_uninstall()` to remove',
          ' before installing again.', call. = FALSE)
   }
@@ -24,7 +24,7 @@ module_install <- function(repo) {
                            '/master/Dockerfile')
   .docker_build(img_id = .repo_to_img(repo), url = dockerfile_url)
   suppressMessages(devtools::install_github(repo = repo))
-  invisible(pkgnm %in% installed.packages())
+  invisible(pkgnm %in% utils::installed.packages())
 }
 
 #' @name module_uninstall
@@ -37,11 +37,11 @@ module_install <- function(repo) {
 #' @export
 module_uninstall <- function(repo) {
   pkgnm <- .repo_to_pkgnm(repo)
-  if (pkgnm %in% installed.packages()) {
+  if (pkgnm %in% utils::installed.packages()) {
     .docker_img_rm(img_id = .repo_to_img(repo = repo))
     suppressMessages(utils::remove.packages(pkgs = pkgnm))
   }
-  invisible(!pkgnm %in% installed.packages())
+  invisible(!pkgnm %in% utils::installed.packages())
 }
 
 #' @name module_import
@@ -49,13 +49,14 @@ module_uninstall <- function(repo) {
 #' @description Import specific functions from an outsider module to the
 #' Global Environment.
 #' @param repo Module repo
+#' @param fname Function name to import
 #' @details If program is successfully removed from your system, TRUE is
 #' returned else FALSE.
 #' @return Function
 #' @export
 module_import <- function(fname, repo) {
   pkgnm <- .repo_to_pkgnm(repo)
-  getFromNamespace(x = fname, ns = pkgnm)
+  utils::getFromNamespace(x = fname, ns = pkgnm)
 }
 
 #' @name module_help
@@ -89,6 +90,10 @@ module_test <- function(repo) {
   })
   res <- tryCatch(test_import(repo = repo), error = function(e) {
     message('Unable to import module functions! See error below:\n\n')
+    stop(e, call. = FALSE)
+  })
+  res <- tryCatch(test_examples(repo = repo), error = function(e) {
+    message('Unable to run module examples! See error below:\n\n')
     stop(e, call. = FALSE)
   })
   invisible(res)

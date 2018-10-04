@@ -6,6 +6,11 @@
 \usage{
 .docker_cp(origin, dest)
 }
+\arguments{
+\item{origin}{Origin filepath}
+
+\item{dest}{Destination filepath}
+}
 \value{
 Logical
 }

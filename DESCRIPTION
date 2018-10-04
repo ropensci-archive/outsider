@@ -2,10 +2,19 @@ Package: outsider
 Type: Package
 Title: Install and Run External Programs in R
 Version: 0.0.0
-Author: D.J. Bennett
-Maintainer: D.J. Bennett <dominic.john.bennett@gmail.com>
-Description: TODO
-License: MIT
+Author: Dom Bennett
+Maintainer: Dom Bennett <dominic.john.bennett@gmail.com>
+Description: Install and run external command line programs in R.
+License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 6.1.0
+BugReports: https://github.com/antonellilab/outsider/issues
+Depends:
+    R (>= 3.3.0)
+Imports:
+    utils,
+    crayon,
+    devtools,
+    jsonlite,
+    sys

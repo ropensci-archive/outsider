@@ -26,7 +26,9 @@ repo <- 'dombennett/om..hello.world..1.0'
 library(outsider)
 module_test(repo)
 
-
+repo <- 'dombennett/om..mafft..7.407'
+library(outsider)
+module_test(repo)
 
 
 
