@@ -18,3 +18,5 @@ Imports:
     devtools,
     jsonlite,
     sys
+Suggests:
+    testthat

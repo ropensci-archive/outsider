@@ -4,3 +4,4 @@ om.yml
 dev.R
 README.Rmd
 logo.png
+.travis.yml

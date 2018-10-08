@@ -2,8 +2,10 @@
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 <!-- devtools::rmarkdown::render("README.Rmd") -->
 <!-- Rscript -e "library(knitr); knit('README.Rmd')" -->
-Run programs outside of R <img src="logo.png" height="200" align="right"/>
-==========================================================================
+Install and run programs, outside of R, inside of R <img src="logo.png" height="200" align="right"/>
+====================================================================================================
+
+[![Build Status](https://travis-ci.org/AntonelliLab/outsider.svg?branch=master)](https://travis-ci.org/AntonelliLab/outsider) [![Coverage Status](https://coveralls.io/repos/github/AntonelliLab/outsider/badge.svg?branch=master)](https://coveralls.io/github/AntonelliLab/outsider?branch=master)
 
 > The Outsider is always unhappy, but he is an agent that ensures the happiness for millions of 'Insiders'.<br><br> *[The Outsider, Wilson, 1956](https://en.wikipedia.org/wiki/The_Outsider_(Colin_Wilson)).*
 
@@ -36,7 +38,12 @@ module_help(repo = repo)
 hello_world <- module_import(fname = 'hello_world', repo = repo)
 # run the imported function
 hello_world()
-#> Hello World!
+#> Hello world!
+#> ------------
+#> DISTRIB_ID=Ubuntu
+#> DISTRIB_RELEASE=18.04
+#> DISTRIB_CODENAME=bionic
+#> DISTRIB_DESCRIPTION="Ubuntu 18.04.1 LTS"
 ```
 
 Available external programs
