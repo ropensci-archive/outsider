@@ -71,6 +71,9 @@ module_import <- function(fname, repo) {
 #' @export
 module_help <- function(repo, fname = NULL) {
   pkgnm <- .repo_to_pkgnm(repo)
+  if (!pkgnm %in% utils::installed.packages()) {
+    stop('OM [', repo, '] not found', call. = FALSE)
+  }
   if (is.null(fname)) {
     utils::help(package = (pkgnm))
   } else {
