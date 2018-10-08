@@ -66,6 +66,8 @@ Things can a get a little existentialist when coding. Not everything works; bugs
 
 The light in this case comes from a big, blue whale called [docker](https://www.docker.com/) and a weird cephalopod-mammal hybrid called [GitHub](https://github.com/).
 
+![outsider_outline](https://raw.githubusercontent.com/AntonelliLab/outsider/master/other/outline.png)
+
 ##Version
 
 Development version 0.
