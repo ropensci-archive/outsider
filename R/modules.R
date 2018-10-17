@@ -16,8 +16,7 @@ module_install <- function(repo) {
   if (!is_docker_available()) {
     stop('Docker is not available. Have you installed it? And is it running?')
   }
-  pkgnm <- .repo_to_pkgnm(repo)
-  if (pkgnm %in% utils::installed.packages()) {
+  if (module_installed(repo)) {
     stop(repo, ' already installed. Use `module_uninstall()` to remove',
          ' before installing again.', call. = FALSE)
   }
@@ -27,7 +26,7 @@ module_install <- function(repo) {
   if (success) {
     devtools::install_github(repo = repo, quiet = TRUE)
   }
-  invisible(pkgnm %in% utils::installed.packages())
+  invisible(module_installed(repo))
 }
 
 #' @name module_uninstall
@@ -44,11 +43,11 @@ module_uninstall <- function(repo) {
   if (pkgnm %in% devtools::loaded_packages()$package) {
     devtools::unload(devtools::inst(pkgnm))
   }
-  if (pkgnm %in% utils::installed.packages()) {
+  if (module_installed(repo = repo)) {
     .docker_img_rm(img_id = .repo_to_img(repo = repo))
     suppressMessages(utils::remove.packages(pkgs = pkgnm))
   }
-  invisible(!pkgnm %in% utils::installed.packages())
+  invisible(!module_installed(repo = repo))
 }
 
 #' @name module_import
