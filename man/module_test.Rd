@@ -13,6 +13,19 @@ module_test(repo)
 Logical
 }
 \description{
-Ensure an outsider module builds and imports correctly and meets
-certain criteria.
+Ensure an outsider module builds, imports correctly and all
+its functions successfully complete.
 }
+\details{
+Success or fail, the module is uninstalled from the machine after
+the test is run.
+}
+\seealso{
+Other user: \code{\link{available}}, \code{\link{log_set}},
+  \code{\link{module_exists}}, \code{\link{module_help}},
+  \code{\link{module_import}},
+  \code{\link{module_installed}},
+  \code{\link{module_install}},
+  \code{\link{module_uninstall}}
+}
+\concept{user}

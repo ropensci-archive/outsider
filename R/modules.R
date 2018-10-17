@@ -4,6 +4,7 @@
 #' @param repo Module repo
 #' @return Logical
 #' @export
+#' @family user
 module_install <- function(repo) {
   # if (!build_status(id = repo)) {
   #   mntnr <- sub(pattern = '/.*', replacement = '', x = repo)
@@ -24,7 +25,7 @@ module_install <- function(repo) {
                            '/master/Dockerfile')
   success <- .docker_build(img_id = .repo_to_img(repo), url = dockerfile_url)
   if (success) {
-    suppressMessages(devtools::install_github(repo = repo))
+    devtools::install_github(repo = repo, quiet = TRUE)
   }
   invisible(pkgnm %in% utils::installed.packages())
 }
@@ -37,6 +38,7 @@ module_install <- function(repo) {
 #' returned else FALSE.
 #' @return Logical
 #' @export
+#' @family user
 module_uninstall <- function(repo) {
   pkgnm <- .repo_to_pkgnm(repo)
   if (pkgnm %in% utils::installed.packages()) {
@@ -56,6 +58,7 @@ module_uninstall <- function(repo) {
 #' returned else FALSE.
 #' @return Function
 #' @export
+#' @family user
 module_import <- function(fname, repo) {
   pkgnm <- .repo_to_pkgnm(repo)
   utils::getFromNamespace(x = fname, ns = pkgnm)
@@ -69,10 +72,11 @@ module_import <- function(fname, repo) {
 #' @param fname Function name
 #' @return NULL
 #' @export
+#' @family user
 module_help <- function(repo, fname = NULL) {
   pkgnm <- .repo_to_pkgnm(repo)
   if (!pkgnm %in% utils::installed.packages()) {
-    stop('OM [', repo, '] not found', call. = FALSE)
+    stop('Outsider Module (OM) [', repo, '] not found', call. = FALSE)
   }
   if (is.null(fname)) {
     utils::help(package = (pkgnm))
@@ -83,24 +87,53 @@ module_help <- function(repo, fname = NULL) {
 
 #' @name module_test
 #' @title Test an outsider module
-#' @description Ensure an outsider module builds and imports correctly and meets
-#' certain criteria.
+#' @description Ensure an outsider module builds, imports correctly and all
+#' its functions successfully complete.
+#' @details Success or fail, the module is uninstalled from the machine after
+#' the test is run.
 #' @param repo Module repo
 #' @return Logical
 #' @export
+#' @family user
 module_test <- function(repo) {
   on.exit(module_uninstall(repo = repo))
   res <- tryCatch(test_install(repo = repo), error = function(e) {
     message('Unable to install module! See error below:\n\n')
-    stop(e, call. = FALSE)
+    stop(e)
   })
-  res <- tryCatch(test_import(repo = repo), error = function(e) {
-    message('Unable to import module functions! See error below:\n\n')
-    stop(e, call. = FALSE)
-  })
-  res <- tryCatch(test_examples(repo = repo), error = function(e) {
-    message('Unable to run module examples! See error below:\n\n')
-    stop(e, call. = FALSE)
-  })
+  res <- test_import(repo = repo)
+  if (!res) {
+    stop('Unable to import all module functions!', call. = FALSE)
+  }
+  res <- test_examples(repo = repo)
+  if (!res) {
+    stop('Unable to run all module examples!', call. = FALSE)
+  }
   invisible(res)
+}
+
+#' @name module_installed
+#' @title Is module installed?
+#' @description Test whether an outsider module is installed.
+#' @param repo Module repo(s)
+#' @return Logical
+#' @export
+#' @family user
+module_installed <- function(repo) {
+  pkgnm <- vapply(X = repo, FUN = .repo_to_pkgnm, FUN.VALUE = character(1))
+  pkgnm %in% utils::installed.packages()
+}
+
+#' @name module_exists
+#' @title Does module exist?
+#' @description Does the module(s) exist as a valid outsider module? Repo
+#' must be a valid GitHub repository with an om.yaml and a passing
+#' build status.
+#' @param repo Module repo(s)
+#' @return Logical
+#' @export
+#' @family user
+module_exists <- function(repo) {
+  # TODO: om.yaml
+  vapply(X = repo, FUN = build_status, FUN.VALUE = logical(1))
 }

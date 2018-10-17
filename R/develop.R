@@ -8,6 +8,7 @@
 #' @param ... Command and arguments
 #' @return Logical
 #' @export
+#' @family developer
 .run <- function(pkgnm, files_to_send, ...) {
   ids <- .ids_get(pkgnm = pkgnm)
   # launch container
@@ -29,6 +30,7 @@
 #' @param ... Command and arguments
 #' @return Character vector
 #' @export
+#' @family developer
 .args_parse <- function(...) {
   args <- unlist(as.list(match.call())[-1])
   if (any(grepl(pattern = '\\s', x = args))) {
@@ -45,6 +47,7 @@
 #' @param args Character vector of arguments
 #' @return Character vector
 #' @export
+#' @family developer
 .which_args_are_filepaths <- function(args) {
   files_and_folders <- vapply(X = args, FUN = function(x) file.exists(x) ||
                                 dir.exists(x), FUN.VALUE = logical(1))

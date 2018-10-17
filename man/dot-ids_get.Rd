@@ -15,3 +15,16 @@ Logical
 \description{
 From a pkgnm, return the image ID and a unique container ID.
 }
+\seealso{
+Other developer: \code{\link{.args_parse}},
+  \code{\link{.docker_build}}, \code{\link{.docker_cmd}},
+  \code{\link{.docker_cp}}, \code{\link{.docker_exec}},
+  \code{\link{.docker_img_rm}},
+  \code{\link{.docker_ps_count}},
+  \code{\link{.docker_start}}, \code{\link{.docker_stop}},
+  \code{\link{.pkgnm_to_prgm}},
+  \code{\link{.pkgnm_to_repo}}, \code{\link{.repo_to_img}},
+  \code{\link{.repo_to_pkgnm}}, \code{\link{.run}},
+  \code{\link{.which_args_are_filepaths}}
+}
+\concept{developer}

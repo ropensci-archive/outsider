@@ -8,6 +8,7 @@
 #' See \code{\link[sys]{exec}}.
 #' @return Logical
 #' @export
+#' @family developer
 .docker_cmd <- function(args, std_out = TRUE, std_err = TRUE) {
   res <- sys::exec_wait(cmd = 'docker', args = args, std_out = std_out,
                         std_err = std_err)
@@ -20,6 +21,7 @@
 #' @param img_id Image ID
 #' @return Logical
 #' @export
+#' @family developer
 .docker_img_rm <- function(img_id) {
   args <- c('image', 'rm', img_id)
   .docker_cmd(args, std_out = log_get('docker_out'),
@@ -33,6 +35,7 @@
 #' @param url Dockerfile URL
 #' @return Logical
 #' @export
+#' @family developer
 .docker_build <- function(img_id, url) {
   args <- c('build', '-t', img_id, url)
   .docker_cmd(args = args, std_out = log_get('docker_out'),
@@ -46,6 +49,7 @@
 #' @param img_id Image ID
 #' @return Logical
 #' @export
+#' @family developer
 .docker_start <- function(cntnr_id, img_id) {
   args <- c('run', '-t', '-d', '--name', cntnr_id, img_id)
   .docker_cmd(args = args, std_out = log_get('docker_out'),
@@ -59,6 +63,7 @@
 #' @param cntnr_id Container ID
 #' @return Logical
 #' @export
+#' @family developer
 .docker_stop <- function(cntnr_id) {
   args1 <- c('stop', cntnr_id)
   res1 <- .docker_cmd(args = args1, std_out = log_get('docker_out'),
@@ -77,6 +82,7 @@
 #' @param ... Command and arguments for container.
 #' @return Logical
 #' @export
+#' @family developer
 .docker_exec <- function(cntnr_id, ...) {
   args <- c('exec', cntnr_id, ...)
   .docker_cmd(args, std_out = log_get('program_out'),
@@ -92,6 +98,7 @@
 #' @param dest Destination filepath
 #' @return Logical
 #' @export
+#' @family developer
 .docker_cp <- function(origin, dest) {
   args <- c('cp', origin, dest)
   .docker_cmd(args = args, std_out = log_get('docker_out'),
@@ -104,6 +111,7 @@
 #' @details Use this to avoid creating multiple containers with the same ID.
 #' @return Integer
 #' @export
+#' @family developer
 .docker_ps_count <- function() {
   res <- sys::exec_internal(cmd = 'docker', args = 'ps')
   if (res[['status']] == 0) {

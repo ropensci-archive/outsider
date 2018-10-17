@@ -4,6 +4,7 @@
 #' @param pkgnm Package name
 #' @return Logical
 #' @export
+#' @family developer
 .ids_get <- function(pkgnm) {
   repo <- .pkgnm_to_repo(pkgnm)
   img_id <- .repo_to_img(repo)
@@ -19,6 +20,7 @@
 #' @param repo Repo
 #' @return Logical
 #' @export
+#' @family developer
 .repo_to_img <- function(repo) {
   repo <- tolower(repo)
   gsub(pattern = '\\.\\.', replacement = '_', x = repo)
@@ -30,6 +32,7 @@
 #' @param pkgnm Package name
 #' @return Logical
 #' @export
+#' @family developer
 .pkgnm_to_repo <- function(pkgnm) {
   prts <- strsplit(x = pkgnm, split = '\\.\\.')[[1]]
   paste0(prts[[length(prts)]], '/', paste0(prts[-1*length(prts)],
@@ -42,6 +45,7 @@
 #' @param repo Repo
 #' @return Logical
 #' @export
+#' @family developer
 .repo_to_pkgnm <- function(repo) {
   repo <- tolower(repo)
   prts <- strsplit(x = repo, split = '/')[[1]]
@@ -55,6 +59,7 @@
 #' @param pkgnm Package name.
 #' @return Logical
 #' @export
+#' @family developer
 .pkgnm_to_prgm <- function(pkgnm) {
   prts <- strsplit(x = pkgnm, split = '\\.\\.')[[1]]
   prts[[2]]

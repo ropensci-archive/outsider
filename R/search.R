@@ -1,8 +1,14 @@
-modules_info <- function() {
+#' @name available
+#' @title Look up information on all available outsider modules
+#' @description Return information on all available outsider modules
+#' @return data.frame
+#' @export
+#' @family user
+available <- function() {
   # search outsider modules
-  srch <- modules_search()
+  srch <- om_search()
   # look up yaml
-  info <- modules_yaml(repos = srch[['full_name']])
+  info <- om_yaml(repos = srch[['full_name']])
   # add extra info
   index <- match(srch[['full_name']], rownames(info))
   info[['updated_at']] <- as.POSIXct(srch[['updated_at']][index],
@@ -16,7 +22,12 @@ modules_info <- function() {
   info
 }
 
-modules_search <- function() {
+#' @name om_search
+#' @title Search for outsider modules
+#' @description Return list of all available outsider modules
+#' @return list
+#' @family private
+om_search <- function() {
   base_url <- 'https://api.github.com/search/repositories'
   search_args <- paste0('?q=om-+in:name+outsider-module+in:description',
                         '&', 'Type=Repositories')
@@ -27,7 +38,13 @@ modules_search <- function() {
   github_res[['items']]
 }
 
-modules_yaml <- function(repos) {
+#' @name om_yaml
+#' @title Module YAML information
+#' @description Return data.frame of all YAML information of given outsider
+#' module repos.
+#' @return data.frame
+#' @family private
+om_yaml <- function(repos) {
   header <- c("program", "flavour", "details")
   info <- as.data.frame(matrix(NA, ncol = 3, nrow = length(repos)))
   colnames(info) <- header

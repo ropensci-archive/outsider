@@ -7,7 +7,8 @@
 log_set(log, val)
 }
 \arguments{
-\item{log}{Output stream one of}
+\item{log}{Output stream one of program_out, program_err, docker_out or
+docker_err}
 
 \item{val}{Either logcal, file or connection.}
 }
@@ -18,3 +19,12 @@ modules.
 \details{
 See \code{\link[sys]{exec}}.
 }
+\seealso{
+Other user: \code{\link{available}},
+  \code{\link{module_exists}}, \code{\link{module_help}},
+  \code{\link{module_import}},
+  \code{\link{module_installed}},
+  \code{\link{module_install}}, \code{\link{module_test}},
+  \code{\link{module_uninstall}}
+}
+\concept{user}
