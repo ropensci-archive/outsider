@@ -1,6 +1,7 @@
 ^.*\.Rproj$
 ^\.Rproj\.user$
 om.yml
+other/
 dev.R
 README.Rmd
 logo.png

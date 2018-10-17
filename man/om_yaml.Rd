@@ -6,6 +6,9 @@
 \usage{
 om_yaml(repos)
 }
+\arguments{
+\item{repos}{Character vector of outsider module repositories.}
+}
 \value{
 data.frame
 }

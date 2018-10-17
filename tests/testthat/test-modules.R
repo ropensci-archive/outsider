@@ -6,9 +6,17 @@ library(testthat)
 repo <- 'DomBennett/om..hello.world..1.0'
 fname <- 'hello_world'
 
+# FUNCTIONS
+clean <- function() {
+  if (module_installed(repo = repo)) {
+    module_uninstall(repo = repo)
+  }
+}
+
 # RUNNING
+print(.libPaths())
+clean()
 context('Testing \'modules\'')
-module_uninstall(repo = repo)
 test_that('module_install() works', {
   on.exit(module_uninstall(repo = repo))
   with_mock(
@@ -50,3 +58,4 @@ test_that('module_test() works', {
   )
   expect_true(module_test(repo = repo))
 })
+clean()

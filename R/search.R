@@ -42,6 +42,7 @@ om_search <- function() {
 #' @title Module YAML information
 #' @description Return data.frame of all YAML information of given outsider
 #' module repos.
+#' @param repos Character vector of outsider module repositories.
 #' @return data.frame
 #' @family private
 om_yaml <- function(repos) {

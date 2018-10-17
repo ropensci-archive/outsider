@@ -30,6 +30,7 @@ log_set <- function(log, val) {
 #' @title Return log stream option
 #' @description Return the log stream setting for a given stream. If the stream
 #' is not set, the function will return TRUE (i.e. prints to console).
+#' @param log Log stream
 #' @return NULL
 #' @family private
 log_get <- function(log = c('program_out', 'program_err', 'docker_out',

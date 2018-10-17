@@ -41,6 +41,9 @@ module_install <- function(repo) {
 #' @family user
 module_uninstall <- function(repo) {
   pkgnm <- .repo_to_pkgnm(repo)
+  if (pkgnm %in% devtools::loaded_packages()$package) {
+    devtools::unload(devtools::inst(pkgnm))
+  }
   if (pkgnm %in% utils::installed.packages()) {
     .docker_img_rm(img_id = .repo_to_img(repo = repo))
     suppressMessages(utils::remove.packages(pkgs = pkgnm))

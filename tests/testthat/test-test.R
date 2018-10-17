@@ -7,7 +7,17 @@ repo <- 'dombennett/om..hello.world..1.0'
 
 # RUNNING
 context('Testing \'test\'')
-expect_true(outsider:::test_install(repo = repo))
+if (module_installed(repo = repo)) {
+  module_uninstall(repo = repo)
+}
+test_that('test_install() works', {
+  res <- outsider:::test_install(repo = repo)
+  expect_true(res)
+  module_uninstall(repo = repo)
+})
+if (!module_installed(repo = repo)) {
+  module_install(repo = repo)
+}
 test_that('fnames_get() works', {
   res <- outsider:::fnames_get(repo = repo)
   expect_true(res == 'hello_world')
