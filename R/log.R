@@ -53,4 +53,5 @@ default_log_set <- function() {
   options(program_err = TRUE)
   options(docker_out = FALSE)
   options(docker_err = TRUE)
+  invisible(TRUE)
 }
