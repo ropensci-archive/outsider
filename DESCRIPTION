@@ -19,4 +19,5 @@ Imports:
     jsonlite,
     sys
 Suggests:
-    testthat
+    testthat,
+    withr

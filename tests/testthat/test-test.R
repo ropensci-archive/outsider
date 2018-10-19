@@ -10,16 +10,29 @@ if (module_installed(repo = repo)) {
   stop('Uninstall hello world before testing.')
 }
 
+# FUNCTIONS
+pretest_install <- function() {
+  if (!module_installed(repo = repo)) {
+    module_install(repo = repo)
+  }
+}
+
 # RUNNING
 context('Testing \'test\'')
+test_that('test_install() works', {
+  with_mock(
+    `outsider:::module_install` = function(...) stop(''),
+    `outsider:::module_uninstall` = function(...) FALSE,
+    expect_error(outsider:::test_install(repo = repo))
+  )
+  with_mock(
+    `outsider:::module_install` = function(...) TRUE,
+    `outsider:::module_uninstall` = function(...) TRUE,
+    expect_true(outsider:::test_install(repo = repo))
+  )
+})
 withr::with_temp_libpaths(code = {
-  on.exit(module_uninstall(repo = repo))
-  test_that('test_install() works', {
-    res <- outsider:::test_install(repo = repo)
-    expect_true(res)
-    module_uninstall(repo = repo)
-  })
-  module_install(repo = repo)
+  pretest_install()
   test_that('fnames_get() works', {
     res <- outsider:::fnames_get(repo = repo)
     expect_true(res == 'hello_world')
