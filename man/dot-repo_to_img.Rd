@@ -17,6 +17,8 @@ Drops .. in repo name to meet docker name requirements.
 }
 \seealso{
 Other developer: \code{\link{.args_parse}},
+  \code{\link{.copy_from_docker}},
+  \code{\link{.copy_to_docker}},
   \code{\link{.docker_build}}, \code{\link{.docker_cmd}},
   \code{\link{.docker_cp}}, \code{\link{.docker_exec}},
   \code{\link{.docker_img_rm}},
@@ -25,6 +27,7 @@ Other developer: \code{\link{.args_parse}},
   \code{\link{.ids_get}}, \code{\link{.pkgnm_to_prgm}},
   \code{\link{.pkgnm_to_repo}},
   \code{\link{.repo_to_pkgnm}}, \code{\link{.run}},
+  \code{\link{.travisyml_gen}},
   \code{\link{.which_args_are_filepaths}}
 }
 \concept{developer}

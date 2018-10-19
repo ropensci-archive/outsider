@@ -33,11 +33,11 @@
 #' @family developer
 .args_parse <- function(...) {
   args <- unlist(as.list(match.call())[-1])
-  if (any(grepl(pattern = '\\s', x = args))) {
-    msg <- paste0('Arguments should be separate elements without spaces.\n',
-                  'e.g. c("-a", "1", "-d", "2"), not "-a 1 -d 2"')
-    stop(msg, .call = FALSE)
-  }
+  # if (any(grepl(pattern = '\\s', x = args))) {
+  #   msg <- paste0('Arguments should be separate elements without spaces.\n',
+  #                 'e.g. c("-a", "1", "-d", "2"), not "-a 1 -d 2"')
+  #   stop(msg, .call = FALSE)
+  # }
   args
 }
 
@@ -54,27 +54,53 @@
   names(files_and_folders)[files_and_folders]
 }
 
+#' @name .copy_to_docker
+#' @title Copy files to docker container
+#' @description Copy all given host files to a running docker container.
+#' @param cntnr_id Container ID
+#' @param host_flpths Filepaths to send on host computer
+#' @return Logical
+#' @export
+#' @family developer
 .copy_to_docker <- function(cntnr_id, host_flpths) {
+  res <- TRUE
   for (host_flpth in host_flpths) {
-    outsider::.docker_cp(origin = host_flpth,
-                         dest = paste0(cntnr_id, ':', '/working_dir/'))
+    res <- res & .docker_cp(origin = host_flpth,
+                            dest = paste0(cntnr_id, ':', '/working_dir/'))
   }
+  res
 }
 
+#' @name .copy_from_docker
+#' @title Copy all contents from working dir
+#' @description Copy all the contents of the working_dir on the outsider Docker
+#' container to the host machine.
+#' @details All outsider modules have a working_dir/ when generated files are
+#' created. These must be copied from the container to the host machine
+#' for the user to interact with.
+#' @param cntnr_id Container ID
+#' @return Logical
+#' @export
+#' @family developer
 .copy_from_docker <- function(cntnr_id) {
-  outsider::.docker_cp(origin = paste0(cntnr_id, ':', '/working_dir/.'),
-                       dest = '.')
+  .docker_cp(origin = paste0(cntnr_id, ':', '/working_dir/.'), dest = '.')
 }
 
-args_check <- function(arg_vctr) {
-  
-}
-
-.travis.yml_gen <- function(repo) {
+#' @name .travisyml_gen
+#' @title Generate travis file
+#' @description Write .travis.yml to working directory.
+#' @details All validated outsider modules must have a .travis.yml in their
+#' repository. These .travis.yml must be generated using this function.
+#' @param repo Repository
+#' @return Logical
+#' @export
+#' @family developer
+.travisyml_gen <- function(repo) {
   url <- paste0('https://raw.githubusercontent.com/DomBennett/',
                 'om..hello.world..1.0/master/.travis.yml')
   travis_text <- paste0(readLines(url), collapse = '\n')
   travis_text <- sub(pattern = 'DomBennett/om\\.\\.hello\\.world\\.\\.1\\.0',
                      replacement = repo, x = travis_text)
   write(x = travis_text, file = '.travis.yml')
+  invisible(file.exists('.travis.yml'))
 }
