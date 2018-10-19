@@ -7,3 +7,4 @@ README.Rmd
 logo.png
 .travis.yml
 vignettes/
+docs/
