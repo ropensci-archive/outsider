@@ -55,7 +55,24 @@ hello_world()
 
 ##Available external programs
 
-**Listing will appear soon!**
+```{r, available, echo=FALSE, results='asis'}
+knitr::opts_chunk$set(
+  comment = ""
+)
+avlbl <- outsider::available()
+pkgnms <- vapply(X = rownames(avlbl), FUN = outsider::.repo_to_pkgnm,
+                 FUN.VALUE = character(1))
+prgms <- vapply(X = pkgnms, FUN = outsider::.pkgnm_to_prgm,
+                 FUN.VALUE = character(1))
+prgms <- sort(unique(tolower(prgms)))
+time_date <- as.character(format(Sys.time(), '%H:%M %d %B %Y (%Z)'))
+cat('Modules available since ', crayon::bold(time_date), '\n\n')
+for (prgm in prgms) {
+  cli::cat_bullet(prgm, '\n')
+}
+```
+
+For more details, see [available modules table](https://antonellilab.github.io/outsider/articles/available.html)
 
 ##How does it work?
 

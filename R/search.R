@@ -17,6 +17,7 @@ available <- function() {
   info[['watcher_count']] <- srch[['watchers_count']][index]
   info[['url']] <- paste0('https://github.com/', rownames(info))
   # order output
+  info <- info[order(info[['program']], decreasing = TRUE), ]
   info <- info[order(info[['updated_at']], decreasing = TRUE), ]
   info <- info[order(info[['watcher_count']], decreasing = TRUE), ]
   info
@@ -29,7 +30,7 @@ available <- function() {
 #' @family private
 om_search <- function() {
   base_url <- 'https://api.github.com/search/repositories'
-  search_args <- paste0('?q=om-+in:name+outsider-module+in:description',
+  search_args <- paste0('?q=om..+in:name+outsider-module+in:description',
                         '&', 'Type=Repositories')
   github_res <- jsonlite::fromJSON(paste0(base_url, search_args))
   if (github_res[['incomplete_results']]) {
@@ -54,7 +55,7 @@ om_yaml <- function(repos) {
     yaml_url <- paste0('https://raw.githubusercontent.com/', repo,
                         '/master/om.yml')
     success <- tryCatch(expr = {
-      tmp <- #yaml::read_yaml(yaml_url)
+      tmp <- yaml::read_yaml(yaml_url)
       all(names(tmp) %in% c("program", "flavour", "details"))
     }, error = function(e) {
       FALSE
@@ -64,7 +65,7 @@ om_yaml <- function(repos) {
     if (!success) {
       next
     }
-    tmp[vapply(tmp, is.null, logical(1))] <- NA
+    tmp[vapply(tmp, is.null, logical(1))] <- ''
     for (h in header) {
       info[repo, h] <- tmp[[h]]
     }

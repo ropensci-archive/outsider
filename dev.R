@@ -1,3 +1,5 @@
+devtools::load_all('.')
+
 repo <- 'dombennett/om..revbayes'
 repo <- 'dombennett/om..hello.world..1.0'
 repo <- 'dombennett/om..mafft..7.407.wextensions'

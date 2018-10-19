@@ -2,7 +2,9 @@ Package: outsider
 Type: Package
 Title: Install and Run External Programs in R
 Version: 0.0.0
-Author: Dom Bennett
+Authors@R: person("Dom", "Bennett", role = c("aut", "cre"),
+    email = "dominic.john.bennett@gmail.com",
+    comment = c(ORCID = "0000-0003-2722-1359"))
 Maintainer: Dom Bennett <dominic.john.bennett@gmail.com>
 Description: Install and run external command line programs in R.
 License: MIT + file LICENSE

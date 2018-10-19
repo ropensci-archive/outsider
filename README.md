@@ -49,7 +49,7 @@ hello_world()
 Available external programs
 ---------------------------
 
-**Listing will appear soon!**
+Available from: 13:46 19 October 2018 (CEST) ● bamm ● blast ● hello.world ● mafft ● pyrate ● raxml
 
 How does it work?
 -----------------

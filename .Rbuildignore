@@ -6,3 +6,4 @@ dev.R
 README.Rmd
 logo.png
 .travis.yml
+vignettes/

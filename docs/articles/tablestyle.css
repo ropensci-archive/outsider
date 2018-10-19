@@ -1,0 +1,13 @@
+
+td, th {
+  padding : 6px
+}
+th {
+  background-color : #51617c ;
+  color : white;
+  border : 1px solid #171819;
+}
+td {
+  color : #51617c ;
+  border : 1px solid #171819
+}
