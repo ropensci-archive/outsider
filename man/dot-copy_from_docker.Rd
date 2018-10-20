@@ -4,10 +4,12 @@
 \alias{.copy_from_docker}
 \title{Copy all contents from working dir}
 \usage{
-.copy_from_docker(cntnr_id)
+.copy_from_docker(cntnr_id, dest = getwd())
 }
 \arguments{
 \item{cntnr_id}{Container ID}
+
+\item{dest}{Directory on host computer where files should be sent}
 }
 \value{
 Logical

@@ -5,11 +5,12 @@
 #' the container.
 #' @param pkgnm Package name
 #' @param files_to_send Filepaths on host to send to module container
+#' @param dest Filepath on host computer for generated files to be returned
 #' @param ... Command and arguments
 #' @return Logical
 #' @export
 #' @family developer
-.run <- function(pkgnm, files_to_send, ...) {
+.run <- function(pkgnm, files_to_send, dest = getwd(), ...) {
   ids <- .ids_get(pkgnm = pkgnm)
   # launch container
   .docker_start(cntnr_id = ids[['cntnr_id']], img_id = ids[['img_id']])
@@ -20,7 +21,7 @@
   # run command
   success <- .docker_exec(cntnr_id = ids[['cntnr_id']], ...)
   # retrieve files
-  .copy_from_docker(cntnr_id = ids[['cntnr_id']])
+  .copy_from_docker(cntnr_id = ids[['cntnr_id']], dest = dest)
   invisible(success)
 }
 
@@ -79,11 +80,12 @@
 #' created. These must be copied from the container to the host machine
 #' for the user to interact with.
 #' @param cntnr_id Container ID
+#' @param dest Directory on host computer where files should be sent
 #' @return Logical
 #' @export
 #' @family developer
-.copy_from_docker <- function(cntnr_id) {
-  .docker_cp(origin = paste0(cntnr_id, ':', '/working_dir/.'), dest = '.')
+.copy_from_docker <- function(cntnr_id, dest = getwd()) {
+  .docker_cp(origin = paste0(cntnr_id, ':', '/working_dir/.'), dest = dest)
 }
 
 #' @name .travisyml_gen
