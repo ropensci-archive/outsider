@@ -4,7 +4,7 @@
 \alias{.to_basename}
 \title{Reduce to filepaths to basename}
 \usage{
-.to_basename(args)
+.to_basename(x)
 }
 \arguments{
 \item{x}{Character vector}

@@ -71,10 +71,10 @@
 #' @return Character vector
 #' @export
 #' @family developer
-.to_basename <- function(args) {
-  files_and_folders <- is_filepath(args)
-  args[files_and_folders] <- basename(args[files_and_folders])
-  args
+.to_basename <- function(x) {
+  files_and_folders <- is_filepath(x)
+  x[files_and_folders] <- basename(x[files_and_folders])
+  x
 }
 
 #' @name .copy_to_docker

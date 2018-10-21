@@ -6,12 +6,13 @@
 #' @export
 #' @family user
 module_install <- function(repo) {
-  # if (!build_status(id = repo)) {
+  # if (!build_status(repo = repo)) {
   #   mntnr <- sub(pattern = '/.*', replacement = '', x = repo)
-  #   msg <- paste0('Sorry, it looks like ', char(repo), ' is not passing',
-  #                 ' -- will not attempt to build on your system.',
+  #   msg <- paste0('Warning, it looks like ', char(repo),
+  #                 ' is not successfully passing its tests on GitHub.',
+  #                 ' The module might not build or function properly. ',
   #                 'Try contacting ', char(mntnr), ' for help.')
-  #   stop(msg)
+  #   warning(msg)
   # }
   if (!is_docker_available()) {
     stop('Docker is not available. Have you installed it? And is it running?')
