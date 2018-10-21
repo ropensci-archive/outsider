@@ -69,6 +69,6 @@ test_import <- function(repo) {
 #' @family private
 test_install <- function(repo) {
   module_uninstall(repo = repo)
-  module_install(repo = repo)
+  .module_install(repo = repo)
   TRUE
 }

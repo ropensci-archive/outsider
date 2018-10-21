@@ -1,3 +1,13 @@
+.module_install <- function(repo) {
+  dockerfile_url <- paste0('https://raw.githubusercontent.com/', repo,
+                           '/master/Dockerfile')
+  success <- .docker_build(img_id = .repo_to_img(repo), url = dockerfile_url)
+  if (success) {
+    devtools::install_github(repo = repo, quiet = TRUE)
+  }
+  invisible(module_installed(repo))
+}
+
 #' @name module_install
 #' @title Install an outsider module
 #' @description Install a module
@@ -6,6 +16,7 @@
 #' @export
 #' @family user
 module_install <- function(repo) {
+  # TODO: fix case sensitive error
   # if (!build_status(repo = repo)) {
   #   mntnr <- sub(pattern = '/.*', replacement = '', x = repo)
   #   msg <- paste0('Warning, it looks like ', char(repo),
@@ -21,13 +32,7 @@ module_install <- function(repo) {
     stop(repo, ' already installed. Use `module_uninstall()` to remove',
          ' before installing again.', call. = FALSE)
   }
-  dockerfile_url <- paste0('https://raw.githubusercontent.com/', repo,
-                           '/master/Dockerfile')
-  success <- .docker_build(img_id = .repo_to_img(repo), url = dockerfile_url)
-  if (success) {
-    devtools::install_github(repo = repo, quiet = TRUE)
-  }
-  invisible(module_installed(repo))
+  .module_install(repo = repo)
 }
 
 #' @name module_uninstall
@@ -42,7 +47,7 @@ module_install <- function(repo) {
 module_uninstall <- function(repo) {
   pkgnm <- .repo_to_pkgnm(repo)
   if (pkgnm %in% devtools::loaded_packages()$package) {
-    devtools::unload(devtools::inst(pkgnm))
+    try(expr = devtools::unload(devtools::inst(pkgnm)), silent = TRUE)
   }
   if (module_installed(repo = repo)) {
     .docker_img_rm(img_id = .repo_to_img(repo = repo))

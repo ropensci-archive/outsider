@@ -21,12 +21,12 @@ pretest_install <- function() {
 context('Testing \'test\'')
 test_that('test_install() works', {
   with_mock(
-    `outsider:::module_install` = function(...) stop(''),
+    `outsider:::.module_install` = function(...) stop(''),
     `outsider:::module_uninstall` = function(...) FALSE,
     expect_error(outsider:::test_install(repo = repo))
   )
   with_mock(
-    `outsider:::module_install` = function(...) TRUE,
+    `outsider:::.module_install` = function(...) TRUE,
     `outsider:::module_uninstall` = function(...) TRUE,
     expect_true(outsider:::test_install(repo = repo))
   )
