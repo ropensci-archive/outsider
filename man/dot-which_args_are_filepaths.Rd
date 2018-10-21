@@ -4,10 +4,12 @@
 \alias{.which_args_are_filepaths}
 \title{Determine which args are filepaths}
 \usage{
-.which_args_are_filepaths(args)
+.which_args_are_filepaths(args, wd = NULL)
 }
 \arguments{
 \item{args}{Character vector of arguments}
+
+\item{wd}{Working directory in which to look for files}
 }
 \value{
 Character vector
@@ -27,6 +29,6 @@ Other developer: \code{\link{.args_parse}},
   \code{\link{.ids_get}}, \code{\link{.pkgnm_to_prgm}},
   \code{\link{.pkgnm_to_repo}}, \code{\link{.repo_to_img}},
   \code{\link{.repo_to_pkgnm}}, \code{\link{.run}},
-  \code{\link{.travisyml_gen}}
+  \code{\link{.to_basename}}, \code{\link{.travisyml_gen}}
 }
 \concept{developer}

@@ -46,13 +46,35 @@
 #' @title Determine which args are filepaths
 #' @description Return filepaths from args.
 #' @param args Character vector of arguments
+#' @param wd Working directory in which to look for files
 #' @return Character vector
 #' @export
 #' @family developer
-.which_args_are_filepaths <- function(args) {
-  files_and_folders <- vapply(X = args, FUN = function(x) file.exists(x) ||
-                                dir.exists(x), FUN.VALUE = logical(1))
-  names(files_and_folders)[files_and_folders]
+.which_args_are_filepaths <- function(args, wd = NULL) {
+  # Check whether any args are filepaths
+  bool_1 <- is_filepath(args)
+  res <- args[bool_1]
+  if (!is.null(wd)) {
+    # Add to list, any wd + args that are filepaths
+    wd_args <- file.path(wd, args)
+    bool_2 <- is_filepath(wd_args)
+    res <- c(res, wd_args[bool_2])
+  }
+  res
+}
+
+#' @name .to_basename
+#' @title Reduce to filepaths to basename
+#' @description Return return a vector where all valid filepaths are converted
+#' to file basenames. E.g. "dir1/dir2/text.file" is converted to "text.file"
+#' @param x Character vector
+#' @return Character vector
+#' @export
+#' @family developer
+.to_basename <- function(args) {
+  files_and_folders <- is_filepath(args)
+  args[files_and_folders] <- basename(args[files_and_folders])
+  args
 }
 
 #' @name .copy_to_docker
@@ -105,4 +127,16 @@
                      replacement = repo, x = travis_text)
   write(x = travis_text, file = '.travis.yml')
   invisible(file.exists('.travis.yml'))
+}
+
+#' @name is_filepath
+#' @title Is a filepath?
+#' @description Return TRUE or FALSE for whether character(s) is a valid
+#' filepath.
+#' @param x Character vector
+#' @return Logical
+#' @family private
+is_filepath <- function(x) {
+  unname(vapply(X = x, FUN = function(x) file.exists(x) ||
+                  dir.exists(x), FUN.VALUE = logical(1)))
 }

@@ -13,7 +13,8 @@ of \code{docker_out}.
 \seealso{
 Other private: \code{\link{build_status}},
   \code{\link{fnames_get}},
-  \code{\link{is_docker_available}}, \code{\link{log_get}},
+  \code{\link{is_docker_available}},
+  \code{\link{is_filepath}}, \code{\link{log_get}},
   \code{\link{om_search}}, \code{\link{om_yaml}},
   \code{\link{test_examples}}, \code{\link{test_import}},
   \code{\link{test_install}}

@@ -9,9 +9,10 @@
 #' @return Logical
 #' @export
 #' @family developer
+# TODO: add interrupt
 .docker_cmd <- function(args, std_out = TRUE, std_err = TRUE) {
-  res <- sys::exec_wait(cmd = 'docker', args = args, std_out = std_out,
-                        std_err = std_err)
+  res <- sys::exec_wait(cmd = 'docker', args = args,
+                        std_out = std_out, std_err = std_err)
   res == 0
 }
 

@@ -31,6 +31,7 @@ Other developer: \code{\link{.args_parse}},
   \code{\link{.ids_get}}, \code{\link{.pkgnm_to_prgm}},
   \code{\link{.pkgnm_to_repo}}, \code{\link{.repo_to_img}},
   \code{\link{.repo_to_pkgnm}}, \code{\link{.run}},
+  \code{\link{.to_basename}},
   \code{\link{.which_args_are_filepaths}}
 }
 \concept{developer}

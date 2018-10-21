@@ -15,7 +15,8 @@ Return list of all available outsider modules
 \seealso{
 Other private: \code{\link{build_status}},
   \code{\link{default_log_set}}, \code{\link{fnames_get}},
-  \code{\link{is_docker_available}}, \code{\link{log_get}},
+  \code{\link{is_docker_available}},
+  \code{\link{is_filepath}}, \code{\link{log_get}},
   \code{\link{om_yaml}}, \code{\link{test_examples}},
   \code{\link{test_import}}, \code{\link{test_install}}
 }
