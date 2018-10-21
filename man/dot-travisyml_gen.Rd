@@ -4,10 +4,12 @@
 \alias{.travisyml_gen}
 \title{Generate travis file}
 \usage{
-.travisyml_gen(repo)
+.travisyml_gen(repo, dir = getwd())
 }
 \arguments{
 \item{repo}{Repository}
+
+\item{dir}{Directory in which to create .travis.yml}
 }
 \value{
 Logical

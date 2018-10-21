@@ -9,11 +9,12 @@ repo <- 'dombennett/om..pyrate..2.0'
 
 library(outsider)
 repo <- 'dombennett/om..pyrate..2.0'
+module_uninstall(repo = repo)
 module_install(repo = repo)
-module_help(repo = repo)
-module_help(repo = repo, fname = 'PyRate')
 pyrate <- module_import(fname = 'PyRate', repo = repo)
-pyrate('-h')
+# just input file
+pyrate('/Users/djb208/Coding/PyRate/example_files/Rhinocerotidae_PyRate.py')
+# input and wd
 pyrate('Rhinocerotidae_PyRate.py', '-wd',
        '/Users/djb208/Coding/PyRate/example_files/')
 

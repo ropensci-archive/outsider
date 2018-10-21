@@ -40,8 +40,10 @@ test_that('.copy_from_docker() works', {
   )
 })
 test_that('.travisyml_gen() works', {
-  on.exit(file.remove('.travis.yml'))
-  expect_true(.travisyml_gen(repo = repo))
+  wd <- tempdir()
+  flpth <- file.path(wd, '.travis.yml')
+  on.exit(file.remove(flpth))
+  expect_true(.travisyml_gen(repo = repo, dir = wd))
 })
 test_that('.to_basename() works', {
   expctd <- list.files(getwd())[1]
