@@ -20,7 +20,8 @@ Imports:
     devtools (>= 1.1),
     jsonlite (>= 1.1),
     sys (>= 1.1),
-    yaml (>= 2.0)
+    yaml (>= 2.0),
+    callr (>= 3.0.0),
 Suggests:
     testthat (>= 2.0),
     withr (>= 2.0),

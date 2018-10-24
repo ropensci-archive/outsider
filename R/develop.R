@@ -19,9 +19,23 @@
   # copy files_to_send to container
   .copy_to_docker(cntnr_id = ids[['cntnr_id']], host_flpths = files_to_send)
   # run command
-  success <- .docker_exec(cntnr_id = ids[['cntnr_id']], ...)
+  # (if command fails, safely shut the container down and send the error
+  #  to console)
+  success <- tryCatch(expr = {
+    .docker_exec(cntnr_id = ids[['cntnr_id']], ...)},
+    error = function(e) {
+      message('Unexpected error has occurred. Safely exiting...')
+      e
+    },
+    interrupt = function(e) {
+      message('User halted. Safely exiting...')
+      FALSE
+    })
   # retrieve files
   .copy_from_docker(cntnr_id = ids[['cntnr_id']], dest = dest)
+  if (inherits(success, 'error')) {
+    stop(success)
+  }
   invisible(success)
 }
 
