@@ -4,13 +4,14 @@
 #' will start a container, run the command and after completion stop and remove
 #' the container.
 #' @param pkgnm Package name
-#' @param files_to_send Filepaths on host to send to module container
+#' @param files_to_send Filepaths on host to send to module container.
 #' @param dest Filepath on host computer for generated files to be returned
-#' @param ... Command and arguments
+#' @param cmd Command to be run, e.g. echo, character
+#' @param args Arguments for command, e.g. "hello world", character vector
 #' @return Logical
 #' @export
 #' @family developer
-.run <- function(pkgnm, files_to_send, dest = getwd(), ...) {
+.run <- function(pkgnm, cmd, args, files_to_send = NULL, dest = getwd()) {
   ids <- .ids_get(pkgnm = pkgnm)
   # launch container
   .docker_start(cntnr_id = ids[['cntnr_id']], img_id = ids[['img_id']])
@@ -22,7 +23,7 @@
   # (if command fails, safely shut the container down and send the error
   #  to console)
   success <- tryCatch(expr = {
-    .docker_exec(cntnr_id = ids[['cntnr_id']], ...)},
+    .docker_exec(cntnr_id = ids[['cntnr_id']], cmd, args)},
     error = function(e) {
       message('Unexpected error has occurred. Safely exiting...')
       e
@@ -41,18 +42,27 @@
 
 #' @name .args_parse
 #' @title Parse arguments
-#' @description Parse arguments.
-#' @param ... Command and arguments
+#' @description Convert '...' of the function that calls this function into
+#' an evaluated, character vector.
+#' @param n Number of generations to go back, integer 
 #' @return Character vector
+#' @details Parse arguments by converting all the arguments provided by the
+#' function that calls this function. E.g. foo(...) calls .args_parse(). All
+#' arguments provided in foo() as '...' are evaluated and converted into
+#' a character vector.
 #' @export
 #' @family developer
-.args_parse <- function(...) {
-  args <- unlist(as.list(match.call())[-1])
+.args_parse <- function(n = 1L) {
+  parent <- sys.parent(n = n)
+  args <- as.list(match.call(definition = sys.function(parent),
+                             call = sys.call(parent)))[-1]
   # if (any(grepl(pattern = '\\s', x = args))) {
   #   msg <- paste0('Arguments should be separate elements without spaces.\n',
   #                 'e.g. c("-a", "1", "-d", "2"), not "-a 1 -d 2"')
   #   stop(msg, .call = FALSE)
   # }
+  args <- lapply(X = args, FUN = eval)
+  args <- vapply(X = args, FUN = as.character, FUN.VALUE = character(1))
   args
 }
 

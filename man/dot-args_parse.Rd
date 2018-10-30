@@ -4,16 +4,23 @@
 \alias{.args_parse}
 \title{Parse arguments}
 \usage{
-.args_parse(...)
+.args_parse(n = 1L)
 }
 \arguments{
-\item{...}{Command and arguments}
+\item{n}{Number of generations to go back, integer}
 }
 \value{
 Character vector
 }
 \description{
-Parse arguments.
+Convert '...' of the function that calls this function into
+an evaluated, character vector.
+}
+\details{
+Parse arguments by converting all the arguments provided by the
+function that calls this function. E.g. foo(...) calls .args_parse(). All
+arguments provided in foo() as '...' are evaluated and converted into
+a character vector.
 }
 \seealso{
 Other developer: \code{\link{.copy_from_docker}},

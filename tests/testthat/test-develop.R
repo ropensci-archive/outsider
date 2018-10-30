@@ -11,11 +11,15 @@ context('Testing \'develop\'')
 test_that('.run() works', {
   with_mock(
     `outsider:::.docker_cmd` = function(...) TRUE,
-    expect_true(.run(pkgnm = pkgnm, files_to_send = NULL))
+    expect_true(.run(pkgnm = pkgnm, files_to_send = NULL, cmd = NULL,
+                     args = NULL))
   )
 })
 test_that('.args_parse() works', {
-  res <- .args_parse('a', 'b', 'c')
+  foo <- function(...) {
+    .args_parse()
+  }
+  res <- foo('a', 'b', 'c')
   expect_equal(res, c('a', 'b', 'c'))
 })
 test_that('.which_args_are_filepaths() works', {

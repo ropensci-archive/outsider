@@ -4,7 +4,7 @@
 \alias{.run}
 \title{Run a command from a docker image}
 \usage{
-.run(pkgnm, files_to_send, dest = getwd(), ...)
+.run(pkgnm, files_to_send, dest = getwd(), cmd, args)
 }
 \arguments{
 \item{pkgnm}{Package name}
@@ -13,7 +13,9 @@
 
 \item{dest}{Filepath on host computer for generated files to be returned}
 
-\item{...}{Command and arguments}
+\item{cmd}{Command to be run, e.g. echo, character}
+
+\item{args}{Arguments for command, e.g. "hello world", character vector}
 }
 \value{
 Logical
