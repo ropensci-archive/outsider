@@ -4,18 +4,18 @@
 \alias{.run}
 \title{Run a command from a docker image}
 \usage{
-.run(pkgnm, files_to_send, dest = getwd(), cmd, args)
+.run(pkgnm, cmd, args, files_to_send = NULL, dest = getwd())
 }
 \arguments{
 \item{pkgnm}{Package name}
 
-\item{files_to_send}{Filepaths on host to send to module container}
-
-\item{dest}{Filepath on host computer for generated files to be returned}
-
 \item{cmd}{Command to be run, e.g. echo, character}
 
 \item{args}{Arguments for command, e.g. "hello world", character vector}
+
+\item{files_to_send}{Filepaths on host to send to module container.}
+
+\item{dest}{Filepath on host computer for generated files to be returned}
 }
 \value{
 Logical
