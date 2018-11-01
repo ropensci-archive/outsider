@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Test whether module can be installed — test_install • outsider</title>
+<title>Generate travis file — .travisyml_gen • outsider</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -30,9 +30,9 @@
 
 
 
-<meta property="og:title" content="Test whether module can be installed — test_install" />
+<meta property="og:title" content="Generate travis file — .travisyml_gen" />
 
-<meta property="og:description" content="Return TRUE if the outsider module successfully installs." />
+<meta property="og:description" content="Write .travis.yml to working directory." />
 
 <meta property="og:image" content="/logo.png" />
 <meta name="twitter:card" content="summary" />
@@ -109,40 +109,56 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Test whether module can be installed</h1>
+    <h1>Generate travis file</h1>
     
-    <div class="hidden name"><code>test_install.Rd</code></div>
+    <div class="hidden name"><code>dot-travisyml_gen.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Return TRUE if the outsider module successfully installs.</p>
+    <p>Write .travis.yml to working directory.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>test_install</span>(<span class='no'>repo</span>)</pre>
+    <pre class="usage"><span class='fu'>.travisyml_gen</span>(<span class='no'>repo</span>, <span class='kw'>dir</span> <span class='kw'>=</span> <span class='fu'>getwd</span>())</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>repo</th>
-      <td><p>Module repo</p></td>
+      <td><p>Repository</p></td>
+    </tr>
+    <tr>
+      <th>dir</th>
+      <td><p>Directory in which to create .travis.yml</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>logical</p>
+    <p>Logical</p>
+    
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <p>All validated outsider modules must have a .travis.yml in their
+repository. These .travis.yml must be generated using this function.</p>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p>Other private: <code><a href='build_status.html'>build_status</a></code>,
-  <code><a href='default_log_set.html'>default_log_set</a></code>, <code><a href='fnames_get.html'>fnames_get</a></code>,
-  <code><a href='is_docker_available.html'>is_docker_available</a></code>,
-  <code><a href='is_filepath.html'>is_filepath</a></code>, <code><a href='log_get.html'>log_get</a></code>,
-  <code><a href='om_search.html'>om_search</a></code>, <code><a href='om_yaml.html'>om_yaml</a></code>,
-  <code><a href='test_examples.html'>test_examples</a></code>, <code><a href='test_import.html'>test_import</a></code></p></div>
+    <div class='dont-index'><p>Other developer: <code><a href='dot-args_parse.html'>.args_parse</a></code>,
+  <code><a href='dot-copy_from_docker.html'>.copy_from_docker</a></code>,
+  <code><a href='dot-copy_to_docker.html'>.copy_to_docker</a></code>,
+  <code><a href='dot-docker_build.html'>.docker_build</a></code>, <code><a href='dot-docker_cmd.html'>.docker_cmd</a></code>,
+  <code><a href='dot-docker_cp.html'>.docker_cp</a></code>, <code><a href='dot-docker_exec.html'>.docker_exec</a></code>,
+  <code><a href='dot-docker_img_rm.html'>.docker_img_rm</a></code>,
+  <code><a href='dot-docker_ps_count.html'>.docker_ps_count</a></code>,
+  <code><a href='dot-docker_start.html'>.docker_start</a></code>, <code><a href='dot-docker_stop.html'>.docker_stop</a></code>,
+  <code><a href='dot-ids_get.html'>.ids_get</a></code>, <code><a href='dot-pkgnm_to_prgm.html'>.pkgnm_to_prgm</a></code>,
+  <code><a href='dot-pkgnm_to_repo.html'>.pkgnm_to_repo</a></code>, <code><a href='dot-repo_to_img.html'>.repo_to_img</a></code>,
+  <code><a href='dot-repo_to_pkgnm.html'>.repo_to_pkgnm</a></code>, <code><a href='dot-run.html'>.run</a></code>,
+  <code><a href='dot-to_basename.html'>.to_basename</a></code>,
+  <code><a href='dot-which_args_are_filepaths.html'>.which_args_are_filepaths</a></code></p></div>
     
 
   </div>
@@ -152,6 +168,8 @@
       <li><a href="#arguments">Arguments</a></li>
       
       <li><a href="#value">Value</a></li>
+
+      <li><a href="#details">Details</a></li>
 
       <li><a href="#see-also">See also</a></li>
           </ul>

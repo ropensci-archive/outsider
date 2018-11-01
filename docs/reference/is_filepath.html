@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Test whether module can be installed — test_install • outsider</title>
+<title>Is a filepath? — is_filepath • outsider</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -30,9 +30,10 @@
 
 
 
-<meta property="og:title" content="Test whether module can be installed — test_install" />
+<meta property="og:title" content="Is a filepath? — is_filepath" />
 
-<meta property="og:description" content="Return TRUE if the outsider module successfully installs." />
+<meta property="og:description" content="Return TRUE or FALSE for whether character(s) is a valid
+filepath." />
 
 <meta property="og:image" content="/logo.png" />
 <meta name="twitter:card" content="summary" />
@@ -109,40 +110,41 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Test whether module can be installed</h1>
+    <h1>Is a filepath?</h1>
     
-    <div class="hidden name"><code>test_install.Rd</code></div>
+    <div class="hidden name"><code>is_filepath.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Return TRUE if the outsider module successfully installs.</p>
+    <p>Return TRUE or FALSE for whether character(s) is a valid
+filepath.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>test_install</span>(<span class='no'>repo</span>)</pre>
+    <pre class="usage"><span class='fu'>is_filepath</span>(<span class='no'>x</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>repo</th>
-      <td><p>Module repo</p></td>
+      <th>x</th>
+      <td><p>Character vector</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>logical</p>
+    <p>Logical</p>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p>Other private: <code><a href='build_status.html'>build_status</a></code>,
   <code><a href='default_log_set.html'>default_log_set</a></code>, <code><a href='fnames_get.html'>fnames_get</a></code>,
-  <code><a href='is_docker_available.html'>is_docker_available</a></code>,
-  <code><a href='is_filepath.html'>is_filepath</a></code>, <code><a href='log_get.html'>log_get</a></code>,
+  <code><a href='is_docker_available.html'>is_docker_available</a></code>, <code><a href='log_get.html'>log_get</a></code>,
   <code><a href='om_search.html'>om_search</a></code>, <code><a href='om_yaml.html'>om_yaml</a></code>,
-  <code><a href='test_examples.html'>test_examples</a></code>, <code><a href='test_import.html'>test_import</a></code></p></div>
+  <code><a href='test_examples.html'>test_examples</a></code>, <code><a href='test_import.html'>test_import</a></code>,
+  <code><a href='test_install.html'>test_install</a></code></p></div>
     
 
   </div>

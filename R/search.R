@@ -56,7 +56,7 @@ om_yaml <- function(repos) {
                         '/master/om.yml')
     success <- tryCatch(expr = {
       tmp <- yaml::read_yaml(yaml_url)
-      all(names(tmp) %in% c("program", "flavour", "details"))
+      all(c("program", "flavour", "details") %in% names(tmp))
     }, error = function(e) {
       FALSE
     }, warning = function(e) {

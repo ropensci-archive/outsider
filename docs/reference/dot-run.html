@@ -124,7 +124,7 @@ the container.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>.run</span>(<span class='no'>pkgnm</span>, <span class='no'>files_to_send</span>, <span class='no'>...</span>)</pre>
+    <pre class="usage"><span class='fu'>.run</span>(<span class='no'>pkgnm</span>, <span class='no'>cmd</span>, <span class='no'>args</span>, <span class='kw'>files_to_send</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>dest</span> <span class='kw'>=</span> <span class='fu'>getwd</span>())</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -134,12 +134,20 @@ the container.</p>
       <td><p>Package name</p></td>
     </tr>
     <tr>
-      <th>files_to_send</th>
-      <td><p>Filepaths on host to send to module container</p></td>
+      <th>cmd</th>
+      <td><p>Command to be run, e.g. echo, character</p></td>
     </tr>
     <tr>
-      <th>...</th>
-      <td><p>Command and arguments</p></td>
+      <th>args</th>
+      <td><p>Arguments for command, e.g. "hello world", character vector</p></td>
+    </tr>
+    <tr>
+      <th>files_to_send</th>
+      <td><p>Filepaths on host to send to module container.</p></td>
+    </tr>
+    <tr>
+      <th>dest</th>
+      <td><p>Filepath on host computer for generated files to be returned</p></td>
     </tr>
     </table>
     
@@ -150,6 +158,8 @@ the container.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p>Other developer: <code><a href='dot-args_parse.html'>.args_parse</a></code>,
+  <code><a href='dot-copy_from_docker.html'>.copy_from_docker</a></code>,
+  <code><a href='dot-copy_to_docker.html'>.copy_to_docker</a></code>,
   <code><a href='dot-docker_build.html'>.docker_build</a></code>, <code><a href='dot-docker_cmd.html'>.docker_cmd</a></code>,
   <code><a href='dot-docker_cp.html'>.docker_cp</a></code>, <code><a href='dot-docker_exec.html'>.docker_exec</a></code>,
   <code><a href='dot-docker_img_rm.html'>.docker_img_rm</a></code>,
@@ -157,7 +167,8 @@ the container.</p>
   <code><a href='dot-docker_start.html'>.docker_start</a></code>, <code><a href='dot-docker_stop.html'>.docker_stop</a></code>,
   <code><a href='dot-ids_get.html'>.ids_get</a></code>, <code><a href='dot-pkgnm_to_prgm.html'>.pkgnm_to_prgm</a></code>,
   <code><a href='dot-pkgnm_to_repo.html'>.pkgnm_to_repo</a></code>, <code><a href='dot-repo_to_img.html'>.repo_to_img</a></code>,
-  <code><a href='dot-repo_to_pkgnm.html'>.repo_to_pkgnm</a></code>,
+  <code><a href='dot-repo_to_pkgnm.html'>.repo_to_pkgnm</a></code>, <code><a href='dot-to_basename.html'>.to_basename</a></code>,
+  <code><a href='dot-travisyml_gen.html'>.travisyml_gen</a></code>,
   <code><a href='dot-which_args_are_filepaths.html'>.which_args_are_filepaths</a></code></p></div>
     
 

@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Test whether module can be installed — test_install • outsider</title>
+<title>Copy files to docker container — .copy_to_docker • outsider</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -30,9 +30,9 @@
 
 
 
-<meta property="og:title" content="Test whether module can be installed — test_install" />
+<meta property="og:title" content="Copy files to docker container — .copy_to_docker" />
 
-<meta property="og:description" content="Return TRUE if the outsider module successfully installs." />
+<meta property="og:description" content="Copy all given host files to a running docker container." />
 
 <meta property="og:image" content="/logo.png" />
 <meta name="twitter:card" content="summary" />
@@ -109,40 +109,50 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Test whether module can be installed</h1>
+    <h1>Copy files to docker container</h1>
     
-    <div class="hidden name"><code>test_install.Rd</code></div>
+    <div class="hidden name"><code>dot-copy_to_docker.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Return TRUE if the outsider module successfully installs.</p>
+    <p>Copy all given host files to a running docker container.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>test_install</span>(<span class='no'>repo</span>)</pre>
+    <pre class="usage"><span class='fu'>.copy_to_docker</span>(<span class='no'>cntnr_id</span>, <span class='no'>host_flpths</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>repo</th>
-      <td><p>Module repo</p></td>
+      <th>cntnr_id</th>
+      <td><p>Container ID</p></td>
+    </tr>
+    <tr>
+      <th>host_flpths</th>
+      <td><p>Filepaths to send on host computer</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>logical</p>
+    <p>Logical</p>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p>Other private: <code><a href='build_status.html'>build_status</a></code>,
-  <code><a href='default_log_set.html'>default_log_set</a></code>, <code><a href='fnames_get.html'>fnames_get</a></code>,
-  <code><a href='is_docker_available.html'>is_docker_available</a></code>,
-  <code><a href='is_filepath.html'>is_filepath</a></code>, <code><a href='log_get.html'>log_get</a></code>,
-  <code><a href='om_search.html'>om_search</a></code>, <code><a href='om_yaml.html'>om_yaml</a></code>,
-  <code><a href='test_examples.html'>test_examples</a></code>, <code><a href='test_import.html'>test_import</a></code></p></div>
+    <div class='dont-index'><p>Other developer: <code><a href='dot-args_parse.html'>.args_parse</a></code>,
+  <code><a href='dot-copy_from_docker.html'>.copy_from_docker</a></code>,
+  <code><a href='dot-docker_build.html'>.docker_build</a></code>, <code><a href='dot-docker_cmd.html'>.docker_cmd</a></code>,
+  <code><a href='dot-docker_cp.html'>.docker_cp</a></code>, <code><a href='dot-docker_exec.html'>.docker_exec</a></code>,
+  <code><a href='dot-docker_img_rm.html'>.docker_img_rm</a></code>,
+  <code><a href='dot-docker_ps_count.html'>.docker_ps_count</a></code>,
+  <code><a href='dot-docker_start.html'>.docker_start</a></code>, <code><a href='dot-docker_stop.html'>.docker_stop</a></code>,
+  <code><a href='dot-ids_get.html'>.ids_get</a></code>, <code><a href='dot-pkgnm_to_prgm.html'>.pkgnm_to_prgm</a></code>,
+  <code><a href='dot-pkgnm_to_repo.html'>.pkgnm_to_repo</a></code>, <code><a href='dot-repo_to_img.html'>.repo_to_img</a></code>,
+  <code><a href='dot-repo_to_pkgnm.html'>.repo_to_pkgnm</a></code>, <code><a href='dot-run.html'>.run</a></code>,
+  <code><a href='dot-to_basename.html'>.to_basename</a></code>, <code><a href='dot-travisyml_gen.html'>.travisyml_gen</a></code>,
+  <code><a href='dot-which_args_are_filepaths.html'>.which_args_are_filepaths</a></code></p></div>
     
 
   </div>
