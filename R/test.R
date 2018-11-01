@@ -1,3 +1,7 @@
+is_running_on_travis <- function() {
+  Sys.getenv("CI") == "true" && Sys.getenv("TRAVIS") == "true"
+}
+
 #' @name fnames_get
 #' @title Function names for module
 #' @description Return function names of all available functions for an

@@ -16,21 +16,18 @@
 #' @export
 #' @family user
 module_install <- function(repo) {
-  # TODO: fix case sensitive error
-  # if (!build_status(repo = repo)) {
-  #   mntnr <- sub(pattern = '/.*', replacement = '', x = repo)
-  #   msg <- paste0('Warning, it looks like ', char(repo),
-  #                 ' is not successfully passing its tests on GitHub.',
-  #                 ' The module might not build or function properly. ',
-  #                 'Try contacting ', char(mntnr), ' for help.')
-  #   warning(msg)
-  # }
+  if (!is_running_on_travis() && !build_status(repo = repo)) {
+    msg <- paste0('It looks like ', char(repo),
+                  ' is not successfully passing its tests on GitHub.\n',
+                  'The module might not build or function properly. ')
+    warning(msg)
+  }
   if (!is_docker_available()) {
     stop('Docker is not available. Have you installed it? And is it running?')
   }
   if (module_installed(repo)) {
-    stop(repo, ' already installed. Use `module_uninstall()` to remove',
-         ' before installing again.', call. = FALSE)
+    stop(char(repo), ' already installed. Use ', func('module_uninstall'),
+         ' to remove before installing again.', call. = FALSE)
   }
   .module_install(repo = repo)
 }
