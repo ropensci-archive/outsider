@@ -3,6 +3,8 @@
 # -- tests and docs for container.methods
 # -- copy to and from container
 # -- multiple versions per om
+# -- outline development steps
+# -- 
 
 devtools::load_all('.')
 
@@ -13,6 +15,7 @@ repo <- 'dombennett/om..raxml..8.2.12.sse3.pthreads'
 repo <- 'dombennett/om..pyrate..2.0'
 
 repo <- 'dombennett/om..pyrate'
+module_test(repo)
 
 cntnr <- container_class(repo = repo)
 start(cntnr)
@@ -85,7 +88,7 @@ repo <- 'DomBennett/om..raxml..8.2.12.pthreads.sse3'
 library(outsider)
 module_test(repo)
 
-repo <- 'dombennett/om..pyrate..2.0'
+repo <- 'dombennett/om..pyrate'
 library(outsider)
 module_test(repo)
 
@@ -94,7 +97,7 @@ module_test(repo)
 
 
 library(outsider)
-repo <- 'dombennett/om..hello.world..1.0'
+repo <- 'dombennett/om..hello.world'
 module_install(repo = repo)
 module_help(repo = repo)
 module_help(repo = repo, fname = 'hello_world')
@@ -102,6 +105,7 @@ hello_world <- module_import(fname = 'hello_world', repo = repo)
 hello_world()
 module_uninstall(repo = repo)
 
+module_test(repo)
 
 
 

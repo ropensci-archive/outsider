@@ -1,6 +1,6 @@
 .module_install <- function(repo) {
   dockerfile_url <- paste0('https://raw.githubusercontent.com/', repo,
-                           '/master/Dockerfile')
+                           '/master/dockerfiles/latest')
   success <- .docker_build(img_id = .repo_to_img(repo), url = dockerfile_url)
   if (success) {
     devtools::install_github(repo = repo, quiet = TRUE)
@@ -90,17 +90,7 @@ module_help <- function(repo, fname = NULL) {
   }
 }
 
-#' @name module_test
-#' @title Test an outsider module
-#' @description Ensure an outsider module builds, imports correctly and all
-#' its functions successfully complete.
-#' @details Success or fail, the module is uninstalled from the machine after
-#' the test is run.
-#' @param repo Module repo
-#' @return Logical
-#' @export
-#' @family user
-module_test <- function(repo) {
+.module_test <- function(repo) {
   on.exit(module_uninstall(repo = repo))
   res <- tryCatch(test_install(repo = repo), error = function(e) {
     message('Unable to install module! See error below:\n\n')
@@ -114,6 +104,36 @@ module_test <- function(repo) {
   if (!res) {
     stop('Unable to run all module examples!', call. = FALSE)
   }
+  invisible(res)
+}
+
+#' @name module_test
+#' @title Test an outsider module
+#' @description Ensure an outsider module builds, imports correctly and all
+#' its functions successfully complete.
+#' @details Success or fail, the module is uninstalled from the machine after
+#' the test is run.
+#' @param repo Module repo
+#' @param verbose Print docker and program info to console
+#' @return Logical
+#' @export
+#' @family user
+module_test <- function(repo, verbose = FALSE) {
+  res <- FALSE
+  on.exit(expr = {
+    if (res) {
+      celebrate()
+    } else {
+      comfort()
+    }})
+  if (verbose) {
+    temp_opts <- list(program_out = TRUE, program_err = TRUE,
+                      docker_out = TRUE, docker_err = TRUE)
+  } else {
+    temp_opts <- list(program_out = FALSE, program_err = FALSE,
+                      docker_out = FALSE, docker_err = FALSE)
+  }
+  res <- withr::with_options(new = temp_opts, code = .module_test(repo = repo))
   invisible(res)
 }
 
