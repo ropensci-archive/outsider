@@ -1,6 +1,4 @@
-.module_install <- function(repo) {
-  dockerfile_url <- paste0('https://raw.githubusercontent.com/', repo,
-                           '/master/dockerfiles/latest')
+.module_install <- function(repo, dockerfile_url) {
   success <- .docker_build(img_id = .repo_to_img(repo), url = dockerfile_url)
   if (success) {
     devtools::install_github(repo = repo, quiet = TRUE)
@@ -12,10 +10,11 @@
 #' @title Install an outsider module
 #' @description Install a module
 #' @param repo Module repo
+#' @param vrsn Module version, default latest
 #' @return Logical
 #' @export
 #' @family user
-module_install <- function(repo) {
+module_install <- function(repo, vrsn = 'latest') {
   if (!is_running_on_travis() && !build_status(repo = repo)) {
     msg <- paste0('It looks like ', char(repo),
                   ' is not successfully passing its tests on GitHub.\n',
@@ -29,7 +28,16 @@ module_install <- function(repo) {
     stop(char(repo), ' already installed. Use ', func('module_uninstall'),
          ' to remove before installing again.', call. = FALSE)
   }
-  .module_install(repo = repo)
+  dockerfiles <- om_versions(repo = repo)
+  pull <- dockerfiles[['name']] == vrsn
+  if (sum(pull) != 1) {
+    vrsns <- vapply(X = dockerfiles[['name']], FUN = char,
+                    FUN.VALUE = character(1))
+    stop('Invalid version provided for ', char(repo),
+         "\nAvailable versions are: ", paste0(vrsns, collapse = ', '))
+  }
+  dockerfile_url <- dockerfiles[pull, 'download_url']
+  .module_install(repo = repo, dockerfile_url = dockerfile_url)
 }
 
 #' @name module_uninstall

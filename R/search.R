@@ -7,8 +7,18 @@
 available <- function() {
   # search outsider modules
   srch <- om_search()
+  om_details(repo = srch[['full_name']])
+}
+
+om_details <- function(repos) {
   # look up yaml
-  info <- om_yaml(repos = srch[['full_name']])
+  info <- om_yaml(repos = repos)
+  # look up version
+  vrsns <- om_versions(repos = repos)
+  info$versions <- vapply(X = repos, FUN = function(x) {
+    paste0(sort(vrsns[vrsns[['repo']] == x, 'name'], decreasing = TRUE),
+           collapse = ', ')
+    }, FUN.VALUE = character(1))
   # add extra info
   index <- match(srch[['full_name']], rownames(info))
   info[['updated_at']] <- as.POSIXct(srch[['updated_at']][index],
@@ -47,8 +57,8 @@ om_search <- function() {
 #' @return data.frame
 #' @family private
 om_yaml <- function(repos) {
-  header <- c("program", "flavour", "details")
-  info <- as.data.frame(matrix(NA, ncol = 3, nrow = length(repos)))
+  header <- c("program", "details")
+  info <- as.data.frame(matrix(NA, ncol = 2, nrow = length(repos)))
   colnames(info) <- header
   rownames(info) <- repos
   for (repo in repos) {
@@ -56,7 +66,7 @@ om_yaml <- function(repos) {
                         '/master/om.yml')
     success <- tryCatch(expr = {
       tmp <- yaml::read_yaml(yaml_url)
-      all(c("program", "flavour", "details") %in% names(tmp))
+      all(c("program", "details") %in% names(tmp))
     }, error = function(e) {
       FALSE
     }, warning = function(e) {
@@ -71,4 +81,20 @@ om_yaml <- function(repos) {
     }
   }
   info
+}
+
+
+om_versions <- function(repos) {
+  res <- data.frame(repo = NA, name = NA, download_url = NA)
+  for (repo in repos) {
+    api_url <- paste0('https://api.github.com/repos/', repo,
+                      '/contents/dockerfiles')
+    raw_df <- jsonlite::fromJSON(api_url)
+    raw_df <- raw_df[ ,c('name', 'download_url')]
+    raw_df$repo <- repo
+    res <- rbind(res, raw_df)
+  }
+  res <- res[-1, ]
+  rownames(res) <- NULL
+  res
 }

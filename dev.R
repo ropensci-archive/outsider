@@ -6,7 +6,7 @@
 # -- copy to and from container
 # -- multiple versions per om
 # -- outline development steps
-# -- 
+# -- vignette: phylogenetic pipeline
 
 devtools::load_all('.')
 

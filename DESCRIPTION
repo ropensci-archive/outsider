@@ -22,9 +22,9 @@ Imports:
     sys (>= 1.1),
     yaml (>= 2.0),
     callr (>= 3.0.0),
+    withr (>= 2.0),
+    cli,
     praise
 Suggests:
     testthat (>= 2.0),
-    withr (>= 2.0),
-    cli,
     knitr (>= 1.0)
