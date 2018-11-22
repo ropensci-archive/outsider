@@ -35,7 +35,7 @@ Additionally, you will also need to install **Docker desktop**. To install Docke
 
 ##Quick examples
 ```{r example-setup, eval=TRUE, include=FALSE}
-outsider::module_uninstall(repo = 'dombennett/om..hello.world..1.0')
+outsider::module_uninstall(repo = 'dombennett/om..hello.world')
 ```
 
 ```{r outsider-example}
@@ -43,7 +43,7 @@ library(outsider)
 # outsider modules are hosted on GitHub
 # this repo is a demonstration outsider module
 # it contains a function for printing 'Hello World!' in Ubuntu 18.04
-repo <- 'dombennett/om..hello.world..1.0'
+repo <- 'dombennett/om..hello.world'
 module_install(repo = repo)
 # look up the help files for the module
 module_help(repo = repo)

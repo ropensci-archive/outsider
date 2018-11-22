@@ -3,8 +3,8 @@ library(outsider)
 library(testthat)
 
 # VARS
-repo <- 'dombennett/om..hello.world..1.0'
-pkgnm <- 'om..hello.world..1.0..dombennett'
+repo <- 'dombennett/om..hello.world'
+pkgnm <- 'om..hello.world..dombennett'
 prgrm_nm <- 'hello.world'
 
 # RUNNING
@@ -12,7 +12,7 @@ context('Testing \'identities\'')
 withr::with_temp_libpaths(code = {
   on.exit(module_uninstall(repo = repo))
   if (!module_installed(repo = repo)) {
-    module_install(repo = repo)
+    suppressWarnings(module_install(repo = repo))
   }
   test_that('.ids_get() works', {
     res <- .ids_get(pkgnm = pkgnm)

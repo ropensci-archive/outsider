@@ -6,7 +6,7 @@ library(testthat)
 img_id <- 'test_img'
 cntnr_id <- 'test_cntnr'
 url <- paste0('https://raw.githubusercontent.com/DomBennett/',
-              'om..hello.world..1.0/master/Dockerfile')
+              'om..hello.world/master/dockerfiles/latest')
 
 # FUNCTIONS ----
 cleanup <- function() {

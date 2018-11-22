@@ -10,7 +10,7 @@ Description: Install and run external command line programs in R.
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
-RoxygenNote: 6.1.0
+RoxygenNote: 6.1.1
 BugReports: https://github.com/antonellilab/outsider/issues
 Depends:
     R (>= 3.3.0)
@@ -22,6 +22,7 @@ Imports:
     sys (>= 1.1),
     yaml (>= 2.0),
     callr (>= 3.0.0),
+    praise
 Suggests:
     testthat (>= 2.0),
     withr (>= 2.0),

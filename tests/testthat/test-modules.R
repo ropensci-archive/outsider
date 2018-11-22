@@ -4,7 +4,7 @@ library(outsider)
 library(testthat)
 
 # VARS
-repo <- 'DomBennett/om..hello.world..1.0'
+repo <- 'DomBennett/om..hello.world'
 fname <- 'hello_world'
 
 # PRE-TEST
@@ -15,7 +15,7 @@ if (module_installed(repo = repo)) {
 # FUNCTIONS
 pretest_install <- function() {
   if (!module_installed(repo = repo)) {
-    module_install(repo = repo)
+    suppressWarnings(module_install(repo = repo))
   }
 }
 
@@ -27,10 +27,10 @@ withr::with_temp_libpaths(code = {
     expect_true(module_uninstall(repo = repo))
       with_mock(
         `outsider::is_docker_available` = function(...) FALSE,
-        expect_error(module_install(repo = repo))
+        expect_error(suppressWarnings(module_install(repo = repo)))
       )
-      expect_true(module_install(repo = repo))
-      expect_error(module_install(repo = repo))
+      expect_true(suppressWarnings(module_install(repo = repo)))
+      expect_error(suppressWarnings(module_install(repo = repo)))
       require(package = .repo_to_pkgnm(repo = repo), character.only = TRUE)
       expect_true(module_uninstall(repo = repo))
   })

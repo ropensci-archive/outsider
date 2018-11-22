@@ -3,7 +3,7 @@ library(outsider)
 library(testthat)
 
 # VARS
-repo <- 'dombennett/om..hello.world..1.0'
+repo <- 'dombennett/om..hello.world'
 
 # PRE-TEST
 if (module_installed(repo = repo)) {
@@ -13,7 +13,7 @@ if (module_installed(repo = repo)) {
 # FUNCTIONS
 pretest_install <- function() {
   if (!module_installed(repo = repo)) {
-    module_install(repo = repo)
+    suppressWarnings(module_install(repo = repo))
   }
 }
 

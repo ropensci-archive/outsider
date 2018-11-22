@@ -3,7 +3,7 @@ library(outsider)
 library(testthat)
 
 # VARS
-repo <- 'dombennett/om..hello.world..1.0'
+repo <- 'dombennett/om..hello.world'
 
 # FUNCTIONS
 datadir_get <- function(subdir = "") {

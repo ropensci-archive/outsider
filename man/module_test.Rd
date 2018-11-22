@@ -4,10 +4,12 @@
 \alias{module_test}
 \title{Test an outsider module}
 \usage{
-module_test(repo)
+module_test(repo, verbose = FALSE)
 }
 \arguments{
 \item{repo}{Module repo}
+
+\item{verbose}{Print docker and program info to console}
 }
 \value{
 Logical

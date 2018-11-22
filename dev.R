@@ -1,5 +1,7 @@
 # TODO:
 # -- .docker_killall
+# -- switch to container.methods
+# -- implement different versions
 # -- tests and docs for container.methods
 # -- copy to and from container
 # -- multiple versions per om
@@ -9,7 +11,7 @@
 devtools::load_all('.')
 
 repo <- 'dombennett/om..revbayes'
-repo <- 'dombennett/om..hello.world..1.0'
+repo <- 'dombennett/om..hello.world'
 repo <- 'dombennett/om..mafft..7.407.wextensions'
 repo <- 'dombennett/om..raxml..8.2.12.sse3.pthreads'
 repo <- 'dombennett/om..pyrate..2.0'
@@ -76,7 +78,7 @@ outsider::.run(pkgnm = pkgnm, files_to_send = files_to_send,
 pyrate(help = TRUE)
 module_uninstall(repo = repo)
 
-repo <- 'dombennett/om..hello.world..1.0'
+repo <- 'dombennett/om..hello.world'
 library(outsider)
 module_test(repo)
 

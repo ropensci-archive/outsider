@@ -146,7 +146,7 @@
 #' @family developer
 .travisyml_gen <- function(repo, dir = getwd()) {
   url <- paste0('https://raw.githubusercontent.com/DomBennett/',
-                'om..hello.world..1.0/master/.travis.yml')
+                'om..hello.world/master/.travis.yml')
   travis_text <- paste0(readLines(url), collapse = '\n')
   travis_text <- sub(pattern = 'DomBennett/om\\.\\.hello\\.world\\.\\.1\\.0',
                      replacement = repo, x = travis_text)
