@@ -1,3 +1,9 @@
+# TODO:
+# -- .docker_killall
+# -- tests and docs for container.methods
+# -- copy to and from container
+# -- multiple versions per om
+
 devtools::load_all('.')
 
 repo <- 'dombennett/om..revbayes'
@@ -6,9 +12,16 @@ repo <- 'dombennett/om..mafft..7.407.wextensions'
 repo <- 'dombennett/om..raxml..8.2.12.sse3.pthreads'
 repo <- 'dombennett/om..pyrate..2.0'
 
+repo <- 'dombennett/om..pyrate'
+
+cntnr <- container_class(repo = repo)
+start(cntnr)
+exec(cntnr, 'echo', 'hello world')
+halt(cntnr)
+
 
 library(outsider)
-repo <- 'dombennett/om..pyrate..2.0'
+repo <- 'dombennett/om..pyrate'
 module_uninstall(repo = repo)
 module_install(repo = repo)
 pyrate <- module_import(fname = 'PyRate', repo = repo)

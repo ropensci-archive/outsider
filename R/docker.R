@@ -10,23 +10,6 @@
 #' @export
 #' @family developer
 .docker_cmd <- function(args, std_out = TRUE, std_err = TRUE) {
-  # status <- function(pid) {
-  #   tryCatch(expr = {
-  #     sys::exec_status(pid = pid, wait = FALSE) == 0
-  #     },
-  #     error = function(e) {
-  #       # Error implies no PID
-  #       TRUE
-  #     }
-  #   )
-  # }
-  # pid <- sys::exec_background(cmd = 'docker', args = args,
-  #                             std_out = std_out, std_err = std_err)
-  # while (is.na(status(pid))) {
-  #   line_spinner()
-  # }
-  # status(pid)
-  # ^^ without callr, requires a daemon process and a line spinner function
   callr_args <- list(args, std_out, std_err)
   res <- callr::r(func = function(args, std_out, std_err) {
     sys::exec_wait(cmd = 'docker', args = args,
