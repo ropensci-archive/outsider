@@ -3,10 +3,12 @@
 # -- switch to container.methods
 # -- implement different versions
 # -- tests and docs for container.methods
+# -- tests and docs for launcher.methods
 # -- copy to and from container
 # -- multiple versions per om
 # -- outline development steps
 # -- vignette: phylogenetic pipeline
+# -- repo: starter package
 
 devtools::load_all('.')
 
@@ -32,9 +34,39 @@ module_install(repo = repo)
 pyrate <- module_import(fname = 'PyRate', repo = repo)
 # just input file
 pyrate('/Users/djb208/Coding/PyRate/example_files/Rhinocerotidae_PyRate.py')
+
+cmd <- 'PyRate.py'
+arglist <- c('Rhinocerotidae_PyRate.py', '-wd',
+             '/Users/djb208/Coding/PyRate/example_files/')
+wd <- outsider::.wd_get(arglist = arglist, key = '-wd', i = 1)
+files_to_send <- outsider::.filestosend_get(arglist = arglist, wd = wd)
+arglist <- c(paste0('/PyRate/', cmd), arglist)
+arglist <- outsider::.arglist_parse(arglist = arglist,
+                                    keyvals_to_drop = '-wd')
+launcher <- outsider::launcher_class(repo = 'dombennett/om..pyrate',
+                                     cmd = 'python2.7', wd = wd,
+                                     files_to_send = files_to_send,
+                                     arglist = arglist)
+devtools::load_all()
+x <- launcher
+cntnr <- container_class(pkgnm = x[['pkgnm']])
+start(cntnr)
+success <- run(x = cntnr, cmd = x[['cmd']], args = x[['arglist']])
+
+
+run(launcher)
+
+cntnr <- outsider:::container_class(pkgnm = launcher[['pkgnm']])
+copy(x = cntnr, send = x[['files_to_send']])
+
+run(launcher)
+
+
 # input and wd
 pyrate('Rhinocerotidae_PyRate.py', '-wd',
        '/Users/djb208/Coding/PyRate/example_files/')
+
+
 
 
 om..pyrate..2.0..dombennett:::base_function

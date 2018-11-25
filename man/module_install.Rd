@@ -4,10 +4,12 @@
 \alias{module_install}
 \title{Install an outsider module}
 \usage{
-module_install(repo)
+module_install(repo, vrsn = "latest")
 }
 \arguments{
 \item{repo}{Module repo}
+
+\item{vrsn}{Module version, default latest}
 }
 \value{
 Logical

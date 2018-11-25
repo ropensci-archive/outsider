@@ -16,17 +16,15 @@ Logical
 Deletes docker image from system.
 }
 \seealso{
-Other developer: \code{\link{.args_parse}},
-  \code{\link{.copy_from_docker}},
-  \code{\link{.copy_to_docker}},
-  \code{\link{.docker_build}}, \code{\link{.docker_cmd}},
-  \code{\link{.docker_cp}}, \code{\link{.docker_exec}},
+Other developer: \code{\link{.docker_build}},
+  \code{\link{.docker_cmd}}, \code{\link{.docker_cp}},
+  \code{\link{.docker_exec}},
   \code{\link{.docker_ps_count}},
   \code{\link{.docker_start}}, \code{\link{.docker_stop}},
   \code{\link{.ids_get}}, \code{\link{.pkgnm_to_prgm}},
   \code{\link{.pkgnm_to_repo}}, \code{\link{.repo_to_img}},
-  \code{\link{.repo_to_pkgnm}}, \code{\link{.run}},
-  \code{\link{.to_basename}}, \code{\link{.travisyml_gen}},
-  \code{\link{.which_args_are_filepaths}}
+  \code{\link{.repo_to_pkgnm}}, \code{\link{.run_nocopy}},
+  \code{\link{.run_noreturn}}, \code{\link{.run_nosend}},
+  \code{\link{.run}}, \code{\link{.travisyml_gen}}
 }
 \concept{developer}
