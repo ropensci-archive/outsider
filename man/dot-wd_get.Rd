@@ -25,3 +25,10 @@ key exists in the arglist and will return its corresponding value.
 If no key or i is provided or found in the arguments, returns the
 R session's working directory.
 }
+\seealso{
+Other developer: \code{\link{.arglist_get}},
+  \code{\link{.arglist_parse}},
+  \code{\link{.filestosend_get}},
+  \code{\link{.travis_yaml}}, \code{\link{outsider-class}}
+}
+\concept{developer}

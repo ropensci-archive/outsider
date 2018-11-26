@@ -6,9 +6,10 @@
 #' @name outsider
 NULL
 
-#' @name .outsider_class
+#' @name outsider-class
+#' @aliases outsider-methods
 #' @title Construct outsider object
-#' @description Returns a outsider object. The outsider object describes a
+#' @description Returns an outsider object. The outsider object describes a
 #' outsider module's program and arguments. The object is generated every
 #' time an outsider module program is called. It details the arguments of a
 #' call, the command as well as the files to send to the docker container.
@@ -17,9 +18,9 @@ NULL
 #' program to be run must be sent to the remote machine before the program
 #' is called.
 #' The arguments, wd and files_to_send can all be defined after the outsider
-#' has been initiated using \code{otsdr$``} notation.
+#' has been initiated using \code{$} notation.
 #' Once a outsider has been defined, the command can be run using
-#' \code{.run(otsdr)}.
+#' \code{.run()}.
 #' The \code{arglist}, \code{wd} or \code{files_to_send} do not need to be
 #' defined for the outsider to be run.
 #' @param repo Repository of the outsider module
@@ -36,9 +37,10 @@ NULL
 #' \item{files_to_send}{Files to be sent to container}
 #' \item{container}{Docker container object}
 #' @export
+#' @family developer
 .outsider_init <- function(repo, cmd = NA, arglist = NULL, wd = NULL,
                            files_to_send = NULL) {
-  pkgnm <- .repo_to_pkgnm(repo = repo)
+  pkgnm <- repo_to_pkgnm(repo = repo)
   container <- container_init(pkgnm = pkgnm)
   parts <- list(repo = repo, pkgnm = pkgnm, cmd = cmd, arglist = arglist,
                 wd = wd, files_to_send = files_to_send, container = container)
@@ -50,13 +52,8 @@ NULL
   UseMethod('.run', x)
 }
 
-#' @name .run
-#' @title Run an outsider module
-#' @description Run an outsider module using the outsider object.
+#' @rdname outsider-class
 #' @param x outsider object
-#' @return Logical
-#' @export
-#' @family developer
 .run.outsider <- function(x) {
   if (is.na(x[['cmd']])) {
     stop('Command not set')

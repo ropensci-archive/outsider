@@ -4,7 +4,7 @@
 #' module repos.
 #' @param repos Character vector of outsider module repositories.
 #' @return data.frame
-#' @family private
+#' @family private-search
 module_yaml <- function(repos) {
   header <- c("program", "details")
   info <- as.data.frame(matrix(NA, ncol = 2, nrow = length(repos)))
@@ -38,7 +38,7 @@ module_yaml <- function(repos) {
 #' modules.
 #' @param repos Character vector of outsider module repositories.
 #' @return data.frame
-#' @family private
+#' @family private-search
 module_versions <- function(repos) {
   res <- data.frame(repo = NA, name = NA, download_url = NA)
   for (repo in repos) {

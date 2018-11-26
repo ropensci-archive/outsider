@@ -1,4 +1,5 @@
-#' @name .travisyml_gen
+# TODO: create proto-outsider module package skeleton
+#' @name .travis_yaml
 #' @title Generate travis file
 #' @description Write .travis.yml to working directory.
 #' @details All validated outsider modules must have a .travis.yml in their
@@ -8,7 +9,7 @@
 #' @return Logical
 #' @export
 #' @family developer
-.travisyml_gen <- function(repo, dir = getwd()) {
+.travis_yaml <- function(repo, dir = getwd()) {
   url <- paste0('https://raw.githubusercontent.com/DomBennett/',
                 'om..hello.world/master/.travis.yml')
   travis_text <- paste0(readLines(url), collapse = '\n')

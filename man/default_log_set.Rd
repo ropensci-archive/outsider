@@ -11,11 +11,9 @@ By default all streams are printed to console with the exception
 of \code{docker_out}.
 }
 \seealso{
-Other private: \code{\link{build_status}},
-  \code{\link{examples_test}}, \code{\link{fnames_get}},
-  \code{\link{import_test}}, \code{\link{install_test}},
-  \code{\link{is_docker_available}},
-  \code{\link{is_filepath}}, \code{\link{log_get}},
-  \code{\link{module_versions}}, \code{\link{module_yaml}}
+Other private: \code{\link{examples_test}},
+  \code{\link{fnames_get}}, \code{\link{import_test}},
+  \code{\link{install_test}}, \code{\link{is_filepath}},
+  \code{\link{log_get}}, \code{\link{to_basename}}
 }
 \concept{private}

@@ -1,7 +1,23 @@
-#' @name celebrate
-#' @title Celebrate
-#' @description Print to console congratulatory text.
-#' @return Logical
+.onAttach <- function(...) {
+  default_log_set()
+}
+
+char <- function(x) {
+  crayon::green(encodeString(x, quote = "'"))
+}
+
+stat <- function(...) {
+  crayon::blue(...)
+}
+
+func <- function(x) {
+  crayon::red(paste0(x, '()'))
+}
+
+cat_line <- function(...) {
+  cat(paste0(..., "\n"), sep = "")
+}
+
 celebrate <- function() {
   template <- paste0("${Exclamation}!", " The module works!",
                      " You are ${adjective}!")
@@ -9,10 +25,6 @@ celebrate <- function() {
   cat_line(crayon::green(mssg))
 }
 
-#' @name comfort
-#' @title Comfort
-#' @description Print to console comforting text.
-#' @return Logical
 comfort <- function() {
   phrases <- c('Ah shucks....', 'Damn damn damn.', 'Sodding socks.',
                'Well drop the goat. This is not great.',

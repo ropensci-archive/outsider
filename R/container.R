@@ -1,17 +1,32 @@
-
 # Class ----
+#' @name container-class
+#' @aliases container-methods
+#' @title Docker container class and methods
+#' @description Return a list class that describes a Docker container.
+#' The resulting class object comes with a series of convenience methods
+#' for starting, stopping and interacting with a container.
+#' @param pkgnm Package name
+#' @param repo Repo
+#' @param x container
+#' @return A list of class \code{container} with the following items:
+#' \item{repo}{Repository of the outsider module}
+#' \item{pkgnm}{Package name of the outsider module}
+#' \item{prgrm}{Command to be called in the container}
+#' \item{cntnr_id}{Unique Docker container name}
+#' \item{img_id}{Image ID}
+#' @family private-docker
 container_init <- function(pkgnm = NULL, repo = NULL) {
   if (!is.null(pkgnm)) {
-    res <- .ids_get(pkgnm = pkgnm)
+    res <- ids_get(pkgnm = pkgnm)
   } else if (!is.null(repo)) {
-    pkgnm <- .repo_to_pkgnm(repo = repo)
-    res <- .ids_get(pkgnm = pkgnm)
+    pkgnm <- repo_to_pkgnm(repo = repo)
+    res <- ids_get(pkgnm = pkgnm)
   } else {
     stop("No package or repo name provided.")
   }
   res <- as.list(res)
-  res[['repo']] <- .pkgnm_to_repo(pkgnm = pkgnm)
-  res[['prgrm']] <- .pkgnm_to_prgm(pkgnm = pkgnm)
+  res[['repo']] <- pkgnm_to_repo(pkgnm = pkgnm)
+  res[['prgrm']] <- pkgnm_to_prgm(pkgnm = pkgnm)
   res[['pkgnm']] <- pkgnm
   structure(res, class = 'container')
 }
@@ -37,29 +52,33 @@ run <- function(x, ...) {
 }
 
 # Functions ----
+#' @rdname container-class
 start.container <- function(x) {
   args <- c('run', '-t', '-d', '--name', x[['cntnr_id']], x[['img_id']])
-  .docker_cmd(args = args, std_out = log_get('docker_out'),
-              std_err = log_get('docker_err'))
+  docker_cmd(args = args, std_out = log_get('docker_out'),
+             std_err = log_get('docker_err'))
 }
 
+#' @rdname container-class
 halt.container <- function(x) {
   cntnr_id <- x[['cntnr_id']]
   args1 <- c('stop', cntnr_id)
-  res1 <- .docker_cmd(args = args1, std_out = log_get('docker_out'),
+  res1 <- docker_cmd(args = args1, std_out = log_get('docker_out'),
                       std_err = log_get('docker_err'))
   args2 <- c('rm', cntnr_id)
-  res2 <- .docker_cmd(args = args2, std_out = log_get('docker_out'),
+  res2 <- docker_cmd(args = args2, std_out = log_get('docker_out'),
                       std_err = log_get('docker_err'))
   res1 & res2
 }
 
+#' @rdname container-class
 exec.container <- function(x, ...) {
   args <- c('exec', x[['cntnr_id']], ...)
-  .docker_cmd(args, std_out = log_get('program_out'),
-              std_err = log_get('program_err'))
+  docker_cmd(args, std_out = log_get('program_out'),
+             std_err = log_get('program_err'))
 }
 
+#' @rdname container-class
 status.container <- function(x) {
   check <- function(argmnts) {
     res <- sys::exec_internal(cmd = 'docker', args = argmnts)
@@ -80,39 +99,36 @@ status.container <- function(x) {
   'Not running'
 }
 
-#' @name copy.container
-#' @title Copy files to and from a docker container
-#' @description Copy all given host files to a running docker container or
-#' copy all files from a container's working directory to a host filepath.
-#' @details All outsider modules have a working_dir/ in which generated files
-#' are created and initiation files must be for the program to use.
+#' @rdname container-class
+#' @details All outsider modules have a \code{working_dir/} in which generated
+#' files are created and initiation files must be for the program to use.
 #' Files must be sent to this working directory and then returned before and
 #' after the program has run.
 #' 
 #' If no \code{send} or \code{rtrn} specified, returns TRUE.
-#' @param x Container ID
 #' @param send Filepaths to send from host computer to container.
 #' @param rtrn Directory on host computer where returning files should be sent.
-#' @return Logical
-#' @export
 copy.container <- function(x, send = NULL, rtrn = NULL) {
   cntnr_id <- x[['cntnr_id']]
   if (!is.null(send)) {
     res <- TRUE
     for (host_flpth in send) {
-      res <- res & .docker_cp(origin = host_flpth,
-                              dest = paste0(cntnr_id, ':', '/working_dir/'))
+      res <- res & docker_cp(origin = host_flpth,
+                             dest = paste0(cntnr_id, ':', '/working_dir/'))
     }
     return(invisible(res))
   }
   if (!is.null(rtrn)) {
-    res <- .docker_cp(origin = paste0(cntnr_id, ':', '/working_dir/.'),
-                      dest = rtrn)
+    res <- docker_cp(origin = paste0(cntnr_id, ':', '/working_dir/.'),
+                     dest = rtrn)
     return(invisible(res))
   }
   invisible(TRUE)
 }
 
+#' @rdname container-class
+#' @param cmd Command name, character
+#' @param args List or vector of arguments, character
 run.container <- function(x, cmd, args) {
   success <- tryCatch(expr = {
     exec(x = x, cmd, args)},

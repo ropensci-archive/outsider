@@ -17,12 +17,9 @@ Return function names of all available functions for an
 installed outsider modules
 }
 \seealso{
-Other private: \code{\link{build_status}},
-  \code{\link{default_log_set}},
+Other private: \code{\link{default_log_set}},
   \code{\link{examples_test}}, \code{\link{import_test}},
-  \code{\link{install_test}},
-  \code{\link{is_docker_available}},
-  \code{\link{is_filepath}}, \code{\link{log_get}},
-  \code{\link{module_versions}}, \code{\link{module_yaml}}
+  \code{\link{install_test}}, \code{\link{is_filepath}},
+  \code{\link{log_get}}, \code{\link{to_basename}}
 }
 \concept{private}

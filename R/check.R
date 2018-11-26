@@ -3,7 +3,7 @@
 #' @description Docker is required to run \code{outsider}. This function tests
 #' whether Docker is available.
 #' @return Logical
-#' @family private
+#' @family private-check
 is_docker_available <- function() {
   res <- sys::exec_internal(cmd = 'docker', args = '--help')
   res[['status']] == 0
@@ -14,7 +14,7 @@ is_docker_available <- function() {
 #' @description Is build passing? Returns either TRUE or FALSE.
 #' @param repo GitHub repo
 #' @return Logical
-#' @family private
+#' @family private-check
 build_status <- function(repo) {
   # search via GitHub API
   base_url <- 'https://api.github.com/search/repositories'

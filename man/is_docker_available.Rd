@@ -14,11 +14,6 @@ Docker is required to run \code{outsider}. This function tests
 whether Docker is available.
 }
 \seealso{
-Other private: \code{\link{build_status}},
-  \code{\link{default_log_set}},
-  \code{\link{examples_test}}, \code{\link{fnames_get}},
-  \code{\link{import_test}}, \code{\link{install_test}},
-  \code{\link{is_filepath}}, \code{\link{log_get}},
-  \code{\link{module_versions}}, \code{\link{module_yaml}}
+Other private-check: \code{\link{build_status}}
 }
-\concept{private}
+\concept{private-check}

@@ -1,8 +1,4 @@
 # Private ----
-#' @name args_get
-#' @title Return the arguments of the parent function
-#' @description Expand ... by calling this function.
-#' @return List
 args_get <- function() {
   parent <- sys.parent(n = 1L)
   as.list(match.call(definition = sys.function(parent),
@@ -15,6 +11,7 @@ args_get <- function() {
 #' to file basenames. E.g. "dir1/dir2/text.file" is converted to "text.file"
 #' @param x Character vector
 #' @return Character vector
+#' @family private
 to_basename <- function(x) {
   files_and_folders <- is_filepath(x)
   x[files_and_folders] <- basename(x[files_and_folders])
@@ -42,6 +39,7 @@ is_filepath <- function(x) {
 #' @param ... Any number of arguments
 #' @return Character vector
 #' @export
+#' @family developer
 .arglist_get <- function(...) {
   arglist <- args_get()
   arglist <- lapply(X = arglist, FUN = eval)
@@ -57,6 +55,7 @@ is_filepath <- function(x) {
 #' @param wd Working directory in which to look for files
 #' @return Character vector
 #' @export
+#' @family developer
 .filestosend_get <- function(arglist, wd = NULL) {
   # Check whether any arglist are filepaths
   arglist <- arglist[arglist != wd]
@@ -85,6 +84,7 @@ is_filepath <- function(x) {
 #' @param i Index of the working directory in the arguments, e.g. 1.
 #' @return Character
 #' @export
+#' @family developer
 .wd_get <- function(arglist, key = NULL, i = NULL) {
   wd <- getwd()
   if (!is.null(key) && key %in% arglist) {
@@ -112,6 +112,7 @@ is_filepath <- function(x) {
 #' @param vals_to_drop Specific values to drop, e.g. --verbose.
 #' @return Character vector
 #' @export
+#' @family developer
 .arglist_parse <- function(arglist, keyvals_to_drop = NULL, vals_to_drop = NULL,
                            normalise_paths = TRUE) {
   for (each in keyvals_to_drop) {

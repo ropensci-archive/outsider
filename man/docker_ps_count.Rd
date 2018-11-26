@@ -15,3 +15,9 @@ Count the number of running docker containers.
 \details{
 Use this to avoid creating multiple containers with the same ID.
 }
+\seealso{
+Other private-docker: \code{\link{container-class}},
+  \code{\link{docker_build}}, \code{\link{docker_cmd}},
+  \code{\link{docker_cp}}, \code{\link{docker_img_rm}}
+}
+\concept{private-docker}

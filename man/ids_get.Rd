@@ -15,3 +15,9 @@ Logical
 \description{
 From a pkgnm, return the image ID and a unique container ID.
 }
+\seealso{
+Other private-ids: \code{\link{pkgnm_to_prgm}},
+  \code{\link{pkgnm_to_repo}}, \code{\link{repo_to_img}},
+  \code{\link{repo_to_pkgnm}}
+}
+\concept{private-ids}

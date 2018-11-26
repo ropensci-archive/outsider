@@ -23,3 +23,10 @@ Drop any specified key:value pairs with \code{keyvals_to_drop} or drop any
 specific values \code{vals_to_drop}. With \code{normalise_paths} as TRUE,
 all filepaths in the arglist will be converted to basenames.
 }
+\seealso{
+Other developer: \code{\link{.arglist_get}},
+  \code{\link{.filestosend_get}},
+  \code{\link{.travis_yaml}}, \code{\link{.wd_get}},
+  \code{\link{outsider-class}}
+}
+\concept{developer}

@@ -16,3 +16,10 @@ Character vector
 Convert all the arguments passed to this function, including
 those contained in '...', into character vector.
 }
+\seealso{
+Other developer: \code{\link{.arglist_parse}},
+  \code{\link{.filestosend_get}},
+  \code{\link{.travis_yaml}}, \code{\link{.wd_get}},
+  \code{\link{outsider-class}}
+}
+\concept{developer}

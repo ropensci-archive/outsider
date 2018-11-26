@@ -16,3 +16,9 @@ Logical
 Converts the R package name of a module into its base program
 name.
 }
+\seealso{
+Other private-ids: \code{\link{ids_get}},
+  \code{\link{pkgnm_to_repo}}, \code{\link{repo_to_img}},
+  \code{\link{repo_to_pkgnm}}
+}
+\concept{private-ids}

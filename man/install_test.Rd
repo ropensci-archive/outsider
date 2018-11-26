@@ -16,12 +16,9 @@ logical
 Return TRUE if the outsider module successfully installs.
 }
 \seealso{
-Other private: \code{\link{build_status}},
-  \code{\link{default_log_set}},
+Other private: \code{\link{default_log_set}},
   \code{\link{examples_test}}, \code{\link{fnames_get}},
-  \code{\link{import_test}},
-  \code{\link{is_docker_available}},
-  \code{\link{is_filepath}}, \code{\link{log_get}},
-  \code{\link{module_versions}}, \code{\link{module_yaml}}
+  \code{\link{import_test}}, \code{\link{is_filepath}},
+  \code{\link{log_get}}, \code{\link{to_basename}}
 }
 \concept{private}

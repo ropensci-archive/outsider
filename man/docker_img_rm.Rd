@@ -15,3 +15,9 @@ Logical
 \description{
 Deletes docker image from system.
 }
+\seealso{
+Other private-docker: \code{\link{container-class}},
+  \code{\link{docker_build}}, \code{\link{docker_cmd}},
+  \code{\link{docker_cp}}, \code{\link{docker_ps_count}}
+}
+\concept{private-docker}

@@ -17,12 +17,6 @@ Return data.frame of all YAML information of given outsider
 module repos.
 }
 \seealso{
-Other private: \code{\link{build_status}},
-  \code{\link{default_log_set}},
-  \code{\link{examples_test}}, \code{\link{fnames_get}},
-  \code{\link{import_test}}, \code{\link{install_test}},
-  \code{\link{is_docker_available}},
-  \code{\link{is_filepath}}, \code{\link{log_get}},
-  \code{\link{module_versions}}
+Other private-search: \code{\link{module_versions}}
 }
-\concept{private}
+\concept{private-search}

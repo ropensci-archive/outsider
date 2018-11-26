@@ -7,6 +7,7 @@
 #' @param std_err if and where to direct child process STDERR.
 #' See \code{\link[sys]{exec}}.
 #' @return Logical
+#' @family private-docker
 docker_cmd <- function(args, std_out = TRUE, std_err = TRUE) {
   callr_args <- list(args, std_out, std_err)
   res <- callr::r(func = function(args, std_out, std_err) {
@@ -21,6 +22,7 @@ docker_cmd <- function(args, std_out = TRUE, std_err = TRUE) {
 #' @description Deletes docker image from system.
 #' @param img_id Image ID
 #' @return Logical
+#' @family private-docker
 docker_img_rm <- function(img_id) {
   args <- c('image', 'rm', img_id)
   docker_cmd(args, std_out = log_get('docker_out'),
@@ -33,6 +35,7 @@ docker_img_rm <- function(img_id) {
 #' @param img_id Image ID
 #' @param url Dockerfile URL
 #' @return Logical
+#' @family private-docker
 docker_build <- function(img_id, url) {
   args <- c('build', '-t', img_id, url)
   docker_cmd(args = args, std_out = log_get('docker_out'),
@@ -47,6 +50,7 @@ docker_build <- function(img_id, url) {
 #' @param origin Origin filepath
 #' @param dest Destination filepath
 #' @return Logical
+#' @family private-docker
 docker_cp <- function(origin, dest) {
   args <- c('cp', origin, dest)
   docker_cmd(args = args, std_out = log_get('docker_out'),
@@ -58,6 +62,7 @@ docker_cp <- function(origin, dest) {
 #' @description Count the number of running docker containers.
 #' @details Use this to avoid creating multiple containers with the same ID.
 #' @return Integer
+#' @family private-docker
 docker_ps_count <- function() {
   res <- sys::exec_internal(cmd = 'docker', args = 'ps')
   if (res[['status']] == 0) {
