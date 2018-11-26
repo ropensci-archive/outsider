@@ -1,3 +1,10 @@
+is_repo_name <- function(x) {
+  is_repo <- grepl(pattern = '/', x = x) & !grepl(pattern = '\\s', x = x)
+  if (!is_repo) {
+    stop(char(x), ' is not a valid repo name.', call. = FALSE)
+  }
+}
+
 #' @name ids_get
 #' @title Get image ID and unique container ID
 #' @description From a pkgnm, return the image ID and a unique container ID.
@@ -21,6 +28,7 @@ ids_get <- function(pkgnm) {
 #' @family private-ids
 repo_to_img <- function(repo) {
   repo <- tolower(repo)
+  is_repo_name(x = repo)
   gsub(pattern = '\\.\\.', replacement = '_', x = repo)
 }
 
@@ -44,6 +52,7 @@ pkgnm_to_repo <- function(pkgnm) {
 #' @family private-ids
 repo_to_pkgnm <- function(repo) {
   repo <- tolower(repo)
+  is_repo_name(x = repo)
   prts <- strsplit(x = repo, split = '/')[[1]]
   paste0(prts[[2]], '..', prts[[1]])
 }

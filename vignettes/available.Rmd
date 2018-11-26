@@ -8,7 +8,8 @@ knitr::opts_chunk$set(echo = TRUE, comment = '')
 ```
 
 ```{r available, echo=FALSE, results='asis'}
-module_info <- outsider::available()
+repos <- outsider::module_search()
+module_info <- outsider::module_details(repos)
 module_info$repo <- rownames(module_info)
 module_info$url <- NULL
 rownames(module_info) <- NULL

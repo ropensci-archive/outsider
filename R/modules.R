@@ -1,6 +1,6 @@
 # Private ----
 .module_install <- function(repo, dockerfile_url) {
-  success <- docker_build(img_id = .repo_to_img(repo), url = dockerfile_url)
+  success <- docker_build(img_id = repo_to_img(repo), url = dockerfile_url)
   if (success) {
     devtools::install_github(repo = repo, quiet = TRUE)
   }
@@ -94,7 +94,7 @@ module_install <- function(repo, vrsn = 'latest') {
     stop(char(repo), ' already installed. Use ', func('module_uninstall'),
          ' to remove before installing again.', call. = FALSE)
   }
-  dockerfiles <- om_versions(repo = repo)
+  dockerfiles <- module_versions(repo = repo)
   pull <- dockerfiles[['name']] == vrsn
   if (sum(pull) != 1) {
     vrsns <- vapply(X = dockerfiles[['name']], FUN = char,
@@ -116,12 +116,12 @@ module_install <- function(repo, vrsn = 'latest') {
 #' @export
 #' @family user
 module_uninstall <- function(repo) {
-  pkgnm <- .repo_to_pkgnm(repo)
+  pkgnm <- repo_to_pkgnm(repo)
   if (pkgnm %in% devtools::loaded_packages()$package) {
     try(expr = devtools::unload(devtools::inst(pkgnm)), silent = TRUE)
   }
   if (module_installed(repo = repo)) {
-    .docker_img_rm(img_id = .repo_to_img(repo = repo))
+    docker_img_rm(img_id = repo_to_img(repo = repo))
     suppressMessages(utils::remove.packages(pkgs = pkgnm))
   }
   invisible(!module_installed(repo = repo))
@@ -139,7 +139,7 @@ module_uninstall <- function(repo) {
 #' @export
 #' @family user
 module_import <- function(fname, repo) {
-  pkgnm <- .repo_to_pkgnm(repo)
+  pkgnm <- repo_to_pkgnm(repo)
   utils::getFromNamespace(x = fname, ns = pkgnm)
 }
 
@@ -153,7 +153,7 @@ module_import <- function(fname, repo) {
 #' @export
 #' @family user
 module_help <- function(repo, fname = NULL) {
-  pkgnm <- .repo_to_pkgnm(repo)
+  pkgnm <- repo_to_pkgnm(repo)
   if (!pkgnm %in% utils::installed.packages()) {
     stop('Outsider Module (OM) [', repo, '] not found', call. = FALSE)
   }
@@ -202,7 +202,7 @@ module_test <- function(repo, verbose = FALSE) {
 #' @export
 #' @family user
 module_installed <- function(repo) {
-  pkgnm <- vapply(X = repo, FUN = .repo_to_pkgnm, FUN.VALUE = character(1))
+  pkgnm <- vapply(X = repo, FUN = repo_to_pkgnm, FUN.VALUE = character(1))
   pkgnm %in% utils::installed.packages()
 }
 

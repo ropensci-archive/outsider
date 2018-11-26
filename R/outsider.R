@@ -54,11 +54,12 @@ NULL
 
 #' @rdname outsider-class
 #' @param x outsider object
+#' @export
 .run.outsider <- function(x) {
   if (is.na(x[['cmd']])) {
     stop('Command not set')
   }
-  cntnr <- x[['cntnr']]
+  cntnr <- x[['container']]
   success <- start(cntnr)
   on.exit(expr = {
     halt(x = cntnr)
@@ -69,7 +70,7 @@ NULL
   if (length(x[['files_to_send']]) > 0) {
     success <- copy(x = cntnr, send = x[['files_to_send']])
   }
-  success <- .run(x = cntnr, cmd = x[['cmd']], args = x[['arglist']])
+  success <- run(x = cntnr, cmd = x[['cmd']], args = x[['arglist']])
   if (length(x[['wd']]) > 0) {
     success <- copy(x = cntnr, rtrn = x[['wd']])
   }
