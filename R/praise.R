@@ -1,3 +1,7 @@
+#' @name celebrate
+#' @title Celebrate
+#' @description Print to console congratulatory text.
+#' @return Logical
 celebrate <- function() {
   template <- paste0("${Exclamation}!", " The module works!",
                      " You are ${adjective}!")
@@ -5,6 +9,10 @@ celebrate <- function() {
   cat_line(crayon::green(mssg))
 }
 
+#' @name comfort
+#' @title Comfort
+#' @description Print to console comforting text.
+#' @return Logical
 comfort <- function() {
   phrases <- c('Ah shucks....', 'Damn damn damn.', 'Sodding socks.',
                'Well drop the goat. This is not great.',

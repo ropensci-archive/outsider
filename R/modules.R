@@ -1,9 +1,75 @@
+# Private ----
 .module_install <- function(repo, dockerfile_url) {
-  success <- .docker_build(img_id = .repo_to_img(repo), url = dockerfile_url)
+  success <- docker_build(img_id = .repo_to_img(repo), url = dockerfile_url)
   if (success) {
     devtools::install_github(repo = repo, quiet = TRUE)
   }
   invisible(module_installed(repo))
+}
+
+.module_test <- function(repo) {
+  on.exit(module_uninstall(repo = repo))
+  res <- tryCatch(install_test(repo = repo), error = function(e) {
+    message('Unable to install module! See error below:\n\n')
+    stop(e)
+  })
+  res <- import_test(repo = repo)
+  if (!res) {
+    stop('Unable to import all module functions!', call. = FALSE)
+  }
+  res <- examples_test(repo = repo)
+  if (!res) {
+    stop('Unable to run all module examples!', call. = FALSE)
+  }
+  invisible(res)
+}
+
+# Public ----
+#' @name module_search
+#' @title Search for available outsider modules
+#' @description Return a list of available outsider modules.
+#' @return Character vector
+#' @export
+#' @family user
+module_search <- function() {
+  base_url <- 'https://api.github.com/search/repositories'
+  search_args <- paste0('?q=om..+in:name+outsider-module+in:description',
+                        '&', 'Type=Repositories')
+  github_res <- jsonlite::fromJSON(paste0(base_url, search_args))
+  if (github_res[['incomplete_results']]) {
+    warning('Not all repos discovered.')
+  }
+  github_res[['items']]
+}
+
+#' @name module_details
+#' @title Look up details on module(s)
+#' @description Return a data.frame of information for outsider module(s).
+#' @param repo Vector of one or more outsider module repositories
+#' @return data.frame
+#' @export
+#' @family user
+module_details <- function(repo) {
+  # look up yaml
+  info <- module_yaml(repos = repo)
+  # look up version
+  vrsns <- module_versions(repos = repo)
+  info$versions <- vapply(X = repos, FUN = function(x) {
+    paste0(sort(vrsns[vrsns[['repo']] == x, 'name'], decreasing = TRUE),
+           collapse = ', ')
+  }, FUN.VALUE = character(1))
+  # add extra info
+  index <- match(srch[['full_name']], rownames(info))
+  info[['updated_at']] <- as.POSIXct(srch[['updated_at']][index],
+                                     format = "%Y-%m-%dT%H:%M:%OSZ",
+                                     timezone = 'UTC')
+  info[['watcher_count']] <- srch[['watchers_count']][index]
+  info[['url']] <- paste0('https://github.com/', rownames(info))
+  # order output
+  info <- info[order(info[['program']], decreasing = TRUE), ]
+  info <- info[order(info[['updated_at']], decreasing = TRUE), ]
+  info <- info[order(info[['watcher_count']], decreasing = TRUE), ]
+  info
 }
 
 #' @name module_install
@@ -96,23 +162,6 @@ module_help <- function(repo, fname = NULL) {
   } else {
     utils::help(package = (pkgnm), topic = (fname))
   }
-}
-
-.module_test <- function(repo) {
-  on.exit(module_uninstall(repo = repo))
-  res <- tryCatch(test_install(repo = repo), error = function(e) {
-    message('Unable to install module! See error below:\n\n')
-    stop(e)
-  })
-  res <- test_import(repo = repo)
-  if (!res) {
-    stop('Unable to import all module functions!', call. = FALSE)
-  }
-  res <- test_examples(repo = repo)
-  if (!res) {
-    stop('Unable to run all module examples!', call. = FALSE)
-  }
-  invisible(res)
 }
 
 #' @name module_test

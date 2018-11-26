@@ -1,9 +1,40 @@
+# Private ----
+#' @name args_get
+#' @title Return the arguments of the parent function
+#' @description Expand ... by calling this function.
+#' @return List
 args_get <- function() {
   parent <- sys.parent(n = 1L)
   as.list(match.call(definition = sys.function(parent),
                      call = sys.call(parent)))[-1]
 }
 
+#' @name to_basename
+#' @title Reduce to filepaths to basename
+#' @description Return return a vector where all valid filepaths are converted
+#' to file basenames. E.g. "dir1/dir2/text.file" is converted to "text.file"
+#' @param x Character vector
+#' @return Character vector
+to_basename <- function(x) {
+  files_and_folders <- is_filepath(x)
+  x[files_and_folders] <- basename(x[files_and_folders])
+  x
+}
+
+#' @name is_filepath
+#' @title Is a filepath?
+#' @description Return TRUE or FALSE for whether character(s) is a valid
+#' filepath.
+#' @param x Character vector
+#' @return Logical
+#' @family private
+is_filepath <- function(x) {
+  unname(vapply(X = x, FUN = function(x) file.exists(x) ||
+                  dir.exists(x), FUN.VALUE = logical(1)))
+}
+
+
+# Public ----
 #' @name .arglist_get
 #' @title Generate vector of arguments
 #' @description Convert all the arguments passed to this function, including
@@ -99,28 +130,4 @@ args_get <- function() {
     arglist <- to_basename(arglist)
   }
   arglist
-}
-
-#' @name to_basename
-#' @title Reduce to filepaths to basename
-#' @description Return return a vector where all valid filepaths are converted
-#' to file basenames. E.g. "dir1/dir2/text.file" is converted to "text.file"
-#' @param x Character vector
-#' @return Character vector
-to_basename <- function(x) {
-  files_and_folders <- is_filepath(x)
-  x[files_and_folders] <- basename(x[files_and_folders])
-  x
-}
-
-#' @name is_filepath
-#' @title Is a filepath?
-#' @description Return TRUE or FALSE for whether character(s) is a valid
-#' filepath.
-#' @param x Character vector
-#' @return Logical
-#' @family private
-is_filepath <- function(x) {
-  unname(vapply(X = x, FUN = function(x) file.exists(x) ||
-                  dir.exists(x), FUN.VALUE = logical(1)))
 }

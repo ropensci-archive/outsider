@@ -18,10 +18,12 @@ must be a valid GitHub repository with an om.yaml and a passing
 build status.
 }
 \seealso{
-Other user: \code{\link{available}}, \code{\link{log_set}},
-  \code{\link{module_help}}, \code{\link{module_import}},
+Other user: \code{\link{log_set}},
+  \code{\link{module_details}}, \code{\link{module_help}},
+  \code{\link{module_import}},
   \code{\link{module_installed}},
-  \code{\link{module_install}}, \code{\link{module_test}},
+  \code{\link{module_install}},
+  \code{\link{module_search}}, \code{\link{module_test}},
   \code{\link{module_uninstall}}
 }
 \concept{user}

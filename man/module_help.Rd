@@ -16,10 +16,12 @@ Look up help files for specific outsider module functions or
 whole modules.
 }
 \seealso{
-Other user: \code{\link{available}}, \code{\link{log_set}},
+Other user: \code{\link{log_set}},
+  \code{\link{module_details}},
   \code{\link{module_exists}}, \code{\link{module_import}},
   \code{\link{module_installed}},
-  \code{\link{module_install}}, \code{\link{module_test}},
+  \code{\link{module_install}},
+  \code{\link{module_search}}, \code{\link{module_test}},
   \code{\link{module_uninstall}}
 }
 \concept{user}

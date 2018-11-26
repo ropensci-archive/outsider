@@ -1,6 +1,6 @@
 
-
-container_class <- function(pkgnm = NULL, repo = NULL) {
+# Class ----
+container_init <- function(pkgnm = NULL, repo = NULL) {
   if (!is.null(pkgnm)) {
     res <- .ids_get(pkgnm = pkgnm)
   } else if (!is.null(repo)) {
@@ -16,18 +16,33 @@ container_class <- function(pkgnm = NULL, repo = NULL) {
   structure(res, class = 'container')
 }
 
+# Methods ----
 start <- function(x, ...) {
   UseMethod('start', x)
 }
+halt <- function(x, ...) {
+  UseMethod('halt', x)
+}
+exec <- function(x, ...) {
+  UseMethod('exec', x)
+}
+status <- function(x, ...) {
+  UseMethod('status', x)
+}
+copy <- function(x, ...) {
+  UseMethod('copy', x)
+}
+run <- function(x, ...) {
+  UseMethod('run', x)
+}
+
+# Functions ----
 start.container <- function(x) {
   args <- c('run', '-t', '-d', '--name', x[['cntnr_id']], x[['img_id']])
   .docker_cmd(args = args, std_out = log_get('docker_out'),
               std_err = log_get('docker_err'))
 }
 
-halt <- function(x, ...) {
-  UseMethod('halt', x)
-}
 halt.container <- function(x) {
   cntnr_id <- x[['cntnr_id']]
   args1 <- c('stop', cntnr_id)
@@ -39,18 +54,12 @@ halt.container <- function(x) {
   res1 & res2
 }
 
-exec <- function(x, ...) {
-  UseMethod('exec', x)
-}
 exec.container <- function(x, ...) {
   args <- c('exec', x[['cntnr_id']], ...)
   .docker_cmd(args, std_out = log_get('program_out'),
               std_err = log_get('program_err'))
 }
 
-status <- function(x, ...) {
-  UseMethod('status', x)
-}
 status.container <- function(x) {
   check <- function(argmnts) {
     res <- sys::exec_internal(cmd = 'docker', args = argmnts)
@@ -69,10 +78,6 @@ status.container <- function(x) {
     return('Stopped')
   }
   'Not running'
-}
-
-copy <- function(x, ...) {
-  UseMethod('copy', x)
 }
 
 #' @name copy.container
@@ -122,6 +127,7 @@ run.container <- function(x, cmd, args) {
   success
 }
 
+#' @export
 print.container <- function(x) {
   cat_line(cli::rule())
   cat_line(crayon::bold('Docker container details:'))

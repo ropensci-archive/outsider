@@ -17,11 +17,10 @@ Is build passing? Returns either TRUE or FALSE.
 }
 \seealso{
 Other private: \code{\link{default_log_set}},
-  \code{\link{fnames_get}},
+  \code{\link{examples_test}}, \code{\link{fnames_get}},
+  \code{\link{import_test}}, \code{\link{install_test}},
   \code{\link{is_docker_available}},
   \code{\link{is_filepath}}, \code{\link{log_get}},
-  \code{\link{om_search}}, \code{\link{om_yaml}},
-  \code{\link{test_examples}}, \code{\link{test_import}},
-  \code{\link{test_install}}
+  \code{\link{module_versions}}, \code{\link{module_yaml}}
 }
 \concept{private}

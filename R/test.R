@@ -20,14 +20,14 @@ fnames_get <- function(repo) {
   fname_env$.get(pkgnm = pkgnm)
 }
 
-#' @name test_examples
+#' @name examples_test
 #' @title Run each example of an outsider module
 #' @description Return TRUE if all of the outsider module functions successfully
 #' run.
 #' @param repo Module repo
 #' @return logical
 #' @family private
-test_examples <- function(repo) {
+examples_test <- function(repo) {
   res <- TRUE
   base_ex_url <- paste0("https://raw.githubusercontent.com/", repo,
                         "/master/examples/")
@@ -45,14 +45,14 @@ test_examples <- function(repo) {
   res
 }
 
-#' @name test_import
+#' @name import_test
 #' @title Test whether module functions can be imported
 #' @description Return TRUE if all of the outsider module functions are
 #' successfully imported.
 #' @param repo Module repo
 #' @return logical
 #' @family private
-test_import <- function(repo) {
+import_test <- function(repo) {
   res <- TRUE
   fnames <- fnames_get(repo = repo)
   for (fname in fnames) {
@@ -65,13 +65,13 @@ test_import <- function(repo) {
   res
 }
 
-#' @name test_install
+#' @name install_test
 #' @title Test whether module can be installed
 #' @description Return TRUE if the outsider module successfully installs.
 #' @param repo Module repo
 #' @return logical
 #' @family private
-test_install <- function(repo) {
+install_test <- function(repo) {
   module_uninstall(repo = repo)
   .module_install(repo = repo)
   TRUE

@@ -16,5 +16,5 @@ Character vector
 }
 \description{
 Return filepaths from arguments. These filepaths can then be
-used to identify files for sending to the Docker container.
+used to identify files/folders for sending to the Docker container.
 }

@@ -22,15 +22,6 @@ All validated outsider modules must have a .travis.yml in their
 repository. These .travis.yml must be generated using this function.
 }
 \seealso{
-Other developer: \code{\link{.docker_build}},
-  \code{\link{.docker_cmd}}, \code{\link{.docker_cp}},
-  \code{\link{.docker_exec}}, \code{\link{.docker_img_rm}},
-  \code{\link{.docker_ps_count}},
-  \code{\link{.docker_start}}, \code{\link{.docker_stop}},
-  \code{\link{.ids_get}}, \code{\link{.pkgnm_to_prgm}},
-  \code{\link{.pkgnm_to_repo}}, \code{\link{.repo_to_img}},
-  \code{\link{.repo_to_pkgnm}}, \code{\link{.run_nocopy}},
-  \code{\link{.run_noreturn}}, \code{\link{.run_nosend}},
-  \code{\link{.run}}
+Other developer: \code{\link{.run}}
 }
 \concept{developer}
