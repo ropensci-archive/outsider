@@ -1,5 +1,5 @@
 # TODO:
-# -- .docker_killall
+# -- update current modules
 # -- tests for container.methods
 # -- tests for outsider.methods
 # -- outline development steps
@@ -16,4 +16,6 @@ repo <- 'dombennett/om..pyrate'
 
 library(outsider)
 module_install(repo)
-module_import(fname = 'hello_world', repo = repo)
+hello_world <- module_import(fname = 'hello_world', repo = repo)
+hello_world()
+module_uninstall(repo)

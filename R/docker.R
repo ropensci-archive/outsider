@@ -9,6 +9,7 @@
 #' @return Logical
 #' @family private-docker
 docker_cmd <- function(args, std_out = TRUE, std_err = TRUE) {
+  .is_docker_available()
   callr_args <- list(args, std_out, std_err)
   res <- callr::r(func = function(args, std_out, std_err) {
     sys::exec_wait(cmd = 'docker', args = args,
@@ -64,10 +65,45 @@ docker_cp <- function(origin, dest) {
 #' @return Integer
 #' @family private-docker
 docker_ps_count <- function() {
+  .is_docker_available()
   res <- sys::exec_internal(cmd = 'docker', args = 'ps')
   if (res[['status']] == 0) {
     ps <- strsplit(x = rawToChar(res[['stdout']]), split = '\n')[[1]][-1]
     return(length(ps))
+  }
+  0
+}
+
+#' @name docker_killall
+#' @title Attempt to kill all running docker containers
+#' @description In the event a user loses track of the number of docker 
+#' containers they have created, this function will stop and remove all
+#' active and inactive containers.
+#' @details If you are running any non-outsider contianers, use this function
+#' with caution.
+#' @return Logical
+#' @family private-docker
+docker_killall <- function() {
+  kill <- function(id) {
+    exec <- function(id, action) {
+      sys::exec_wait(cmd = 'docker', args = c(action, id), std_out = FALSE,
+                     std_err = FALSE)
+    }
+    try(expr = {
+      exec(id, 'stop')
+      exec(id, 'rm')
+    }, silent = TRUE)
+  }
+  .is_docker_available()
+  res <- sys::exec_internal(cmd = 'docker', args = c('ps', '-a'))
+  if (res[['status']] == 0) {
+    processes <- strsplit(x = rawToChar(res[['stdout']]),
+                          split = '\n')[[1]][-1]
+    processes <- strsplit(x = processes, split = "\\s{2,}")
+    ps_ids <- vapply(X = processes, FUN = '[[', FUN.VALUE = character(1), 1)
+    for (id in ps_ids) {
+      kill(id)
+    }
   }
   0
 }

@@ -87,9 +87,7 @@ module_install <- function(repo, vrsn = 'latest') {
                   'The module might not build or function properly. ')
     warning(msg)
   }
-  if (!is_docker_available()) {
-    stop('Docker is not available. Have you installed it? And is it running?')
-  }
+  .is_docker_available()
   if (module_installed(repo)) {
     stop(char(repo), ' already installed. Use ', func('module_uninstall'),
          ' to remove before installing again.', call. = FALSE)

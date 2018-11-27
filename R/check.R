@@ -1,12 +1,49 @@
-#' @name is_docker_available
-#' @title Check if Docker is available
+.is_docker_available <- function() {
+  installed <- is_docker_installed()
+  if (!installed) {
+    message(paste0('Docker is not installed. ',
+                   'Follow the installation instructions for your system:\n',
+                   'https://docs.docker.com/'))
+    running <- FALSE
+  } else {
+    running <- is_docker_running()
+    if (!running) {
+      message(paste0('Docker is not running. ', 'Start the docker program by ',
+                     'looking it up in your applications/programs and ',
+                     'opening it.'))
+    }
+  }
+  avlbl <- installed & running
+  if (!avlbl) {
+    stop("Docker is not available.", call. = FALSE)
+  }
+}
+
+#' @name is_docker_installed
+#' @title Check if Docker is installed
 #' @description Docker is required to run \code{outsider}. This function tests
-#' whether Docker is available.
+#' whether Docker is installed.
 #' @return Logical
 #' @family private-check
-is_docker_available <- function() {
+is_docker_installed <- function() {
   res <- sys::exec_internal(cmd = 'docker', args = '--help')
   res[['status']] == 0
+}
+
+#' @name is_docker_running
+#' @title Check if Docker is running
+#' @description Docker is required to run \code{outsider}. This function tests
+#' whether Docker is running.
+#' @return Logical
+#' @family private-check
+is_docker_running <- function() {
+  res <- tryCatch(expr = {
+    res <- sys::exec_internal(cmd = 'docker', args = 'ps')
+    res[['status']] == 0
+    }, error = function(e) {
+      FALSE
+    })
+  res
 }
 
 #' @name build_status
