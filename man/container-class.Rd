@@ -66,6 +66,7 @@ If no \code{send} or \code{rtrn} specified, returns TRUE.
 Other private-docker: \code{\link{docker_build}},
   \code{\link{docker_cmd}}, \code{\link{docker_cp}},
   \code{\link{docker_img_rm}},
+  \code{\link{docker_killall}},
   \code{\link{docker_ps_count}}
 }
 \concept{private-docker}

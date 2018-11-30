@@ -19,10 +19,12 @@ Imports:
     crayon,
     devtools (>= 1.1),
     jsonlite (>= 1.1),
-    sys (>= 1.1),
+    sys (>= 2.1),
     yaml (>= 2.0),
     callr (>= 3.0.0),
     withr (>= 2.0),
+    tibble,
+    getPass,
     cli,
     praise
 Suggests:

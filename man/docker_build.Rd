@@ -21,6 +21,7 @@ Runs run \code{build} command.
 Other private-docker: \code{\link{container-class}},
   \code{\link{docker_cmd}}, \code{\link{docker_cp}},
   \code{\link{docker_img_rm}},
+  \code{\link{docker_killall}},
   \code{\link{docker_ps_count}}
 }
 \concept{private-docker}

@@ -25,6 +25,7 @@ Runs a docker command with provided arguments
 Other private-docker: \code{\link{container-class}},
   \code{\link{docker_build}}, \code{\link{docker_cp}},
   \code{\link{docker_img_rm}},
+  \code{\link{docker_killall}},
   \code{\link{docker_ps_count}}
 }
 \concept{private-docker}

@@ -63,8 +63,8 @@ NULL
   success <- start(cntnr)
   on.exit(expr = {
     halt(x = cntnr)
-    if (!success) {
-      message(print(outsider))
+    if (!success & log_get('docker_out')) {
+      message(print(x))
     }
   })
   if (length(x[['files_to_send']]) > 0) {
@@ -96,7 +96,9 @@ print.outsider <- function(x) {
   cat_line('Args ', paste0(arglist, collapse = ', '))
   cat_line('Files to send ', paste0(x[['files_to_send']], collapse = ', '))
   cat_line('Working dir ', char(x[['wd']]))
-  cat_line('Container ID ', char(x[['container']][['cntnr_id']]))
+  cat_line('Container image ', char(x[['container']][['img']]))
+  cat_line('Container name ', char(x[['container']][['cntnr']]))
+  cat_line('Container tag ', char(x[['container']][['tag']]))
   cat_line('Container status ', char(status(x[['container']])))
   cat_line(cli::rule())
 }

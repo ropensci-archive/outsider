@@ -57,6 +57,9 @@ is_filepath <- function(x) {
 #' @export
 #' @family developer
 .filestosend_get <- function(arglist, wd = NULL) {
+  if (length(arglist) == 0) {
+    return(character(0))
+  }
   # Check whether any arglist are filepaths
   arglist <- arglist[arglist != wd]
   bool_1 <- is_filepath(arglist)
@@ -86,6 +89,9 @@ is_filepath <- function(x) {
 #' @export
 #' @family developer
 .wd_get <- function(arglist, key = NULL, i = NULL) {
+  if (length(arglist) == 0) {
+    return(character(0))
+  }
   wd <- getwd()
   if (!is.null(key) && key %in% arglist) {
     wd_i <- which(arglist == key)
@@ -115,6 +121,9 @@ is_filepath <- function(x) {
 #' @family developer
 .arglist_parse <- function(arglist, keyvals_to_drop = NULL, vals_to_drop = NULL,
                            normalise_paths = TRUE) {
+  if (length(arglist) == 0) {
+    return(character(0))
+  }
   for (each in keyvals_to_drop) {
     if (each %in% arglist) {
       each_i <- which(arglist == each)

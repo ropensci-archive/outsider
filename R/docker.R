@@ -21,26 +21,39 @@ docker_cmd <- function(args, std_out = TRUE, std_err = TRUE) {
 #' @name docker_img_rm
 #' @title Remove docker image
 #' @description Deletes docker image from system.
-#' @param img_id Image ID
+#' @param img Image name
 #' @return Logical
 #' @family private-docker
-docker_img_rm <- function(img_id) {
-  args <- c('image', 'rm', img_id)
+docker_img_rm <- function(img) {
+  args <- c('image', 'rm', img)
   docker_cmd(args, std_out = log_get('docker_out'),
               std_err = log_get('docker_err'))
+}
+
+docker_pull <- function(img, tag = 'latest') {
+  args <- c('pull', paste0(img, ':', tag))
+  docker_cmd(args = args, std_out = log_get('docker_out'),
+             std_err = log_get('docker_err'))
 }
 
 #' @name docker_build
 #' @title Build a docker image
 #' @description Runs run \code{build} command.
-#' @param img_id Image ID
-#' @param url Dockerfile URL
+#' @param img Image name
+#' @param url_or_path Dockerfile URL
+#' @param tag Docker tag, default 'latest'
 #' @return Logical
 #' @family private-docker
-docker_build <- function(img_id, url) {
-  args <- c('build', '-t', img_id, url)
+docker_build <- function(img, url_or_path, tag = 'latest') {
+  args <- c('build', '-t', paste0(img, ':', tag), url_or_path)
   docker_cmd(args = args, std_out = log_get('docker_out'),
               std_err = log_get('docker_err'))
+}
+
+docker_push <- function(img, tag = 'latest') {
+  args <- c('push', paste0(img, ':', tag))
+  docker_cmd(args = args, std_out = log_get('docker_out'),
+             std_err = log_get('docker_err'))
 }
 
 #' @name docker_cp
@@ -72,6 +85,36 @@ docker_ps_count <- function() {
     return(length(ps))
   }
   0
+}
+
+docker_login <- function(username) {
+  psswrd_file <- tempfile()
+  on.exit(file.remove(psswrd_file))
+  msg <- paste0('Password for [', username, ']: ')
+  write(x = getPass::getPass(msg = msg), file = psswrd_file)
+  arglist <- c('login', '-u', username, '--password-stdin')
+  res <- sys::exec_internal(cmd = 'docker', args = arglist,
+                            std_in = psswrd_file)
+  success <- res[['status']] == 0
+  if (success) {
+    cat_line('Successfully logged in as ', char(username))
+  } else {
+    cat_line('Login failed.')
+  }
+  invisible(success)
+}
+
+docker_img_ls <- function() {
+  res <- sys::exec_internal(cmd = 'docker', args = c('image', 'ls'))
+  if (res[['status']] == 0) {
+    images <- strsplit(x = rawToChar(res[['stdout']]), split = '\n')[[1]]
+    images <- strsplit(x = images, split = '\\s{2,}')
+    header <- gsub(pattern = ' ', replacement = '_', x = tolower(images[[1]]))
+    images <- matrix(data = unlist(images[-1]), nrow = 2, ncol = length(header),
+                     byrow = TRUE)
+    colnames(images) <- header
+  }
+  tibble::as_tibble(images)
 }
 
 #' @name docker_killall

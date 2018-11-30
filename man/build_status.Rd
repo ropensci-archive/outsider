@@ -16,6 +16,7 @@ Logical
 Is build passing? Returns either TRUE or FALSE.
 }
 \seealso{
-Other private-check: \code{\link{is_docker_available}}
+Other private-check: \code{\link{is_docker_installed}},
+  \code{\link{is_docker_running}}
 }
 \concept{private-check}

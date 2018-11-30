@@ -6,18 +6,20 @@ is_repo_name <- function(x) {
 }
 
 #' @name ids_get
-#' @title Get image ID and unique container ID
-#' @description From a pkgnm, return the image ID and a unique container ID.
-#' @param pkgnm Package name
+#' @title Get docker names for a module
+#' @description From a pkgnm, return the image and container names.
+#' @param pkgnm Package name of module
 #' @return Logical
 #' @family private-ids
 ids_get <- function(pkgnm) {
   repo <- pkgnm_to_repo(pkgnm)
-  img_id <- repo_to_img(repo)
+  img <- repo_to_img(repo)
   prgrm <- pkgnm_to_prgm(pkgnm)
   nps <- docker_ps_count()
-  cntnr_id <- paste0(prgrm, '_', nps)
-  c('img_id' = img_id, 'cntnr_id' = cntnr_id)
+  imgs <- docker_img_ls()
+  tag <- imgs[imgs[['repository']] == img, 'tag']
+  cntnr <- paste0(prgrm, '_', nps)
+  c('img' = img, 'cntnr' = cntnr, 'tag' = tag)
 }
 
 #' @name repo_to_img

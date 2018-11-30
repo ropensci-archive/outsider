@@ -12,19 +12,25 @@
 #' \item{repo}{Repository of the outsider module}
 #' \item{pkgnm}{Package name of the outsider module}
 #' \item{prgrm}{Command to be called in the container}
-#' \item{cntnr_id}{Unique Docker container name}
-#' \item{img_id}{Image ID}
+#' \item{cntnr}{Unique Docker container name}
+#' \item{img}{Image ID}
 #' @family private-docker
 container_init <- function(pkgnm = NULL, repo = NULL) {
   if (!is.null(pkgnm)) {
-    res <- ids_get(pkgnm = pkgnm)
+    ids <- ids_get(pkgnm = pkgnm)
   } else if (!is.null(repo)) {
     pkgnm <- repo_to_pkgnm(repo = repo)
-    res <- ids_get(pkgnm = pkgnm)
+    ids <- ids_get(pkgnm = pkgnm)
   } else {
     stop("No package or repo name provided.")
   }
-  res <- as.list(res)
+  res <- list()
+  res[['cntnr']] <- ids[['cntnr']]
+  res[['img']] <- ids[['img']]
+  if (length(ids[['tag']]) == 0) {
+    stop('Missing docker image. Try reinstalling the module.', call. = FALSE)
+  }
+  res[['tag']] <- ids[['tag']]
   res[['repo']] <- pkgnm_to_repo(pkgnm = pkgnm)
   res[['prgrm']] <- pkgnm_to_prgm(pkgnm = pkgnm)
   res[['pkgnm']] <- pkgnm
@@ -54,18 +60,18 @@ run <- function(x, ...) {
 # Functions ----
 #' @rdname container-class
 start.container <- function(x) {
-  args <- c('run', '-t', '-d', '--name', x[['cntnr_id']], x[['img_id']])
+  args <- c('run', '-t', '-d', '--name', x[['cntnr']], x[['img']])
   docker_cmd(args = args, std_out = log_get('docker_out'),
              std_err = log_get('docker_err'))
 }
 
 #' @rdname container-class
 halt.container <- function(x) {
-  cntnr_id <- x[['cntnr_id']]
-  args1 <- c('stop', cntnr_id)
+  cntnr <- x[['cntnr']]
+  args1 <- c('stop', cntnr)
   res1 <- docker_cmd(args = args1, std_out = log_get('docker_out'),
                       std_err = log_get('docker_err'))
-  args2 <- c('rm', cntnr_id)
+  args2 <- c('rm', cntnr)
   res2 <- docker_cmd(args = args2, std_out = log_get('docker_out'),
                       std_err = log_get('docker_err'))
   res1 & res2
@@ -73,7 +79,7 @@ halt.container <- function(x) {
 
 #' @rdname container-class
 exec.container <- function(x, ...) {
-  args <- c('exec', x[['cntnr_id']], ...)
+  args <- c('exec', x[['cntnr']], ...)
   docker_cmd(args, std_out = log_get('program_out'),
              std_err = log_get('program_err'))
 }
@@ -82,11 +88,11 @@ exec.container <- function(x, ...) {
 status.container <- function(x) {
   check <- function(argmnts) {
     res <- sys::exec_internal(cmd = 'docker', args = argmnts)
-    res[['status']] == 0 && grepl(paste0('\\s+', cntnr_id, '\n'),
+    res[['status']] == 0 && grepl(paste0('\\s+', cntnr, '\n'),
                                   rawToChar(res[['stdout']]))
   }
-  cntnr_id <- x[['cntnr_id']]
-  name_arg <- paste0('name=', cntnr_id)
+  cntnr <- x[['cntnr']]
+  name_arg <- paste0('name=', cntnr)
   # running
   res <- check(argmnts = c('ps', '-f', name_arg))
   if (res) {
@@ -109,17 +115,17 @@ status.container <- function(x) {
 #' @param send Filepaths to send from host computer to container.
 #' @param rtrn Directory on host computer where returning files should be sent.
 copy.container <- function(x, send = NULL, rtrn = NULL) {
-  cntnr_id <- x[['cntnr_id']]
+  cntnr <- x[['cntnr']]
   if (!is.null(send)) {
     res <- TRUE
     for (host_flpth in send) {
       res <- res & docker_cp(origin = host_flpth,
-                             dest = paste0(cntnr_id, ':', '/working_dir/'))
+                             dest = paste0(cntnr, ':', '/working_dir/'))
     }
     return(invisible(res))
   }
   if (!is.null(rtrn)) {
-    res <- docker_cp(origin = paste0(cntnr_id, ':', '/working_dir/.'),
+    res <- docker_cp(origin = paste0(cntnr, ':', '/working_dir/.'),
                      dest = rtrn)
     return(invisible(res))
   }
@@ -147,8 +153,9 @@ run.container <- function(x, cmd, args) {
 print.container <- function(x) {
   cat_line(cli::rule())
   cat_line(crayon::bold('Docker container details:'))
-  cat_line('Image ', char(x[['img_id']]))
-  cat_line('Container ', char(x[['cntnr_id']]))
+  cat_line('Image ', char(x[['img']]))
+  cat_line('Container ', char(x[['cntnr']]))
+  cat_line('Tag ', char(x[['tag']]))
   cat_line('Status ', char(status.container(x)))
   cat_line(cli::rule())
   cat_line(crayon::bold('Outsider module details:'))

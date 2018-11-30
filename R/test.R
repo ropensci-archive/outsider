@@ -14,7 +14,7 @@ fnames_get <- function(repo) {
     suppressMessages(require(pkgnm, character.only = TRUE))
     ls(paste0('package:', pkgnm))
   }
-  pkgnm <- .repo_to_pkgnm(repo = repo)
+  pkgnm <- repo_to_pkgnm(repo = repo)
   fname_env <- new.env()
   fname_env$.get <- .get
   fname_env$.get(pkgnm = pkgnm)
@@ -69,10 +69,11 @@ import_test <- function(repo) {
 #' @title Test whether module can be installed
 #' @description Return TRUE if the outsider module successfully installs.
 #' @param repo Module repo
+#' @param dockerfile_url URL for Dockerfile
 #' @return logical
 #' @family private
-install_test <- function(repo) {
+install_test <- function(repo, tag) {
   module_uninstall(repo = repo)
-  .module_install(repo = repo)
+  .module_install(repo = repo, tag = tag)
   TRUE
 }

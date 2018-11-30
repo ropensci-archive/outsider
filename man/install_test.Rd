@@ -4,10 +4,12 @@
 \alias{install_test}
 \title{Test whether module can be installed}
 \usage{
-install_test(repo)
+install_test(repo, dockerfile_url)
 }
 \arguments{
 \item{repo}{Module repo}
+
+\item{dockerfile_url}{URL for Dockerfile}
 }
 \value{
 logical
