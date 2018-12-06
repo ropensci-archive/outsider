@@ -46,8 +46,8 @@ A list of class \code{container} with the following items:
 \item{repo}{Repository of the outsider module}
 \item{pkgnm}{Package name of the outsider module}
 \item{prgrm}{Command to be called in the container}
-\item{cntnr_id}{Unique Docker container name}
-\item{img_id}{Image ID}
+\item{cntnr}{Unique Docker container name}
+\item{img}{Image ID}
 }
 \description{
 Return a list class that describes a Docker container.
@@ -65,8 +65,8 @@ If no \code{send} or \code{rtrn} specified, returns TRUE.
 \seealso{
 Other private-docker: \code{\link{docker_build}},
   \code{\link{docker_cmd}}, \code{\link{docker_cp}},
-  \code{\link{docker_img_rm}},
+  \code{\link{docker_img_ls}}, \code{\link{docker_img_rm}},
   \code{\link{docker_killall}},
-  \code{\link{docker_ps_count}}
+  \code{\link{docker_ps_count}}, \code{\link{docker_pull}}
 }
 \concept{private-docker}

@@ -13,7 +13,8 @@ module_search <- function() {
   if (github_res[['incomplete_results']]) {
     warning('Not all repos discovered.')
   }
-  github_res[['items']]
+  res <- github_res[['items']]
+  res[['full_name']]
 }
 
 #' @name module_details
@@ -28,21 +29,22 @@ module_details <- function(repo) {
   info <- module_yaml(repos = repo)
   # look up version
   tags <- module_tags(repos = repo)
-  info$versions <- vapply(X = repos, FUN = function(x) {
-    paste0(sort(vrsns[vrsns[['repo']] == x, 'name'], decreasing = TRUE),
-           collapse = ', ')
+  info <- info[info[['repo']] %in% tags[['repo']], ]
+  info$versions <- vapply(X = unique(tags[['repo']]), FUN = function(x) {
+    paste0(sort(as.character(tags[tags[['repo']] == x, 'tag']),
+                decreasing = TRUE), collapse = ', ')
   }, FUN.VALUE = character(1))
   # add extra info
-  index <- match(srch[['full_name']], rownames(info))
-  info[['updated_at']] <- as.POSIXct(srch[['updated_at']][index],
-                                     format = "%Y-%m-%dT%H:%M:%OSZ",
-                                     timezone = 'UTC')
-  info[['watcher_count']] <- srch[['watchers_count']][index]
-  info[['url']] <- paste0('https://github.com/', rownames(info))
-  # order output
-  info <- info[order(info[['program']], decreasing = TRUE), ]
-  info <- info[order(info[['updated_at']], decreasing = TRUE), ]
-  info <- info[order(info[['watcher_count']], decreasing = TRUE), ]
+  # index <- match(srch[['full_name']], rownames(info))
+  # info[['updated_at']] <- as.POSIXct(srch[['updated_at']][index],
+  #                                    format = "%Y-%m-%dT%H:%M:%OSZ",
+  #                                    timezone = 'UTC')
+  # info[['watcher_count']] <- srch[['watchers_count']][index]
+  # info[['url']] <- paste0('https://github.com/', rownames(info))
+  # # order output
+  # info <- info[order(info[['program']], decreasing = TRUE), ]
+  # info <- info[order(info[['updated_at']], decreasing = TRUE), ]
+  # info <- info[order(info[['watcher_count']], decreasing = TRUE), ]
   info
 }
 
@@ -115,11 +117,14 @@ module_tags <- function(repos) {
   for (repo in repos) {
     api_url <- paste0('https://api.github.com/repos/', repo,
                       '/contents/dockerfiles')
-    raw_df <- jsonlite::fromJSON(api_url)
-    tags <- c(tags, raw_df[ ,'name'])
-    download_urls <- c(download_urls, downloadurl_get(repo = repo,
-                                                      name = raw_df[ ,'name']))
-    all_repo <- c(all_repo, rep(repo, nrow(raw_df)))
+    raw_df <- try(jsonlite::fromJSON(api_url), silent = TRUE)
+    if (!inherits(raw_df, 'try-error')) {
+      tags <- c(tags, raw_df[ ,'name'])
+      download_urls <- c(download_urls,
+                         downloadurl_get(repo = repo,
+                                         name = raw_df[ ,'name']))
+      all_repo <- c(all_repo, rep(repo, nrow(raw_df)))
+    }
   }
   tibble::as_tibble(x = list(repo = all_repo, tag = tags, url = download_urls))
 }

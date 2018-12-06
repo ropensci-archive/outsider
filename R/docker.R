@@ -30,6 +30,13 @@ docker_img_rm <- function(img) {
               std_err = log_get('docker_err'))
 }
 
+#' @name docker_pull
+#' @title Pull an image from DockerHub.
+#' @description Speeds up outsider module installation by downloading compiled
+#' images.
+#' @param img Image name
+#' @return Logical
+#' @family private-docker
 docker_pull <- function(img, tag = 'latest') {
   args <- c('pull', paste0(img, ':', tag))
   docker_cmd(args = args, std_out = log_get('docker_out'),
@@ -48,12 +55,6 @@ docker_build <- function(img, url_or_path, tag = 'latest') {
   args <- c('build', '-t', paste0(img, ':', tag), url_or_path)
   docker_cmd(args = args, std_out = log_get('docker_out'),
               std_err = log_get('docker_err'))
-}
-
-docker_push <- function(img, tag = 'latest') {
-  args <- c('push', paste0(img, ':', tag))
-  docker_cmd(args = args, std_out = log_get('docker_out'),
-             std_err = log_get('docker_err'))
 }
 
 #' @name docker_cp
@@ -87,31 +88,19 @@ docker_ps_count <- function() {
   0
 }
 
-docker_login <- function(username) {
-  psswrd_file <- tempfile()
-  on.exit(file.remove(psswrd_file))
-  msg <- paste0('Password for [', username, ']: ')
-  write(x = getPass::getPass(msg = msg), file = psswrd_file)
-  arglist <- c('login', '-u', username, '--password-stdin')
-  res <- sys::exec_internal(cmd = 'docker', args = arglist,
-                            std_in = psswrd_file)
-  success <- res[['status']] == 0
-  if (success) {
-    cat_line('Successfully logged in as ', char(username))
-  } else {
-    cat_line('Login failed.')
-  }
-  invisible(success)
-}
-
+#' @name docker_img_ls
+#' @title List the number of installed images
+#' @description Return a table of all the available Docker images.
+#' @return tibble
+#' @family private-docker
 docker_img_ls <- function() {
   res <- sys::exec_internal(cmd = 'docker', args = c('image', 'ls'))
   if (res[['status']] == 0) {
     images <- strsplit(x = rawToChar(res[['stdout']]), split = '\n')[[1]]
     images <- strsplit(x = images, split = '\\s{2,}')
     header <- gsub(pattern = ' ', replacement = '_', x = tolower(images[[1]]))
-    images <- matrix(data = unlist(images[-1]), nrow = 2, ncol = length(header),
-                     byrow = TRUE)
+    images <- matrix(data = unlist(images[-1]), nrow = length(images) - 1,
+                     ncol = length(header), byrow = TRUE)
     colnames(images) <- header
   }
   tibble::as_tibble(images)

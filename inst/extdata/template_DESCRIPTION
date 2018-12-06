@@ -1,9 +1,7 @@
 Package: %package_name%
 Type: Package
-Title: Outsider module for running %program_name%
 Version: 1.0.0
-Author: %author_name%
-Maintainer: %author_name% <%author_email%>
+Title: Outsider module for running %program_name%
 GitHub: %github_user%
 Docker: %docker_user%
 Description: Install and run %program_name% from within R.

@@ -17,7 +17,7 @@ Converts the R package name of a module into its repo name.
 }
 \seealso{
 Other private-ids: \code{\link{ids_get}},
-  \code{\link{pkgnm_to_prgm}}, \code{\link{repo_to_img}},
-  \code{\link{repo_to_pkgnm}}
+  \code{\link{pkgnm_to_img}}, \code{\link{pkgnm_to_prgm}},
+  \code{\link{repo_to_img}}, \code{\link{repo_to_pkgnm}}
 }
 \concept{private-ids}

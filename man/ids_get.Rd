@@ -2,22 +2,22 @@
 % Please edit documentation in R/identities.R
 \name{ids_get}
 \alias{ids_get}
-\title{Get image ID and unique container ID}
+\title{Get docker names for a module}
 \usage{
 ids_get(pkgnm)
 }
 \arguments{
-\item{pkgnm}{Package name}
+\item{pkgnm}{Package name of module}
 }
 \value{
 Logical
 }
 \description{
-From a pkgnm, return the image ID and a unique container ID.
+From a pkgnm, return the image and container names.
 }
 \seealso{
-Other private-ids: \code{\link{pkgnm_to_prgm}},
-  \code{\link{pkgnm_to_repo}}, \code{\link{repo_to_img}},
-  \code{\link{repo_to_pkgnm}}
+Other private-ids: \code{\link{pkgnm_to_img}},
+  \code{\link{pkgnm_to_prgm}}, \code{\link{pkgnm_to_repo}},
+  \code{\link{repo_to_img}}, \code{\link{repo_to_pkgnm}}
 }
 \concept{private-ids}

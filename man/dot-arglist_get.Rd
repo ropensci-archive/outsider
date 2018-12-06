@@ -20,6 +20,9 @@ those contained in '...', into character vector.
 Other developer: \code{\link{.arglist_parse}},
   \code{\link{.filestosend_get}},
   \code{\link{.travis_yaml}}, \code{\link{.wd_get}},
+  \code{\link{module_check}},
+  \code{\link{module_identities}},
+  \code{\link{module_skeleton}}, \code{\link{module_test}},
   \code{\link{outsider-class}}
 }
 \concept{developer}

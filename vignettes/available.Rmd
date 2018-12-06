@@ -1,6 +1,6 @@
 ---
 title: "Available modules"
-output: rmarkdown::html_vignette
+output: html_document
 ---
 
 ```{r setup, include=FALSE}
@@ -8,15 +8,15 @@ knitr::opts_chunk$set(echo = TRUE, comment = '')
 ```
 
 ```{r available, echo=FALSE, results='asis'}
-repos <- outsider::module_search()
-module_info <- outsider::module_details(repos)
-module_info$repo <- rownames(module_info)
-module_info$url <- NULL
-rownames(module_info) <- NULL
-colnames(module_info) <- c('Program name', 	'Program flavour',
-                           'Program details', 'Last updated',
-                           'N. watchers', 'Repo')
-time_date <- as.character(format(Sys.time(), '%H:%M, %d %B %Y (%Z)'))
-cat('Last updated: ', crayon::bold(time_date), '\n')
-knitr::kable(module_info, format = "html")
+# repos <- outsider::module_search()
+# module_info <- outsider::module_details(repos)
+# module_info$repo <- rownames(module_info)
+# module_info$url <- NULL
+# rownames(module_info) <- NULL
+# colnames(module_info) <- c('Program name', 	'Program flavour',
+#                            'Program details', 'Last updated',
+#                            'N. watchers', 'Repo')
+# time_date <- as.character(format(Sys.time(), '%H:%M, %d %B %Y (%Z)'))
+# cat('Last updated: ', crayon::bold(time_date), '\n')
+# knitr::kable(module_info, format = "html")
 ```

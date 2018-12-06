@@ -4,7 +4,7 @@
 \alias{install_test}
 \title{Test whether module can be installed}
 \usage{
-install_test(repo, dockerfile_url)
+install_test(repo, tag)
 }
 \arguments{
 \item{repo}{Module repo}

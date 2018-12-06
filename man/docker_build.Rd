@@ -4,12 +4,14 @@
 \alias{docker_build}
 \title{Build a docker image}
 \usage{
-docker_build(img_id, url)
+docker_build(img, url_or_path, tag = "latest")
 }
 \arguments{
-\item{img_id}{Image ID}
+\item{img}{Image name}
 
-\item{url}{Dockerfile URL}
+\item{url_or_path}{Dockerfile URL}
+
+\item{tag}{Docker tag, default 'latest'}
 }
 \value{
 Logical
@@ -20,8 +22,8 @@ Runs run \code{build} command.
 \seealso{
 Other private-docker: \code{\link{container-class}},
   \code{\link{docker_cmd}}, \code{\link{docker_cp}},
-  \code{\link{docker_img_rm}},
+  \code{\link{docker_img_ls}}, \code{\link{docker_img_rm}},
   \code{\link{docker_killall}},
-  \code{\link{docker_ps_count}}
+  \code{\link{docker_ps_count}}, \code{\link{docker_pull}}
 }
 \concept{private-docker}

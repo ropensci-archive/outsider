@@ -25,7 +25,7 @@ Other user: \code{\link{module_details}},
   \code{\link{module_import}},
   \code{\link{module_installed}},
   \code{\link{module_install}},
-  \code{\link{module_search}}, \code{\link{module_test}},
+  \code{\link{module_search}},
   \code{\link{module_uninstall}}
 }
 \concept{user}

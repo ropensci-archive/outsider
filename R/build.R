@@ -1,109 +1,69 @@
-# skeleton
-
-templates_get <- function() {
-  fls <- list.files(path = system.file("extdata", package = "outsider"),
-                    pattern = 'template_')
-  templates <- vector(mode = 'list', length = length(fls))
-  destpths <- sub(pattern = 'template_', replacement = '', x = fls)
-  destpths <- gsub(pattern = '_', replacement = .Platform$file.sep,
-                   x = destpths)
-  for (i in seq_along(fls)) {
-    flpth <- system.file("extdata", fls[[i]], package = "outsider")
-    templates[[i]] <- stringr::str_c(readLines(con = flpth), collapse = '\n')
+pkgdetails_get <- function(flpth) {
+  flpth <- file.path(flpth, 'DESCRIPTION')
+  if (!file.exists(flpth)) {
+    stop('Invalid R package path provided.', call. = FALSE)
   }
-  names(templates) <- destpths
-  templates
+  lines <- readLines(con = flpth)
+  lines <- strsplit(x = lines, split = ':')
+  pull <- vapply(X = lines, FUN = length, FUN.VALUE = integer(1)) == 2
+  lines <- lines[pull]
+  nms <- vapply(X = lines, FUN = '[[', FUN.VALUE = character(1), 1)
+  nms <- trimws(nms)
+  vals <- vapply(X = lines, FUN = '[[', FUN.VALUE = character(1), 2)
+  vals <- trimws(vals)
+  names(vals) <- nms
+  vals
 }
 
-strng_replace <- function(strng, skltn_vls) {
-  for (i in seq_along(skltn_vls)) {
-    pttrn <- skltn_vls[[i]][['pttrn']]
-    rplcmnt <- skltn_vls[[i]][['val']]
-    strng <- stringr::str_replace_all(string = strng, pattern = pttrn,
-                                      replacement = rplcmnt)
-  }
-  strng
-}
-
-skltn_vls <- list(
-  'Author name' = list('pttrn' = '%author_name%', 'val' = NA),
-  'Author email' = list('pttrn' = '%author_email%', 'val' = NA),
-  'Github username' = list('pttrn' = '%github_user%', 'val' = NA),
-  'Docker username' = list('pttrn' = '%docker_user%', 'val' = NA),
-  'R version' = list('pttrn' = '%r_version%', 'val' = NA),
-  'Package name' = list('pttrn' = '%package_name%', 'val' = NA),
-  'Program name' = list('pttrn' = '%program_name%', 'val' = NA),
-  'Github repo' = list('pttrn' = '%repo%', 'val' = '')
-)
-
-file_create <- function(x, flpth) {
-  basefl <- basename(path = flpth)
-  dirpth <- sub(pattern = basefl, replacement = '', x = flpth)
-  suppressWarnings(dir.create(path = dirpth, recursive = TRUE))
-  write(x = x, file = flpth)
-}
-
-module_skeleton <- function() {
-  skltn_vls[['R version']][['val']] <- paste0(version[['major']], '.',
-                                                    version[['minor']])
-  pkgnm <- readline(prompt = 'Package name: ')
-  if (!grepl(pattern = '^om\\.\\.', x = pkgnm)) {
-    stop('Invalid package name. Must begin ', char('om..'))
-  }
-  if (!dir.exists(pkgnm)) {
-    dir.create(pkgnm)
-  }
-  skltn_vls[['Package name']][['val']] <- pkgnm
-  for (i in seq_along(skltn_vls)) {
-    if (is.na(skltn_vls[[i]][['val']])) {
-      skltn_vls[[i]][['val']] <-
-        readline(prompt = paste0(names(skltn_vls)[[i]], ': '))
+print.ids <- function(x) {
+  for (i in seq_along(x)) {
+    msg <- names(x)[[i]]
+    if (length(x[[i]]) == 1) {
+      cat_line(msg, ': ', char(x[[i]]))
+    } else {
+      cat_line(msg, '... ')
+      for (j in seq_along(x[[i]])) {
+        msg <- names(x[[i]][[j]])
+        cat_line('... ', msg, ': ', char(x[[i]][[j]]))
+      }
     }
   }
-  skltn_vls[['Github repo']][['val']] <-
-    paste0(skltn_vls[['Github username']][['val']], '/',
-           skltn_vls[['Package name']][['val']])
-  templates <- templates_get()
-  for (i in seq_along(templates)) {
-    x <- strng_replace(strng = templates[[i]], skltn_vls = skltn_vls)
-    file_create(x = x, flpth = file.path(pkgnm, names(templates)[[i]]))
-  }
-}
-
-# build
-# check
-# test
-# push
-
-pkgnm_get <- function() {
-  lines <- readLines(con = 'DESCRIPTION')
-  pkgnm <- lines[grepl(pattern = '^Package:', x = lines)]
-  pkgnm <- sub(pattern = '^Package:', replacement = '', x = pkgnm)
-  pkgnm <- gsub(pattern = '\\s', replacement = '', x = pkgnm)
-  pkgnm
 }
 
 # Public ----
-module_build <- function(tag = 'latest') {
-  cat_line(crayon::bold('Looking up package details ....'))
-  pkgnm <- pkgnm_get()
-  cat_line('... Package: ', char(pkgnm))
+#' @name module_identities
+#' @title Return identities for a module
+#' @description Returns a list of the identities (GitHub repo, Package name,
+#' Docker images) for an outsider module. Works for modules in development.
+#' Requires module to have a file path.
+#' @param flpth File path to location of module
+#' @return Logical
+#' @export
+#' @family developer
+module_identities <- function(flpth) {
+  res <- list()
+  pkg_details <- pkgdetails_get(flpth = flpth)
+  pkgnm <- pkg_details[['Package']]
+  docker_user <- pkg_details[['Docker']]
+  res[['R package name']] <- pkgnm
   repo <- pkgnm_to_repo(pkgnm = pkgnm)
-  cat_line('... GitHub repo: ', char(repo))
-  cat_line(crayon::bold('Building Docker image ....'))
-  cat_line('... Tag: ', char(tag))
-  flpth <- file.path(getwd(), 'dockerfiles', tag)
-  img <- repo_to_img(repo)
-  img_success <- docker_build(img = img, url_or_path = flpth, tag = tag)
-  cat_line(crayon::bold('Building package ....'))
-  pkg_success <- devtools::install(pkg = getwd())
-  cat_line(crayon::bold('Pushing Docker image ....'))
-  cat_line('... Docker repo: ', char(paste0(img, ':', tag)))
-  push_success <- try(expr = docker_push(img = img, tag = tag), silent = TRUE)
-  if (!push_success) {
-    message('Failed to push. Do you have an account and are you logged in?')
-  }
-  invisible(img_success & pkg_success & push_success)
+  res[['GitHub repo']] <- repo
+  dockerdirs <- list.files(file.path(flpth, 'dockerfiles'))
+  img <- pkgnm_to_img(pkgnm = pkgnm, docker_user = docker_user)
+  res[['Docker images']] <- paste0(img, ':', dockerdirs)
+  structure(res, class = 'ids')
+}
+
+#' @name module_check
+#' @title Check names and structure of a module
+#' @description Returns TRUE if all the names and structure of an outsider
+#' module are correct.
+#' @param flpth File path to location of module
+#' @return Logical
+#' @export
+#' @family developer
+module_check <- function(flpth = NULL) {
+  TRUE
 }
 
 #' @name module_test
@@ -116,7 +76,7 @@ module_build <- function(tag = 'latest') {
 #' @param verbose Print docker and program info to console
 #' @return Logical
 #' @export
-#' @family user
+#' @family developer
 module_test <- function(repo, verbose = FALSE) {
   res <- FALSE
   on.exit(expr = {
@@ -142,7 +102,7 @@ module_test <- function(repo, verbose = FALSE) {
   tags <- module_tags(repos = repo)
   for (i in seq_len(nrow(tags))) {
     tag <- tags[i, 'name']
-    tag <- paste0('Tag = ', char(vrsns[i, 'name']))
+    tag <- paste0('Tag = ', char(tags[i, 'name']))
     res <- tryCatch(install_test(repo = repo, tag = tag),
                     error = function(e) {
                       message(paste0('Unable to install module! ', tag,

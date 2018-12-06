@@ -10,13 +10,13 @@ module_yaml(repos)
 \item{repos}{Character vector of outsider module repositories.}
 }
 \value{
-data.frame
+tbl_df
 }
 \description{
-Return data.frame of all YAML information of given outsider
+Return tbl_df of all YAML information of given outsider
 module repos.
 }
 \seealso{
-Other private-search: \code{\link{module_versions}}
+Other private-search: \code{\link{module_tags}}
 }
 \concept{private-search}

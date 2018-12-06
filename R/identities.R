@@ -17,21 +17,38 @@ ids_get <- function(pkgnm) {
   prgrm <- pkgnm_to_prgm(pkgnm)
   nps <- docker_ps_count()
   imgs <- docker_img_ls()
-  tag <- imgs[imgs[['repository']] == img, 'tag']
+  tag <- as.character(imgs[imgs[['repository']] == img, 'tag'])
   cntnr <- paste0(prgrm, '_', nps)
   c('img' = img, 'cntnr' = cntnr, 'tag' = tag)
 }
 
 #' @name repo_to_img
-#' @title Convert repo to image ID
-#' @description Drops .. in repo name to meet docker name requirements.
+#' @title Convert repo to image
+#' @description Drops .. in repo name to meet docker name requirements and
+#' looks up Docker username from package description.
 #' @param repo Repo
 #' @return Logical
 #' @family private-ids
 repo_to_img <- function(repo) {
-  repo <- tolower(repo)
-  is_repo_name(x = repo)
-  gsub(pattern = '\\.\\.', replacement = '_', x = repo)
+  pkgnm <- repo_to_pkgnm(repo = repo)
+  pkgnm_to_img(pkgnm = pkgnm)
+}
+
+#' @name pkgnm_to_img
+#' @title Convert pkgnm to image
+#' @description Drops .. in repo name to meet docker name requirements.
+#' @param pkgnm Package name
+#' @param docker_user Docker username, if not supplied will search package
+#' description.
+#' @return Logical
+#' @family private-ids
+pkgnm_to_img <- function(pkgnm, docker_user = NULL) {
+  if (is.null(docker_user)) {
+    docker_user <- utils::packageDescription(pkg = pkgnm)[['Docker']]
+  }
+  img <- gsub(pattern = '\\.\\.', replacement = '_', x = pkgnm)
+  img <- sub(pattern = '_[^_]+$', replacement = '', x = img)
+  paste0(docker_user, '/', img)
 }
 
 #' @name pkgnm_to_repo

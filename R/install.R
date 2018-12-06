@@ -44,13 +44,17 @@ module_install <- function(repo, tag = 'latest') {
 #' @export
 #' @family user
 module_uninstall <- function(repo) {
+  is_installed <- function() {
+    mdl_installed <- module_installed()
+    repo %in% mdl_installed[['repo']]
+  }
   pkgnm <- repo_to_pkgnm(repo)
   if (pkgnm %in% devtools::loaded_packages()$package) {
     try(expr = devtools::unload(devtools::inst(pkgnm)), silent = TRUE)
   }
-  if (module_installed(repo = repo)) {
+  if (is_installed()) {
     docker_img_rm(img = repo_to_img(repo = repo))
     suppressMessages(utils::remove.packages(pkgs = pkgnm))
   }
-  invisible(!module_installed(repo = repo))
+  invisible(!is_installed())
 }

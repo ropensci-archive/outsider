@@ -2,7 +2,7 @@
 % Please edit documentation in R/identities.R
 \name{repo_to_img}
 \alias{repo_to_img}
-\title{Convert repo to image ID}
+\title{Convert repo to image}
 \usage{
 repo_to_img(repo)
 }
@@ -13,11 +13,12 @@ repo_to_img(repo)
 Logical
 }
 \description{
-Drops .. in repo name to meet docker name requirements.
+Drops .. in repo name to meet docker name requirements and
+looks up Docker username from package description.
 }
 \seealso{
 Other private-ids: \code{\link{ids_get}},
-  \code{\link{pkgnm_to_prgm}}, \code{\link{pkgnm_to_repo}},
-  \code{\link{repo_to_pkgnm}}
+  \code{\link{pkgnm_to_img}}, \code{\link{pkgnm_to_prgm}},
+  \code{\link{pkgnm_to_repo}}, \code{\link{repo_to_pkgnm}}
 }
 \concept{private-ids}

@@ -12,7 +12,7 @@
   arglist <- outsider::.arglist_get(...)
   # create an outsider object: describe the arguments and program
   otsdr <- outsider::.outsider_init(repo = '%repo%',
-                                    cmd = %program_name%,
+                                    cmd = '%program_name%',
                                     arglist = arglist)
   # run the command
   outsider::.run(otsdr)
