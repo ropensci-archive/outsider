@@ -97,7 +97,7 @@ datadir_get <- function(subdir = "") {
 
 vars_get <- function(what) {
   vars <- list('repo' = 'dombennett/om..hello.world',
-               'pkgnm' = 'om..hello..world..dombennett',
-               'prgrm' <- 'hello.world')
+               'pkgnm' = 'om..hello.world..dombennett',
+               'program' = 'hello.world')
   vars[[what]]
 }

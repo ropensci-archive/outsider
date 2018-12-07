@@ -15,7 +15,7 @@ ids_get <- function(pkgnm) {
   prgrm <- pkgnm_to_prgm(pkgnm)
   nps <- docker_ps_count()
   imgs <- docker_img_ls()
-  tag <- as.character(imgs[imgs[['repository']] == img, 'tag'])
+  tag <- imgs[imgs[['repository']] == img, 'tag'][[1]]
   cntnr <- paste0(prgrm, '_', nps)
   c('img' = img, 'cntnr' = cntnr, 'tag' = tag)
 }

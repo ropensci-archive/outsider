@@ -139,6 +139,9 @@ module_installed <- function() {
 #' @family user
 module_import <- function(fname, repo) {
   pkgnm <- repo_to_pkgnm(repo)
+  if (!pkgnm %in% utils::installed.packages()) {
+    stop('Module ', char(repo), ' not found', call. = FALSE)
+  }
   utils::getFromNamespace(x = fname, ns = pkgnm)
 }
 
