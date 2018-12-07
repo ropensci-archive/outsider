@@ -1,3 +1,30 @@
+# Developer build functions
+
+# Private ----
+test <- function(repo) {
+  on.exit(module_uninstall(repo = repo))
+  tags <- module_tags(repos = repo)
+  for (i in seq_len(nrow(tags))) {
+    tag <- tags[i, 'name']
+    tag <- paste0('Tag = ', char(tags[i, 'name']))
+    res <- tryCatch(install_test(repo = repo, tag = tag),
+                    error = function(e) {
+                      message(paste0('Unable to install module! ', tag,
+                                     ". See error below:\n\n"))
+                      stop(e)
+                    })
+    res <- import_test(repo = repo)
+    if (!res) {
+      stop('Unable to import all module functions! ', tag, call. = FALSE)
+    }
+    res <- examples_test(repo = repo)
+    if (!res) {
+      stop('Unable to run all module examples! ', tag, call. = FALSE)
+    }
+  }
+  invisible(res)
+}
+
 pkgdetails_get <- function(flpth) {
   flpth <- file.path(flpth, 'DESCRIPTION')
   if (!file.exists(flpth)) {
@@ -30,8 +57,109 @@ print.ids <- function(x) {
   }
 }
 
-# Public ----
-#' @name module_identities
+#' @name templates_get
+#' @title Retreive template files
+#' @description Return template files for an outsider module.
+#' @return character vector
+#' @family private
+templates_get <- function() {
+  fls <- list.files(path = system.file("extdata", package = "outsider"),
+                    pattern = 'template_')
+  templates <- vector(mode = 'list', length = length(fls))
+  destpths <- sub(pattern = 'template_', replacement = '', x = fls)
+  destpths <- gsub(pattern = '_', replacement = .Platform$file.sep,
+                   x = destpths)
+  for (i in seq_along(fls)) {
+    flpth <- system.file("extdata", fls[[i]], package = "outsider")
+    templates[[i]] <- stringr::str_c(readLines(con = flpth), collapse = '\n')
+  }
+  names(templates) <- destpths
+  templates
+}
+
+#' @name string_replace
+#' @title Replace patterns in a string
+#' @description For a given character string, replace patterns with values.
+#' @return character
+#' @family private
+string_replace <- function(string, patterns, values) {
+  for (i in seq_along(values)) {
+    string <- stringr::str_replace_all(string = string,
+                                       pattern = patterns[[i]],
+                                       replacement = values[[i]])
+  }
+  string
+}
+
+#' @name file_create
+#' @title Create file
+#' @description Write x to a filepath. Forces creation of directories.
+#' @return NULL
+#' @family private
+file_create <- function(x, flpth) {
+  basefl <- basename(path = flpth)
+  dirpth <- sub(pattern = basefl, replacement = '', x = flpth)
+  suppressWarnings(dir.create(path = dirpth, recursive = TRUE))
+  write(x = x, file = flpth)
+}
+
+# Public (hidden from general user) ----
+#' @name .module_skeleton
+#' @title Generate a skeleton for a module
+#' @description Create all the base files and folders to kickstart the
+#' development of a new outsider module.
+#' @details Module developers must have a GitHub and Docker-Hub account.
+#' For more detailed information, see online.
+#' @param flpth File path to location of where module will be created, default
+#' current working directory.
+#' @param program_name Name of the command-line program
+#' @param github_user Developer's username for GitHub
+#' @param docker_user Developer's username for Docker
+#' @return Logical
+#' @export
+#' @family developer
+.module_skeleton <- function(program_name, github_user, docker_user,
+                             flpth = getwd()) {
+  r_version <- paste0(version[['major']], '.', version[['minor']])
+  mdlnm <- paste0('om..', program_name)
+  if (!dir.exists(file.path(flpth, mdlnm))) {
+    dir.create(file.path(flpth, mdlnm))
+  }
+  package_name <- paste0(mdlnm, '..', github_user)
+  repo <- paste0(github_user, '/', mdlnm)
+  values <- mget(c('repo', 'package_name', 'r_version', 'docker_user',
+                   'github_user', 'program_name'))
+  patterns <- paste0('%', names(values), '%')
+  templates <- templates_get()
+  for (i in seq_along(templates)) {
+    x <- string_replace(string = templates[[i]], patterns = patterns,
+                        values = values)
+    file_create(x = x, flpth = file.path(flpth, mdlnm, names(templates)[[i]]))
+  }
+  invisible(TRUE)
+}
+
+#' @name .module_travis
+#' @title Generate Travis-CI file
+#' @description Write .travis.yml to working directory.
+#' @details All validated outsider modules must have a .travis.yml in their
+#' repository. These .travis.yml must be generated using this function.
+#' @param repo Repository
+#' @param flpth Directory in which to create .travis.yml
+#' @return Logical
+#' @export
+#' @family developer
+.module_travis <- function(repo, flpth = getwd()) {
+  url <- paste0('https://raw.githubusercontent.com/DomBennett/',
+                'om..hello.world/master/.travis.yml')
+  travis_text <- paste0(readLines(url), collapse = '\n')
+  travis_text <- sub(pattern = 'DomBennett/om\\.\\.hello\\.world',
+                     replacement = repo, x = travis_text)
+  write(x = travis_text, file = file.path(flpth, '.travis.yml'))
+  invisible(file.exists(file.path(flpth, '.travis.yml')))
+}
+
+#' @name .module_identities
 #' @title Return identities for a module
 #' @description Returns a list of the identities (GitHub repo, Package name,
 #' Docker images) for an outsider module. Works for modules in development.
@@ -40,7 +168,7 @@ print.ids <- function(x) {
 #' @return Logical
 #' @export
 #' @family developer
-module_identities <- function(flpth) {
+.module_identities <- function(flpth) {
   res <- list()
   pkg_details <- pkgdetails_get(flpth = flpth)
   pkgnm <- pkg_details[['Package']]
@@ -54,7 +182,7 @@ module_identities <- function(flpth) {
   structure(res, class = 'ids')
 }
 
-#' @name module_check
+#' @name .module_check
 #' @title Check names and structure of a module
 #' @description Returns TRUE if all the names and structure of an outsider
 #' module are correct.
@@ -62,7 +190,7 @@ module_identities <- function(flpth) {
 #' @return Logical
 #' @export
 #' @family developer
-module_check <- function(flpth = NULL) {
+.module_check <- function(flpth = NULL) {
   TRUE
 }
 
@@ -77,7 +205,7 @@ module_check <- function(flpth = NULL) {
 #' @return Logical
 #' @export
 #' @family developer
-module_test <- function(repo, verbose = FALSE) {
+.module_test <- function(repo, verbose = FALSE) {
   res <- FALSE
   on.exit(expr = {
     if (res) {
@@ -92,31 +220,6 @@ module_test <- function(repo, verbose = FALSE) {
     temp_opts <- list(program_out = FALSE, program_err = FALSE,
                       docker_out = FALSE, docker_err = FALSE)
   }
-  res <- withr::with_options(new = temp_opts, code = .module_test(repo = repo))
-  invisible(res)
-}
-
-# Private ----
-.module_test <- function(repo) {
-  on.exit(module_uninstall(repo = repo))
-  tags <- module_tags(repos = repo)
-  for (i in seq_len(nrow(tags))) {
-    tag <- tags[i, 'name']
-    tag <- paste0('Tag = ', char(tags[i, 'name']))
-    res <- tryCatch(install_test(repo = repo, tag = tag),
-                    error = function(e) {
-                      message(paste0('Unable to install module! ', tag,
-                                     ". See error below:\n\n"))
-                      stop(e)
-                    })
-    res <- import_test(repo = repo)
-    if (!res) {
-      stop('Unable to import all module functions! ', tag, call. = FALSE)
-    }
-    res <- examples_test(repo = repo)
-    if (!res) {
-      stop('Unable to run all module examples! ', tag, call. = FALSE)
-    }
-  }
+  res <- withr::with_options(new = temp_opts, code = test(repo = repo))
   invisible(res)
 }

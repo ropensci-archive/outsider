@@ -1,3 +1,5 @@
+# Developer argument functions
+
 # Private ----
 args_get <- function() {
   parent <- sys.parent(n = 1L)
@@ -31,7 +33,7 @@ is_filepath <- function(x) {
 }
 
 
-# Public ----
+# Public (hidden from general user) ----
 #' @name .arglist_get
 #' @title Generate vector of arguments
 #' @description Convert all the arguments passed to this function, including

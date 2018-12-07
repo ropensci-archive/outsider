@@ -10,9 +10,13 @@ knitr::opts_chunk$set(echo = TRUE)
 # Introduction
 
 `outsider` allows users to install and run programs on their own computer
-without the need to leave the R environment. Is there a command-line program
-that is not available through `outsider` that you wish was? Well, you can create
-your own module! If you can install the program on your own machine and have
+without the need to leave the R environment. If there is a command-line program
+that is not available through `outsider` you can create your own module to make 
+it available. In this article, we will outline what makes an `outsider` module
+and then provide a simple walkthrough of a module.
+
+
+If you can install the program on your own machine and have
 some experience with R packages and GitHub then you should be readily able
 to create one.
 
@@ -80,8 +84,8 @@ folders.
 
 ```{r skeleton}
 library(outsider)
-module_skeleton(github_user = 'dombennett', program_name = 'echo',
-                docker_user = 'dombennett')
+.module_skeleton(github_user = 'dombennett', program_name = 'echo',
+                 docker_user = 'dombennett')
 ```
 
 The above code will create an `outsider` module with the name `om..echor`.

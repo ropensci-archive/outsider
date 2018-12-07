@@ -1,3 +1,5 @@
+# Docker container class and functions
+
 # Class ----
 #' @name container-class
 #' @aliases container-methods

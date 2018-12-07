@@ -1,3 +1,60 @@
+# Functions that interact directly with Docker
+
+# Checks ----
+#' @name is_docker_available
+#' @title Check if Docker is installed and running
+#' @description Raises an error if docker is not available.
+#' @return Logical
+#' @family private-check
+is_docker_available <- function() {
+  installed <- is_docker_installed()
+  if (!installed) {
+    message(paste0('Docker is not installed. ',
+                   'Follow the installation instructions for your system:\n',
+                   'https://docs.docker.com/'))
+    running <- FALSE
+  } else {
+    running <- is_docker_running()
+    if (!running) {
+      message(paste0('Docker is not running. ', 'Start the docker program by ',
+                     'looking it up in your applications/programs and ',
+                     'opening it.'))
+    }
+  }
+  avlbl <- installed & running
+  if (!avlbl) {
+    stop("Docker is not available.", call. = FALSE)
+  }
+}
+
+#' @name is_docker_installed
+#' @title Check if Docker is installed
+#' @description Docker is required to run \code{outsider}. This function tests
+#' whether Docker is installed.
+#' @return Logical
+#' @family private-check
+is_docker_installed <- function() {
+  res <- sys::exec_internal(cmd = 'docker', args = '--help')
+  res[['status']] == 0
+}
+
+#' @name is_docker_running
+#' @title Check if Docker is running
+#' @description Docker is required to run \code{outsider}. This function tests
+#' whether Docker is running.
+#' @return Logical
+#' @family private-check
+is_docker_running <- function() {
+  res <- tryCatch(expr = {
+    res <- sys::exec_internal(cmd = 'docker', args = 'ps')
+    res[['status']] == 0
+  }, error = function(e) {
+    FALSE
+  })
+  res
+}
+
+# Base function ----
 #' @name docker_cmd
 #' @title Run docker command
 #' @description Runs a docker command with provided arguments
@@ -9,7 +66,7 @@
 #' @return Logical
 #' @family private-docker
 docker_cmd <- function(args, std_out = TRUE, std_err = TRUE) {
-  .is_docker_available()
+  is_docker_available()
   callr_args <- list(args, std_out, std_err)
   res <- callr::r(func = function(args, std_out, std_err) {
     sys::exec_wait(cmd = 'docker', args = args,
@@ -18,6 +75,7 @@ docker_cmd <- function(args, std_out = TRUE, std_err = TRUE) {
   res == 0
 }
 
+# Derivatives ----
 #' @name docker_img_rm
 #' @title Remove docker image
 #' @description Deletes docker image from system.
@@ -72,6 +130,7 @@ docker_cp <- function(origin, dest) {
               std_err = log_get('docker_err'))
 }
 
+# Special ----
 #' @name docker_ps_count
 #' @title Count docker processes
 #' @description Count the number of running docker containers.
@@ -79,7 +138,7 @@ docker_cp <- function(origin, dest) {
 #' @return Integer
 #' @family private-docker
 docker_ps_count <- function() {
-  .is_docker_available()
+  is_docker_available()
   res <- sys::exec_internal(cmd = 'docker', args = 'ps')
   if (res[['status']] == 0) {
     ps <- strsplit(x = rawToChar(res[['stdout']]), split = '\n')[[1]][-1]
@@ -104,38 +163,4 @@ docker_img_ls <- function() {
     colnames(images) <- header
   }
   tibble::as_tibble(images)
-}
-
-#' @name docker_killall
-#' @title Attempt to kill all running docker containers
-#' @description In the event a user loses track of the number of docker 
-#' containers they have created, this function will stop and remove all
-#' active and inactive containers.
-#' @details If you are running any non-outsider contianers, use this function
-#' with caution.
-#' @return Logical
-#' @family private-docker
-docker_killall <- function() {
-  kill <- function(id) {
-    exec <- function(id, action) {
-      sys::exec_wait(cmd = 'docker', args = c(action, id), std_out = FALSE,
-                     std_err = FALSE)
-    }
-    try(expr = {
-      exec(id, 'stop')
-      exec(id, 'rm')
-    }, silent = TRUE)
-  }
-  .is_docker_available()
-  res <- sys::exec_internal(cmd = 'docker', args = c('ps', '-a'))
-  if (res[['status']] == 0) {
-    processes <- strsplit(x = rawToChar(res[['stdout']]),
-                          split = '\n')[[1]][-1]
-    processes <- strsplit(x = processes, split = "\\s{2,}")
-    ps_ids <- vapply(X = processes, FUN = '[[', FUN.VALUE = character(1), 1)
-    for (id in ps_ids) {
-      kill(id)
-    }
-  }
-  0
 }

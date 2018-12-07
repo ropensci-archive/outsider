@@ -1,10 +1,8 @@
-is_repo_name <- function(x) {
-  is_repo <- grepl(pattern = '/', x = x) & !grepl(pattern = '\\s', x = x)
-  if (!is_repo) {
-    stop(char(x), ' is not a valid repo name.', call. = FALSE)
-  }
-}
+# Identity functions
+#     Once a module is installed, all identities (img, Docker username etc.) can
+#     be determined from the GitHub repo.
 
+# Get ----
 #' @name ids_get
 #' @title Get docker names for a module
 #' @description From a pkgnm, return the image and container names.
@@ -34,6 +32,7 @@ repo_to_img <- function(repo) {
   pkgnm_to_img(pkgnm = pkgnm)
 }
 
+# Conversion ----
 #' @name pkgnm_to_img
 #' @title Convert pkgnm to image
 #' @description Drops .. in repo name to meet docker name requirements.
@@ -86,4 +85,18 @@ repo_to_pkgnm <- function(repo) {
 pkgnm_to_prgm <- function(pkgnm) {
   prts <- strsplit(x = pkgnm, split = '\\.\\.')[[1]]
   prts[[2]]
+}
+
+# Check ----
+#' @name is_repo_name
+#' @title Is GitHub repo name valid?
+#' @description Calls error if repo name is invalid.
+#' @param x Target name
+#' @return NULL
+#' @family private-ids
+is_repo_name <- function(x) {
+  is_repo <- grepl(pattern = '/', x = x) & !grepl(pattern = '\\s', x = x)
+  if (!is_repo) {
+    stop(char(x), ' is not a valid repo name.', call. = FALSE)
+  }
 }

@@ -24,7 +24,6 @@ Imports:
     callr (>= 3.0.0),
     withr (>= 2.0),
     tibble,
-    getPass,
     cli,
     praise
 Suggests:

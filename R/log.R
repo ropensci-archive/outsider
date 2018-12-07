@@ -1,3 +1,5 @@
+# Control log output from Docker functions
+
 #' @name log_set
 #' @title Set log streams for console output
 #' @description Set if and where to send the console streams of the outsider

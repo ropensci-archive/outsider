@@ -1,3 +1,5 @@
+# Control messaging to console
+
 .onAttach <- function(...) {
   default_log_set()
 }

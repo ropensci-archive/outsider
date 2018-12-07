@@ -1,3 +1,7 @@
+# Module test functions
+
+# Internal ----
+# Ensure tests do not run on Travis-CI
 is_running_on_travis <- function() {
   Sys.getenv("CI") == "true" && Sys.getenv("TRAVIS") == "true"
 }
@@ -20,6 +24,7 @@ fnames_get <- function(repo) {
   fname_env$.get(pkgnm = pkgnm)
 }
 
+# Tests ----
 #' @name examples_test
 #' @title Run each example of an outsider module
 #' @description Return TRUE if all of the outsider module functions successfully
@@ -69,11 +74,11 @@ import_test <- function(repo) {
 #' @title Test whether module can be installed
 #' @description Return TRUE if the outsider module successfully installs.
 #' @param repo Module repo
-#' @param dockerfile_url URL for Dockerfile
+#' @param tag Docker tag
 #' @return logical
 #' @family private
 install_test <- function(repo, tag) {
   module_uninstall(repo = repo)
-  .module_install(repo = repo, tag = tag)
+  install(repo = repo, tag = tag)
   TRUE
 }
