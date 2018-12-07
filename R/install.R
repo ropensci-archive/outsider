@@ -66,7 +66,7 @@ module_install <- function(repo, tag = 'latest', manual = FALSE) {
     stop(char(repo), ' already installed. Use ', func('module_uninstall'),
          ' to remove before installing again.', call. = FALSE)
   }
-  tag_data <- module_tags(repos = repo)
+  tag_data <- tags(repos = repo)
   pull <- tag_data[['tag']] == tag
   if (sum(pull) != 1) {
     tags <- vapply(X = tag_data[['name']], FUN = char,

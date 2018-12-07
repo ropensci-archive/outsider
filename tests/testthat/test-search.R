@@ -3,24 +3,14 @@ library(outsider)
 library(testthat)
 
 # VARS
-repo <- 'dombennett/om..hello.world'
+repo <- outsider:::vars_get('repo')
 
 # FUNCTIONS
-datadir_get <- function(subdir = "") {
-  wd <- getwd()
-  if (grepl("testthat", wd)) {
-    datadir <- "data"
-  }
-  else {
-    datadir <- file.path("tests", "testthat", "data")
-  }
-  file.path(datadir, subdir)
-}
 mock_search <- function(...) {
-  readRDS(file = file.path(datadir_get(), 'om_search.RData'))
+  readRDS(file = file.path(outsider:::datadir_get(), 'om_search.RData'))
 }
 mock_yaml <- function(...) {
-  readRDS(file = file.path(datadir_get(), 'om_yaml.RData'))
+  readRDS(file = file.path(outsider:::datadir_get(), 'om_yaml.RData'))
 }
 
 # RUNNING

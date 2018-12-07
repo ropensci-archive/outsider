@@ -82,3 +82,22 @@ install_test <- function(repo, tag) {
   install(repo = repo, tag = tag)
   TRUE
 }
+
+# Unittest ----
+datadir_get <- function(subdir = "") {
+  wd <- getwd()
+  if (grepl("testthat", wd)) {
+    datadir <- "data"
+  }
+  else {
+    datadir <- file.path("tests", "testthat", "data")
+  }
+  file.path(datadir, subdir)
+}
+
+vars_get <- function(what) {
+  vars <- list('repo' = 'dombennett/om..hello.world',
+               'pkgnm' = 'om..hello..world..dombennett',
+               'prgrm' <- 'hello.world')
+  vars[[what]]
+}

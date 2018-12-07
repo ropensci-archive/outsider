@@ -53,7 +53,9 @@ build_status <- function(repo) {
   res <- repo_search(repo = repo)
   url <- paste0(travis_api_url, res[['full_name']], '.json')
   build_info <- try(expr = jsonlite::fromJSON(txt = url), silent = TRUE)
-  !inherits(build_info, 'try-error') && build_info[["last_build_status"]] == 0
+  !inherits(build_info, 'try-error') &&
+    !is.null(build_info[["last_build_status"]]) &&
+    build_info[["last_build_status"]] == 0
 }
 
 #' @name read_yaml

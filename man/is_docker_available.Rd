@@ -6,9 +6,6 @@
 \usage{
 is_docker_available()
 }
-\value{
-Logical
-}
 \description{
 Raises an error if docker is not available.
 }

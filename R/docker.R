@@ -4,7 +4,7 @@
 #' @name is_docker_available
 #' @title Check if Docker is installed and running
 #' @description Raises an error if docker is not available.
-#' @return Logical
+#' @return NULL
 #' @family private-check
 is_docker_available <- function() {
   installed <- is_docker_installed()
@@ -25,6 +25,7 @@ is_docker_available <- function() {
   if (!avlbl) {
     stop("Docker is not available.", call. = FALSE)
   }
+  invisible(NULL)
 }
 
 #' @name is_docker_installed
@@ -34,8 +35,13 @@ is_docker_available <- function() {
 #' @return Logical
 #' @family private-check
 is_docker_installed <- function() {
-  res <- sys::exec_internal(cmd = 'docker', args = '--help')
-  res[['status']] == 0
+  success <- tryCatch(expr = {
+    res <- sys::exec_internal(cmd = 'docker', args = '--help')
+    res[['status']] == 0
+    }, error = function(e) {
+      FALSE
+    })
+  success
 }
 
 #' @name is_docker_running
@@ -45,13 +51,13 @@ is_docker_installed <- function() {
 #' @return Logical
 #' @family private-check
 is_docker_running <- function() {
-  res <- tryCatch(expr = {
+  success <- tryCatch(expr = {
     res <- sys::exec_internal(cmd = 'docker', args = 'ps')
     res[['status']] == 0
   }, error = function(e) {
     FALSE
   })
-  res
+  success
 }
 
 # Base function ----

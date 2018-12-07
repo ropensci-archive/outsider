@@ -3,7 +3,7 @@ library(outsider)
 library(testthat)
 
 # VARS
-repo <- 'dombennett/om..hello.world'
+repo <- outsider:::vars_get('repo')
 
 # PRE-TEST
 if (module_installed(repo = repo)) {
