@@ -12,8 +12,11 @@ of \code{docker_out}.
 }
 \seealso{
 Other private: \code{\link{examples_test}},
-  \code{\link{fnames_get}}, \code{\link{import_test}},
-  \code{\link{install_test}}, \code{\link{is_filepath}},
-  \code{\link{log_get}}, \code{\link{to_basename}}
+  \code{\link{file_create}}, \code{\link{fnames_get}},
+  \code{\link{import_test}}, \code{\link{install_test}},
+  \code{\link{install}}, \code{\link{is_filepath}},
+  \code{\link{is_installed}}, \code{\link{log_get}},
+  \code{\link{string_replace}},
+  \code{\link{templates_get}}, \code{\link{to_basename}}
 }
 \concept{private}

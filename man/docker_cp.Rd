@@ -25,7 +25,6 @@ Container foldes are indicated with
 Other private-docker: \code{\link{container-class}},
   \code{\link{docker_build}}, \code{\link{docker_cmd}},
   \code{\link{docker_img_ls}}, \code{\link{docker_img_rm}},
-  \code{\link{docker_killall}},
   \code{\link{docker_ps_count}}, \code{\link{docker_pull}}
 }
 \concept{private-docker}

@@ -20,7 +20,8 @@ Drops .. in repo name to meet docker name requirements.
 }
 \seealso{
 Other private-ids: \code{\link{ids_get}},
-  \code{\link{pkgnm_to_prgm}}, \code{\link{pkgnm_to_repo}},
-  \code{\link{repo_to_img}}, \code{\link{repo_to_pkgnm}}
+  \code{\link{is_repo_name}}, \code{\link{pkgnm_to_prgm}},
+  \code{\link{pkgnm_to_repo}}, \code{\link{repo_to_img}},
+  \code{\link{repo_to_pkgnm}}
 }
 \concept{private-ids}

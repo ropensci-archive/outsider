@@ -2,9 +2,10 @@
 % Please edit documentation in R/build.R
 \name{module_test}
 \alias{module_test}
+\alias{.module_test}
 \title{Test an outsider module}
 \usage{
-module_test(repo, verbose = FALSE)
+.module_test(repo, verbose = FALSE)
 }
 \arguments{
 \item{repo}{Module repo}
@@ -26,10 +27,10 @@ the test is run.
 Other developer: \code{\link{.arglist_get}},
   \code{\link{.arglist_parse}},
   \code{\link{.filestosend_get}},
-  \code{\link{.travis_yaml}}, \code{\link{.wd_get}},
-  \code{\link{module_check}},
-  \code{\link{module_identities}},
-  \code{\link{module_skeleton}},
+  \code{\link{.module_check}},
+  \code{\link{.module_identities}},
+  \code{\link{.module_skeleton}},
+  \code{\link{.module_travis}}, \code{\link{.wd_get}},
   \code{\link{outsider-class}}
 }
 \concept{developer}

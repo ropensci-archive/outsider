@@ -29,9 +29,10 @@ R session's working directory.
 Other developer: \code{\link{.arglist_get}},
   \code{\link{.arglist_parse}},
   \code{\link{.filestosend_get}},
-  \code{\link{.travis_yaml}}, \code{\link{module_check}},
-  \code{\link{module_identities}},
-  \code{\link{module_skeleton}}, \code{\link{module_test}},
+  \code{\link{.module_check}},
+  \code{\link{.module_identities}},
+  \code{\link{.module_skeleton}},
+  \code{\link{.module_travis}}, \code{\link{module_test}},
   \code{\link{outsider-class}}
 }
 \concept{developer}

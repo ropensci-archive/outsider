@@ -4,16 +4,17 @@
 \alias{module_details}
 \title{Look up details on module(s)}
 \usage{
-module_details(repo)
+module_details(repo = NULL)
 }
 \arguments{
-\item{repo}{Vector of one or more outsider module repositories}
+\item{repo}{Vector of one or more outsider module repositories, default NULL.}
 }
 \value{
 tbl_df
 }
 \description{
 Return a tbl_df of information for outsider module(s).
+If \code{repo} is NULL, will return details on all avaiable modules.
 }
 \seealso{
 Other user: \code{\link{log_set}},

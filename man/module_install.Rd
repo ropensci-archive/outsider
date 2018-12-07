@@ -4,12 +4,14 @@
 \alias{module_install}
 \title{Install an outsider module}
 \usage{
-module_install(repo, tag = "latest")
+module_install(repo, tag = "latest", manual = FALSE)
 }
 \arguments{
-\item{repo}{Module repo}
+\item{repo}{Module repo, character.}
 
-\item{tag}{Module version, default latest}
+\item{tag}{Module version, default latest. Character.}
+
+\item{manual}{Build the docker image? Default FALSE. Logical.}
 }
 \value{
 Logical

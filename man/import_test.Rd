@@ -18,8 +18,11 @@ successfully imported.
 }
 \seealso{
 Other private: \code{\link{default_log_set}},
-  \code{\link{examples_test}}, \code{\link{fnames_get}},
-  \code{\link{install_test}}, \code{\link{is_filepath}},
-  \code{\link{log_get}}, \code{\link{to_basename}}
+  \code{\link{examples_test}}, \code{\link{file_create}},
+  \code{\link{fnames_get}}, \code{\link{install_test}},
+  \code{\link{install}}, \code{\link{is_filepath}},
+  \code{\link{is_installed}}, \code{\link{log_get}},
+  \code{\link{string_replace}},
+  \code{\link{templates_get}}, \code{\link{to_basename}}
 }
 \concept{private}

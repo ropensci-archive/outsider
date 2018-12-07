@@ -57,9 +57,10 @@ defined for the outsider to be run.
 Other developer: \code{\link{.arglist_get}},
   \code{\link{.arglist_parse}},
   \code{\link{.filestosend_get}},
-  \code{\link{.travis_yaml}}, \code{\link{.wd_get}},
-  \code{\link{module_check}},
-  \code{\link{module_identities}},
-  \code{\link{module_skeleton}}, \code{\link{module_test}}
+  \code{\link{.module_check}},
+  \code{\link{.module_identities}},
+  \code{\link{.module_skeleton}},
+  \code{\link{.module_travis}}, \code{\link{.wd_get}},
+  \code{\link{module_test}}
 }
 \concept{developer}
