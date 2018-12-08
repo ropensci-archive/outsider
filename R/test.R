@@ -100,6 +100,7 @@ vars_get <- function(what) {
                'pkgnm' = 'om..hello.world..dombennett',
                'program' = 'hello.world',
                'img' = 'dombennett/om_hello.world',
-               'cntnr' = 'om_hello.world_0')
+               'cntnr' = 'om_hello.world_0',
+               'fname' = 'hello_world')
   vars[[what]]
 }

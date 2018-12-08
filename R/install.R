@@ -75,7 +75,7 @@ module_install <- function(repo, tag = 'latest', manual = FALSE) {
          "\nAvailable versions are: ", paste0(tags, collapse = ', '))
   }
   if (manual) {
-    dockerfile_url <- as.character(tag_data[pull, 'url'])
+    dockerfile_url <- as.character(tag_data[pull, 'download_url'])
     success <- install(repo = repo, tag = tag, dockerfile_url = dockerfile_url)
   } else {
     success <- install(repo = repo, tag = tag)
@@ -99,7 +99,8 @@ module_uninstall <- function(repo) {
     try(expr = devtools::unload(devtools::inst(pkgnm)), silent = TRUE)
   }
   if (is_installed(repo = repo)) {
-    docker_img_rm(img = repo_to_img(repo = repo))
+    # TODO: are we sure this would remove all tagged version of an image?
+    try(docker_img_rm(img = repo_to_img(repo = repo)), silent = TRUE)
     suppressMessages(utils::remove.packages(pkgs = pkgnm))
   }
   invisible(!is_installed(repo = repo))
@@ -109,21 +110,29 @@ module_uninstall <- function(repo) {
 #' @title Which outsider modules are installed?
 #' @description Returns tbl_df of details for all outsider modules
 #' installed on the user's computer.
+#' @param show_images Look-up the module images? Default FALSE.
 #' @return tbl_df
 #' @export
 #' @family user
-module_installed <- function() {
+module_installed <- function(show_images = FALSE) {
   installed <- utils::installed.packages()
   modules <- installed[grepl(pattern = '^om\\.\\.', x = installed)]
   if (length(modules) == 0) {
     return(tibble::as_tibble(x = list()))
   }
   repos <- vapply(X = modules, FUN = pkgnm_to_repo, character(1))
-  imgnms <- vapply(X = repos, FUN = repo_to_img, character(1))
-  images <- docker_img_ls()
-  img_exists <- imgnms %in% images[['repository']]
-  tibble::as_tibble(list(pkg = modules, repo = repos, docker_img = imgnms,
-                         img_exists = img_exists))
+  if (show_images) {
+    imgnms <- vapply(X = repos, FUN = function(x) {
+      tryCatch(repo_to_img(x), error = function(e) '')
+    }, character(1))
+    images <- docker_img_ls()
+    img_exists <- imgnms %in% images[['repository']]
+    res <- tibble::as_tibble(list(pkg = modules, repo = repos,
+                                  docker_img = imgnms, img_exists = img_exists))
+  } else {
+    res <- tibble::as_tibble(list(pkg = modules, repo = repos))
+  }
+  res
 }
 
 #' @name module_import

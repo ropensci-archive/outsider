@@ -4,64 +4,90 @@ library(outsider)
 library(testthat)
 
 # VARS
-repo <- 'DomBennett/om..hello.world'
-fname <- 'hello_world'
+repo <- outsider:::vars_get('repo')
+fname <- outsider:::vars_get('fname')
 
-# PRE-TEST
-if (module_installed(repo = repo)) {
-  stop('Uninstall hello world before testing.')
-}
-
-# FUNCTIONS
-pretest_install <- function() {
-  if (!module_installed(repo = repo)) {
-    suppressWarnings(module_install(repo = repo))
-  }
-}
+# # PRE-TEST
+# if (module_installed(repo = repo)) {
+#   stop('Uninstall hello world before testing.')
+# }
+# 
+# # FUNCTIONS
+# pretest_install <- function() {
+#   if (!module_installed(repo = repo)) {
+#     suppressWarnings(module_install(repo = repo))
+#   }
+# }
 
 # RUNNING
-context('Testing \'modules\'')
-withr::with_temp_libpaths(code = {
-  on.exit(module_uninstall(repo = repo))
-  test_that('module_install() and module_uninstall works', {
+context('Testing \'install\'')
+test_that("is_installed() works", {
+  with_mock(
+    `outsider::module_installed` = function(...) data.frame(repo = 'this/repo'),
+    expect_true(outsider:::is_installed(repo = 'this/repo'))
+  )
+  with_mock(
+    `outsider::module_installed` = function(...) data.frame(repo = 'this/repo'),
+    expect_false(outsider:::is_installed(repo = 'that/repo'))
+  )
+})
+test_that("install() works", {
+  # Lots of internal tests for this function -- required to ensure consistent
+  #  behaviour.
+  with_mock(
+    `outsider:::is_installed` = function(...) FALSE,
+    `devtools::install_github` = function(...) TRUE,
+    `outsider:::docker_pull` = function(...) TRUE,
+    `outsider:::docker_build` = function(...) TRUE,
+    `outsider::module_uninstall` = function(...) TRUE,
+    `outsider:::repo_to_img` = function(...) list(),
+    expect_false(outsider:::install(repo = 'this/repo', tag = ''))
+  )
+  with_mock(
+    `outsider:::is_installed` = function(...) TRUE,
+    `devtools::install_github` = function(...) TRUE,
+    `outsider:::docker_pull` = function(...) TRUE,
+    `outsider:::docker_build` = function(...) TRUE,
+    `outsider::module_uninstall` = function(...) TRUE,
+    `outsider:::repo_to_img` = function(...) list(),
+    expect_true(outsider:::install(repo = 'this/repo', tag = '',
+                                   dockerfile_url = ''))
+  )
+  with_mock(
+    `outsider:::is_installed` = function(...) TRUE,
+    `devtools::install_github` = function(...) TRUE,
+    `outsider:::docker_pull` = function(...) TRUE,
+    `outsider:::docker_build` = function(...) TRUE,
+    `outsider::module_uninstall` = function(...) TRUE,
+    `outsider:::repo_to_img` = function(...) list(),
+    expect_true(outsider:::install(repo = 'this/repo', tag = ''))
+  )
+})
+test_that('module_[install/uninstall/import/help]() work', {
+  withr::with_temp_libpaths(code = {
+    with_mock(
+      `outsider:::build_status` = function(...) TRUE,
+      `outsider:::is_docker_available` = function(...) TRUE,
+      `outsider:::docker_build` = function(...) TRUE,
+      `outsider:::docker_pull` = function(...) TRUE,
+      expect_true(module_install(repo = repo))
+    )
+    expect_null(module_help(repo = repo))
+    expect_true(inherits(module_help(repo = repo, fname = fname),
+                         'help_files_with_topic'))
+    expect_true(inherits(module_import(fname = fname, repo = repo), 'function'))
+    with_mock(
+      `outsider:::build_status` = function(...) FALSE,
+      `outsider:::is_docker_available` = function(...) TRUE,
+      expect_warning(expect_error(module_install(repo = repo)))
+    )
     expect_true(module_uninstall(repo = repo))
-      with_mock(
-        `outsider::is_docker_available` = function(...) FALSE,
-        expect_error(suppressWarnings(module_install(repo = repo)))
-      )
-      expect_true(suppressWarnings(module_install(repo = repo)))
-      expect_error(suppressWarnings(module_install(repo = repo)))
-      require(package = .repo_to_pkgnm(repo = repo), character.only = TRUE)
-      expect_true(module_uninstall(repo = repo))
-  })
-  test_that('module_import() works', {
-    pretest_install()
-    foo <- module_import(fname = fname, repo = repo)
-    expect_true(inherits(foo, 'function'))
-  })
-  test_that('module_help() works', {
-    pretest_install()
-    help_files <- module_help(fname = fname, repo = repo)
-    expect_true(inherits(help_files, 'help_files_with_topic'))
-  })
-  test_that('module_test() works', {
     with_mock(
-      `outsider:::test_install` = function(...) stop(''),
-      expect_error(module_test(repo = repo))
+      `outsider:::is_docker_available` = function(...) TRUE,
+      `outsider:::docker_build` = function(...) TRUE,
+      `outsider:::docker_pull` = function(...) TRUE,
+      expect_true(module_install(repo = repo, manual = TRUE))
     )
-    with_mock(
-      `outsider:::test_import` = function(...) stop(''),
-      expect_error(module_test(repo = repo))
-    )
-    with_mock(
-      `outsider:::test_examples` = function(...) stop(''),
-      expect_error(module_test(repo = repo))
-    )
-    with_mock(
-      `outsider:::test_install` = function(...) TRUE,
-      `outsider:::test_import` = function(...) TRUE,
-      `outsider:::test_examples` = function(...) TRUE,
-      expect_true(module_test(repo = repo))
-    )
+    expect_true(module_uninstall(repo = repo))
   })
 })
