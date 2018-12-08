@@ -159,14 +159,18 @@ docker_ps_count <- function() {
 #' @return tibble
 #' @family private-docker
 docker_img_ls <- function() {
-  res <- sys::exec_internal(cmd = 'docker', args = c('image', 'ls'))
-  if (res[['status']] == 0) {
-    images <- strsplit(x = rawToChar(res[['stdout']]), split = '\n')[[1]]
-    images <- strsplit(x = images, split = '\\s{2,}')
-    header <- gsub(pattern = ' ', replacement = '_', x = tolower(images[[1]]))
-    images <- matrix(data = unlist(images[-1]), nrow = length(images) - 1,
-                     ncol = length(header), byrow = TRUE)
-    colnames(images) <- header
+  res <- list()
+  sys_out <- sys::exec_internal(cmd = 'docker', args = c('image', 'ls'))
+  if (sys_out[['status']] == 0) {
+    images <- strsplit(x = rawToChar(sys_out[['stdout']]), split = '\n')[[1]]
+    if (length(images) > 1) {
+      images <- strsplit(x = images, split = '\\s{2,}')
+      header <- gsub(pattern = ' ', replacement = '_',
+                     x = tolower(images[[1]]))
+      res <- matrix(data = unlist(images[-1]), nrow = length(images) - 1,
+                       ncol = length(header), byrow = TRUE)
+      colnames(res) <- header
+    }
   }
-  tibble::as_tibble(images)
+  tibble::as_tibble(res)
 }

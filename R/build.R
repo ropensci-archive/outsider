@@ -1,9 +1,16 @@
 # Developer build functions
 
 # Private ----
+#' @name test
+#' @title Test a module
+#' @description Test an outsider module by making sure it installs,
+#' imports and its examples run correctly.
+#' @param repo Repository
+#' @return logical
+#' @family private
 test <- function(repo) {
   on.exit(module_uninstall(repo = repo))
-  tags <- module_tags(repos = repo)
+  tags <- tags(repos = repo)
   for (i in seq_len(nrow(tags))) {
     tag <- tags[i, 'name']
     tag <- paste0('Tag = ', char(tags[i, 'name']))
@@ -25,6 +32,13 @@ test <- function(repo) {
   invisible(res)
 }
 
+#' @name pkgdetails_get
+#' @title Read the a package description
+#' @description Return a list of all package details based on a package's
+#' DESCRIPTION file.
+#' @param flpth Path to package
+#' @return logical
+#' @family private
 pkgdetails_get <- function(flpth) {
   flpth <- file.path(flpth, 'DESCRIPTION')
   if (!file.exists(flpth)) {
@@ -42,6 +56,7 @@ pkgdetails_get <- function(flpth) {
   vals
 }
 
+#' @export
 print.ids <- function(x) {
   for (i in seq_along(x)) {
     msg <- names(x)[[i]]
