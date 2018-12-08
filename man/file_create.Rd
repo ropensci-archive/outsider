@@ -6,6 +6,11 @@
 \usage{
 file_create(x, flpth)
 }
+\arguments{
+\item{x}{Text for writing to file}
+
+\item{flpth}{File path to be created}
+}
 \description{
 Write x to a filepath. Forces creation of directories.
 }

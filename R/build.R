@@ -12,28 +12,28 @@ test <- function(repo) {
   on.exit(module_uninstall(repo = repo))
   tags <- tags(repos = repo)
   for (i in seq_len(nrow(tags))) {
-    tag <- tags[i, 'name']
-    tag <- paste0('Tag = ', char(tags[i, 'name']))
+    tag <- tags[i, 'tag'][[1]]
+    tag_msg <- paste0('Tag = ', char(tag))
     res <- tryCatch(install_test(repo = repo, tag = tag),
                     error = function(e) {
-                      message(paste0('Unable to install module! ', tag,
+                      message(paste0('Unable to install module! ', tag_msg,
                                      ". See error below:\n\n"))
                       stop(e)
                     })
     res <- import_test(repo = repo)
     if (!res) {
-      stop('Unable to import all module functions! ', tag, call. = FALSE)
+      stop('Unable to import all module functions! ', tag_msg, call. = FALSE)
     }
     res <- examples_test(repo = repo)
     if (!res) {
-      stop('Unable to run all module examples! ', tag, call. = FALSE)
+      stop('Unable to run all module examples! ', tag_msg, call. = FALSE)
     }
   }
   invisible(res)
 }
 
 #' @name pkgdetails_get
-#' @title Read the a package description
+#' @title Read the package description
 #' @description Return a list of all package details based on a package's
 #' DESCRIPTION file.
 #' @param flpth Path to package
@@ -63,9 +63,9 @@ print.ids <- function(x) {
     if (length(x[[i]]) == 1) {
       cat_line(msg, ': ', char(x[[i]]))
     } else {
-      cat_line(msg, '... ')
+      cat_line(msg, ' ... ')
       for (j in seq_along(x[[i]])) {
-        msg <- names(x[[i]][[j]])
+        msg <- names(x[[i]])[[j]]
         cat_line('... ', msg, ': ', char(x[[i]][[j]]))
       }
     }
@@ -109,6 +109,8 @@ string_replace <- function(string, patterns, values) {
 #' @name file_create
 #' @title Create file
 #' @description Write x to a filepath. Forces creation of directories.
+#' @param x Text for writing to file
+#' @param flpth File path to be created
 #' @return NULL
 #' @family private
 file_create <- function(x, flpth) {
@@ -169,7 +171,7 @@ file_create <- function(x, flpth) {
                 'om..hello.world/master/.travis.yml')
   travis_text <- paste0(readLines(url), collapse = '\n')
   travis_text <- sub(pattern = 'DomBennett/om\\.\\.hello\\.world',
-                     replacement = repo, x = travis_text)
+                     replacement = repo, x = travis_text, ignore.case = TRUE)
   write(x = travis_text, file = file.path(flpth, '.travis.yml'))
   invisible(file.exists(file.path(flpth, '.travis.yml')))
 }
@@ -184,6 +186,7 @@ file_create <- function(x, flpth) {
 #' @export
 #' @family developer
 .module_identities <- function(flpth) {
+  # TODO: come-up with better class name than "ids"
   res <- list()
   pkg_details <- pkgdetails_get(flpth = flpth)
   pkgnm <- pkg_details[['Package']]

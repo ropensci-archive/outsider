@@ -2,7 +2,7 @@
 % Please edit documentation in R/build.R
 \name{pkgdetails_get}
 \alias{pkgdetails_get}
-\title{Read the a package description}
+\title{Read the package description}
 \usage{
 pkgdetails_get(flpth)
 }
