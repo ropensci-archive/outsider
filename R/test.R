@@ -25,6 +25,10 @@ fnames_get <- function(repo) {
 }
 
 # Tests ----
+ex_source <- function(file) {
+  source(file = file, local = TRUE)
+}
+
 #' @name examples_test
 #' @title Run each example of an outsider module
 #' @description Return TRUE if all of the outsider module functions successfully
@@ -40,7 +44,7 @@ examples_test <- function(repo) {
   ex_urls <- paste0(base_ex_url, fnames, '.R')
   for (i in seq_along(ex_urls)) {
     res <- tryCatch(expr = {
-      source(file = ex_urls[[i]], local = TRUE)
+      ex_source(file = ex_urls[[i]])
       TRUE
       }, error = function(e) {
         message('Failed to run example for `', fnames[[i]], '`')

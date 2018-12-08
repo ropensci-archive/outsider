@@ -2,53 +2,56 @@
 library(outsider)
 library(testthat)
 
-# VARS
-repo <- outsider:::vars_get('repo')
-
-# PRE-TEST
-if (module_installed(repo = repo)) {
-  stop('Uninstall hello world before testing.')
-}
-
-# FUNCTIONS
-pretest_install <- function() {
-  if (!module_installed(repo = repo)) {
-    suppressWarnings(module_install(repo = repo))
-  }
-}
-
 # RUNNING
+context('Testing \'internal\'')
+test_that('fnames_get() works', {
+  res <- with_mock(
+    `outsider:::repo_to_pkgnm` = function(...) 'outsider',
+    outsider:::fnames_get(repo = '')
+  )
+  expect_true('module_install' %in% res)
+})
 context('Testing \'test\'')
-test_that('test_install() works', {
+test_that('install_test() works', {
   with_mock(
-    `outsider:::.module_install` = function(...) stop(''),
+    `outsider:::install` = function(...) stop(''),
     `outsider:::module_uninstall` = function(...) FALSE,
-    expect_error(outsider:::test_install(repo = repo))
+    expect_error(outsider:::install_test(repo = '', tag = 'latest'))
   )
   with_mock(
-    `outsider:::.module_install` = function(...) TRUE,
+    `outsider:::install` = function(...) TRUE,
     `outsider:::module_uninstall` = function(...) TRUE,
-    expect_true(outsider:::test_install(repo = repo))
+    expect_true(outsider:::install_test(repo = '', tag = 'latest'))
   )
 })
-withr::with_temp_libpaths(code = {
-  pretest_install()
-  test_that('fnames_get() works', {
-    res <- outsider:::fnames_get(repo = repo)
-    expect_true(res == 'hello_world')
-  })
-  test_that('test_import() works', {
-    expect_true(outsider:::test_import(repo = repo))
-    with_mock(
-      `outsider::module_import` = function(...) NULL,
-      expect_false(outsider:::test_import(repo = repo))
-    )
-  })
-  test_that('test_examples() works', {
-    expect_true(outsider:::test_examples(repo = repo))
-    with_mock(
-      `outsider::module_import` = function(...) stop(),
-      expect_false(outsider:::test_examples(repo = repo))
-    )
-  })
+test_that('import_test() works', {
+  with_mock(
+    `outsider:::fnames_get` = function(...) 'foo',
+    `outsider::module_import` = function(...) NULL,
+    expect_false(outsider:::import_test(repo = ''))
+  )
+  with_mock(
+    `outsider:::fnames_get` = function(...) 'foo',
+    `outsider::module_import` = function(...) function() {},
+    expect_true(outsider:::import_test(repo = repo))
+  )
+})
+test_that('examples_test() works', {
+  with_mock(
+    `outsider:::fnames_get` = function(...) 'foo',
+    `outsider:::ex_source` = function(...) stop(),
+    expect_false(outsider:::examples_test(repo = ''))
+  )
+  with_mock(
+    `outsider:::fnames_get` = function(...) 'foo',
+    `outsider:::ex_source` = function(...) NULL,
+    expect_true(outsider:::examples_test(repo = ''))
+  )
+})
+context('Testing \'unittest\'')
+test_that('datadir_get() works', {
+  expect_true(grepl(pattern = 'data', x = outsider:::datadir_get()))
+})
+test_that('vars_get() works', {
+  expect_true(grepl(pattern = 'hello', x = outsider:::vars_get('repo')))
 })
