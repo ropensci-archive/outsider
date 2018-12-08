@@ -60,24 +60,28 @@ NULL
     stop('Command not set')
   }
   cntnr <- x[['container']]
-  success <- start(cntnr)
-  on.exit(expr = {
-    halt(x = cntnr)
-    if (!success & log_get('docker_out')) {
-      message(print(x))
-    }
-  })
+  successes <- list()
+  successes[['start']] <- start(cntnr)
+  on.exit(halt(x = cntnr))
   if (length(x[['files_to_send']]) > 0) {
-    success <- copy(x = cntnr, send = x[['files_to_send']])
+    successes[['send']] <- copy(x = cntnr, send = x[['files_to_send']])
   }
-  success <- run(x = cntnr, cmd = x[['cmd']], args = x[['arglist']])
+  successes[['run']] <- run(x = cntnr, cmd = x[['cmd']], args = x[['arglist']])
   if (length(x[['wd']]) > 0) {
-    success <- copy(x = cntnr, rtrn = x[['wd']])
+    successes[['return']] <- copy(x = cntnr, rtrn = x[['wd']])
   }
-  if (inherits(success, 'error')) {
-    message('An error occurred in the following outsider ...')
+  are_errors <- vapply(X = successes, FUN = inherits, FUN.VALUE = logical(1),
+                       'error')
+  success <- all(vapply(X = successes, FUN = is.logical,
+                        FUN.VALUE = logical(1))) && all(unlist(successes))
+  if (any(are_errors)) {
+    message('An error occurred in the following container ...')
     message(print(x))
-    stop(success)
+    stop(successes[are_errors][[1]])
+  }
+  if (!success) {
+    message('An command and arguments failed to run for ...')
+    message(print(x))
   }
   invisible(success)
 }
