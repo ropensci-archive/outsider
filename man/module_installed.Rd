@@ -4,7 +4,10 @@
 \alias{module_installed}
 \title{Which outsider modules are installed?}
 \usage{
-module_installed()
+module_installed(show_images = FALSE)
+}
+\arguments{
+\item{show_images}{Look-up the module images? Default FALSE.}
 }
 \value{
 tbl_df

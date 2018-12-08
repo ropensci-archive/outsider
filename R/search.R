@@ -155,7 +155,7 @@ module_details <- function(repo = NULL) {
     github_res <- do.call(what = rbind, args = github_res)
   } else {
     github_res <- all_search()
-    repo <- github_res[['full_name']]
+    repo <- github_res[, 'full_name']
   }
   # look up yaml
   info <- yaml(repos = repo)
@@ -166,11 +166,12 @@ module_details <- function(repo = NULL) {
                 decreasing = TRUE), collapse = ', ')
   }, FUN.VALUE = character(1))
   # add extra info
-  index <- match(github_res[['full_name']], info[['repo']])
-  info[['updated_at']] <- as.POSIXct(github_res[['updated_at']][index],
+  index <- match(tolower(github_res[, 'full_name']),
+                 tolower(info[['repo']]))
+  info[['updated_at']] <- as.POSIXct(github_res[index, 'updated_at'],
                                      format = "%Y-%m-%dT%H:%M:%OSZ",
                                      timezone = 'UTC')
-  info[['watcher_count']] <- github_res[['watchers_count']][index]
+  info[['watcher_count']] <- github_res[index, 'watchers_count']
   info[['url']] <- paste0('https://github.com/', rownames(info))
   # # order output
   info <- info[order(info[['program']], decreasing = TRUE), ]
