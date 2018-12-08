@@ -11,23 +11,31 @@
 
 \item{key}{Argument key identifying the working directory, e.g. -wd}
 
-\item{i}{Index of the working directory in the arguments, e.g. 1.}
+\item{i}{Index in the arglist that determines the working directory, e.g. 1.}
 }
 \value{
 Character
 }
 \description{
-Utility function for determines the working directory from 
-arglist. The workign directory can be determined from the arglist either by
+Utility function for determining the working directory from 
+arglist. The working directory can be determined from the arglist either by
 a key:value or an index. For example, the working directory may be determined
 by the key \code{-wd} in which case this function will identify whether this
 key exists in the arglist and will return its corresponding value.
-If no key or i is provided or found in the arguments, returns the
-R session's working directory.
+Alternatively, the working directory may be determined by the first argument
+(e.g. an input file), in which case setting \code{i=1} will return the first
+argument in the arglist.
+If an input file is returned, a user can use \link{\code{.dirpath_get}} to
+convert the file path to a directory path.
+If both \code{key} and \code{i} are provided, \code{key} takes precedence.
+If no \code{key} or \code{i} is provided and/or no working directory is
+found in the arguments, the function will return the R session's working
+directory.
+If no arguments are provided, returns empty character vector.
 }
 \seealso{
 Other developer: \code{\link{.arglist_get}},
-  \code{\link{.arglist_parse}},
+  \code{\link{.arglist_parse}}, \code{\link{.dirpath_get}},
   \code{\link{.filestosend_get}},
   \code{\link{.module_check}},
   \code{\link{.module_identities}},

@@ -23,8 +23,17 @@ Drop any specified key:value pairs with \code{keyvals_to_drop} or drop any
 specific values \code{vals_to_drop}. With \code{normalise_paths} as TRUE,
 all filepaths in the arglist will be converted to basenames.
 }
+\details{
+It is important the file paths are normalised, because they will
+not be available to the Docker container. The only files available will
+be those that have been transfered to the container as determined through
+the \link{\code{.outsider_init}}. These files will be located in the
+same directory as where the function is called and require no absolute
+file path.
+}
 \seealso{
 Other developer: \code{\link{.arglist_get}},
+  \code{\link{.dirpath_get}},
   \code{\link{.filestosend_get}},
   \code{\link{.module_check}},
   \code{\link{.module_identities}},

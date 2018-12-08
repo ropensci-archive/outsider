@@ -29,7 +29,7 @@ For more detailed information, see online.
 }
 \seealso{
 Other developer: \code{\link{.arglist_get}},
-  \code{\link{.arglist_parse}},
+  \code{\link{.arglist_parse}}, \code{\link{.dirpath_get}},
   \code{\link{.filestosend_get}},
   \code{\link{.module_check}},
   \code{\link{.module_identities}},

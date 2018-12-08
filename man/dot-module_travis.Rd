@@ -23,7 +23,7 @@ repository. These .travis.yml must be generated using this function.
 }
 \seealso{
 Other developer: \code{\link{.arglist_get}},
-  \code{\link{.arglist_parse}},
+  \code{\link{.arglist_parse}}, \code{\link{.dirpath_get}},
   \code{\link{.filestosend_get}},
   \code{\link{.module_check}},
   \code{\link{.module_identities}},

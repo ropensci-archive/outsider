@@ -20,6 +20,7 @@ ids_get <- function(pkgnm) {
   c('img' = img, 'cntnr' = cntnr, 'tag' = tag)
 }
 
+# Conversion ----
 #' @name repo_to_img
 #' @title Convert repo to image
 #' @description Drops .. in repo name to meet docker name requirements and
@@ -32,7 +33,6 @@ repo_to_img <- function(repo) {
   pkgnm_to_img(pkgnm = pkgnm)
 }
 
-# Conversion ----
 #' @name pkgnm_to_img
 #' @title Convert pkgnm to image
 #' @description Drops .. in repo name to meet docker name requirements.

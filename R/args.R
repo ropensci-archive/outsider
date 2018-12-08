@@ -63,7 +63,9 @@ is_filepath <- function(x) {
     return(character(0))
   }
   # Check whether any arglist are filepaths
-  arglist <- arglist[arglist != wd]
+  if (!is.null(wd)) {
+    arglist <- arglist[arglist != wd]
+  }
   bool_1 <- is_filepath(arglist)
   res <- arglist[bool_1]
   if (!is.null(wd)) {
@@ -77,16 +79,24 @@ is_filepath <- function(x) {
 
 #' @name .wd_get
 #' @title Return working directory
-#' @description Utility function for determines the working directory from 
-#' arglist. The workign directory can be determined from the arglist either by
+#' @description Utility function for determining the working directory from 
+#' arglist. The working directory can be determined from the arglist either by
 #' a key:value or an index. For example, the working directory may be determined
 #' by the key \code{-wd} in which case this function will identify whether this
 #' key exists in the arglist and will return its corresponding value.
-#' If no key or i is provided or found in the arguments, returns the
-#' R session's working directory.
+#' Alternatively, the working directory may be determined by the first argument
+#' (e.g. an input file), in which case setting \code{i=1} will return the first
+#' argument in the arglist.
+#' If an input file is returned, a user can use \link{\code{.dirpath_get}} to
+#' convert the file path to a directory path.
+#' If both \code{key} and \code{i} are provided, \code{key} takes precedence.
+#' If no \code{key} or \code{i} is provided and/or no working directory is
+#' found in the arguments, the function will return the R session's working
+#' directory.
+#' If no arguments are provided, returns empty character vector.
 #' @param arglist Arguments as character vector
 #' @param key Argument key identifying the working directory, e.g. -wd
-#' @param i Index of the working directory in the arguments, e.g. 1.
+#' @param i Index in the arglist that determines the working directory, e.g. 1.
 #' @return Character
 #' @export
 #' @family developer
@@ -101,12 +111,35 @@ is_filepath <- function(x) {
     return(wd)
   }
   if (!is.null(i)) {
-    wd <- sub(pattern = basename(arglist[i]), replacement = '', x = arglist[i])
-    if (wd == '') {
-      wd <- getwd()
-    }
+    wd <- arglist[[i]]
   }
   wd
+}
+
+#' @name .dirpath_get
+#' @title Convert file path to directory path
+#' @description Takes a file path and converts it to its directory path by
+#' dropping the file name and extension. If \code{flpth} is already a directory
+#' path, the argument will be returned unchanged. If nothing is provided,
+#' nothing is returned (i.e. \code{character(0)}).
+#' @param flpth File path for which directory path will be returned.
+#' @return Character
+#' @export
+#' @family developer
+.dirpath_get <- function(flpth) {
+  if (length(flpth) == 0) {
+    return(character(0))
+  }
+  if (dir.exists(flpth)) {
+    # already a directory
+    return(flpth)
+  }
+  res <- sub(pattern = basename(flpth), replacement = '', x = flpth)
+  if (res == '') {
+    # if no path, must be working directory
+    res <- getwd()
+  }
+  res
 }
 
 #' @name .arglist_parse
@@ -115,6 +148,12 @@ is_filepath <- function(x) {
 #' Drop any specified key:value pairs with \code{keyvals_to_drop} or drop any
 #' specific values \code{vals_to_drop}. With \code{normalise_paths} as TRUE,
 #' all filepaths in the arglist will be converted to basenames.
+#' @details It is important the file paths are normalised, because they will
+#' not be available to the Docker container. The only files available will
+#' be those that have been transfered to the container as determined through
+#' the \link{\code{.outsider_init}}. These files will be located in the
+#' same directory as where the function is called and require no absolute
+#' file path.
 #' @param arglist Arguments as character vector
 #' @param keyvals_to_drop Argument keys to drop, e.g. -wd.
 #' @param vals_to_drop Specific values to drop, e.g. --verbose.

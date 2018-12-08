@@ -4,47 +4,75 @@ library(testthat)
 
 # RUNNING
 context('Testing \'args\'')
-test_that('.run() works', {
-  with_mock(
-    `outsider:::.docker_cmd` = function(...) TRUE,
-    expect_true(.run(pkgnm = pkgnm, files_to_send = NULL, cmd = NULL,
-                     args = NULL))
-  )
-})
-test_that('.args_parse() works', {
+test_that('args_get() works', {
   foo <- function(...) {
-    .args_parse()
+    outsider:::args_get()
   }
   res <- foo('a', 'b', 'c')
-  expect_equal(res, c('a', 'b', 'c'))
-})
-test_that('.which_args_are_filepaths() works', {
-  flnm <- 'testfile.txt'
-  write('test', file = flnm)
-  on.exit(file.remove(flnm))
-  res <- .which_args_are_filepaths(c('notafile', flnm))
-  expect_true(res == flnm)
-  res <- .which_args_are_filepaths(c('notafile', flnm), wd = getwd())
-  expect_true(file.path(getwd(), flnm) %in% res)
-})
-test_that('.copy_to_docker() works', {
-  with_mock(
-    `outsider:::.docker_cmd` = function(...) TRUE,
-    expect_true(.copy_to_docker(cntnr_id = '', host_flpths = rep('file', 10)))
-  )
-})
-test_that('.copy_from_docker() works', {
-  with_mock(
-    `outsider:::.docker_cmd` = function(...) TRUE,
-    expect_true(.copy_from_docker(cntnr_id = ''))
-  )
+  expect_equal(res, list('a', 'b', 'c'))
 })
 test_that('to_basename() works', {
   expctd <- list.files(getwd())[1]
   args <- c(file.path(getwd(), expctd), 'arg1', 'arg2')
-  expect_true(.to_basename(args)[1] == expctd)
+  expect_true(outsider:::to_basename(args)[1] == expctd)
 })
 test_that('is_filepath() works', {
   files <- list.files(getwd())
   expect_true(all(outsider:::is_filepath(files)))
+})
+a <- 10L
+test_that('.args_get() works', {
+  res <- .arglist_get(a, 'b', 'c')
+  expect_equal(res, c(10L, 'b', 'c'))
+})
+test_that('.filestosend_get() works', {
+  # nothin in, nothin out
+  expect_equal(.filestosend_get(character(0)), character())
+  flnm <- 'testfile.txt'
+  write('test', file = flnm)
+  on.exit(file.remove(flnm))
+  res <- .filestosend_get(c('notafile', flnm))
+  expect_true(res == flnm)
+  res <- .filestosend_get(c('notafile', flnm), wd = getwd())
+  expect_true(file.path(getwd(), flnm) %in% res)
+})
+test_that('.wd_get() works', {
+  # nothin in, nothin out
+  expect_equal(.wd_get(character(0)), character())
+  arglist <- c('1', '-wd', 'thisiswd/', '--otherarg')
+  expect_equal(.wd_get(arglist), getwd())
+  expect_equal(.wd_get(arglist, key = '-wd'), 'thisiswd/')
+  arglist <- c('thisiswd/inputfile', '--otherarg', '--index', '1')
+  expect_equal(.wd_get(arglist, i = 1, key = '-wd'), 'thisiswd/inputfile')
+  arglist <- c('inputfile', '--otherarg', '--index', '1', '-wd', 'thisiswd/')
+  expect_equal(.wd_get(arglist, i = 1, key = '-wd'), 'thisiswd/')
+})
+test_that('.dirpath_get() works', {
+  # nothin in, nothin out
+  expect_equal(.dirpath_get(character(0)), character())
+  # if dirpath already, dirpath returned
+  datapth <- outsider:::datadir_get()
+  expect_equal(.dirpath_get(datapth), datapth)
+  # drop filename
+  expect_equal(.dirpath_get(paste0(datapth, 'afile.txt')), datapth)
+})
+test_that('.arglist_parse() works', {
+  # nothin in, nothin out
+  expect_equal(.arglist_parse(character(0)), character())
+  # path normalisation
+  res <- .arglist_parse(arglist = paste0(outsider:::datadir_get()))
+  expect_equal(res, 'data')
+  res <- .arglist_parse(arglist = 'not/a/real/file/path')
+  expect_equal(res, 'not/a/real/file/path')
+  # drop keyvals
+  res <- .arglist_parse(arglist = c('-wd', 'thisiswd/', '-verbosity', '2',
+                                    'otherarg'),
+                        keyvals_to_drop = c('-wd', '-verbosity'))
+  expect_equal(res, 'otherarg')
+  # drop vals
+  res <- .arglist_parse(arglist = c('-wd', 'thisiswd/', '-verbosity', '2',
+                                    'otherarg', '--unwanted1', '--unwanted2'),
+                        keyvals_to_drop = c('-wd', '-verbosity'),
+                        vals_to_drop = c('--unwanted1', '--unwanted2'))
+  expect_equal(res, 'otherarg')
 })

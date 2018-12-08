@@ -20,7 +20,7 @@ used to identify files/folders for sending to the Docker container.
 }
 \seealso{
 Other developer: \code{\link{.arglist_get}},
-  \code{\link{.arglist_parse}},
+  \code{\link{.arglist_parse}}, \code{\link{.dirpath_get}},
   \code{\link{.module_check}},
   \code{\link{.module_identities}},
   \code{\link{.module_skeleton}},
