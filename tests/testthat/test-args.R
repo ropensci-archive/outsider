@@ -20,10 +20,9 @@ test_that('is_filepath() works', {
   files <- list.files(getwd())
   expect_true(all(outsider:::is_filepath(files)))
 })
-a <- 10L
 test_that('.args_get() works', {
-  res <- .arglist_get(a, 'b', 'c')
-  expect_equal(res, c(10L, 'b', 'c'))
+  res <- .arglist_get(outsider:::gh_api_url, 'b', 'c')
+  expect_equal(res, c(outsider:::gh_api_url, 'b', 'c'))
 })
 test_that('.filestosend_get() works', {
   # nothin in, nothin out

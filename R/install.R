@@ -169,8 +169,12 @@ module_help <- function(repo, fname = NULL) {
     stop('Module ', char(repo), ' not found', call. = FALSE)
   }
   if (is.null(fname)) {
-    utils::help(package = (pkgnm))
+    .help(package = (pkgnm))
   } else {
-    utils::help(package = (pkgnm), topic = (fname))
+    .help(package = (pkgnm), topic = (fname))
   }
+}
+
+.help <- function(...) {
+  utils::help(...)
 }

@@ -44,7 +44,7 @@ test_that('print.container() works', {
                                            'tag' = tag),
     `outsider:::status.container` = function(x, ...) 'This is a mock',
     container <- outsider:::container_init(pkgnm = pkgnm),
-    print(container)
+    expect_null(print(container))
   )
 })
 test_that('container methods work', {

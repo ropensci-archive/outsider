@@ -5,19 +5,8 @@ library(testthat)
 
 # VARS
 repo <- outsider:::vars_get('repo')
+pkgnm <- outsider:::vars_get('pkgnm')
 fname <- outsider:::vars_get('fname')
-
-# # PRE-TEST
-# if (module_installed(repo = repo)) {
-#   stop('Uninstall hello world before testing.')
-# }
-# 
-# # FUNCTIONS
-# pretest_install <- function() {
-#   if (!module_installed(repo = repo)) {
-#     suppressWarnings(module_install(repo = repo))
-#   }
-# }
 
 # RUNNING
 context('Testing \'install\'')
@@ -65,6 +54,7 @@ test_that("install() works", {
 })
 test_that('module_[install/uninstall/import/help]() work', {
   withr::with_temp_libpaths(code = {
+    #try(utils::remove.packages(pkgnm), silent = TRUE)
     with_mock(
       `outsider:::build_status` = function(...) TRUE,
       `outsider:::is_docker_available` = function(...) TRUE,
@@ -72,9 +62,11 @@ test_that('module_[install/uninstall/import/help]() work', {
       `outsider:::docker_pull` = function(...) TRUE,
       expect_true(module_install(repo = repo))
     )
-    expect_null(module_help(repo = repo))
-    expect_true(inherits(module_help(repo = repo, fname = fname),
-                         'help_files_with_topic'))
+    with_mock(
+      `outsider:::.help` = function(...) TRUE,
+      expect_true(module_help(repo = repo)),
+      expect_true(module_help(repo = repo, fname = fname))
+    )
     expect_true(inherits(module_import(fname = fname, repo = repo), 'function'))
     with_mock(
       `outsider:::build_status` = function(...) FALSE,
@@ -83,6 +75,7 @@ test_that('module_[install/uninstall/import/help]() work', {
     )
     expect_true(module_uninstall(repo = repo))
     with_mock(
+      `outsider:::build_status` = function(...) TRUE,
       `outsider:::is_docker_available` = function(...) TRUE,
       `outsider:::docker_build` = function(...) TRUE,
       `outsider:::docker_pull` = function(...) TRUE,
