@@ -60,6 +60,7 @@ test_that("install() works", {
 })
 test_that('module_install() works', {
   with_mock(
+    `outsider:::is_running_on_travis` = function() FALSE,
     `outsider:::build_status` = function(...) TRUE,
     `outsider:::is_docker_available` = function(...) TRUE,
     `outsider:::is_installed` = function(...) FALSE,
@@ -68,6 +69,7 @@ test_that('module_install() works', {
     expect_true(module_install(repo = repo))
   )
   with_mock(
+    `outsider:::is_running_on_travis` = function() FALSE,
     `outsider:::build_status` = function(...) TRUE,
     `outsider:::is_docker_available` = function(...) TRUE,
     `outsider:::is_installed` = function(...) FALSE,
@@ -76,6 +78,7 @@ test_that('module_install() works', {
     expect_true(module_install(repo = repo, manual = TRUE))
   )
   with_mock(
+    `outsider:::is_running_on_travis` = function() FALSE,
     `outsider:::build_status` = function(...) TRUE,
     `outsider:::is_docker_available` = function(...) TRUE,
     `outsider:::is_installed` = function(...) TRUE,
@@ -84,6 +87,7 @@ test_that('module_install() works', {
     expect_error(module_install(repo = repo))
   )
   with_mock(
+    `outsider:::is_running_on_travis` = function() FALSE,
     `outsider:::build_status` = function(...) FALSE,
     `outsider:::is_docker_available` = function(...) TRUE,
     `outsider:::is_installed` = function(...) FALSE,
@@ -92,6 +96,7 @@ test_that('module_install() works', {
     expect_warning(module_install(repo = repo))
   )
   with_mock(
+    `outsider:::is_running_on_travis` = function() FALSE,
     `outsider:::build_status` = function(...) FALSE,
     `outsider:::is_docker_available` = function(...) TRUE,
     `outsider:::is_installed` = function(...) FALSE,
