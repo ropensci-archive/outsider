@@ -99,6 +99,7 @@ vars_get <- function(what) {
   vars <- list('repo' = 'dombennett/om..hello.world',
                'pkgnm' = 'om..hello.world..dombennett',
                'program' = 'hello.world',
-               'img' = 'dombennett/om_hello.world')
+               'img' = 'dombennett/om_hello.world',
+               'cntnr' = 'om_hello.world_0')
   vars[[what]]
 }

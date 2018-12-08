@@ -2,6 +2,7 @@
 
 S3method(.run,outsider)
 S3method(print,container)
+S3method(print,ids)
 S3method(print,outsider)
 export(.arglist_get)
 export(.arglist_parse)

@@ -16,7 +16,9 @@ Other private: \code{\link{examples_test}},
   \code{\link{import_test}}, \code{\link{install_test}},
   \code{\link{install}}, \code{\link{is_filepath}},
   \code{\link{is_installed}}, \code{\link{log_get}},
+  \code{\link{pkgdetails_get}},
   \code{\link{string_replace}},
-  \code{\link{templates_get}}, \code{\link{to_basename}}
+  \code{\link{templates_get}}, \code{\link{test}},
+  \code{\link{to_basename}}
 }
 \concept{private}

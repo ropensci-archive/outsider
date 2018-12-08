@@ -48,7 +48,9 @@ test_that('docker_cmd() works', {
   expect_true(outsider:::docker_cmd(args = '--help'))
 })
 test_that('docker_pull() works', {
-  expect_true(outsider:::docker_pull(img = outsider:::vars_get('img')))
+  img <- outsider:::vars_get('img')
+  expect_true(outsider:::docker_pull(img = img))
+  on.exit(outsider:::docker_img_rm(img = img))
 })
 test_that('docker_build() and docker_img_rm() works', {
   expect_false(outsider:::docker_build(img = img, url_or_path = 'url'))

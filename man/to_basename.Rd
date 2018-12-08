@@ -22,7 +22,8 @@ Other private: \code{\link{default_log_set}},
   \code{\link{fnames_get}}, \code{\link{import_test}},
   \code{\link{install_test}}, \code{\link{install}},
   \code{\link{is_filepath}}, \code{\link{is_installed}},
-  \code{\link{log_get}}, \code{\link{string_replace}},
-  \code{\link{templates_get}}
+  \code{\link{log_get}}, \code{\link{pkgdetails_get}},
+  \code{\link{string_replace}},
+  \code{\link{templates_get}}, \code{\link{test}}
 }
 \concept{private}

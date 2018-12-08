@@ -2,93 +2,72 @@
 library(outsider)
 library(testthat)
 
-# RUNNING
+# Vars ----
+repo <- outsider:::vars_get('repo')
+pkgnm <- outsider:::vars_get('pkgnm')
+img <- outsider:::vars_get('img')
+cntnr <- outsider:::vars_get('cntnr')
+tag <- 'latest'
+
+# RUNNING ----
 context('Testing \'container\'')
-test_that('.container_init() works', {
-  
-})
-
-
-
-test_that('.copy_to_docker() works', {
+test_that('container_init() works', {
   with_mock(
-    `outsider:::.docker_cmd` = function(...) TRUE,
-    expect_true(.copy_to_docker(cntnr_id = '', host_flpths = rep('file', 10)))
+    `outsider:::ids_get` = function(...) c('img' = img, 'cntnr' = cntnr,
+                                           'tag' = tag),
+    expect_true(inherits(outsider:::container_init(pkgnm = pkgnm),
+                         'container'))
+  )
+  with_mock(
+    `outsider:::ids_get` = function(...) c('img' = img, 'cntnr' = cntnr,
+                                           'tag' = tag),
+    expect_true(inherits(outsider:::container_init(repo = repo),
+                         'container'))
+  )
+  expect_error(outsider:::container_init())
+})
+test_that('run.container() works', {
+  container <- structure(list(), class = 'container')
+  with_mock(
+    `outsider:::exec.container` = function(x, ...) TRUE,
+    expect_true(outsider:::run.container(x = container, cmd = '', args = ''))
+  )
+  res <- with_mock(
+    `outsider:::exec.container` = function(x, ...) stop(),
+    outsider:::run.container(x = container, cmd = '', args = '')
+  )
+  expect_true(inherits(res, 'simpleError'))
+})
+test_that('print.container() works', {
+   with_mock(
+    `outsider:::ids_get` = function(...) c('img' = img, 'cntnr' = cntnr,
+                                           'tag' = tag),
+    `outsider:::status.container` = function(x, ...) 'This is a mock',
+    container <- outsider:::container_init(pkgnm = pkgnm),
+    print(container)
   )
 })
-test_that('.copy_from_docker() works', {
-  with_mock(
-    `outsider:::.docker_cmd` = function(...) TRUE,
-    expect_true(.copy_from_docker(cntnr_id = ''))
+test_that('container methods work', {
+  # set-up
+  outsider:::docker_pull(img = img)
+  container <- with_mock(
+    `outsider:::ids_get` = function(...) c('img' = img, 'cntnr' = cntnr,
+                                           'tag' = tag),
+    outsider:::container_init(pkgnm = pkgnm)
   )
-})
-
-# LIBS
-library(outsider)
-library(testthat)
-
-# VARS
-img_id <- 'test_img'
-cntnr_id <- 'test_cntnr'
-url <- paste0('https://raw.githubusercontent.com/DomBennett/',
-              'om..hello.world/master/dockerfiles/latest')
-
-# FUNCTIONS ----
-cleanup <- function() {
-  outsider:::docker_stop(cntnr_id = cntnr_id)
-  outsider:::docker_img_rm(img_id = img_id)
-}
-build <- function() {
-  expect_true(outsider:::docker_build(img_id = img_id, url = url))
-}
-build_and_start <- function() {
-  build()
-  expect_true(outsider:::docker_start(cntnr_id = cntnr_id, img_id = img_id))
-}
-
-# RUNNING
-context('Testing \'modules\'')
-test_that('docker_cmd() works', {
-  expect_true(outsider:::docker_cmd(args = '--help'))
-})
-test_that('.docker_build() works', {
-  expect_false(outsider:::docker_build(img_id = img_id, url = 'url'))
-  expect_true(outsider:::docker_build(img_id = img_id, url = url))
-  outsider:::docker_img_rm(img_id = img_id)
-})
-test_that('.docker_img_rm() works', {
-  build()
-  expect_true(outsider:::docker_img_rm(img_id = img_id))
-})
-test_that('.docker_start() works', {
-  on.exit(cleanup())
-  build()
-  expect_false(outsider:::docker_start(cntnr_id = cntnr_id, img_id = 'notanimage'))
-  expect_true(outsider:::docker_start(cntnr_id = cntnr_id, img_id = img_id))
-  expect_true(outsider:::docker_stop(cntnr_id = cntnr_id))
-})
-test_that('.docker_stop() works', {
-  on.exit(cleanup())
-  build_and_start()
-  expect_false(outsider:::docker_stop(cntnr_id = 'notacontainer'))
-})
-test_that('.docker_exec() works', {
-  on.exit(cleanup())
-  build_and_start()
-  expect_true(outsider:::docker_exec(cntnr_id = cntnr_id, 'echo', 'Hello!'))
-  expect_false(outsider:::docker_exec(cntnr_id = cntnr_id, 'notacommand'))
-})
-test_that('.docker_cp() works', {
-  on.exit(cleanup())
-  build_and_start()
-  expect_true(outsider:::docker_cp(origin = paste0(cntnr_id, ':', 'hello.txt'),
-                                   dest = 'hello.txt'))
-  on.exit(file.remove('hello.txt'), add = TRUE)
-  expect_true(file.exists('hello.txt'))
-})
-test_that('.docker_ps_count() works', {
-  on.exit(cleanup())
-  expect_true(outsider:::docker_ps_count() == 0)
-  build_and_start()
-  expect_true(outsider:::docker_ps_count() == 1)
+  # pull down
+  on.exit(outsider:::docker_img_rm(img = img))
+  # tests
+  expect_true(outsider:::status.container(container) == 'Not running')
+  expect_true(outsider:::start.container(container))
+  expect_true(outsider:::exec.container(container, 'touch', 'file_to_return'))
+  expect_true(outsider:::copy.container(container, rtrn = getwd()))
+  expect_true(file.exists('file_to_return'))
+  expect_true(file.remove('file_to_return'))
+  expect_true(file.create('file_to_send'))
+  expect_true(outsider:::copy.container(container, send = 'file_to_send'))
+  expect_true(file.remove('file_to_send'))
+  #expect_true(outsider:::exec(container, 'ls'))
+  expect_true(outsider:::status.container(container) == 'Running')
+  expect_true(outsider:::halt.container(container))
 })
