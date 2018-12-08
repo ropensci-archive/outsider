@@ -6,6 +6,9 @@
 \usage{
 is_installed(repo)
 }
+\arguments{
+\item{repo}{GitHub repo}
+}
 \value{
 logical
 }

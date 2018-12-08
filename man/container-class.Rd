@@ -33,6 +33,8 @@ container_init(pkgnm = NULL, repo = NULL)
 
 \item{x}{container}
 
+\item{...}{Arguments}
+
 \item{send}{Filepaths to send from host computer to container.}
 
 \item{rtrn}{Directory on host computer where returning files should be sent.}

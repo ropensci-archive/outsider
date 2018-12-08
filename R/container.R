@@ -10,6 +10,7 @@
 #' @param pkgnm Package name
 #' @param repo Repo
 #' @param x container
+#' @param ... Arguments
 #' @return A list of class \code{container} with the following items:
 #' \item{repo}{Repository of the outsider module}
 #' \item{pkgnm}{Package name of the outsider module}
@@ -152,7 +153,7 @@ run.container <- function(x, cmd, args) {
 }
 
 #' @export
-print.container <- function(x) {
+print.container <- function(x, ...) {
   cat_line(cli::rule())
   cat_line(crayon::bold('Docker container details:'))
   cat_line('Image ', char(x[['img']]))

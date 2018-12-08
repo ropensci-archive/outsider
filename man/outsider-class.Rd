@@ -24,6 +24,8 @@
 \item{files_to_send}{Files to be sent to container}
 
 \item{x}{outsider object}
+
+\item{...}{Additional print arguments}
 }
 \value{
 A list of class \code{outsider} with the following items:

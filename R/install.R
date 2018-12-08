@@ -4,6 +4,7 @@
 #' @name is_installed
 #' @title Is module installed?
 #' @description Return TRUE if module is installed.
+#' @param repo GitHub repo
 #' @return logical
 #' @family private
 is_installed <- function(repo) {
@@ -69,7 +70,7 @@ module_install <- function(repo, tag = 'latest', manual = FALSE) {
   tag_data <- tags(repos = repo)
   pull <- tag_data[['tag']] == tag
   if (sum(pull) != 1) {
-    tags <- vapply(X = tag_data[['name']], FUN = char,
+    tags <- vapply(X = tag_data[['tag']], FUN = char,
                    FUN.VALUE = character(1))
     stop('Invalid version provided for ', char(repo),
          "\nAvailable versions are: ", paste0(tags, collapse = ', '))
@@ -101,9 +102,12 @@ module_uninstall <- function(repo) {
   if (is_installed(repo = repo)) {
     # TODO: are we sure this would remove all tagged version of an image?
     try(docker_img_rm(img = repo_to_img(repo = repo)), silent = TRUE)
-    suppressMessages(utils::remove.packages(pkgs = pkgnm))
+    pkg_rm(pkgs = pkgnm)
   }
   invisible(!is_installed(repo = repo))
+}
+pkg_rm <- function(...) {
+  suppressMessages(utils::remove.packages(...))
 }
 
 #' @name module_installed
@@ -115,7 +119,7 @@ module_uninstall <- function(repo) {
 #' @export
 #' @family user
 module_installed <- function(show_images = FALSE) {
-  installed <- utils::installed.packages()
+  installed <- installed_pkgs()
   modules <- installed[grepl(pattern = '^om\\.\\.', x = installed)]
   if (length(modules) == 0) {
     return(tibble::as_tibble(x = list()))
@@ -134,6 +138,9 @@ module_installed <- function(show_images = FALSE) {
   }
   res
 }
+installed_pkgs <- function(...) {
+  utils::installed.packages(...)
+}
 
 #' @name module_import
 #' @title Import functions from a module
@@ -151,7 +158,10 @@ module_import <- function(fname, repo) {
   if (!pkgnm %in% utils::installed.packages()) {
     stop('Module ', char(repo), ' not found', call. = FALSE)
   }
-  utils::getFromNamespace(x = fname, ns = pkgnm)
+  nmspc_get(x = fname, ns = pkgnm)
+}
+nmspc_get <- function(...) {
+  utils::getFromNamespace(...)
 }
 
 #' @name module_help
@@ -169,12 +179,11 @@ module_help <- function(repo, fname = NULL) {
     stop('Module ', char(repo), ' not found', call. = FALSE)
   }
   if (is.null(fname)) {
-    .help(package = (pkgnm))
+    hlp_get(package = (pkgnm))
   } else {
-    .help(package = (pkgnm), topic = (fname))
+    hlp_get(package = (pkgnm), topic = (fname))
   }
 }
-
-.help <- function(...) {
+hlp_get <- function(...) {
   utils::help(...)
 }

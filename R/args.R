@@ -87,7 +87,7 @@ is_filepath <- function(x) {
 #' Alternatively, the working directory may be determined by the first argument
 #' (e.g. an input file), in which case setting \code{i=1} will return the first
 #' argument in the arglist.
-#' If an input file is returned, a user can use \link{\code{.dirpath_get}} to
+#' If an input file is returned, a user can use \code{\link{.dirpath_get}} to
 #' convert the file path to a directory path.
 #' If both \code{key} and \code{i} are provided, \code{key} takes precedence.
 #' If no \code{key} or \code{i} is provided and/or no working directory is
@@ -151,12 +151,13 @@ is_filepath <- function(x) {
 #' @details It is important the file paths are normalised, because they will
 #' not be available to the Docker container. The only files available will
 #' be those that have been transfered to the container as determined through
-#' the \link{\code{.outsider_init}}. These files will be located in the
+#' the \code{\link{.outsider_init}}. These files will be located in the
 #' same directory as where the function is called and require no absolute
 #' file path.
 #' @param arglist Arguments as character vector
 #' @param keyvals_to_drop Argument keys to drop, e.g. -wd.
 #' @param vals_to_drop Specific values to drop, e.g. --verbose.
+#' @param normalise_paths Reduce paths to basenames? Default, TRUE.
 #' @return Character vector
 #' @export
 #' @family developer

@@ -13,6 +13,8 @@
 \item{keyvals_to_drop}{Argument keys to drop, e.g. -wd.}
 
 \item{vals_to_drop}{Specific values to drop, e.g. --verbose.}
+
+\item{normalise_paths}{Reduce paths to basenames? Default, TRUE.}
 }
 \value{
 Character vector
@@ -27,7 +29,7 @@ all filepaths in the arglist will be converted to basenames.
 It is important the file paths are normalised, because they will
 not be available to the Docker container. The only files available will
 be those that have been transfered to the container as determined through
-the \link{\code{.outsider_init}}. These files will be located in the
+the \code{\link{.outsider_init}}. These files will be located in the
 same directory as where the function is called and require no absolute
 file path.
 }

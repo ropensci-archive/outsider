@@ -99,6 +99,7 @@ docker_img_rm <- function(img) {
 #' @description Speeds up outsider module installation by downloading compiled
 #' images.
 #' @param img Image name
+#' @param tag Tag version, default latest.
 #' @return Logical
 #' @family private-docker
 docker_pull <- function(img, tag = 'latest') {

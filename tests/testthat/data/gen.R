@@ -13,3 +13,7 @@ search_args <- paste0('?q=om..+in:name+outsider-module+in:description',
 github_res <- jsonlite::fromJSON(paste0(gh_search_repo_url, search_args))
 saveRDS(object = github_res, file = file.path('tests', 'testthat', 'data',
                                               'all_search.RData'))
+# tags
+tag_data <- outsider:::tags(repos = 'dombennett/om..hello.world')
+saveRDS(object = tag_data, file = file.path('tests', 'testthat', 'data',
+                                            'tag_data.RData'))

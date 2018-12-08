@@ -2,6 +2,16 @@
 library(outsider)
 library(testthat)
 
+# Vars ----
+description <- 'Package: mypkg
+Type: Package
+Title: My package
+Version: 0.0.0
+Authors@R: Me
+Maintainer: Me <me@mine.com>
+Description: This is my package
+'
+
 # Running ----
 test_that('test() works', {
   tags <- tibble::as_tibble(list(repo = c('test/repo', 'test/repo'),
@@ -41,8 +51,11 @@ test_that('test() works', {
   )
 })
 test_that('pkgdetails_get() works', {
-  flpth <- file.path(.libPaths(), 'utils')
-  res <- outsider:::pkgdetails_get(flpth = flpth)
+  drpth <- tempdir()
+  flpth <- file.path(drpth, 'DESCRIPTION')
+  write(x = description, file = flpth)
+  on.exit(file.remove(flpth))
+  res <- outsider:::pkgdetails_get(flpth = drpth)
   expect_true(inherits(res, 'character'))
   expect_error(outsider:::pkgdetails_get(flpth = 'notapath'))
 })

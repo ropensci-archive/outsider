@@ -28,6 +28,7 @@ NULL
 #' @param arglist Arguments for command, character vector
 #' @param wd Directory to which program generated files will be returned
 #' @param files_to_send Files to be sent to container
+#' @param ... Additional print arguments
 #' @return A list of class \code{outsider} with the following items:
 #' \item{repo}{Repository of the outsider module}
 #' \item{pkgnm}{Package name of the outsider module}
@@ -48,7 +49,7 @@ NULL
 }
 
 #' @export
-.run <- function(x, ...) {
+.run <- function(x) {
   UseMethod('.run', x)
 }
 
@@ -87,7 +88,7 @@ NULL
 }
 
 #' @export
-print.outsider <- function(x) {
+print.outsider <- function(x, ...) {
   cat_line(cli::rule())
   cat_line(crayon::bold('Outsider module:'))
   cat_line('Repo ', char(x[['repo']]))

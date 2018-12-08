@@ -11,6 +11,7 @@ travis_api_url <- 'https://api.travis-ci.org/repos/'
 #' @name repo_search
 #' @title Search for repository
 #' @description Return GitHub API item for specific repository.
+#' @param repo GitHub repo
 #' @return data.frame
 #' @family private-search
 repo_search <- function(repo) {

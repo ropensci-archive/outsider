@@ -8,6 +8,8 @@ docker_pull(img, tag = "latest")
 }
 \arguments{
 \item{img}{Image name}
+
+\item{tag}{Tag version, default latest.}
 }
 \value{
 Logical

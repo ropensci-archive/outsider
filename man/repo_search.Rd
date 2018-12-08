@@ -6,6 +6,9 @@
 \usage{
 repo_search(repo)
 }
+\arguments{
+\item{repo}{GitHub repo}
+}
 \value{
 data.frame
 }

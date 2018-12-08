@@ -6,6 +6,13 @@
 \usage{
 string_replace(string, patterns, values)
 }
+\arguments{
+\item{string}{Text}
+
+\item{patterns}{Patterns to replace with values}
+
+\item{values}{Values to be put in place}
+}
 \value{
 character
 }

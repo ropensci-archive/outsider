@@ -25,7 +25,7 @@ key exists in the arglist and will return its corresponding value.
 Alternatively, the working directory may be determined by the first argument
 (e.g. an input file), in which case setting \code{i=1} will return the first
 argument in the arglist.
-If an input file is returned, a user can use \link{\code{.dirpath_get}} to
+If an input file is returned, a user can use \code{\link{.dirpath_get}} to
 convert the file path to a directory path.
 If both \code{key} and \code{i} are provided, \code{key} takes precedence.
 If no \code{key} or \code{i} is provided and/or no working directory is

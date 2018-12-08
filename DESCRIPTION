@@ -23,6 +23,7 @@ Imports:
     yaml (>= 2.0),
     callr (>= 3.0.0),
     withr (>= 2.0),
+    stringr,
     tibble,
     cli,
     praise

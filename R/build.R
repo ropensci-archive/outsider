@@ -57,7 +57,7 @@ pkgdetails_get <- function(flpth) {
 }
 
 #' @export
-print.ids <- function(x) {
+print.ids <- function(x, ...) {
   for (i in seq_along(x)) {
     msg <- names(x)[[i]]
     if (length(x[[i]]) == 1) {
@@ -96,6 +96,9 @@ templates_get <- function() {
 #' @title Replace patterns in a string
 #' @description For a given character string, replace patterns with values.
 #' @return character
+#' @param string Text
+#' @param patterns Patterns to replace with values
+#' @param values Values to be put in place
 #' @family private
 string_replace <- function(string, patterns, values) {
   for (i in seq_along(values)) {
