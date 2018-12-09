@@ -15,8 +15,14 @@ ids_get <- function(pkgnm) {
   prgrm <- pkgnm_to_prgm(pkgnm)
   nps <- docker_ps_count()
   imgs <- docker_img_ls()
-  tag <- imgs[imgs[['repository']] == img, 'tag'][[1]]
-  tag <- tag[[1]]
+  print(imgs)
+  if ('tag' %in% colnames(imgs)) {
+    tag <- imgs[imgs[['repository']] == img, 'tag'][[1]]
+    tag <- tag[[1]]
+  } else {
+    # Sometimes there is no tag column (?)
+    tag <- 'latest'
+  }
   cntnr <- paste0(prgrm, '_', nps)
   c('img' = img, 'cntnr' = cntnr, 'tag' = tag)
 }
