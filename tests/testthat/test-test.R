@@ -39,7 +39,7 @@ test_that('import_test() works', {
 test_that('examples_test() works', {
   with_mock(
     `outsider:::fnames_get` = function(...) 'foo',
-    `outsider:::ex_source` = function(...) stop(),
+    `outsider:::ex_source` = function(...) stop('Foo error'),
     expect_false(outsider:::examples_test(repo = ''))
   )
   with_mock(

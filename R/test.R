@@ -43,7 +43,7 @@ examples_test <- function(repo) {
       TRUE
       }, error = function(e) {
         message('Failed to run example for `', fnames[[i]], '`')
-        message(e)
+        message(as.character(e))
         FALSE
         })
   }
