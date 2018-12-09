@@ -12,7 +12,7 @@ repo <- 'dombennett/om..raxml'
 repo <- 'dombennett/om..pyrate'
 
 library(outsider)
-module_test(repo)
+.module_test(repo)
 
 library(outsider)
 module_install(repo)
