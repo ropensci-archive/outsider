@@ -1,9 +1,6 @@
 # TODO:
-# -- update current modules
-# -- tests everything again
 # -- outline development steps
 # -- vignette: phylogenetic pipeline
-# -- repo: starter package
 # -- backdoor
 
 devtools::load_all('.')

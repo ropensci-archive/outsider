@@ -24,11 +24,6 @@ fnames_get <- function(repo) {
   fname_env$.get(pkgnm = pkgnm)
 }
 
-# Tests ----
-ex_source <- function(file) {
-  source(file = file, local = TRUE)
-}
-
 #' @name examples_test
 #' @title Run each example of an outsider module
 #' @description Return TRUE if all of the outsider module functions successfully
@@ -52,6 +47,9 @@ examples_test <- function(repo) {
         })
   }
   res
+}
+ex_source <- function(file) {
+  source(file = file, local = TRUE)
 }
 
 #' @name import_test

@@ -173,7 +173,7 @@ module_details <- function(repo = NULL) {
                                      format = "%Y-%m-%dT%H:%M:%OSZ",
                                      timezone = 'UTC')
   info[['watcher_count']] <- github_res[index, 'watchers_count']
-  info[['url']] <- paste0('https://github.com/', rownames(info))
+  info[['url']] <- paste0('https://github.com/', info[['repo']])
   # # order output
   info <- info[order(info[['program']], decreasing = TRUE), ]
   info <- info[order(info[['updated_at']], decreasing = TRUE), ]

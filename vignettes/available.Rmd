@@ -1,6 +1,6 @@
 ---
 title: "Available modules"
-output: html_document
+output: rmarkdown::html_vignette
 ---
 
 ```{r setup, include=FALSE}
@@ -9,6 +9,14 @@ knitr::opts_chunk$set(echo = TRUE, comment = '')
 
 ```{r available, echo=FALSE, results='asis'}
 module_info <- outsider::module_details()
+# convert to links
+module_info[['program']] <- paste0('[', module_info[['program']], '](',
+                                   module_info[['url']], ')')
+module_info[['url']] <- NULL
+module_info[['repo']] <- NULL
+module_info[['watcher_count']] <- NULL
+module_info[['updated_at']] <- format(module_info[['updated_at']], '%d %b %y')
+colnames(module_info) <- c('Program', 'Details', 'Versions', 'Updated')
 time_date <- as.character(format(Sys.time(), '%H:%M, %d %B %Y (%Z)'))
 cat('Last updated: ', crayon::bold(time_date), '\n')
 knitr::kable(as.data.frame(module_info), format = "html")

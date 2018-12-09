@@ -81,7 +81,7 @@ NULL
     stop(successes[are_errors][[1]])
   }
   if (!success) {
-    message('An command and arguments failed to run for ...')
+    message('Command and arguments failed to run for ...')
     message(print(x))
   }
   invisible(success)

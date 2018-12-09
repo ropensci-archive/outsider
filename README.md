@@ -30,8 +30,11 @@ library(outsider)
 # outsider modules are hosted on GitHub
 # this repo is a demonstration outsider module
 # it contains a function for printing 'Hello World!' in Ubuntu 18.04
-repo <- 'dombennett/om..hello.world..1.0'
+repo <- 'dombennett/om..hello.world'
 module_install(repo = repo)
+#> Warning in module_install(repo = repo): It looks like 'dombennett/om..hello.world' is not successfully passing its tests on GitHub.
+#> The module might not build or function properly.
+#> [1] TRUE
 # look up the help files for the module
 module_help(repo = repo)
 # import the 'hello_world' function
@@ -49,7 +52,21 @@ hello_world()
 Available external programs
 ---------------------------
 
-Available from: 13:46 19 October 2018 (CEST) ● bamm ● blast ● hello.world ● mafft ● pyrate ● raxml
+Modules available since 14:51 09 December 2018 (CET)
+
+● bamm
+
+● blast
+
+● hello.world
+
+● mafft
+
+● pyrate
+
+● raxml
+
+For more details, see [available modules table](https://antonellilab.github.io/outsider/articles/available.html)
 
 How does it work?
 -----------------
