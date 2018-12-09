@@ -8,3 +8,5 @@ logo.png
 .travis.yml
 vignettes/
 docs/
+paper/
+pkgdown/

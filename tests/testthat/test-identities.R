@@ -11,7 +11,7 @@ program <- outsider:::vars_get('program')
 # RUNNING
 context('Testing \'identities\'')
 test_that('ids_get() works', {
-  imgs <- tibble::as_tibble(list('repository' = repo, 'tag' = 'latest'))
+  imgs <- tibble::as_tibble(list('repository' = img, 'tag' = 'latest'))
   res <- with_mock(
     `outsider:::pkgnm_to_img` = function(...) img,
     `outsider:::docker_ps_count` = function(...) 0,
