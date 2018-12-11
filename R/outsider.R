@@ -28,6 +28,7 @@ NULL
 #' @param arglist Arguments for command, character vector
 #' @param wd Directory to which program generated files will be returned
 #' @param files_to_send Files to be sent to container
+#' @param ignore_errors Ignore raised errors? Default FALSE.
 #' @param ... Additional print arguments
 #' @return A list of class \code{outsider} with the following items:
 #' \item{repo}{Repository of the outsider module}
@@ -37,14 +38,16 @@ NULL
 #' \item{wd}{Directory to which program generated files will be returned}
 #' \item{files_to_send}{Files to be sent to container}
 #' \item{container}{Docker container object}
+#' \item{ignore_errors}{Prevent errors being raised}
 #' @export
 #' @family developer
 .outsider_init <- function(repo, cmd = NA, arglist = NULL, wd = NULL,
-                           files_to_send = NULL) {
+                           files_to_send = NULL, ignore_errors = FALSE) {
   pkgnm <- repo_to_pkgnm(repo = repo)
   container <- container_init(pkgnm = pkgnm)
   parts <- list(repo = repo, pkgnm = pkgnm, cmd = cmd, arglist = arglist,
-                wd = wd, files_to_send = files_to_send, container = container)
+                wd = wd, files_to_send = files_to_send, container = container,
+                ignore_errors = FALSE)
   structure(parts, class = 'outsider')
 }
 
@@ -70,6 +73,9 @@ NULL
   successes[['run']] <- run(x = cntnr, cmd = x[['cmd']], args = x[['arglist']])
   if (length(x[['wd']]) > 0) {
     successes[['return']] <- copy(x = cntnr, rtrn = x[['wd']])
+  }
+  if (x[['ignore_errors']]) {
+    return(TRUE)
   }
   are_errors <- vapply(X = successes, FUN = inherits, FUN.VALUE = logical(1),
                        'error')

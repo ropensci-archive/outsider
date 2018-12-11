@@ -8,7 +8,7 @@
 \title{Construct outsider object}
 \usage{
 .outsider_init(repo, cmd = NA, arglist = NULL, wd = NULL,
-  files_to_send = NULL)
+  files_to_send = NULL, ignore_errors = FALSE)
 
 \method{.run}{outsider}(x)
 }
@@ -23,6 +23,8 @@
 
 \item{files_to_send}{Files to be sent to container}
 
+\item{ignore_errors}{Ignore raised errors? Default FALSE.}
+
 \item{x}{outsider object}
 
 \item{...}{Additional print arguments}
@@ -36,6 +38,7 @@ A list of class \code{outsider} with the following items:
 \item{wd}{Directory to which program generated files will be returned}
 \item{files_to_send}{Files to be sent to container}
 \item{container}{Docker container object}
+\item{ignore_errors}{Prevent errors being raised}
 }
 \description{
 Returns an outsider object. The outsider object describes a
