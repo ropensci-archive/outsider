@@ -8,6 +8,13 @@
 
 <title>Construct outsider object — outsider-class • outsider</title>
 
+<!-- favicons -->
+<link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
+<link rel="apple-touch-icon" type="image/png" sizes="180x180" href="../apple-touch-icon.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="120x120" href="../apple-touch-icon-120x120.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="76x76" href="../apple-touch-icon-76x76.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png" />
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
@@ -135,7 +142,7 @@ call, the command as well as the files to send to the docker container.</p>
     </div>
 
     <pre class="usage"><span class='fu'>.outsider_init</span>(<span class='no'>repo</span>, <span class='kw'>cmd</span> <span class='kw'>=</span> <span class='fl'>NA</span>, <span class='kw'>arglist</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>wd</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>files_to_send</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)
+  <span class='kw'>files_to_send</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>ignore_errors</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
 
 <span class='co'># S3 method for outsider</span>
 <span class='fu'>.run</span>(<span class='no'>x</span>)</pre>
@@ -164,6 +171,10 @@ call, the command as well as the files to send to the docker container.</p>
       <td><p>Files to be sent to container</p></td>
     </tr>
     <tr>
+      <th>ignore_errors</th>
+      <td><p>Ignore raised errors? Default FALSE.</p></td>
+    </tr>
+    <tr>
       <th>x</th>
       <td><p>outsider object</p></td>
     </tr>
@@ -183,6 +194,7 @@ call, the command as well as the files to send to the docker container.</p>
 <dt>wd</dt><dd><p>Directory to which program generated files will be returned</p></dd>
 <dt>files_to_send</dt><dd><p>Files to be sent to container</p></dd>
 <dt>container</dt><dd><p>Docker container object</p></dd>
+<dt>ignore_errors</dt><dd><p>Prevent errors being raised</p></dd>
 
     
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>

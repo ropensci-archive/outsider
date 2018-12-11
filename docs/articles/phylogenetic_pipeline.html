@@ -6,6 +6,12 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Phylogenetic pipeline • outsider</title>
+<!-- favicons --><link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
+<link rel="apple-touch-icon" type="image/png" sizes="180x180" href="../apple-touch-icon.png">
+<link rel="apple-touch-icon" type="image/png" sizes="120x120" href="../apple-touch-icon-120x120.png">
+<link rel="apple-touch-icon" type="image/png" sizes="76x76" href="../apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png">
 <!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script><!-- Bootstrap --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script><!-- sticky kit --><script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
@@ -82,7 +88,7 @@
     <div class="page-header toc-ignore">
       <h1>Phylogenetic pipeline</h1>
             
-            <h4 class="date">2018-12-09</h4>
+            <h4 class="date">2018-12-11</h4>
       
       
       <div class="hidden name"><code>phylogenetic_pipeline.Rmd</code></div>
@@ -91,10 +97,248 @@
 
     
     
-
+<div id="introduction" class="section level1">
+<h1 class="hasAnchor">
+<a href="#introduction" class="anchor"></a>Introduction</h1>
+<p>We will outline an example pipeline using external command-line tools, called through <code>outsider</code>.</p>
+<p>In this example, we will generate a phylogenetic tree in three steps: obtain orthologous sequences, align the sequences, estimate tree.</p>
+<p>In our example, we will keep it simple and fast and generate a tree of CytB sequences in the primate genus of Night Monkeys, <strong>Aotus</strong>.</p>
+<div id="phylotar" class="section level2">
+<h2 class="hasAnchor">
+<a href="#phylotar" class="anchor"></a>phylotaR</h2>
+<p>To get us started with need DNA sequences that represent the same gene region, i.e. sequences that are orthologous. We can obtain our sequences quickly using the example data from the R package <a href="https://github.com/ropensci/phylotaR"><code>phylotaR</code></a>.</p>
+<p><code>phylotaR</code> provides a pipeline for identifying orthologous sequences from a reputable online biological sequence database. The package comes with a few pre-calculated example sequences. We can extract sequence clusters that represent the gene region <a href="https://en.wikipedia.org/wiki/Cytochrome_b">cytb</a> with the following script.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(phylotaR)
+<span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/data">data</a></span>(<span class="st">"aotus"</span>)
+smmry &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/summary">summary</a></span>(aotus)
+cytb &lt;-<span class="st"> </span>smmry<span class="op">$</span>ID[<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/which">which</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/grep">grepl</a></span>(<span class="st">'cytb'</span>, smmry<span class="op">$</span>Feature))[<span class="dv">1</span>]]
+cytb &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/phylotaR/topics/drop_clstrs">drop_clstrs</a></span>(aotus, cytb)
+cytb &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/phylotaR/topics/drop_by_rank">drop_by_rank</a></span>(cytb, <span class="dt">n =</span> <span class="dv">1</span>)
+txids &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/phylotaR/topics/get_txids">get_txids</a></span>(cytb, <span class="dt">cid =</span> <span class="st">'9'</span>)
+sp_nms &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/phylotaR/topics/get_tx_slot">get_tx_slot</a></span>(cytb, txids, <span class="dt">slt_nm =</span> <span class="st">'scnm'</span>)
+sp_nms &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/grep">sub</a></span>(<span class="st">' '</span>, <span class="st">'_'</span>, sp_nms)
+<span class="kw"><a href="https://www.rdocumentation.org/packages/phylotaR/topics/write_sqs">write_sqs</a></span>(cytb, <span class="st">'aotus_cytb.fasta'</span>, <span class="dt">sq_nm =</span> sp_nms, <span class="dt">sid =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/names">names</a></span>(sp_nms))</code></pre></div>
+</div>
+<div id="alignment" class="section level2">
+<h2 class="hasAnchor">
+<a href="#alignment" class="anchor"></a>Alignment</h2>
+<p>Now we have written our sequences to a text-based <code>.fasta</code> file, we need to aign them! To do this, we can use <a href="https://mafft.cbrc.jp/alignment/software/"><code>mafft</code></a>. We first need to install the module and then import the key function, <code>mafft</code>. After doing this, we can call the <code>mafft</code> program using the same arguments that we would if it were calling the program via command-line.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(outsider)
+repo &lt;-<span class="st"> 'dombennett/om..mafft'</span>
+<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/warning">suppressWarnings</a></span>(<span class="kw"><a href="../reference/module_install.html">module_install</a></span>(<span class="dt">repo =</span> repo))</code></pre></div>
+<pre><code>## [1] TRUE</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mafft &lt;-<span class="st"> </span><span class="kw"><a href="../reference/module_import.html">module_import</a></span>(<span class="dt">fname =</span> <span class="st">'mafft'</span>, <span class="dt">repo =</span> repo)
+<span class="kw">mafft</span>(<span class="st">'--auto'</span>, <span class="st">'aotus_cytb.fasta'</span>, <span class="st">'&gt;'</span>, <span class="st">'alignment.fasta'</span>)</code></pre></div>
+<pre><code>## outputhat23=16
+## treein = 0
+## compacttree = 0
+## stacksize: 8192 kb
+## generating a scoring matrix for nucleotide (dist=200) ... done
+## All-to-all alignment.
+##     0 / 8
+    1 / 8
+    2 / 8
+    3 / 8
+    4 / 8
+    5 / 8
+    6 / 8
+tbfast-pair (nuc) Version 7.407
+## alg=L, model=DNA200 (2), 2.00 (6.00), -0.10 (-0.30), noshift, amax=0.0
+## 0 thread(s)
+## 
+## outputhat23=16
+## Loading 'hat3.seed' ... 
+## done.
+## Writing hat3 for iterative refinement
+## generating a scoring matrix for nucleotide (dist=200) ... done
+## Gap Penalty = -1.53, +0.00, +0.00
+## tbutree = 1, compacttree = 0
+## Constructing a UPGMA tree ... 
+## 
+    0 / 8
+## done.
+## 
+## Progressive alignment ... 
+## 
+STEP     1 /7 
+STEP     2 /7 
+STEP     3 /7 
+STEP     4 /7 
+STEP     5 /7 
+STEP     6 /7 
+STEP     7 /7 
+## done.
+## tbfast (nuc) Version 7.407
+## alg=A, model=DNA200 (2), 1.53 (4.59), -0.00 (-0.00), noshift, amax=0.0
+## 1 thread(s)
+## 
+## minimumweight = 0.000010
+## autosubalignment = 0.000000
+## nthread = 0
+## randomseed = 0
+## blosum 62 / kimura 200
+## poffset = 0
+## niter = 16
+## sueff_global = 0.100000
+## nadd = 16
+## Loading 'hat3' ... done.
+## generating a scoring matrix for nucleotide (dist=200) ... done
+## 
+## 
+    0 / 8
+## Segment   1/  1    1-1141
+## STEP 001-001-0  identical.   
+STEP 001-001-1  identical.   
+STEP 001-002-0  identical.   
+STEP 001-002-1  identical.   
+STEP 001-003-0  identical.   
+STEP 001-003-1  identical.   
+STEP 001-004-0  identical.   
+STEP 001-004-1  identical.   
+STEP 001-005-0  identical.   
+STEP 001-005-1  identical.   
+STEP 001-006-0  identical.   
+STEP 001-006-1  identical.   
+STEP 001-007-1  identical.   
+STEP 002-007-1  identical.   
+STEP 002-006-0  identical.   
+STEP 002-006-1  identical.   
+## Converged.
+## 
+## done
+## dvtditr (nuc) Version 7.407
+## alg=A, model=DNA200 (2), 1.53 (4.59), -0.00 (-0.00), noshift, amax=0.0
+## 0 thread(s)
+## 
+## 
+## Strategy:
+##  L-INS-i (Probably most accurate, very slow)
+##  Iterative refinement method (&lt;16) with LOCAL pairwise alignment information
+## 
+## If unsure which option to use, try 'mafft --auto input &gt; output'.
+## For more information, see 'mafft --help', 'mafft --man' and the mafft page.
+## 
+## The default gap scoring scheme has been changed in version 7.110 (2013 Oct).
+## It tends to insert more gaps into gap-rich regions than previous versions.
+## To disable this change, add the --leavegappyregion option.</code></pre>
+</div>
+<div id="phylogeny" class="section level2">
+<h2 class="hasAnchor">
+<a href="#phylogeny" class="anchor"></a>Phylogeny</h2>
+<p>We can repeat the same process as we did for <code>mafft</code> but instead for <a href="https://github.com/stamatak/standard-RAxML"><code>RAxML</code></a> – a command-line program for estimating phylogenetic trees using maximum likelihood.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(outsider)
+repo &lt;-<span class="st"> 'dombennett/om..raxml'</span>
+<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/warning">suppressWarnings</a></span>(<span class="kw"><a href="../reference/module_install.html">module_install</a></span>(<span class="dt">repo =</span> repo))</code></pre></div>
+<pre><code>## [1] TRUE</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">raxml &lt;-<span class="st"> </span><span class="kw"><a href="../reference/module_import.html">module_import</a></span>(<span class="dt">fname =</span> <span class="st">'raxml'</span>, <span class="dt">repo =</span> repo)
+<span class="kw">raxml</span>(<span class="st">'-m'</span>, <span class="st">'GTRGAMMA'</span>, <span class="st">'-s'</span>, <span class="st">'alignment.fasta'</span>, <span class="st">'-p'</span>, <span class="st">'1234'</span>, <span class="st">'-n'</span>,
+      <span class="st">'aotus_cytb'</span>, <span class="st">'-T'</span>, <span class="st">'2'</span>)</code></pre></div>
+<pre><code>## 
+## RAxML can't, parse the alignment file as phylip file 
+## it will now try to parse it as FASTA file
+## 
+## 
+## 
+## Using BFGS method to optimize GTR rate parameters, to disable this specify "--no-bfgs" 
+## 
+## 
+## This is the RAxML Master Pthread
+## 
+## This is RAxML Worker Pthread Number: 1
+## 
+## 
+## This is RAxML version 8.2.12 released by Alexandros Stamatakis on May 2018.
+## 
+## With greatly appreciated code contributions by:
+## Andre Aberer      (HITS)
+## Simon Berger      (HITS)
+## Alexey Kozlov     (HITS)
+## Kassian Kobert    (HITS)
+## David Dao         (KIT and HITS)
+## Sarah Lutteropp   (KIT and HITS)
+## Nick Pattengale   (Sandia)
+## Wayne Pfeiffer    (SDSC)
+## Akifumi S. Tanabe (NRIFS)
+## Charlie Taylor    (UF)
+## 
+## 
+## Alignment has 74 distinct alignment patterns
+## 
+## Proportion of gaps and completely undetermined characters in this alignment: 0.00%
+## 
+## RAxML rapid hill-climbing mode
+## 
+## Using 1 distinct models/data partitions with joint branch length optimization
+## 
+## 
+## Executing 1 inferences on the original alignment using 1 distinct randomized MP trees
+## 
+## All free model parameters will be estimated by RAxML
+## GAMMA model of rate heterogeneity, ML estimate of alpha-parameter
+## 
+## GAMMA Model parameters will be estimated up to an accuracy of 0.1000000000 Log Likelihood units
+## 
+## Partition: 0
+## Alignment Patterns: 74
+## Name: No Name Provided
+## DataType: DNA
+## Substitution Matrix: GTR
+## 
+## 
+## 
+## 
+## RAxML was called as follows:
+## 
+## raxmlHPC-PTHREADS-SSE3 -m GTRGAMMA -s alignment.fasta -p 1234 -n aotus_cytb -T 2 
+## 
+## 
+## Partition: 0 with name: No Name Provided
+## Base frequencies: 0.289 0.285 0.120 0.306 
+## 
+## Inference[0]: Time 0.120260 GAMMA-based likelihood -2591.962827, best rearrangement setting 5
+## 
+## 
+## Conducting final model optimizations on all 1 trees under GAMMA-based models ....
+## 
+## Inference[0] final GAMMA-based Likelihood: -2591.962819 tree written to file /working_dir/RAxML_result.aotus_cytb
+## 
+## 
+## Starting final GAMMA-based thorough Optimization on tree 0 likelihood -2591.962819 .... 
+## 
+## Final GAMMA-based Score of best tree -2591.962819
+## 
+## Program execution info written to /working_dir/RAxML_info.aotus_cytb
+## Best-scoring ML tree written to: /working_dir/RAxML_bestTree.aotus_cytb
+## 
+## Overall execution time: 0.182794 secs or 0.000051 hours or 0.000002 days</code></pre>
+</div>
+<div id="visualisation" class="section level2">
+<h2 class="hasAnchor">
+<a href="#visualisation" class="anchor"></a>Visualisation</h2>
+<p>Now, let’s check out our tree!</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(ape)
+tree &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/ape/topics/read.tree">read.tree</a></span>(<span class="st">'RAxML_bestTree.aotus_cytb'</span>)
+<span class="kw"><a href="https://www.rdocumentation.org/packages/graphics/topics/plot">plot</a></span>(tree, <span class="dt">type =</span> <span class="st">'unrooted'</span>)</code></pre></div>
+<p><img src="phylogenetic_pipeline_files/figure-html/visualise-1.png" width="700"></p>
+</div>
+</div>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
+        <div id="tocnav">
+      <h2 class="hasAnchor">
+<a href="#tocnav" class="anchor"></a>Contents</h2>
+      <ul class="nav nav-pills nav-stacked">
+<li>
+<a href="#introduction">Introduction</a><ul class="nav nav-pills nav-stacked">
+<li><a href="#phylotar">phylotaR</a></li>
+      <li><a href="#alignment">Alignment</a></li>
+      <li><a href="#phylogeny">Phylogeny</a></li>
+      <li><a href="#visualisation">Visualisation</a></li>
+      </ul>
+</li>
+      </ul>
+</div>
       </div>
 
 </div>
