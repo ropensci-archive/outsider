@@ -21,7 +21,7 @@ knitr::opts_chunk$set(
 *[The Outsider, Wilson, 1956](https://en.wikipedia.org/wiki/The_Outsider_(Colin_Wilson)).*
 
 <br>
-Integrating external programs into a deployable, R workflow can be challenging. Although there are many useful functions and packages (e.g. `system()` or `reticulate`) for calling code and software from alternative languages, these approaches require users to independently install dependant software and may not work across platforms.`outsider` aims to make this easier by allowing users to install, run and control programs *outside of R* across all operating systems.
+Integrating external programs into a deployable, R workflow can be challenging. Although there are many useful functions and packages (e.g. `base::system()`) for calling code and software from alternative languages, these approaches require users to independently install dependant software and may not work across platforms. `outsider` aims to make this easier by allowing users to install, run and control programs *outside of R* across all operating systems.
 
 ##Installation
 
@@ -76,12 +76,7 @@ For more details, see [available modules table](https://antonellilab.github.io/o
 
 ##How does it work?
 
-> Dans l'obscurité de ma prison roulante, j'ai retrouvé un à un, comme du fond de ma fatigue, tous les bruits familiers d'une ville que j'aimais et d'une certaine heure où il m'arrivait de me sentir content. Le cri des vendeurs de journaux dans l'air déjà détendu, les derniers oiseaux dans le square, l'appel des marchands de sandwiches, la plainte des tramways dans les hauts tournants de la ville et cette rumeur du ciel avant que la nuit bascule sur le port, tout cela recomposait pour moi un itinéraire d'aveugle, que je connaissais bien avant d'entrer en prison.<br><br>
-*[L'étranger, Camus, 1942](https://en.wikipedia.org/wiki/The_Stranger_(Camus_novel)).*
-
-Things can a get a little existentialist when coding. Not everything works; bugs, errors and failures. This can be especially true when you're forced to pull code together from multiple programs and on different operating systems. But even during these darkest moments, there can be light.
-
-The light in this case comes from a big, blue whale called [docker](https://www.docker.com/) and a weird cephalopod-mammal hybrid called [GitHub](https://github.com/).
+`outsider` makes use of the program [docker](https://www.docker.com/) which allows users to create small, deployable virtual machines, called Docker images. The advantage of these images is that they can be run on any machine that has Docker installed, regardless of operating system. The `outsider` package makes external programs available in R by facilitating the interaction between Docker and the R console through **outsider modules**. These modules consist of two parts: a Dockerfile that describes the Docker image that contains the external program and an R package for interacting with the Docker image. Upon installing and running a module through `outsider`, a Docker image is launched and the R code of the module is used to interact with the external program. Anyone can create a module. They are hosted on [GitHub](https://github.com/) and can be searched for and downloaded through `outsider`.
 
 ![outsider_outline](https://raw.githubusercontent.com/AntonelliLab/outsider/master/other/outline.png)
 

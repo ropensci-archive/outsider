@@ -1,0 +1,160 @@
+---
+title: "Basics: Building a module"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+`outsider` allows users to install and run programs on their own computer
+without the need to leave the R environment. If there is a command-line program
+that is not available through `outsider` you can create your own module!
+In this article, we will outline what an `outsider` module is and then provide
+a simple walkthrough for creating the simplest of simple modules.
+
+
+If you are able to install the program on your own machine and have
+some experience with R packages and GitHub then you should be readily able
+to create one. In this article, we will walk you through how to create a module
+using a very simple command line program that prints whatever the user provides
+it.
+
+To follow this guide you will need the following:
+*A GitHub account (sign-up [here](https://github.com/))
+*A Docker-Hub account (sign-up [here](https://hub.docker.com/))
+
+# Basics
+
+## Module structure
+
+At its heart, an `outsider` module is just an R package with a `Dockerfile`.
+All modules have the following basic file/folder structure:
+
+```
+# Core files and folders of a module #
+- DESCRIPTION
+- R/
+    - functions.R
+- dockerfiles/
+    - latest/
+        - Dockerfile
+- om.yaml
+- README.md
+- .travis.yml
+```
+
+*R files and folders*
+
+The R package is encapsulated by the `DESCRIPTION` file and the `R/` folder.
+The first of these describes the package details (package name, author,
+dependencies, etc.) and the second contains the R code that make up the package.
+The `R/` folder can have any number of scripts with whatever names a developer
+chooses (skeleton default `functions.R`).
+
+*Docker files and folders*
+
+The `outsider` package and its modules depend on Docker to run. Docker acts
+like a virtual machine on a user's computer. It allows users to run specific
+code, often designed for different operating systems, on any machine that has
+Docker installed. These code snippets are called Docker images. And these
+images are described by a `Dockerfile`. The `dockerfiles/` folder in the
+module contains the `Dockerfile` that describes how to install the external
+command-line program that the develop wishes to run through R. `dockerfiles/`
+can have multiple versions of a `Dockerfile` but every module must have a
+`latest/`.
+
+*GitHub files and folders*
+
+To make modules discoverable on GitHub, all modules require an `om.yml`.
+This file has two elements (program and details) encoded in the
+[YAML format](https://en.wikipedia.org/wiki/YAML). To describe the module on
+the GitHub website a `README.md` is also required.
+
+# Walkthrough
+
+We will walk you through how to create your very own `outsider` module that will
+simply print (though `echo`) whatever is given to it. This process comes in a
+series of steps: 1) generate core files and folders, 2) create Docker image, 3)
+upload Docker image to the Docker Hub, 4) upload module files and folders to
+GitHub, and 5) test the module.
+
+## Step 1: Generate the files and folders
+
+As displayed above, we need to generate the core files and folders of a module.
+This process can be easily performed using the `.module_skeleton()` function.
+This function takes a few details about the developer and the program and then
+generates all the necessary core file structures.
+
+The necessary information required for the function to run are our GitHub and
+Docker Hub usernames plus the name for the program we wish to provide as a
+module (which is `echo` -- a UNIX command for printing). In these code snippets,
+the usernames are of the `outsider` maintainer. In order for these examples to
+work for you, you will need to change "dombennett" to your own usernames.
+(Note, your usernames may differ for GitHub and Docker Hub).
+
+```{r skeleton}
+library(outsider)
+.module_skeleton(github_user = 'dombennett', program_name = 'echo',
+                 docker_user = 'dombennett', flpth = getwd())
+```
+
+The above code will create an `outsider` module with the name `om..echor`.
+After running the above code, you should take a minute to inspect the generated
+files. In particular you should look at the `DESCRIPTION` file, the `Dockerfile`
+and `functions.R`.
+
+
+At this stage, we would then edit the `dockerfiles/latest/Dockerfile` and the
+`R/functions.R` to work for our chosen external program. But because `echo`, the
+program we wish to port through `outsider`, is so simple we don't actually have
+to make any changes to these files. By default, the `Dockerfile` is based on
+Ubuntu which ships with `echo` and our starting function in `functions.R` is
+based around running `echo`: it parses the arguments, creates an outsider
+object, and then launches the object.
+
+> **What's with the `.` at the beginning of the functions?** Dots at the
+beginning of an object in R are hidden. To prevent the average user from running
+functions intended for use by developers, a `.` is added.
+
+> **Why `om..echor`?** All modules must start with "om.." in order for them to
+be discovered on GitHub.
+
+## Build a module
+
+The building of a module comes in two steps: build the Docker image and
+install the R package.
+
+```{r build_install, eval = FALSE}
+library(outsider)
+
+```
+
+
+## Dockerfiles
+
+In every `outsider` module there is a folder for all dockerfiles. 
+
+We need to build the docker image.
+
+`docker build -t [docker-hub-name]/[name]:[tag] dockerfiles/[tag]/.`
+
+```{bash docker-build}
+docker build -t dombennett/om_echo:latest om..echo/dockerfiles/latest/.
+```
+
+```{r build-package}
+devtools::document('om..echo')
+devtools::install('om..echo')
+```
+
+```{r test-package}
+library(outsider)
+echo <- module_import('echo', repo = 'dombennett/om..echo')
+echo('hello world!')
+```
+
+```{r clean-up, include=FALSE}
+module_uninstall(repo = 'dombennett/om..echo')
+unlink(x = 'om..echo', recursive = TRUE, force = TRUE)
+```

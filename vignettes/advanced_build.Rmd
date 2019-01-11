@@ -1,0 +1,18 @@
+---
+title: "Advanced: Building a module"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+
+# How it works
+
+# Finding and installing
+
+# Building your own module
+
+### Notes on names

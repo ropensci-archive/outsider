@@ -1,0 +1,20 @@
+---
+title: "Install and run programs, outside of R, inside of R"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+# How it works
+
+# Finding and installing
+
+# Commands
+
+Commands are always followed by spaces. This to help parsing the arguments that
+are passed. 
+
+# Building your own module
