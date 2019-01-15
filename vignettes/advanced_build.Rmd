@@ -7,12 +7,28 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
+> This page is currently a work-in-progress. Your best chance of creating a
+module is copying the format and code structures of a pre-existing module. In
+the future this page will have a more exhaustive list of `outsider` details
+and how-tos for particular types of command-line programs.
 
+## Contents
 
-# How it works
+* [Notes on names]()
+* [Module DESCRIPTION slots]()
+* [Transferring files]()
+* [Creating examples]()
+* [Continuous integration]()
 
-# Finding and installing
+## Notes on names
 
-# Building your own module
+All modules have the following naming convention:
 
-### Notes on names
+* GitHub repo: `[username]/om..[program_name]`
+* R package: `om..[program_name]..[username]`
+* Docker image: `[username]/om_[program_name]`
+
+These naming conventions make modules discoverable on GitHub (searches are made
+of R packages beginning with `om..`). Both the R package and Docker image
+names derive from the GitHub repo name. By being formatted in a predicatble way,
+the contents of a module can be more easily tracked.
