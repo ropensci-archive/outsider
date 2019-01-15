@@ -11,7 +11,7 @@ Install and run programs, outside of R, inside of R <img src="logo.png" height="
 
 <br> Integrating external programs into a deployable, R workflow can be challenging. Although there are many useful functions and packages (e.g. `base::system()`) for calling code and software from alternative languages, these approaches require users to independently install dependant software and may not work across platforms. `outsider` aims to make this easier by allowing users to install, run and control programs *outside of R* across all operating systems.
 
-**For more detailed information, check out the [`outsider` website](https://antonellilab.github.io/outsider)**
+**For more detailed information, check out the [`outsider` website](https://antonellilab.github.io/outsider/articles/outsider.html)**
 
 Installation
 ------------
@@ -52,7 +52,7 @@ hello_world()
 Available external programs
 ---------------------------
 
-Modules available since 22:33 15 January 2019 (CET)
+Modules available since 22:55 15 January 2019 (CET)
 
 ● bamm
 

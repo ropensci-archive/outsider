@@ -23,7 +23,7 @@ knitr::opts_chunk$set(
 <br>
 Integrating external programs into a deployable, R workflow can be challenging. Although there are many useful functions and packages (e.g. `base::system()`) for calling code and software from alternative languages, these approaches require users to independently install dependant software and may not work across platforms. `outsider` aims to make this easier by allowing users to install, run and control programs *outside of R* across all operating systems.
 
-**For more detailed information, check out the [`outsider` website](https://antonellilab.github.io/outsider)**
+**For more detailed information, check out the [`outsider` website](https://antonellilab.github.io/outsider/articles/outsider.html)**
 
 ##Installation
 

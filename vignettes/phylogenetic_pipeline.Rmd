@@ -112,8 +112,9 @@ plot(tree, type = 'unrooted')
 ```
 
 ```{r cleanup, include = FALSE}
+# TODO: update om..mafft to remove "script" itself
 files_to_remove <- c(list.files(pattern = c('.fasta')),
-                     list.files(pattern = 'RAxML_'))
+                     list.files(pattern = 'RAxML_'), 'script')
 for (file_to_remove in files_to_remove) {
   try(file.remove(file_to_remove), silent = TRUE)
 }

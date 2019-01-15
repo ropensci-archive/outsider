@@ -174,7 +174,7 @@ RUN mkdir /working_dir
 WORKDIR /working_dir
 ```
 
-> **What's the WORKDIR?* The WORKDIR sets the starting directory when a command
+> **What's the WORKDIR?** The WORKDIR sets the starting directory when a command
 is passed to the Docker image. All `outsider` modules require this to be
 "working_dir" as it allows `outsider` functions to know where to transfer files
 to and from the virtual machine.

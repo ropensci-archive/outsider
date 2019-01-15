@@ -180,7 +180,7 @@ FROM ubuntu:latest
 RUN mkdir /working_dir
 WORKDIR /working_dir</code></pre>
 <blockquote>
-<p>**What’s the WORKDIR?* The WORKDIR sets the starting directory when a command is passed to the Docker image. All <code>outsider</code> modules require this to be “working_dir” as it allows <code>outsider</code> functions to know where to transfer files to and from the virtual machine.</p>
+<p><strong>What’s the WORKDIR?</strong> The WORKDIR sets the starting directory when a command is passed to the Docker image. All <code>outsider</code> modules require this to be “working_dir” as it allows <code>outsider</code> functions to know where to transfer files to and from the virtual machine.</p>
 </blockquote>
 <p>Using our Dockerfile, we now need to build our Docker image. This requires running commands via command-line. Before continuing, open your favourite terminal or command-prompt program and type <code>docker --help</code> to ensure that your Docker program is up and running. The command to then build a docker image from a Dockerfile is the following: <code>docker build -t [docker-hub-name]/[docker_image]:[tag] [Dockerfile directory]</code> Where the <code>-t</code> indicates the tagged name of the Docker image and the final argument is the file path to the location of the Dockerfile. Note that for a module, the GitHub repo name has <code>..</code> whereas the Docker image name has <code>_</code>. In our example, we can run the following command in a terminal:</p>
 <div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="co"># docker build -t [tagged name] [directory containing Dockerfile]</span>
@@ -192,14 +192,14 @@ WORKDIR /working_dir</code></pre>
 ## Step 1/3 : FROM ubuntu:latest
 ##  ---&gt; 93fd78260bd1
 ## Step 2/3 : RUN mkdir /working_dir
-##  ---&gt; Running in 4c20c7996388
-## Removing intermediate container 4c20c7996388
-##  ---&gt; 0213839d590c
+##  ---&gt; Running in 085559171fb9
+## Removing intermediate container 085559171fb9
+##  ---&gt; d6c93793cf1c
 ## Step 3/3 : WORKDIR /working_dir
-##  ---&gt; Running in 2ab7a5bf4285
-## Removing intermediate container 2ab7a5bf4285
-##  ---&gt; d04b1b35c8bb
-## Successfully built d04b1b35c8bb
+##  ---&gt; Running in 7aeb0c3abfed
+## Removing intermediate container 7aeb0c3abfed
+##  ---&gt; bee413fe99b2
+## Successfully built bee413fe99b2
 ## Successfully tagged dombennett/om_echo:latest</code></pre>
 <blockquote>
 <p><strong>What is a tag?</strong> A Docker tag is akin to the version number of the image. By default, if no tag is provided, Docker will use ‘latest’.</p>
