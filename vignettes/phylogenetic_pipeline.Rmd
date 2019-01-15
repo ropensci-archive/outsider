@@ -8,7 +8,7 @@ output: rmarkdown::html_vignette
 knitr::opts_chunk$set(echo = TRUE)
 # hide warnings
 module_install <- function(repo) {
-  supressWarnings(outsider::module_install(repo = repo))
+  suppressWarnings(outsider::module_install(repo = repo))
 }
 ```
 

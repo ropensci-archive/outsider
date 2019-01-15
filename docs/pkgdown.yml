@@ -2,7 +2,9 @@ pandoc: 1.19.2.1
 pkgdown: 1.2.0.9000
 pkgdown_sha: c980e84a573614087c6e151d5e6e19a22748b761
 articles:
+  advanced_build: advanced_build.html
   available: available.html
-  build_a_module: build_a_module.html
+  build: build.html
+  outsider: outsider.html
   phylogenetic_pipeline: phylogenetic_pipeline.html
 

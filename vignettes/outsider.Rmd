@@ -76,7 +76,7 @@ project name. Given its uniqueness, all modules are referred to by their `repo`.
 To confirm the module is installed on a computer, it might be useful to use
 `module_installed()`. This function returns a table of all installed modules.
 
-``` {r module_install}
+``` {r module_installed}
 library(outsider)
 print(module_installed())
 ```

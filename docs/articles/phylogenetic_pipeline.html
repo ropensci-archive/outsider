@@ -50,6 +50,9 @@
   </a>
 </li>
 <li>
+  <a href="../articles/outsider.html">Get started</a>
+</li>
+<li>
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
@@ -60,10 +63,13 @@
   </a>
   <ul class="dropdown-menu" role="menu">
 <li>
+      <a href="../articles/advanced_build.html">Advanced: Building a module</a>
+    </li>
+    <li>
       <a href="../articles/available.html">Available modules</a>
     </li>
     <li>
-      <a href="../articles/build_a_module.html">How to build an `outsider` module</a>
+      <a href="../articles/build.html">Basics: Building a module</a>
     </li>
     <li>
       <a href="../articles/phylogenetic_pipeline.html">Phylogenetic pipeline</a>
@@ -88,7 +94,7 @@
     <div class="page-header toc-ignore">
       <h1>Phylogenetic pipeline</h1>
             
-            <h4 class="date">2018-12-11</h4>
+            <h4 class="date">2019-01-15</h4>
       
       
       <div class="hidden name"><code>phylogenetic_pipeline.Rmd</code></div>
@@ -97,37 +103,104 @@
 
     
     
-<div id="introduction" class="section level1">
+<p>The whole point of <code>outsider</code> is to bring lots of programs together into a single place to allow the development of analysis pipelines. Let’s demonstrate this process by creating a simple a pipeline for constructing an evolutionary tree. We will generate a tree in three steps: obtain orthologous sequences, align sequences and estimate tree.</p>
+<p>In our example, we will keep it simple and fast and generate a tree of <a href="https://en.wikipedia.org/wiki/Cytochrome_b">CytB</a> sequences in the primate genus of Night Monkeys, <strong>Aotus</strong>.</p>
+<div id="phylotar" class="section level1">
 <h1 class="hasAnchor">
-<a href="#introduction" class="anchor"></a>Introduction</h1>
-<p>We will outline an example pipeline using external command-line tools, called through <code>outsider</code>.</p>
-<p>In this example, we will generate a phylogenetic tree in three steps: obtain orthologous sequences, align the sequences, estimate tree.</p>
-<p>In our example, we will keep it simple and fast and generate a tree of CytB sequences in the primate genus of Night Monkeys, <strong>Aotus</strong>.</p>
-<div id="phylotar" class="section level2">
-<h2 class="hasAnchor">
-<a href="#phylotar" class="anchor"></a>phylotaR</h2>
-<p>To get us started with need DNA sequences that represent the same gene region, i.e. sequences that are orthologous. We can obtain our sequences quickly using the example data from the R package <a href="https://github.com/ropensci/phylotaR"><code>phylotaR</code></a>.</p>
+<a href="#phylotar" class="anchor"></a>phylotaR</h1>
+<p>To get us started we need DNA sequences that represent the same gene region, i.e. sequences that are orthologous. We can obtain our sequences quickly using the example data from the R package <a href="https://github.com/ropensci/phylotaR"><code>phylotaR</code></a>.</p>
 <p><code>phylotaR</code> provides a pipeline for identifying orthologous sequences from a reputable online biological sequence database. The package comes with a few pre-calculated example sequences. We can extract sequence clusters that represent the gene region <a href="https://en.wikipedia.org/wiki/Cytochrome_b">cytb</a> with the following script.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">aotus &lt;-<span class="st"> </span><span class="ot">NULL</span></code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(phylotaR)
+<span class="co"># Example data</span>
 <span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/data">data</a></span>(<span class="st">"aotus"</span>)
+<span class="co"># Generate summary of identified clusters</span>
 smmry &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/summary">summary</a></span>(aotus)
+<span class="co"># Extract cluster with 'cytb' in feature name</span>
 cytb &lt;-<span class="st"> </span>smmry<span class="op">$</span>ID[<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/which">which</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/grep">grepl</a></span>(<span class="st">'cytb'</span>, smmry<span class="op">$</span>Feature))[<span class="dv">1</span>]]
 cytb &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/phylotaR/topics/drop_clstrs">drop_clstrs</a></span>(aotus, cytb)
+<span class="co"># Reduce cluster to just one sequence per taxon</span>
 cytb &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/phylotaR/topics/drop_by_rank">drop_by_rank</a></span>(cytb, <span class="dt">n =</span> <span class="dv">1</span>)
-txids &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/phylotaR/topics/get_txids">get_txids</a></span>(cytb, <span class="dt">cid =</span> <span class="st">'9'</span>)
+<span class="co"># Get taxonomic IDs for taxa in cluster</span>
+txids &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/phylotaR/topics/get_txids">get_txids</a></span>(cytb, <span class="dt">cid =</span> cytb<span class="op">@</span>cids[[<span class="dv">1</span>]])
+<span class="co"># Convert IDs to species names</span>
 sp_nms &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/phylotaR/topics/get_tx_slot">get_tx_slot</a></span>(cytb, txids, <span class="dt">slt_nm =</span> <span class="st">'scnm'</span>)
 sp_nms &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/grep">sub</a></span>(<span class="st">' '</span>, <span class="st">'_'</span>, sp_nms)
-<span class="kw"><a href="https://www.rdocumentation.org/packages/phylotaR/topics/write_sqs">write_sqs</a></span>(cytb, <span class="st">'aotus_cytb.fasta'</span>, <span class="dt">sq_nm =</span> sp_nms, <span class="dt">sid =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/names">names</a></span>(sp_nms))</code></pre></div>
+<span class="co"># Write out</span>
+<span class="kw"><a href="https://www.rdocumentation.org/packages/phylotaR/topics/write_sqs">write_sqs</a></span>(cytb, <span class="st">'aotus_cytb.fasta'</span>, <span class="dt">sq_nm =</span> sp_nms, <span class="dt">sid =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/names">names</a></span>(sp_nms))
+<span class="co"># What do the first 50 lines of the file look like?</span>
+<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/cat">cat</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/paste">paste0</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/readLines">readLines</a></span>(<span class="st">'aotus_cytb.fasta'</span>, <span class="dt">n =</span> <span class="dv">50</span>), <span class="dt">collapse =</span> <span class="st">'</span><span class="ch">\n</span><span class="st">'</span>))</code></pre></div>
+<pre><code>## &gt;Aotus_nancymaae
+## atgacttctccccgcaaaacacacccactaacaaagatcattaacgaatcattcattgatctacccacaccacccaacat
+## ttcctcctgatgaaattttggctcactcttaggcatttgcctaattattcaaatcaccaccggcctgttcttagctatac
+## actacacaccagatacctcaaccgccttctcctccgtcgcccatatcacccgagacgtcaactatggctgaataattcgc
+## tacatacatgccaacggtgcttccatattcttcgtatgcctttttctccacattggtcgaggactttactatggatcctt
+## tctttctctgaagacttgaaatatcggtaccatcctactacttacaaccatagccacagcattcataggctatgttcttc
+## catgaggccaaatatcattctgaggggctacagtaattacaaatcttttatcagccattccctatatcggatctgacctt
+## gtacaatgaatttgaggtggcttctcagtagataaagccactctcacacgattctttacttttcactttatcttaccctt
+## cattatcgcagccctagcaactatccatctattatttctgcatgaaacaggatcaagtaacccatcaggaataacatctg
+## accccgacaaaatcacatttcacccctattatacagctaaagacattctaggattaatctttcttctcttatccctaata
+## agcctaaccctatttatacccgaccttttaaccgacccagataattatacactggctaatcccctcaacactccacccca
+## catcaagccagagtgatattttctatttgcatacgcaatcctacgatctatccctaataaacttggaggagttctagccc
+## tagtactttctattttaattctaatagttatccctatactacatctctccaaacaacaaagcataatatttcgacccatc
+## actcaaattctattctgaactctagtagctgacctactaactctcacatgaattggaggccaaccggttgaatacccctt
+## cgtaaccattggccaaaccgcatccattacatacttcttcattattattatcctaatgcccctttccgcctcaatcgaaa
+## atatattacttaaatgataa
+## 
+## &gt;Aotus_azarai
+## atgacctccccccgcaaaacacacccactagcaaagattattaacgaatcattcatcgatctccccacaccatccaacat
+## ttcctcttgatgaaattttggctcactcttaggcatttgcctaatcattcaaatcaccaccggcctgttcttagctatac
+## attacacaccagatacctcaactgccttctcctccgtcgctcatatcacccgagacgttaactatggctgaataattcgc
+## tatatacatgccaacggcgcttccatattcttcgtatgcctttttctccatattggccgaggactttactatggatcttt
+## cctttttctgaagacttgaaatatcggtattatcctactacttacaaccatagccacagcattcataggctatgttcttc
+## catgaggccaaatatcattctgaggggccacagtaattacaaaccttctatcagctatcccctatatcgggtctgacctt
+## gtacaatgaatttgaggtggcttctcagtagataaagccactctcacacgattctttacttttcactttatcttaccctt
+## tattatcgcagccctagcaactattcacctcttatttctacatgaaacaggatcaagcaacccatcaggaataacatctg
+## accccgacaaagtcacattccacccctattatacagctaaggatattctaggattaatctttcttctcttatccctaata
+## agcctaaccctatttatacccgaccttctaacggacccagataattatacactagccaaccctctcaacaccccgcctca
+## cattaagccagagtggtattttctatttgcatacgcaattctacgatctatccctaataaacttggaggagtactagccc
+## tagtactttctatcctaatcttaatggctatccccgtactacatttctccaaacagcaaagtataatatttcgacccatt
+## actcaaattctattctgagctctggtagctgacctactaactctcacgtgaattggaggtcaaccagttgagtacccctt
+## cgtaaccattggccagaccgcatccattatatacttcttcattattattaccctaataccccttttcgccttaattgaaa
+## ataaattacttaaatgatag
+## 
+## &gt;Aotus_griseimembra
+## atgacttctccccgcaaaacacacccactaacaaagatcattaacgaatcattcattgatctacccacaccacccaacat
+## ttcctcctgatgaaattttggctcactcttaggcatttgcctaattattcaaatcaccaccggcctgttcttagctatac
+## actacacaccagatacctcaaccgccttctcctccgtcgcccatatcacccgagacgtcaactatggctgaataattcgc
+## tacatacatgccaacggtgcttccatattcttcgtatgcctttttctccacattggtcgaggactttactatggatcctt
+## cctttctctgaagacttgaaatatcggtaccatcctactacttacaaccatagccacagcattcataggctatgttcttc
+## catgaggccaaatatcattctgaggggctacagtaattacaaatcttatatcagccattccctatatcggatctgacctt
+## gtacaatgaatttgaggtggcttctcagtagataaagccactctcacacgattctttacttttcactttatcttaccctt
+## cattatcgcagccctagcaactatccatctattatttctgcatgaaacaggatcaagtaacccatcaggaataacatctg
+## accccgacaaaatcacatttcacccctattatacagctaaagacattctagggttaatctttcttctcttatccctaata
+## agcctaaccctatttatacccgaccttttaaccgacccagataattatacactggctaatcccctcaacactccacccca
+## catcaagccagagtgatattttctatttgcatacgcaattctacgatctatccctaataaacttggaggagttctagccc
+## tagtactttctattttaattctaatagttatccctatactacatctctccaaacaacaaagcataatatttcgacccatc
+## actcaaattctattctgaactctagtagctgacctactaactctcacatgaattggaggccaaccggttgaatacccctt
+## cgtaaccattggccaaaccgcatccattacatacttcttcattattattatcctaatgcccctttccgcctcaatcgaaa
+## atatattacttaaatgataa</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/cat">cat</a></span>(<span class="st">'...'</span>)</code></pre></div>
+<pre><code>## ...</code></pre>
 </div>
-<div id="alignment" class="section level2">
-<h2 class="hasAnchor">
-<a href="#alignment" class="anchor"></a>Alignment</h2>
-<p>Now we have written our sequences to a text-based <code>.fasta</code> file, we need to aign them! To do this, we can use <a href="https://mafft.cbrc.jp/alignment/software/"><code>mafft</code></a>. We first need to install the module and then import the key function, <code>mafft</code>. After doing this, we can call the <code>mafft</code> program using the same arguments that we would if it were calling the program via command-line.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(outsider)
+<div id="alignment" class="section level1">
+<h1 class="hasAnchor">
+<a href="#alignment" class="anchor"></a>Alignment</h1>
+<p>Now we have written our sequences to a text-based <code>.fasta</code> file, we need to aign them! To do this, we can use <a href="https://mafft.cbrc.jp/alignment/software/"><code>mafft</code></a>. We first need to install the module and then import the key function, <code>mafft</code>. After doing this, we can call the <code>mafft</code> program using the same arguments that we would if it were calling the program via command-line. In our case we can simple run our alignment using the ‘–auto’ parameter.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(outsider)</code></pre></div>
+<pre><code>## 
+## Attaching package: 'outsider'</code></pre>
+<pre><code>## The following object is masked _by_ '.GlobalEnv':
+## 
+##     module_install</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Install module</span>
 repo &lt;-<span class="st"> 'dombennett/om..mafft'</span>
-<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/warning">suppressWarnings</a></span>(<span class="kw"><a href="../reference/module_install.html">module_install</a></span>(<span class="dt">repo =</span> repo))</code></pre></div>
+<span class="kw"><a href="../reference/module_install.html">module_install</a></span>(<span class="dt">repo =</span> repo)</code></pre></div>
 <pre><code>## [1] TRUE</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mafft &lt;-<span class="st"> </span><span class="kw"><a href="../reference/module_import.html">module_import</a></span>(<span class="dt">fname =</span> <span class="st">'mafft'</span>, <span class="dt">repo =</span> repo)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Import the function</span>
+mafft &lt;-<span class="st"> </span><span class="kw"><a href="../reference/module_import.html">module_import</a></span>(<span class="dt">fname =</span> <span class="st">'mafft'</span>, <span class="dt">repo =</span> repo)
+<span class="co"># Run our program with normal mafft arguments</span>
+<span class="co"># Note: all arguments must be separate character variables.</span>
 <span class="kw">mafft</span>(<span class="st">'--auto'</span>, <span class="st">'aotus_cytb.fasta'</span>, <span class="st">'&gt;'</span>, <span class="st">'alignment.fasta'</span>)</code></pre></div>
 <pre><code>## outputhat23=16
 ## treein = 0
@@ -222,15 +295,18 @@ STEP 002-006-1  identical.
 ## It tends to insert more gaps into gap-rich regions than previous versions.
 ## To disable this change, add the --leavegappyregion option.</code></pre>
 </div>
-<div id="phylogeny" class="section level2">
-<h2 class="hasAnchor">
-<a href="#phylogeny" class="anchor"></a>Phylogeny</h2>
+<div id="phylogeny" class="section level1">
+<h1 class="hasAnchor">
+<a href="#phylogeny" class="anchor"></a>Phylogeny</h1>
 <p>We can repeat the same process as we did for <code>mafft</code> but instead for <a href="https://github.com/stamatak/standard-RAxML"><code>RAxML</code></a> – a command-line program for estimating phylogenetic trees using maximum likelihood.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(outsider)
+<span class="co"># Install</span>
 repo &lt;-<span class="st"> 'dombennett/om..raxml'</span>
-<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/warning">suppressWarnings</a></span>(<span class="kw"><a href="../reference/module_install.html">module_install</a></span>(<span class="dt">repo =</span> repo))</code></pre></div>
+<span class="kw"><a href="../reference/module_install.html">module_install</a></span>(<span class="dt">repo =</span> repo)</code></pre></div>
 <pre><code>## [1] TRUE</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">raxml &lt;-<span class="st"> </span><span class="kw"><a href="../reference/module_import.html">module_import</a></span>(<span class="dt">fname =</span> <span class="st">'raxml'</span>, <span class="dt">repo =</span> repo)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Import</span>
+raxml &lt;-<span class="st"> </span><span class="kw"><a href="../reference/module_import.html">module_import</a></span>(<span class="dt">fname =</span> <span class="st">'raxml'</span>, <span class="dt">repo =</span> repo)
+<span class="co"># Run</span>
 <span class="kw">raxml</span>(<span class="st">'-m'</span>, <span class="st">'GTRGAMMA'</span>, <span class="st">'-s'</span>, <span class="st">'alignment.fasta'</span>, <span class="st">'-p'</span>, <span class="st">'1234'</span>, <span class="st">'-n'</span>,
       <span class="st">'aotus_cytb'</span>, <span class="st">'-T'</span>, <span class="st">'2'</span>)</code></pre></div>
 <pre><code>## 
@@ -295,7 +371,7 @@ repo &lt;-<span class="st"> 'dombennett/om..raxml'</span>
 ## Partition: 0 with name: No Name Provided
 ## Base frequencies: 0.289 0.285 0.120 0.306 
 ## 
-## Inference[0]: Time 0.120260 GAMMA-based likelihood -2591.962827, best rearrangement setting 5
+## Inference[0]: Time 0.289111 GAMMA-based likelihood -2591.962827, best rearrangement setting 5
 ## 
 ## 
 ## Conducting final model optimizations on all 1 trees under GAMMA-based models ....
@@ -310,17 +386,16 @@ repo &lt;-<span class="st"> 'dombennett/om..raxml'</span>
 ## Program execution info written to /working_dir/RAxML_info.aotus_cytb
 ## Best-scoring ML tree written to: /working_dir/RAxML_bestTree.aotus_cytb
 ## 
-## Overall execution time: 0.182794 secs or 0.000051 hours or 0.000002 days</code></pre>
+## Overall execution time: 0.367546 secs or 0.000102 hours or 0.000004 days</code></pre>
 </div>
-<div id="visualisation" class="section level2">
-<h2 class="hasAnchor">
-<a href="#visualisation" class="anchor"></a>Visualisation</h2>
+<div id="visualisation" class="section level1">
+<h1 class="hasAnchor">
+<a href="#visualisation" class="anchor"></a>Visualisation</h1>
 <p>Now, let’s check out our tree!</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(ape)
 tree &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/ape/topics/read.tree">read.tree</a></span>(<span class="st">'RAxML_bestTree.aotus_cytb'</span>)
 <span class="kw"><a href="https://www.rdocumentation.org/packages/graphics/topics/plot">plot</a></span>(tree, <span class="dt">type =</span> <span class="st">'unrooted'</span>)</code></pre></div>
 <p><img src="phylogenetic_pipeline_files/figure-html/visualise-1.png" width="700"></p>
-</div>
 </div>
   </div>
 
@@ -329,14 +404,10 @@ tree &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocume
       <h2 class="hasAnchor">
 <a href="#tocnav" class="anchor"></a>Contents</h2>
       <ul class="nav nav-pills nav-stacked">
-<li>
-<a href="#introduction">Introduction</a><ul class="nav nav-pills nav-stacked">
 <li><a href="#phylotar">phylotaR</a></li>
       <li><a href="#alignment">Alignment</a></li>
       <li><a href="#phylogeny">Phylogeny</a></li>
       <li><a href="#visualisation">Visualisation</a></li>
-      </ul>
-</li>
       </ul>
 </div>
       </div>

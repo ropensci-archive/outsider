@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Install and Run External Programs in R • outsider</title>
+<title>Install and run programs, outside of R, inside of R • outsider</title>
 <!-- favicons --><link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
 <link rel="apple-touch-icon" type="image/png" sizes="180x180" href="apple-touch-icon.png">
@@ -15,8 +15,9 @@
 <!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script><!-- Bootstrap --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script><!-- sticky kit --><script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script><!-- pkgdown --><link href="pkgdown.css" rel="stylesheet">
-<script src="pkgdown.js"></script><meta property="og:title" content="Install and Run External Programs in R">
-<meta property="og:description" content="Install and run external command line programs in R.">
+<script src="pkgdown.js"></script><meta property="og:title" content="Install and run programs, outside of R, inside of R">
+<meta property="og:description" content="Install and run external command-line programs in R through use of
+    'Docker' &lt;https://www.docker.com/&gt; and 'GitHub' &lt;http://github.com/&gt;.">
 <meta property="og:image" content="/logo.png">
 <meta name="twitter:card" content="summary">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
@@ -50,6 +51,9 @@
   </a>
 </li>
 <li>
+  <a href="articles/outsider.html">Get started</a>
+</li>
+<li>
   <a href="reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
@@ -60,10 +64,13 @@
   </a>
   <ul class="dropdown-menu" role="menu">
 <li>
+      <a href="articles/advanced_build.html">Advanced: Building a module</a>
+    </li>
+    <li>
       <a href="articles/available.html">Available modules</a>
     </li>
     <li>
-      <a href="articles/build_a_module.html">How to build an `outsider` module</a>
+      <a href="articles/build.html">Basics: Building a module</a>
     </li>
     <li>
       <a href="articles/phylogenetic_pipeline.html">Phylogenetic pipeline</a>
@@ -96,7 +103,8 @@
 <blockquote>
 <p>The Outsider is always unhappy, but he is an agent that ensures the happiness for millions of ‘Insiders’.<br><br><em><a href="https://en.wikipedia.org/wiki/The_Outsider_(Colin_Wilson)">The Outsider, Wilson, 1956</a>.</em></p>
 </blockquote>
-<p><br> Integrating external programs into a deployable, R workflow can be challenging. Although there are many useful functions and packages (e.g. <code><a href="https://www.rdocumentation.org/packages/base/topics/system">system()</a></code> or <code>reticulate</code>) for calling code and software from alternative languages, these approaches require users to independently install dependant software and may not work across platforms.<code>outsider</code> aims to make this easier by allowing users to install, run and control programs <em>outside of R</em> across all operating systems.</p>
+<p><br> Integrating external programs into a deployable, R workflow can be challenging. Although there are many useful functions and packages (e.g. <code><a href="https://www.rdocumentation.org/packages/base/topics/system">base::system()</a></code>) for calling code and software from alternative languages, these approaches require users to independently install dependant software and may not work across platforms. <code>outsider</code> aims to make this easier by allowing users to install, run and control programs <em>outside of R</em> across all operating systems.</p>
+<p><strong>For more detailed information, check out the <a href="https://antonellilab.github.io/outsider"><code>outsider</code> website</a></strong></p>
 <div id="installation" class="section level2">
 <h2 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h2>
@@ -130,23 +138,19 @@ hello_world &lt;-<span class="st"> </span><span class="kw"><a href="reference/mo
 <div id="available-external-programs" class="section level2">
 <h2 class="hasAnchor">
 <a href="#available-external-programs" class="anchor"></a>Available external programs</h2>
-<p>Modules available since 14:44 11 December 2018 (CET)</p>
+<p>Modules available since 22:36 15 January 2019 (CET)</p>
 <p>● bamm</p>
 <p>● blast</p>
 <p>● hello.world</p>
 <p>● mafft</p>
 <p>● pyrate</p>
 <p>● raxml</p>
-<p>For more details, see <a href="https://antonellilab.github.io/outsider/articles/available.html">available modules table</a></p>
+<p>For more details, see the <a href="https://antonellilab.github.io/outsider/articles/available.html">available modules table</a></p>
 </div>
 <div id="how-does-it-work" class="section level2">
 <h2 class="hasAnchor">
 <a href="#how-does-it-work" class="anchor"></a>How does it work?</h2>
-<blockquote>
-<p>Dans l’obscurité de ma prison roulante, j’ai retrouvé un à un, comme du fond de ma fatigue, tous les bruits familiers d’une ville que j’aimais et d’une certaine heure où il m’arrivait de me sentir content. Le cri des vendeurs de journaux dans l’air déjà détendu, les derniers oiseaux dans le square, l’appel des marchands de sandwiches, la plainte des tramways dans les hauts tournants de la ville et cette rumeur du ciel avant que la nuit bascule sur le port, tout cela recomposait pour moi un itinéraire d’aveugle, que je connaissais bien avant d’entrer en prison.<br><br><em><a href="https://en.wikipedia.org/wiki/The_Stranger_(Camus_novel)">L’étranger, Camus, 1942</a>.</em></p>
-</blockquote>
-<p>Things can a get a little existentialist when coding. Not everything works; bugs, errors and failures. This can be especially true when you’re forced to pull code together from multiple programs and on different operating systems. But even during these darkest moments, there can be light.</p>
-<p>The light in this case comes from a big, blue whale called <a href="https://www.docker.com/">docker</a> and a weird cephalopod-mammal hybrid called <a href="https://github.com/">GitHub</a>.</p>
+<p><code>outsider</code> makes use of the program <a href="https://www.docker.com/">docker</a> which allows users to create small, deployable virtual machines, called Docker images. The advantage of these images is that they can be run on any machine that has Docker installed, regardless of operating system. The <code>outsider</code> package makes external programs available in R by facilitating the interaction between Docker and the R console through <strong>outsider modules</strong>. These modules consist of two parts: a Dockerfile that describes the Docker image that contains the external program and an R package for interacting with the Docker image. Upon installing and running a module through <code>outsider</code>, a Docker image is launched and the R code of the module is used to interact with the external program. Anyone can create a module. They are hosted on <a href="https://github.com/">GitHub</a> and can be searched for and downloaded through <code>outsider</code>.</p>
 <div class="figure">
 <img src="https://raw.githubusercontent.com/AntonelliLab/outsider/master/other/outline.png" alt="outsider_outline"><p class="caption">outsider_outline</p>
 </div>
