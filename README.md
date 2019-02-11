@@ -24,8 +24,8 @@ devtools::install_github('AntonelliLab/outsider')
 
 Additionally, you will also need to install **Docker desktop**. To install Docker visit the Docker website and follow the instructions for your operating system: [Install Docker](https://www.docker.com/products/docker-desktop).
 
-Quick examples
---------------
+Quick example
+-------------
 
 ``` r
 library(outsider)
@@ -34,6 +34,9 @@ library(outsider)
 # it contains a function for printing 'Hello World!' in Ubuntu 18.04
 repo <- 'dombennett/om..hello.world'
 module_install(repo = repo)
+#> Warning: No 'dombennett/om..hello.world' found.
+#> Warning in module_install(repo = repo): It looks like 'dombennett/om..hello.world' is not successfully passing its tests on GitHub.
+#> The module might not build or function properly.
 #> [1] TRUE
 # look up the help files for the module
 module_help(repo = repo)
@@ -52,7 +55,7 @@ hello_world()
 Available external programs
 ---------------------------
 
-Modules available since 22:55 15 January 2019 (CET)
+Modules available since 17:42 11 February 2019 (CET)
 
 ● bamm
 

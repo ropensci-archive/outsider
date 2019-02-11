@@ -37,7 +37,7 @@ Additionally, you will also need to install **Docker desktop**. To install
 Docker visit the Docker website and follow the instructions for your operating
 system: [Install Docker](https://www.docker.com/products/docker-desktop).
 
-##Quick examples
+##Quick example
 ```{r example-setup, eval=TRUE, include=FALSE}
 outsider::module_uninstall(repo = 'dombennett/om..hello.world')
 ```
