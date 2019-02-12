@@ -10,7 +10,7 @@ log_set(log, val)
 \item{log}{Output stream one of program_out, program_err, docker_out or
 docker_err}
 
-\item{val}{Either logcal, file or connection.}
+\item{val}{Either logical, file or connection.}
 }
 \description{
 Set if and where to send the console streams of the outsider
@@ -18,6 +18,29 @@ modules.
 }
 \details{
 See \code{\link[sys]{exec}}.
+}
+\examples{
+library(outsider)
+# install and import
+repo <- 'dombennett/om..hello.world'
+module_install(repo = repo)
+hello_world <- module_import(fname = 'hello_world', repo = repo)
+
+# control the log stream
+# send output to file
+tmpfl <- tempfile()
+log_set(log = 'program_out', val = tmpfl)
+hello_world()
+(readLines(con = tmpfl))
+file.remove(tmpfl)
+# send docker and program output to console
+log_set(log = 'program_out', val = TRUE)
+log_set(log = 'docker_out', val = TRUE)
+hello_world()
+
+# uninstall
+rm(hello_world)
+module_uninstall(repo = repo)
 }
 \seealso{
 Other user: \code{\link{module_details}},

@@ -40,7 +40,7 @@
 <meta property="og:title" content="Look up details on module(s) — module_details" />
 
 <meta property="og:description" content="Return a tbl_df of information for outsider module(s).
-If repo is NULL, will return details on all avaiable modules." />
+If repo is NULL, will return details on all available modules." />
 
 <meta property="og:image" content="/logo.png" />
 <meta name="twitter:card" content="summary" />
@@ -139,7 +139,7 @@ If repo is NULL, will return details on all avaiable modules." />
     <div class="ref-description">
     
     <p>Return a tbl_df of information for outsider module(s).
-If <code>repo</code> is NULL, will return details on all avaiable modules.</p>
+If <code>repo</code> is NULL, will return details on all available modules.</p>
     
     </div>
 
@@ -169,6 +169,22 @@ If <code>repo</code> is NULL, will return details on all avaiable modules.</p>
   <code><a href='module_uninstall.html'>module_uninstall</a></code></p></div>
     
 
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/library'>library</a></span>(<span class='no'>outsider</span>)
+<span class='co'># return table of ALL available modules on GitHub</span>
+<span class='co'># NOT RUN - takes too long</span>
+<span class='co'># (available_modules &lt;- module_search())</span>
+
+<span class='co'># look-up whether specific module exists</span>
+<span class='no'>repo</span> <span class='kw'>&lt;-</span> <span class='st'>'dombennett/om..goodbye.world'</span>
+(<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/warning'>suppressWarnings</a></span>(<span class='fu'><a href='module_exists.html'>module_exists</a></span>(<span class='kw'>repo</span> <span class='kw'>=</span> <span class='no'>repo</span>)))</div><div class='output co'>#&gt; dombennett/om..goodbye.world 
+#&gt;                        FALSE </div><div class='input'><span class='no'>repo</span> <span class='kw'>&lt;-</span> <span class='st'>'dombennett/om..hello.world'</span>
+(<span class='fu'><a href='module_exists.html'>module_exists</a></span>(<span class='kw'>repo</span> <span class='kw'>=</span> <span class='no'>repo</span>))</div><div class='output co'>#&gt; dombennett/om..hello.world 
+#&gt;                       TRUE </div><div class='input'><span class='co'># get details on specific module(s)</span>
+(<span class='fu'>module_details</span>(<span class='kw'>repo</span> <span class='kw'>=</span> <span class='no'>repo</span>))</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 1 x 7</span><span>
+#&gt;   repo    program  details   versions updated_at          watcher_count url     
+#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>   </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>    </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>     </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>    </span><span style='color: #949494;font-style: italic;'>&lt;dttm&gt;</span><span>              </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>         </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>   
+#&gt; </span><span style='color: #BCBCBC;'>1</span><span> domben… hello w… Template… latest   2019-01-09 </span><span style='color: #949494;'>16:43:39</span><span> 0             https:/…</div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
@@ -178,7 +194,9 @@ If <code>repo</code> is NULL, will return details on all avaiable modules.</p>
       <li><a href="#value">Value</a></li>
 
       <li><a href="#see-also">See also</a></li>
-          </ul>
+      
+      <li><a href="#examples">Examples</a></li>
+    </ul>
 
   </div>
 </div>

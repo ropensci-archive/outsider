@@ -125,7 +125,7 @@ docker_build <- function(img, url_or_path, tag = 'latest') {
 #' @name docker_cp
 #' @title Copy files to and from container
 #' @description Copy files to and from running Docker container
-#' @details Container foldes are indicated with
+#' @details Container folders are indicated with
 #' \code{[container_id]:[filepath]}.
 #' @param origin Origin filepath
 #' @param dest Destination filepath

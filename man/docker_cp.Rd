@@ -18,7 +18,7 @@ Logical
 Copy files to and from running Docker container
 }
 \details{
-Container foldes are indicated with
+Container folders are indicated with
 \code{[container_id]:[filepath]}.
 }
 \seealso{

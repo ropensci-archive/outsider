@@ -142,8 +142,150 @@
     <tbody>
       <tr>
         <th colspan="2">
-          <h2 id="section-all-functions" class="hasAnchor"><a href="#section-all-functions" class="anchor"></a>All functions</h2>
-          <p class="section-desc"></p>
+          <h2 id="section-user" class="hasAnchor"><a href="#section-user" class="anchor"></a>User</h2>
+          <p class="section-desc"><p>Install and run modules</p></p>
+        </th>
+      </tr>
+      <tr>
+        
+        <td>
+          <p><code><a href="log_set.html">log_set()</a></code> </p>
+        </td>
+        <td><p>Set log streams for console output</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="module_details.html">module_details()</a></code> </p>
+        </td>
+        <td><p>Look up details on module(s)</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="module_exists.html">module_exists()</a></code> </p>
+        </td>
+        <td><p>Does module exist?</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="module_help.html">module_help()</a></code> </p>
+        </td>
+        <td><p>Get help for outsider modules</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="module_import.html">module_import()</a></code> </p>
+        </td>
+        <td><p>Import functions from a module</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="module_install.html">module_install()</a></code> </p>
+        </td>
+        <td><p>Install an outsider module</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="module_installed.html">module_installed()</a></code> </p>
+        </td>
+        <td><p>Which outsider modules are installed?</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="module_search.html">module_search()</a></code> </p>
+        </td>
+        <td><p>Search for available outsider modules</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="module_uninstall.html">module_uninstall()</a></code> </p>
+        </td>
+        <td><p>Uninstall and remove a module</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="outsider.html">outsider</a></code> </p>
+        </td>
+        <td><p>outsider: Install and run programs, outside of R, inside of R</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-developer" class="hasAnchor"><a href="#section-developer" class="anchor"></a>Developer</h2>
+          <p class="section-desc"><p>Tools for creating modules</p></p>
+        </th>
+      </tr>
+      <tr>
+        
+        <td>
+          <p><code><a href="dot-arglist_get.html">.arglist_get()</a></code> </p>
+        </td>
+        <td><p>Generate vector of arguments</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="dot-arglist_parse.html">.arglist_parse()</a></code> </p>
+        </td>
+        <td><p>Normalise arguments for docker container</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="dot-dirpath_get.html">.dirpath_get()</a></code> </p>
+        </td>
+        <td><p>Convert file path to directory path</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="dot-filestosend_get.html">.filestosend_get()</a></code> </p>
+        </td>
+        <td><p>Determine which arguments are filepaths</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="dot-module_check.html">.module_check()</a></code> </p>
+        </td>
+        <td><p>Check names and structure of a module</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="dot-module_identities.html">.module_identities()</a></code> </p>
+        </td>
+        <td><p>Return identities for a module</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="dot-module_skeleton.html">.module_skeleton()</a></code> </p>
+        </td>
+        <td><p>Generate a skeleton for a module</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="dot-module_test.html">.module_test()</a></code> </p>
+        </td>
+        <td><p>Test an outsider module</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="dot-module_travis.html">.module_travis()</a></code> </p>
+        </td>
+        <td><p>Generate Travis-CI file</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="dot-wd_get.html">.wd_get()</a></code> </p>
+        </td>
+        <td><p>Return working directory</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="outsider-class.html">.outsider_init()</a></code> <code><a href="outsider-class.html">.run(<i>&lt;outsider&gt;</i>)</a></code> </p>
+        </td>
+        <td><p>Construct outsider object</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-internal-functions" class="hasAnchor"><a href="#section-internal-functions" class="anchor"></a>Internal functions</h2>
+          <p class="section-desc"><p>Private internal functions, documented here for openness</p></p>
         </th>
       </tr>
       <tr>
@@ -212,60 +354,6 @@
           <p><code><a href="docker_pull.html">docker_pull()</a></code> </p>
         </td>
         <td><p>Pull an image from DockerHub.</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="dot-arglist_get.html">.arglist_get()</a></code> </p>
-        </td>
-        <td><p>Generate vector of arguments</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="dot-arglist_parse.html">.arglist_parse()</a></code> </p>
-        </td>
-        <td><p>Normalise arguments for docker container</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="dot-dirpath_get.html">.dirpath_get()</a></code> </p>
-        </td>
-        <td><p>Convert file path to directory path</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="dot-filestosend_get.html">.filestosend_get()</a></code> </p>
-        </td>
-        <td><p>Determine which arguments are filepaths</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="dot-module_check.html">.module_check()</a></code> </p>
-        </td>
-        <td><p>Check names and structure of a module</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="dot-module_identities.html">.module_identities()</a></code> </p>
-        </td>
-        <td><p>Return identities for a module</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="dot-module_skeleton.html">.module_skeleton()</a></code> </p>
-        </td>
-        <td><p>Generate a skeleton for a module</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="dot-module_travis.html">.module_travis()</a></code> </p>
-        </td>
-        <td><p>Generate Travis-CI file</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="dot-wd_get.html">.wd_get()</a></code> </p>
-        </td>
-        <td><p>Return working directory</p></td>
       </tr><tr>
         
         <td>
@@ -353,78 +441,6 @@
       </tr><tr>
         
         <td>
-          <p><code><a href="log_set.html">log_set()</a></code> </p>
-        </td>
-        <td><p>Set log streams for console output</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="module_details.html">module_details()</a></code> </p>
-        </td>
-        <td><p>Look up details on module(s)</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="module_exists.html">module_exists()</a></code> </p>
-        </td>
-        <td><p>Does module exist?</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="module_help.html">module_help()</a></code> </p>
-        </td>
-        <td><p>Get help for outsider modules</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="module_import.html">module_import()</a></code> </p>
-        </td>
-        <td><p>Import functions from a module</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="module_install.html">module_install()</a></code> </p>
-        </td>
-        <td><p>Install an outsider module</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="module_installed.html">module_installed()</a></code> </p>
-        </td>
-        <td><p>Which outsider modules are installed?</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="module_search.html">module_search()</a></code> </p>
-        </td>
-        <td><p>Search for available outsider modules</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="module_test.html">.module_test()</a></code> </p>
-        </td>
-        <td><p>Test an outsider module</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="module_uninstall.html">module_uninstall()</a></code> </p>
-        </td>
-        <td><p>Uninstall and remove a module</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="outsider-class.html">.outsider_init()</a></code> <code><a href="outsider-class.html">.run(<i>&lt;outsider&gt;</i>)</a></code> </p>
-        </td>
-        <td><p>Construct outsider object</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="outsider.html">outsider</a></code> </p>
-        </td>
-        <td><p>outsider</p></td>
-      </tr><tr>
-        
-        <td>
           <p><code><a href="pkgdetails_get.html">pkgdetails_get()</a></code> </p>
         </td>
         <td><p>Read the package description</p></td>
@@ -487,7 +503,7 @@
         <td>
           <p><code><a href="templates_get.html">templates_get()</a></code> </p>
         </td>
-        <td><p>Retreive template files</p></td>
+        <td><p>Retrieve template files</p></td>
       </tr><tr>
         
         <td>
@@ -514,7 +530,9 @@
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
-      <li><a href="#section-all-functions">All functions</a></li>
+      <li><a href="#section-user">User</a></li>
+      <li><a href="#section-developer">Developer</a></li>
+      <li><a href="#section-internal-functions">Internal functions</a></li>
     </ul>
   </div>
 </div>

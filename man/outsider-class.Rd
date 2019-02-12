@@ -58,6 +58,55 @@ Once a outsider has been defined, the command can be run using
 The \code{arglist}, \code{wd} or \code{files_to_send} do not need to be
 defined for the outsider to be run.
 }
+\examples{
+library(outsider)
+# Set-up: install hello.world, ships with ubuntu
+# we can make simple commands in bash via R
+repo <- 'dombennett/om..hello.world'
+module_install(repo)
+
+# Run echo
+# create a outsider object that contains argument and Docker container details
+otsdr <- outsider::.outsider_init(repo = repo, cmd = 'echo',
+                                  arglist = c('hello world!'))
+# check details
+print(otsdr)
+# run the command
+outsider::.run(otsdr)
+
+# Send a file
+# an existing outsider object can be modified
+tmppth <- tempdir()
+flpth <- file.path(tmppth, 'testfile')
+write(x = 'hello from within a file!', file = flpth)
+otsdr$files_to_send <- flpth
+otsdr$cmd <- 'cat'
+otsdr$arglist <- 'testfile'
+# check details
+print(otsdr)
+# run the command
+outsider::.run(otsdr)
+
+# Return a file
+# an existing outsider object can be modified
+otsdr$files_to_send <- NULL
+otsdr$cmd <- 'touch'
+otsdr$arglist <- 'newfile'
+otsdr$wd <- tmppth  # determines where created files are returned to
+# check details
+print(otsdr)
+# run the command
+outsider::.run(otsdr)
+# check if 'newfile' exists in tempdir()
+nwflpth <- file.path(tmppth, 'newfile')
+(file.exists(nwflpth))
+
+# Clean-up
+rm(otsdr)
+file.remove(flpth)
+file.remove(nwflpth)
+module_uninstall(repo = repo)
+}
 \seealso{
 Other developer: \code{\link{.arglist_get}},
   \code{\link{.arglist_parse}}, \code{\link{.dirpath_get}},
@@ -65,7 +114,7 @@ Other developer: \code{\link{.arglist_get}},
   \code{\link{.module_check}},
   \code{\link{.module_identities}},
   \code{\link{.module_skeleton}},
-  \code{\link{.module_travis}}, \code{\link{.wd_get}},
-  \code{\link{module_test}}
+  \code{\link{.module_test}}, \code{\link{.module_travis}},
+  \code{\link{.wd_get}}
 }
 \concept{developer}

@@ -179,7 +179,7 @@ all filepaths in the arglist will be converted to basenames.</p>
 
     <p>It is important the file paths are normalised, because they will
 not be available to the Docker container. The only files available will
-be those that have been transfered to the container as determined through
+be those that have been transferred to the container as determined through
 the <code><a href='outsider-class.html'>.outsider_init</a></code>. These files will be located in the
 same directory as where the function is called and require no absolute
 file path.</p>
@@ -192,10 +192,28 @@ file path.</p>
   <code><a href='dot-module_check.html'>.module_check</a></code>,
   <code><a href='dot-module_identities.html'>.module_identities</a></code>,
   <code><a href='dot-module_skeleton.html'>.module_skeleton</a></code>,
-  <code><a href='dot-module_travis.html'>.module_travis</a></code>, <code><a href='dot-wd_get.html'>.wd_get</a></code>,
-  <code><a href='module_test.html'>module_test</a></code>, <code><a href='outsider-class.html'>outsider-class</a></code></p></div>
+  <code><a href='dot-module_test.html'>.module_test</a></code>, <code><a href='dot-module_travis.html'>.module_travis</a></code>,
+  <code><a href='dot-wd_get.html'>.wd_get</a></code>, <code><a href='outsider-class.html'>outsider-class</a></code></p></div>
     
 
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/library'>library</a></span>(<span class='no'>outsider</span>)
+<span class='no'>wd</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/file.path'>file.path</a></span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/tempfile'>tempdir</a></span>(), <span class='st'>'results'</span>)
+<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/files2'>dir.create</a></span>(<span class='no'>wd</span>)
+<span class='no'>arglist</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>'-a'</span>, <span class='fl'>10</span>, <span class='st'>'-b'</span>, <span class='st'>'model2'</span>, <span class='st'>'-wd'</span>, <span class='no'>wd</span>, <span class='st'>'--unwanted'</span>)
+<span class='co'># drop unwanted key:value pairs</span>
+(<span class='fu'>.arglist_parse</span>(<span class='kw'>arglist</span> <span class='kw'>=</span> <span class='no'>arglist</span>, <span class='kw'>keyvals_to_drop</span> <span class='kw'>=</span> <span class='st'>'-wd'</span>,
+                <span class='kw'>normalise_paths</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>))</div><div class='output co'>#&gt; [1] "-a"         "10"         "-b"         "model2"     "--unwanted"</div><div class='input'><span class='co'># drop unwanted argument values</span>
+(<span class='fu'>.arglist_parse</span>(<span class='kw'>arglist</span> <span class='kw'>=</span> <span class='no'>arglist</span>, <span class='kw'>vals_to_drop</span> <span class='kw'>=</span> <span class='st'>'--unwanted'</span>,
+                <span class='kw'>normalise_paths</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>))</div><div class='output co'>#&gt; [1] "-a"                      "10"                     
+#&gt; [3] "-b"                      "model2"                 
+#&gt; [5] "-wd"                     "/tmp/Rtmp8w19OF/results"</div><div class='input'><span class='co'># make paths relative, necessary for Docker:</span>
+<span class='co'>#   paths must be relative to the working directory in the container</span>
+(<span class='fu'>.arglist_parse</span>(<span class='kw'>arglist</span> <span class='kw'>=</span> <span class='no'>arglist</span>, <span class='kw'>normalise_paths</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>))</div><div class='output co'>#&gt; [1] "-a"         "10"         "-b"         "model2"     "-wd"       
+#&gt; [6] "results"    "--unwanted"</div><div class='input'>
+
+<span class='co'># clean-up</span>
+<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/unlink'>unlink</a></span>(<span class='no'>wd</span>)</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
@@ -207,7 +225,9 @@ file path.</p>
       <li><a href="#details">Details</a></li>
 
       <li><a href="#see-also">See also</a></li>
-          </ul>
+      
+      <li><a href="#examples">Examples</a></li>
+    </ul>
 
   </div>
 </div>

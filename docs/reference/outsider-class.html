@@ -224,10 +224,110 @@ defined for the outsider to be run.</p>
   <code><a href='dot-module_check.html'>.module_check</a></code>,
   <code><a href='dot-module_identities.html'>.module_identities</a></code>,
   <code><a href='dot-module_skeleton.html'>.module_skeleton</a></code>,
-  <code><a href='dot-module_travis.html'>.module_travis</a></code>, <code><a href='dot-wd_get.html'>.wd_get</a></code>,
-  <code><a href='module_test.html'>module_test</a></code></p></div>
+  <code><a href='dot-module_test.html'>.module_test</a></code>, <code><a href='dot-module_travis.html'>.module_travis</a></code>,
+  <code><a href='dot-wd_get.html'>.wd_get</a></code></p></div>
     
 
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/library'>library</a></span>(<span class='no'>outsider</span>)
+<span class='co'># Set-up: install hello.world, ships with ubuntu</span>
+<span class='co'># we can make simple commands in bash via R</span>
+<span class='no'>repo</span> <span class='kw'>&lt;-</span> <span class='st'>'dombennett/om..hello.world'</span>
+<span class='fu'><a href='module_install.html'>module_install</a></span>(<span class='no'>repo</span>)</div><div class='output co'>#&gt; latest: Pulling from dombennett/om_hello.world
+#&gt; 124c757242f8: Already exists
+#&gt; 9d866f8bde2a: Already exists
+#&gt; fa3f2f277e67: Already exists
+#&gt; 398d32b153e8: Already exists
+#&gt; afde35469481: Already exists
+#&gt; 6376e5eb74c4: Pulling fs layer
+#&gt; 057c1f061444: Pulling fs layer
+#&gt; 6376e5eb74c4: Download complete
+#&gt; 057c1f061444: Verifying Checksum
+#&gt; 057c1f061444: Download complete
+#&gt; 6376e5eb74c4: Pull complete
+#&gt; 057c1f061444: Pull complete
+#&gt; Digest: sha256:f6770b2eea5e5f3d3934a2b1a14acf696675b2086d11227c27b096c9dfabb7dd
+#&gt; Status: Downloaded newer image for dombennett/om_hello.world:latest</div><div class='output co'>#&gt; [1] TRUE</div><div class='input'>
+<span class='co'># Run echo</span>
+<span class='co'># create a outsider object that contains argument and Docker container details</span>
+<span class='no'>otsdr</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>outsider</span><span class='kw ns'>::</span><span class='fu'><a href='https://www.rdocumentation.org/packages/outsider/topics/outsider-class'>.outsider_init</a></span>(<span class='kw'>repo</span> <span class='kw'>=</span> <span class='no'>repo</span>, <span class='kw'>cmd</span> <span class='kw'>=</span> <span class='st'>'echo'</span>,
+                                  <span class='kw'>arglist</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>'hello world!'</span>))
+<span class='co'># check details</span>
+<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/print'>print</a></span>(<span class='no'>otsdr</span>)</div><div class='output co'>#&gt; ─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+#&gt; <span style='font-weight: bold;'>Outsider module:</span><span>
+#&gt; Repo </span><span style='color: #00BB00;'>'dombennett/om..hello.world'</span><span>
+#&gt; Package </span><span style='color: #00BB00;'>'om..hello.world..dombennett'</span><span>
+#&gt; Command </span><span style='color: #00BB00;'>'echo'</span><span>
+#&gt; Args </span><span style='color: #00BB00;'>'hello world!'</span><span>
+#&gt; Files to send 
+#&gt; Working dir 
+#&gt; Container image </span><span style='color: #00BB00;'>'dombennett/om_hello.world'</span><span>
+#&gt; Container name </span><span style='color: #00BB00;'>'hello.world_0'</span><span>
+#&gt; Container tag </span><span style='color: #00BB00;'>'latest'</span><span>
+#&gt; Container status </span><span style='color: #00BB00;'>'Not running'</span><span>
+#&gt; ─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────</div><div class='input'><span class='co'># run the command</span>
+<span class='kw pkg'>outsider</span><span class='kw ns'>::</span><span class='fu'>.run</span>(<span class='no'>otsdr</span>)</div><div class='output co'>#&gt; 71a063d9be639b7074f79f55bc8201d034a22b1a8675fa717a064a8f18e68cad
+#&gt; hello world!
+#&gt; hello.world_0
+#&gt; hello.world_0</div><div class='input'>
+<span class='co'># Send a file</span>
+<span class='co'># an existing outsider object can be modified</span>
+<span class='no'>tmppth</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/tempfile'>tempdir</a></span>()
+<span class='no'>flpth</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/file.path'>file.path</a></span>(<span class='no'>tmppth</span>, <span class='st'>'testfile'</span>)
+<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/write'>write</a></span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='st'>'hello from within a file!'</span>, <span class='kw'>file</span> <span class='kw'>=</span> <span class='no'>flpth</span>)
+<span class='no'>otsdr</span>$<span class='no'>files_to_send</span> <span class='kw'>&lt;-</span> <span class='no'>flpth</span>
+<span class='no'>otsdr</span>$<span class='no'>cmd</span> <span class='kw'>&lt;-</span> <span class='st'>'cat'</span>
+<span class='no'>otsdr</span>$<span class='no'>arglist</span> <span class='kw'>&lt;-</span> <span class='st'>'testfile'</span>
+<span class='co'># check details</span>
+<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/print'>print</a></span>(<span class='no'>otsdr</span>)</div><div class='output co'>#&gt; ─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+#&gt; </span><span style='font-weight: bold;'>Outsider module:</span><span>
+#&gt; Repo </span><span style='color: #00BB00;'>'dombennett/om..hello.world'</span><span>
+#&gt; Package </span><span style='color: #00BB00;'>'om..hello.world..dombennett'</span><span>
+#&gt; Command </span><span style='color: #00BB00;'>'cat'</span><span>
+#&gt; Args </span><span style='color: #00BB00;'>'testfile'</span><span>
+#&gt; Files to send /tmp/Rtmp8w19OF/testfile
+#&gt; Working dir 
+#&gt; Container image </span><span style='color: #00BB00;'>'dombennett/om_hello.world'</span><span>
+#&gt; Container name </span><span style='color: #00BB00;'>'hello.world_0'</span><span>
+#&gt; Container tag </span><span style='color: #00BB00;'>'latest'</span><span>
+#&gt; Container status </span><span style='color: #00BB00;'>'Not running'</span><span>
+#&gt; ─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────</div><div class='input'><span class='co'># run the command</span>
+<span class='kw pkg'>outsider</span><span class='kw ns'>::</span><span class='fu'>.run</span>(<span class='no'>otsdr</span>)</div><div class='output co'>#&gt; 621820033edadba25e45890374113e595da5e73f26bafe1bfd879a17c7df5f0c
+#&gt; hello from within a file!
+#&gt; hello.world_0
+#&gt; hello.world_0</div><div class='input'>
+<span class='co'># Return a file</span>
+<span class='co'># an existing outsider object can be modified</span>
+<span class='no'>otsdr</span>$<span class='no'>files_to_send</span> <span class='kw'>&lt;-</span> <span class='kw'>NULL</span>
+<span class='no'>otsdr</span>$<span class='no'>cmd</span> <span class='kw'>&lt;-</span> <span class='st'>'touch'</span>
+<span class='no'>otsdr</span>$<span class='no'>arglist</span> <span class='kw'>&lt;-</span> <span class='st'>'newfile'</span>
+<span class='no'>otsdr</span>$<span class='no'>wd</span> <span class='kw'>&lt;-</span> <span class='no'>tmppth</span>  <span class='co'># determines where created files are returned to</span>
+<span class='co'># check details</span>
+<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/print'>print</a></span>(<span class='no'>otsdr</span>)</div><div class='output co'>#&gt; ─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+#&gt; </span><span style='font-weight: bold;'>Outsider module:</span><span>
+#&gt; Repo </span><span style='color: #00BB00;'>'dombennett/om..hello.world'</span><span>
+#&gt; Package </span><span style='color: #00BB00;'>'om..hello.world..dombennett'</span><span>
+#&gt; Command </span><span style='color: #00BB00;'>'touch'</span><span>
+#&gt; Args </span><span style='color: #00BB00;'>'newfile'</span><span>
+#&gt; Files to send 
+#&gt; Working dir </span><span style='color: #00BB00;'>'/tmp/Rtmp8w19OF'</span><span>
+#&gt; Container image </span><span style='color: #00BB00;'>'dombennett/om_hello.world'</span><span>
+#&gt; Container name </span><span style='color: #00BB00;'>'hello.world_0'</span><span>
+#&gt; Container tag </span><span style='color: #00BB00;'>'latest'</span><span>
+#&gt; Container status </span><span style='color: #00BB00;'>'Not running'</span><span>
+#&gt; ─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────</div><div class='input'><span class='co'># run the command</span>
+<span class='kw pkg'>outsider</span><span class='kw ns'>::</span><span class='fu'>.run</span>(<span class='no'>otsdr</span>)</div><div class='output co'>#&gt; d817530b97a373f0e64dde5d66b2da3207dd7320efd3f3ad89b09a6e97ac2b38
+#&gt; hello.world_0
+#&gt; hello.world_0</div><div class='input'><span class='co'># check if 'newfile' exists in tempdir()</span>
+<span class='no'>nwflpth</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/file.path'>file.path</a></span>(<span class='no'>tmppth</span>, <span class='st'>'newfile'</span>)
+(<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/files'>file.exists</a></span>(<span class='no'>nwflpth</span>))</div><div class='output co'>#&gt; [1] TRUE</div><div class='input'>
+<span class='co'># Clean-up</span>
+<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/rm'>rm</a></span>(<span class='no'>otsdr</span>)
+<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/files'>file.remove</a></span>(<span class='no'>flpth</span>)</div><div class='output co'>#&gt; [1] TRUE</div><div class='input'><span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/files'>file.remove</a></span>(<span class='no'>nwflpth</span>)</div><div class='output co'>#&gt; [1] TRUE</div><div class='input'><span class='fu'><a href='module_uninstall.html'>module_uninstall</a></span>(<span class='kw'>repo</span> <span class='kw'>=</span> <span class='no'>repo</span>)</div><div class='output co'>#&gt; Untagged: dombennett/om_hello.world:latest
+#&gt; Untagged: dombennett/om_hello.world@sha256:f6770b2eea5e5f3d3934a2b1a14acf696675b2086d11227c27b096c9dfabb7dd
+#&gt; Deleted: sha256:c0cb087733b9adadb450360477d78b2a7e261f0bdec804f36ce3ba41902fc2d0
+#&gt; Deleted: sha256:42732d30db60051011756269795de113c9d8265adc4a5149f1f94bb7a07e4c13
+#&gt; Deleted: sha256:c80459014be1f9d2908724be50a24c545c98a9fb5a4c25a1effcec93ddcac6c8</div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
@@ -239,7 +339,9 @@ defined for the outsider to be run.</p>
       <li><a href="#details">Details</a></li>
 
       <li><a href="#see-also">See also</a></li>
-          </ul>
+      
+      <li><a href="#examples">Examples</a></li>
+    </ul>
 
   </div>
 </div>

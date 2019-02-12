@@ -14,7 +14,21 @@ tbl_df
 }
 \description{
 Return a tbl_df of information for outsider module(s).
-If \code{repo} is NULL, will return details on all avaiable modules.
+If \code{repo} is NULL, will return details on all available modules.
+}
+\examples{
+library(outsider)
+# return table of ALL available modules on GitHub
+# NOT RUN - takes too long
+# (available_modules <- module_search())
+
+# look-up whether specific module exists
+repo <- 'dombennett/om..goodbye.world'
+(suppressWarnings(module_exists(repo = repo)))
+repo <- 'dombennett/om..hello.world'
+(module_exists(repo = repo))
+# get details on specific module(s)
+(module_details(repo = repo))
 }
 \seealso{
 Other user: \code{\link{log_set}},

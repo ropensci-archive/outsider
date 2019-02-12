@@ -6,7 +6,8 @@
 #' modules.
 #' @param log Output stream one of program_out, program_err, docker_out or
 #' docker_err
-#' @param val Either logcal, file or connection.
+#' @param val Either logical, file or connection.
+#' @example examples/log_set.R
 #' @details
 #' See \code{\link[sys]{exec}}.
 #' @return NULL

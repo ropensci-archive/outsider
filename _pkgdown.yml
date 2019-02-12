@@ -1,0 +1,69 @@
+reference:
+- title: User
+  desc: Install and run modules
+  contents:
+    - log_set
+    - module_details
+    - module_exists
+    - module_help
+    - module_import
+    - module_install
+    - module_installed
+    - module_search
+    - module_uninstall
+    - outsider
+- title: Developer
+  desc: Tools for creating modules
+  contents:
+    - starts_with("\\.")
+- title: Internal functions
+  desc: Private internal functions, documented here for openness
+  contents:
+    - all_search
+    - build_status
+    - container_init
+    - default_log_set
+    - docker_build
+    - docker_cmd
+    - docker_cp
+    - docker_img_ls
+    - docker_img_rm
+    - docker_ps_count
+    - docker_pull
+    - examples_test
+    - file_create
+    - fnames_get
+    - ids_get
+    - import_test
+    - install
+    - install_test
+    - is_docker_available
+    - is_docker_installed
+    - is_docker_running
+    - is_filepath
+    - is_installed
+    - is_repo_name
+    - log_get
+    - pkgdetails_get
+    - pkgnm_to_img
+    - pkgnm_to_prgm
+    - pkgnm_to_repo
+    - read_yaml
+    - repo_search
+    - repo_to_img
+    - repo_to_pkgnm
+    - string_replace
+    - tags
+    - templates_get
+    - test
+    - to_basename
+    - yaml
+
+articles:
+- title: All articles
+  desc: Tutorials for using and developing with `outsider`
+  contents:
+  - '`available`'
+  - '`phylogenetic_pipeline`'
+  - '`build`'
+  - '`advanced_build`'

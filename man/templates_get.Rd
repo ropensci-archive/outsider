@@ -2,7 +2,7 @@
 % Please edit documentation in R/build.R
 \name{templates_get}
 \alias{templates_get}
-\title{Retreive template files}
+\title{Retrieve template files}
 \usage{
 templates_get()
 }

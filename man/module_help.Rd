@@ -15,6 +15,22 @@ module_help(repo, fname = NULL)
 Look up help files for specific outsider module functions or
 whole modules.
 }
+\examples{
+library(outsider)
+# simplest repo
+repo <- 'dombennett/om..hello.world'
+# install
+module_install(repo = repo)
+# get help
+module_help(repo = repo)
+# import function
+hello_world <- module_import(fname = 'hello_world', repo = repo)
+# run function
+hello_world()
+# uninstall
+rm(hello_world)
+module_uninstall(repo = repo)
+}
 \seealso{
 Other user: \code{\link{log_set}},
   \code{\link{module_details}},

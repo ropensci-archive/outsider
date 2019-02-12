@@ -64,7 +64,7 @@ cat('...')
 # Alignment
 
 Now we have written our sequences to a text-based `.fasta` file, we need to
-aign them! To do this, we can use
+align them! To do this, we can use
 [`mafft`](https://mafft.cbrc.jp/alignment/software/). We first need to install
 the module and then import the key function, `mafft`. After doing this, we can
 call the `mafft` program using the same arguments that we would if it were

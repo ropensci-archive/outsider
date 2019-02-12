@@ -201,8 +201,8 @@ By default, if no tag is provided,  Docker will use 'latest'.
 
 ## Step 3: Document and build R package
 
-If the Docker image is successfuly built, we can now install the R package. To
-do this we can run somme functions from within R using the [`devtools`](https://github.com/r-lib/devtools) package.
+If the Docker image is successfully built, we can now install the R package. To
+do this we can run some functions from within R using the [`devtools`](https://github.com/r-lib/devtools) package.
 
 ```{r build-package}
 # first document

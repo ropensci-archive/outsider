@@ -16,6 +16,11 @@ tbl_df
 Returns tbl_df of details for all outsider modules
 installed on the user's computer.
 }
+\examples{
+library(outsider)
+# check what modules are installed
+(module_installed())
+}
 \seealso{
 Other user: \code{\link{log_set}},
   \code{\link{module_details}},

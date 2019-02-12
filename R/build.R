@@ -73,7 +73,7 @@ print.ids <- function(x, ...) {
 }
 
 #' @name templates_get
-#' @title Retreive template files
+#' @title Retrieve template files
 #' @description Return template files for an outsider module.
 #' @return character vector
 #' @family private
@@ -211,11 +211,12 @@ file_create <- function(x, flpth) {
 #' @return Logical
 #' @export
 #' @family developer
+#' @example examples/.module_build.R
 .module_check <- function(flpth = NULL) {
   TRUE
 }
 
-#' @name module_test
+#' @name .module_test
 #' @title Test an outsider module
 #' @description Ensure an outsider module builds, imports correctly and all
 #' its functions successfully complete.
@@ -225,6 +226,7 @@ file_create <- function(x, flpth) {
 #' @param verbose Print docker and program info to console
 #' @return Logical
 #' @export
+#' @example examples/.module_test.R
 #' @family developer
 .module_test <- function(repo, verbose = FALSE) {
   res <- FALSE

@@ -7,6 +7,18 @@ gh_search_repo_url <- paste0(gh_api_url, '/search/repositories')
 gh_raw_url <- 'https://raw.githubusercontent.com/'
 travis_api_url <- 'https://api.travis-ci.org/repos/'
 
+# Auth token
+authtoken_get <- function(joiner = c('?', '&')) {
+  joiner <- match.arg(joiner)
+  tkn <- Sys.getenv("GITHUB_PAT")
+  if (!is.null(tkn)) {
+    tkn <- paste0(joiner, 'access_token=', tkn)
+  } else {
+    tkn <- NULL
+  }
+  tkn
+}
+
 # Private ----
 #' @name repo_search
 #' @title Search for repository
@@ -15,7 +27,8 @@ travis_api_url <- 'https://api.travis-ci.org/repos/'
 #' @return data.frame
 #' @family private-search
 repo_search <- function(repo) {
-  search_args <- paste0('?q=', repo, '&', 'Type=Repositories')
+  search_args <- paste0('?q=', repo, '&', 'Type=Repositories',
+                        authtoken_get('&'))
   github_res <- jsonlite::fromJSON(paste0(gh_search_repo_url, search_args))
   if (github_res[['total_count']] == 0) {
     warning('No ', char(repo), ' found.', call. = FALSE)
@@ -36,7 +49,7 @@ repo_search <- function(repo) {
 #' @family private-search
 all_search <- function() {
   search_args <- paste0('?q=om..+in:name+outsider-module+in:description',
-                        '&', 'Type=Repositories')
+                        '&', 'Type=Repositories', authtoken_get('&'))
   github_res <- jsonlite::fromJSON(paste0(gh_search_repo_url, search_args))
   if (github_res[['incomplete_results']]) {
     warning('Not all repos discovered.')
@@ -110,7 +123,8 @@ yaml <- function(repos) {
 #' @family private-search
 tags <- function(repos) {
   fetch <- function(repo) {
-    api_url <- paste0(gh_api_url, '/repos/', repo, '/contents/dockerfiles')
+    api_url <- paste0(gh_api_url, '/repos/', repo, '/contents/dockerfiles',
+                      authtoken_get('?'))
     raw_df <- try(jsonlite::fromJSON(api_url), silent = TRUE)
     if (!inherits(raw_df, 'try-error')) {
       tag <- raw_df[ ,'name']
@@ -132,6 +146,7 @@ tags <- function(repos) {
 #' @title Search for available outsider modules
 #' @description Return a list of available outsider modules.
 #' @return Character vector
+#' @example examples/module_search.R
 #' @export
 #' @family user
 module_search <- function() {
@@ -142,9 +157,10 @@ module_search <- function() {
 #' @name module_details
 #' @title Look up details on module(s)
 #' @description Return a tbl_df of information for outsider module(s).
-#' If \code{repo} is NULL, will return details on all avaiable modules.
+#' If \code{repo} is NULL, will return details on all available modules.
 #' @param repo Vector of one or more outsider module repositories, default NULL.
 #' @return tbl_df
+#' @example examples/module_search.R
 #' @export
 #' @family user
 module_details <- function(repo = NULL) {
@@ -188,6 +204,7 @@ module_details <- function(repo = NULL) {
 #' build status.
 #' @param repo Module repo(s)
 #' @return Logical
+#' @example examples/module_search.R
 #' @export
 #' @family user
 module_exists <- function(repo) {

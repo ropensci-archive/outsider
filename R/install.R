@@ -53,6 +53,7 @@ install <- function(repo, tag, dockerfile_url = NULL) {
 #' @param tag Module version, default latest. Character.
 #' @param manual Build the docker image? Default FALSE. Logical.
 #' @return Logical
+#' @example examples/module_install.R
 #' @export
 #' @family user
 module_install <- function(repo, tag = 'latest', manual = FALSE) {
@@ -91,6 +92,7 @@ module_install <- function(repo, tag = 'latest', manual = FALSE) {
 #' @param repo Module repo
 #' @details If program is successfully removed from your system, TRUE is
 #' returned else FALSE.
+#' @example examples/module_install.R
 #' @return Logical
 #' @export
 #' @family user
@@ -116,6 +118,7 @@ pkg_rm <- function(...) {
 #' installed on the user's computer.
 #' @param show_images Look-up the module images? Default FALSE.
 #' @return tbl_df
+#' @example examples/module_installed.R
 #' @export
 #' @family user
 module_installed <- function(show_images = FALSE) {
@@ -150,6 +153,7 @@ installed_pkgs <- function(...) {
 #' @param fname Function name to import
 #' @details If program is successfully removed from your system, TRUE is
 #' returned else FALSE.
+#' @example examples/module_install.R
 #' @return Function
 #' @export
 #' @family user
@@ -170,6 +174,7 @@ nmspc_get <- function(...) {
 #' whole modules.
 #' @param repo Module repo
 #' @param fname Function name
+#' @example examples/module_install.R
 #' @return NULL
 #' @export
 #' @family user

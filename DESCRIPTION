@@ -15,6 +15,7 @@ RoxygenNote: 6.1.1
 SystemRequirements: docker (>=18.0.0)
 URL: https://antonellilab.github.io/outsider
 BugReports: https://github.com/antonellilab/outsider/issues
+Language: en-GB
 Depends:
     R (>= 3.3.0)
 Imports:

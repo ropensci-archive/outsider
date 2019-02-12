@@ -18,6 +18,16 @@ dropping the file name and extension. If \code{flpth} is already a directory
 path, the argument will be returned unchanged. If nothing is provided,
 nothing is returned (i.e. \code{character(0)}).
 }
+\examples{
+library(outsider)
+# get the parent directory from a filepath
+drpth <- tempdir()
+flpth <- file.path(drpth, 'testfile')
+file.create(flpth)
+(.dirpath_get(flpth = flpth) == drpth)
+(.dirpath_get(flpth = drpth) == drpth)
+file.remove(flpth)
+}
 \seealso{
 Other developer: \code{\link{.arglist_get}},
   \code{\link{.arglist_parse}},
@@ -25,7 +35,7 @@ Other developer: \code{\link{.arglist_get}},
   \code{\link{.module_check}},
   \code{\link{.module_identities}},
   \code{\link{.module_skeleton}},
-  \code{\link{.module_travis}}, \code{\link{.wd_get}},
-  \code{\link{module_test}}, \code{\link{outsider-class}}
+  \code{\link{.module_test}}, \code{\link{.module_travis}},
+  \code{\link{.wd_get}}, \code{\link{outsider-class}}
 }
 \concept{developer}

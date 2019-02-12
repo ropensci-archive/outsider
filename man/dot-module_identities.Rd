@@ -23,7 +23,7 @@ Other developer: \code{\link{.arglist_get}},
   \code{\link{.filestosend_get}},
   \code{\link{.module_check}},
   \code{\link{.module_skeleton}},
-  \code{\link{.module_travis}}, \code{\link{.wd_get}},
-  \code{\link{module_test}}, \code{\link{outsider-class}}
+  \code{\link{.module_test}}, \code{\link{.module_travis}},
+  \code{\link{.wd_get}}, \code{\link{outsider-class}}
 }
 \concept{developer}

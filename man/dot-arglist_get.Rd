@@ -16,6 +16,12 @@ Character vector
 Convert all the arguments passed to this function, including
 those contained in '...', into character vector.
 }
+\examples{
+library(outsider)
+# return a character vector of all arguments provided
+.arglist_get('any', 'number', 'of', 'arguments...', 'number', 'or', 'anything',
+             1L, TRUE)
+}
 \seealso{
 Other developer: \code{\link{.arglist_parse}},
   \code{\link{.dirpath_get}},
@@ -23,7 +29,7 @@ Other developer: \code{\link{.arglist_parse}},
   \code{\link{.module_check}},
   \code{\link{.module_identities}},
   \code{\link{.module_skeleton}},
-  \code{\link{.module_travis}}, \code{\link{.wd_get}},
-  \code{\link{module_test}}, \code{\link{outsider-class}}
+  \code{\link{.module_test}}, \code{\link{.module_travis}},
+  \code{\link{.wd_get}}, \code{\link{outsider-class}}
 }
 \concept{developer}

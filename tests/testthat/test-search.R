@@ -31,6 +31,10 @@ mock_all_search_bad <- function(...) {
 
 # RUNNING
 context('Testing \'search\'')
+test_that('authtoken_get() works', {
+  expect_true(is.character(outsider:::authtoken_get()) |
+                is.null(outsider:::authtoken_get()))
+})
 test_that('repo_search() works', {
   with_mock(
     `jsonlite::fromJSON` = mock_repo_search_0,

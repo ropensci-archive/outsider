@@ -221,9 +221,10 @@
   "codeRepository": "https://antonellilab.github.io/outsider",
   "releaseNotes": "https://github.com/AntonelliLab/outsider/blob/master/NEWS.md",
   "readme": "https://github.com/AntonelliLab/outsider/blob/master/README.md",
-  "fileSize": "38.225KB",
+  "fileSize": "40.077KB",
   "contIntegration": [
     "https://travis-ci.org/AntonelliLab/outsider",
     "https://coveralls.io/github/AntonelliLab/outsider?branch=master"
-  ]
+  ],
+  "developmentStatus": "https://www.repostatus.org/#active"
 }

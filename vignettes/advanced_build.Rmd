@@ -30,5 +30,5 @@ All modules have the following naming convention:
 
 These naming conventions make modules discoverable on GitHub (searches are made
 of R packages beginning with `om..`). Both the R package and Docker image
-names derive from the GitHub repo name. By being formatted in a predicatble way,
+names derive from the GitHub repo name. By being formatted in a predictable way,
 the contents of a module can be more easily tracked.

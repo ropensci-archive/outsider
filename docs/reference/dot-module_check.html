@@ -165,10 +165,48 @@ module are correct.</p>
   <code><a href='dot-filestosend_get.html'>.filestosend_get</a></code>,
   <code><a href='dot-module_identities.html'>.module_identities</a></code>,
   <code><a href='dot-module_skeleton.html'>.module_skeleton</a></code>,
-  <code><a href='dot-module_travis.html'>.module_travis</a></code>, <code><a href='dot-wd_get.html'>.wd_get</a></code>,
-  <code><a href='module_test.html'>module_test</a></code>, <code><a href='outsider-class.html'>outsider-class</a></code></p></div>
+  <code><a href='dot-module_test.html'>.module_test</a></code>, <code><a href='dot-module_travis.html'>.module_travis</a></code>,
+  <code><a href='dot-wd_get.html'>.wd_get</a></code>, <code><a href='outsider-class.html'>outsider-class</a></code></p></div>
     
 
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/library'>library</a></span>(<span class='no'>outsider</span>)
+<span class='co'># build a skeleton package</span>
+<span class='no'>flpth</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/tempfile'>tempdir</a></span>()
+<span class='fu'><a href='dot-module_skeleton.html'>.module_skeleton</a></span>(<span class='kw'>program_name</span> <span class='kw'>=</span> <span class='st'>'example'</span>, <span class='kw'>github_user</span> <span class='kw'>=</span> <span class='st'>'github_user'</span>,
+                 <span class='kw'>docker_user</span> <span class='kw'>=</span> <span class='st'>'docker_user'</span>, <span class='kw'>flpth</span> <span class='kw'>=</span> <span class='no'>flpth</span>)
+<span class='co'># look-up module user and program name/ids</span>
+<span class='co'># note: "om.." is added to the beginning of the program name</span>
+<span class='no'>mdl_pth</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/file.path'>file.path</a></span>(<span class='no'>flpth</span>, <span class='st'>'om..example'</span>)
+(<span class='no'>ids</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='dot-module_identities.html'>.module_identities</a></span>(<span class='kw'>flpth</span> <span class='kw'>=</span> <span class='no'>mdl_pth</span>))</div><div class='output co'>#&gt; R package name: <span style='color: #00BB00;'>'om..example..github_user'</span><span>
+#&gt; GitHub repo: </span><span style='color: #00BB00;'>'github_user/om..example'</span><span>
+#&gt; Docker images: </span><span style='color: #00BB00;'>'docker_user/om_example_github:latest'</span><span></div><div class='input'><span class='co'># generate .travis.yml</span>
+<span class='fu'><a href='dot-module_travis.html'>.module_travis</a></span>(<span class='kw'>repo</span> <span class='kw'>=</span> <span class='no'>ids</span>$<span class='no'>`GitHub repo`</span>, <span class='kw'>flpth</span> <span class='kw'>=</span> <span class='no'>mdl_pth</span>)
+<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/cat'>cat</a></span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/readLines'>readLines</a></span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/file.path'>file.path</a></span>(<span class='no'>mdl_pth</span>, <span class='st'>'.travis.yml'</span>)), <span class='kw'>sep</span> <span class='kw'>=</span> <span class='st'>'\n'</span>)</div><div class='output co'>#&gt; language: r
+#&gt; latex: false
+#&gt; fortran: false
+#&gt; pandoc: false
+#&gt; 
+#&gt; warnings_are_errors: true
+#&gt; sudo: required
+#&gt; 
+#&gt; services:
+#&gt;   - docker
+#&gt; 
+#&gt; addons:
+#&gt;   apt:
+#&gt;     packages:
+#&gt;       - libapparmor-dev
+#&gt;   
+#&gt; r_github_packages:
+#&gt;   - antonellilab/outsider
+#&gt;   
+#&gt; script:
+#&gt;   - Rscript -e 'outsider::.module_test(repo = "github_user/om..example")'</div><div class='input'><span class='co'># check the package is formatted correctly</span>
+<span class='fu'>.module_check</span>(<span class='kw'>flpth</span> <span class='kw'>=</span> <span class='no'>mdl_pth</span>)</div><div class='output co'>#&gt; [1] TRUE</div><div class='input'>
+
+<span class='co'># clean-up</span>
+<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/unlink'>unlink</a></span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='no'>mdl_pth</span>, <span class='kw'>recursive</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
@@ -178,7 +216,9 @@ module are correct.</p>
       <li><a href="#value">Value</a></li>
 
       <li><a href="#see-also">See also</a></li>
-          </ul>
+      
+      <li><a href="#examples">Examples</a></li>
+    </ul>
 
   </div>
 </div>

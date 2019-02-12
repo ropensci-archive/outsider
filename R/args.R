@@ -40,6 +40,7 @@ is_filepath <- function(x) {
 #' those contained in '...', into character vector.
 #' @param ... Any number of arguments
 #' @return Character vector
+#' @example examples/.arglist_get.R
 #' @export
 #' @family developer
 .arglist_get <- function(...) {
@@ -56,6 +57,7 @@ is_filepath <- function(x) {
 #' @param arglist Character vector of arguments
 #' @param wd Working directory in which to look for files
 #' @return Character vector
+#' @example examples/.filestosend_get.R
 #' @export
 #' @family developer
 .filestosend_get <- function(arglist, wd = NULL) {
@@ -98,6 +100,7 @@ is_filepath <- function(x) {
 #' @param key Argument key identifying the working directory, e.g. -wd
 #' @param i Index in the arglist that determines the working directory, e.g. 1.
 #' @return Character
+#' @example examples/.wd_get.R
 #' @export
 #' @family developer
 .wd_get <- function(arglist, key = NULL, i = NULL) {
@@ -125,6 +128,7 @@ is_filepath <- function(x) {
 #' @param flpth File path for which directory path will be returned.
 #' @return Character
 #' @export
+#' @example examples/.dirpath_get.R
 #' @family developer
 .dirpath_get <- function(flpth) {
   if (length(flpth) == 0) {
@@ -150,7 +154,7 @@ is_filepath <- function(x) {
 #' all filepaths in the arglist will be converted to basenames.
 #' @details It is important the file paths are normalised, because they will
 #' not be available to the Docker container. The only files available will
-#' be those that have been transfered to the container as determined through
+#' be those that have been transferred to the container as determined through
 #' the \code{\link{.outsider_init}}. These files will be located in the
 #' same directory as where the function is called and require no absolute
 #' file path.
@@ -159,6 +163,7 @@ is_filepath <- function(x) {
 #' @param vals_to_drop Specific values to drop, e.g. --verbose.
 #' @param normalise_paths Reduce paths to basenames? Default, TRUE.
 #' @return Character vector
+#' @example examples/.arglist_parse.R
 #' @export
 #' @family developer
 .arglist_parse <- function(arglist, keyvals_to_drop = NULL, vals_to_drop = NULL,

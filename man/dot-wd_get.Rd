@@ -33,6 +33,15 @@ found in the arguments, the function will return the R session's working
 directory.
 If no arguments are provided, returns empty character vector.
 }
+\examples{
+library(outsider)
+# wd is determined by key argument
+arglist <- c('-a', 10, '-wd', 'path/to/wd', '-b', 'model2')
+(.wd_get(arglist = arglist, key = '-wd'))
+# wd is determined by an index
+arglist <- c('path/to/wd', '-a', 10, '-b', 'model2')
+(.wd_get(arglist = arglist, i = 1))
+}
 \seealso{
 Other developer: \code{\link{.arglist_get}},
   \code{\link{.arglist_parse}}, \code{\link{.dirpath_get}},
@@ -40,7 +49,7 @@ Other developer: \code{\link{.arglist_get}},
   \code{\link{.module_check}},
   \code{\link{.module_identities}},
   \code{\link{.module_skeleton}},
-  \code{\link{.module_travis}}, \code{\link{module_test}},
+  \code{\link{.module_test}}, \code{\link{.module_travis}},
   \code{\link{outsider-class}}
 }
 \concept{developer}
