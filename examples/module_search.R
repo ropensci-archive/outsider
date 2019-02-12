@@ -4,8 +4,9 @@ library(outsider)
 # (available_modules <- module_search())
 
 # look-up whether specific module exists
-repo <- 'dombennett/om..goodbye.world'
-(suppressWarnings(module_exists(repo = repo)))
+# NOT RUN
+# repo <- 'dombennett/om..goodbye.world'
+# (suppressWarnings(module_exists(repo = repo)))
 repo <- 'dombennett/om..hello.world'
 (module_exists(repo = repo))
 # get details on specific module(s)

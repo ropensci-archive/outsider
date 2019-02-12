@@ -21,9 +21,10 @@ See \code{\link[sys]{exec}}.
 }
 \examples{
 library(outsider)
-# install and import
 repo <- 'dombennett/om..hello.world'
-module_install(repo = repo)
+# if not installed, install
+installed <- module_installed()
+if (!repo \%in\% installed[['repo']]) module_install(repo)
 hello_world <- module_import(fname = 'hello_world', repo = repo)
 
 # control the log stream
@@ -37,10 +38,6 @@ file.remove(tmpfl)
 log_set(log = 'program_out', val = TRUE)
 log_set(log = 'docker_out', val = TRUE)
 hello_world()
-
-# uninstall
-rm(hello_world)
-module_uninstall(repo = repo)
 }
 \seealso{
 Other user: \code{\link{module_details}},

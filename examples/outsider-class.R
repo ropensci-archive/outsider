@@ -2,7 +2,9 @@ library(outsider)
 # Set-up: install hello.world, ships with ubuntu
 # we can make simple commands in bash via R
 repo <- 'dombennett/om..hello.world'
-module_install(repo)
+# if not installed, install
+installed <- module_installed()
+if (!repo %in% installed[['repo']]) module_install(repo)
 
 # Run echo
 # create a outsider object that contains argument and Docker container details
@@ -11,7 +13,8 @@ otsdr <- outsider::.outsider_init(repo = repo, cmd = 'echo',
 # check details
 print(otsdr)
 # run the command
-outsider::.run(otsdr)
+# NOT RUN
+# outsider::.run(otsdr)
 
 # Send a file
 # an existing outsider object can be modified
@@ -44,4 +47,3 @@ nwflpth <- file.path(tmppth, 'newfile')
 rm(otsdr)
 file.remove(flpth)
 file.remove(nwflpth)
-module_uninstall(repo = repo)
