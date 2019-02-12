@@ -11,7 +11,7 @@ travis_api_url <- 'https://api.travis-ci.org/repos/'
 authtoken_get <- function(joiner = c('?', '&')) {
   joiner <- match.arg(joiner)
   tkn <- Sys.getenv("GITHUB_PAT")
-  if (!is.null(tkn)) {
+  if (nchar(tkn) > 0) {
     tkn <- paste0(joiner, 'access_token=', tkn)
   } else {
     tkn <- NULL
