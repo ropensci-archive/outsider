@@ -50,7 +50,7 @@ arglist <- c('-a', 10, '-b', 'model2', '-wd', wd, '--unwanted')
 
 
 # clean-up
-unlink(wd)
+unlink(wd, recursive = TRUE)
 }
 \seealso{
 Other developer: \code{\link{.arglist_get}},

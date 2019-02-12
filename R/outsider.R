@@ -53,6 +53,7 @@ NULL
 #' @export
 #' @example examples/outsider-class.R
 #' @family developer
+# TODO: example needs to avoid pulling from GitHub over and over.
 .outsider_init <- function(repo, cmd = NA, arglist = NULL, wd = NULL,
                            files_to_send = NULL, ignore_errors = FALSE) {
   pkgnm <- repo_to_pkgnm(repo = repo)

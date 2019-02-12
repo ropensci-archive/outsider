@@ -131,6 +131,7 @@ tags <- function(repos) {
       download_url <- paste0(gh_raw_url, repo, '/master/dockerfiles/',
                              raw_df[ ,'name'], '/Dockerfile')
     } else {
+      warning('Unable to fetch data from GitHub for ', char(repo))
       download_url <- tag <- ''
     }
     data.frame(repo = repo, tag = tag, download_url = download_url,

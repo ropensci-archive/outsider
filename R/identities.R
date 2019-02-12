@@ -17,8 +17,13 @@ ids_get <- function(pkgnm) {
   imgs <- docker_img_ls()
   #print(imgs)
   if ('tag' %in% colnames(imgs)) {
-    tag <- imgs[imgs[['repository']] == img, 'tag'][[1]]
-    tag <- tag[[1]]
+    pull <- imgs[['repository']] == img
+    if (any(pull)) {
+      tag <- imgs[pull, 'tag'][[1]]
+      tag <- tag[[1]]
+    } else {
+      stop(char(repo), ' is missing its Docker image, try reinstalling.')
+    }
   } else {
     # Sometimes there is no tag column (?)
     tag <- 'latest'
