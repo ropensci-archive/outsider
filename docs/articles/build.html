@@ -190,16 +190,16 @@ WORKDIR /working_dir</code></pre>
 
 
 ## Step 1/3 : FROM ubuntu:latest
-##  ---&gt; 93fd78260bd1
+##  ---&gt; 16508e5c265d
 ## Step 2/3 : RUN mkdir /working_dir
-##  ---&gt; Running in 085559171fb9
-## Removing intermediate container 085559171fb9
-##  ---&gt; d6c93793cf1c
+##  ---&gt; Running in 1d052131fb0c
+## Removing intermediate container 1d052131fb0c
+##  ---&gt; ef71eadff5a4
 ## Step 3/3 : WORKDIR /working_dir
-##  ---&gt; Running in 7aeb0c3abfed
-## Removing intermediate container 7aeb0c3abfed
-##  ---&gt; bee413fe99b2
-## Successfully built bee413fe99b2
+##  ---&gt; Running in 5e75ecdc384b
+## Removing intermediate container 5e75ecdc384b
+##  ---&gt; b5f0607f424c
+## Successfully built b5f0607f424c
 ## Successfully tagged dombennett/om_echo:latest</code></pre>
 <blockquote>
 <p><strong>What is a tag?</strong> A Docker tag is akin to the version number of the image. By default, if no tag is provided, Docker will use ‘latest’.</p>
@@ -212,22 +212,48 @@ WORKDIR /working_dir</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># first document</span>
 devtools<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/devtools/topics/document">document</a></span>(<span class="st">'om..echo'</span>)</code></pre></div>
 <pre><code>## Updating om..echo..dombennett documentation</code></pre>
-<pre><code>## Loading om..echo..dombennett</code></pre>
 <pre><code>## First time using roxygen2. Upgrading automatically...</code></pre>
-<pre><code>## Updating roxygen version in /Users/djb208/Coding/outsider/vignettes/om..echo/DESCRIPTION</code></pre>
+<pre><code>## Updating roxygen version in /home/dom/Coding/outsider/vignettes/om..echo/DESCRIPTION</code></pre>
+<pre><code>## Writing NAMESPACE</code></pre>
+<pre><code>## Loading om..echo..dombennett</code></pre>
 <pre><code>## Writing NAMESPACE
-## Writing NAMESPACE
 ## Writing echo.Rd</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># then install</span>
 devtools<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/devtools/topics/install">install</a></span>(<span class="st">'om..echo'</span>)</code></pre></div>
-<pre><code>## Installing om..echo..dombennett</code></pre>
-<pre><code>## '/Library/Frameworks/R.framework/Resources/bin/R' --no-site-file  \
-##   --no-environ --no-save --no-restore --quiet CMD INSTALL  \
-##   '/Users/djb208/Coding/outsider/vignettes/om..echo'  \
-##   --library='/Library/Frameworks/R.framework/Versions/3.5/Resources/library'  \
-##   --install-tests</code></pre>
-<pre><code>## </code></pre>
-<pre><code>## Reloading installed om..echo..dombennett</code></pre>
+<pre><code>## Skipping 1 packages not available: outsider</code></pre>
+<pre><code>##   
+   checking for file ‘/home/dom/Coding/outsider/vignettes/om..echo/DESCRIPTION’ ...
+  
+✔  checking for file ‘/home/dom/Coding/outsider/vignettes/om..echo/DESCRIPTION’
+## 
+  
+─  preparing ‘om..echo..dombennett’:
+## 
+  
+✔  checking DESCRIPTION meta-information
+## 
+  
+─  checking for LF line-endings in source and make files and shell scripts
+## 
+  
+─  checking for empty or unneeded directories
+## ─  building ‘om..echo..dombennett_1.0.0.tar.gz’
+## 
+  
+   
+## 
+Running /usr/lib/R/bin/R CMD INSTALL \
+##   /tmp/RtmpPZ6YVb/om..echo..dombennett_1.0.0.tar.gz --install-tests 
+## * installing to library ‘/home/dom/R/x86_64-pc-linux-gnu-library/3.5’
+## * installing *source* package ‘om..echo..dombennett’ ...
+## ** R
+## ** byte-compile and prepare package for lazy loading
+## ** help
+## *** installing help indices
+## ** building package indices
+## ** testing if installed package can be loaded
+## * DONE (om..echo..dombennett)</code></pre>
+<pre><code>## Reloading attached om..echo..dombennett</code></pre>
 <blockquote>
 <p><strong>What does <code>document()</code> do?</strong> In addition to the core files indicated above, an R package also requires R documentation files that are stored in <code>man/</code> – these provide the <code>?[function]</code> utility. The <code>document()</code> function generates these files via <a href="https://github.com/klutometis/roxygen"><code>roxygen</code></a> comments and tags located in the R scripts that make the package, i.e. all comments that begin <code>#'</code>. For more information, look up “object documentation in R”.</p>
 </blockquote>
@@ -304,7 +330,7 @@ echo &lt;-<span class="st"> </span><span class="kw"><a href="../reference/module
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.2.0.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.3.0.9000.</p>
 </div>
       </footer>
 </div>

@@ -106,7 +106,7 @@ test_that('module_install() works', {
   )
 })
 test_that('module_help() works', {
-  expect_error(module_help(repo = repo))
+  expect_error(module_help(repo = 'githubuser/reponame'))
   with_mock(
     `outsider:::hlp_get` = function(...) TRUE,
     `outsider:::repo_to_pkgnm` = function(...) 'testthat',
@@ -114,7 +114,7 @@ test_that('module_help() works', {
   )
 })
 test_that('module_import() works', {
-  expect_error(module_import(repo = repo, fname = fname))
+  expect_error(module_import(repo = 'githubuser/reponame', fname = 'foo'))
   with_mock(
     `outsider:::nmspc_get` = function(...) TRUE,
     `outsider:::repo_to_pkgnm` = function(...) 'testthat',

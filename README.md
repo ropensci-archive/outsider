@@ -5,7 +5,7 @@
 Install and run programs, outside of R, inside of R <img src="logo.png" height="200" align="right"/>
 ====================================================================================================
 
-[![Build Status](https://travis-ci.org/AntonelliLab/outsider.svg?branch=master)](https://travis-ci.org/AntonelliLab/outsider) [![Coverage Status](https://coveralls.io/repos/github/AntonelliLab/outsider/badge.svg?branch=master)](https://coveralls.io/github/AntonelliLab/outsider?branch=master)
+[![Build Status](https://travis-ci.org/AntonelliLab/outsider.svg?branch=master)](https://travis-ci.org/AntonelliLab/outsider) [![Coverage Status](https://coveralls.io/repos/github/AntonelliLab/outsider/badge.svg?branch=master)](https://coveralls.io/github/AntonelliLab/outsider?branch=master) [![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
 
 > The Outsider is always unhappy, but he is an agent that ensures the happiness for millions of 'Insiders'.<br><br> *[The Outsider, Wilson, 1956](https://en.wikipedia.org/wiki/The_Outsider_(Colin_Wilson)).*
 
@@ -34,9 +34,6 @@ library(outsider)
 # it contains a function for printing 'Hello World!' in Ubuntu 18.04
 repo <- 'dombennett/om..hello.world'
 module_install(repo = repo)
-#> Warning: No 'dombennett/om..hello.world' found.
-#> Warning in module_install(repo = repo): It looks like 'dombennett/om..hello.world' is not successfully passing its tests on GitHub.
-#> The module might not build or function properly.
 #> [1] TRUE
 # look up the help files for the module
 module_help(repo = repo)
@@ -55,7 +52,7 @@ hello_world()
 Available external programs
 ---------------------------
 
-Modules available since 17:42 11 February 2019 (CET)
+Modules available since 11:07 12 February 2019 (CET)
 
 ● bamm
 
