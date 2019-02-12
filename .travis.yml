@@ -24,6 +24,3 @@ notifications:
   email:
     on_success: change
     on_failure: always
-
-before_script:
-  - Rscript -e 'outsider::module_install(repo = "DomBennett/om..hello.world")'
