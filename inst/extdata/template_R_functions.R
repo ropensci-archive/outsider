@@ -2,10 +2,7 @@
 #' @title %program_name%
 #' @description Run %program_name%
 #' @param ... Arguments
-#' @examples
-#' library(outsider)
-#' %program_name% <- module_import('%program_name%', repo = '%repo%')
-#' %program_name%('-h')  # or --help or whichever argument prints help
+#' @example /examples/example.R
 #' @export
 %program_name% <- function(...) {
   # convert the ... into a argument list
