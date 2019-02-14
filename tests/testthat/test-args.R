@@ -4,13 +4,6 @@ library(testthat)
 
 # RUNNING
 context('Testing \'args\'')
-test_that('args_get() works', {
-  foo <- function(...) {
-    outsider:::args_get()
-  }
-  res <- foo('a', 'b', 'c')
-  expect_equal(res, list('a', 'b', 'c'))
-})
 test_that('to_basename() works', {
   expctd <- list.files(getwd())[1]
   args <- c(file.path(getwd(), expctd), 'arg1', 'arg2')
@@ -22,6 +15,17 @@ test_that('is_filepath() works', {
 })
 test_that('.args_get() works', {
   res <- .arglist_get(outsider:::gh_api_url, 'b', 'c')
+  expect_equal(res, c(outsider:::gh_api_url, 'b', 'c'))
+  # check different depths
+  foo <- function(...) {
+    .arglist_get(...)
+  }
+  res <- foo(outsider:::gh_api_url, 'b', 'c')
+  expect_equal(res, c(outsider:::gh_api_url, 'b', 'c'))
+  foo2 <- function(...) {
+    foo(...)
+  }
+  res <- foo2(outsider:::gh_api_url, 'b', 'c')
   expect_equal(res, c(outsider:::gh_api_url, 'b', 'c'))
 })
 test_that('.filestosend_get() works', {

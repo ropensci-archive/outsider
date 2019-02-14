@@ -1,12 +1,6 @@
 # Developer argument functions
 
 # Private ----
-args_get <- function() {
-  parent <- sys.parent(n = 1L)
-  as.list(match.call(definition = sys.function(parent),
-                     call = sys.call(parent)))[-1]
-}
-
 #' @name to_basename
 #' @title Reduce to filepaths to basename
 #' @description Return return a vector where all valid filepaths are converted
@@ -44,7 +38,7 @@ is_filepath <- function(x) {
 #' @export
 #' @family developer
 .arglist_get <- function(...) {
-  arglist <- args_get()
+  arglist <- as.list(substitute(list(...)))[-1L]
   arglist <- lapply(X = arglist, FUN = eval)
   arglist <- vapply(X = arglist, FUN = as.character, FUN.VALUE = character(1))
   arglist
