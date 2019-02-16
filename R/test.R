@@ -14,14 +14,9 @@ is_running_on_travis <- function() {
 #' @return character vector
 #' @family private
 fnames_get <- function(repo) {
-  .get <- function(pkgnm) {
-    suppressMessages(require(pkgnm, character.only = TRUE))
-    ls(paste0('package:', pkgnm))
-  }
   pkgnm <- repo_to_pkgnm(repo = repo)
-  fname_env <- new.env()
-  fname_env$.get <- .get
-  fname_env$.get(pkgnm = pkgnm)
+  ns <- suppressMessages(loadNamespace(pkgnm))
+  ls(ns)
 }
 
 #' @name examples_test
