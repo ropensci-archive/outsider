@@ -1,4 +1,9 @@
 language: r
+r:
+  - oldrel
+  - release
+
+
 latex: false
 fortran: false
 pandoc: false
