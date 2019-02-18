@@ -172,49 +172,23 @@ returned else FALSE.</p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/library'>library</a></span>(<span class='no'>outsider</span>)
-<span class='co'># simplest repo</span>
-<span class='no'>repo</span> <span class='kw'>&lt;-</span> <span class='st'>'dombennett/om..hello.world'</span>
-<span class='co'># install</span>
-<span class='fu'><a href='module_install.html'>module_install</a></span>(<span class='kw'>repo</span> <span class='kw'>=</span> <span class='no'>repo</span>)</div><div class='output co'>#&gt; latest: Pulling from dombennett/om_hello.world
-#&gt; 124c757242f8: Already exists
-#&gt; 9d866f8bde2a: Already exists
-#&gt; fa3f2f277e67: Already exists
-#&gt; 398d32b153e8: Already exists
-#&gt; afde35469481: Already exists
-#&gt; 6376e5eb74c4: Pulling fs layer
-#&gt; 057c1f061444: Pulling fs layer
-#&gt; 6376e5eb74c4: Verifying Checksum
-#&gt; 6376e5eb74c4: Download complete
-#&gt; 057c1f061444: Verifying Checksum
-#&gt; 057c1f061444: Download complete
-#&gt; 6376e5eb74c4: Pull complete
-#&gt; 057c1f061444: Pull complete
-#&gt; Digest: sha256:f6770b2eea5e5f3d3934a2b1a14acf696675b2086d11227c27b096c9dfabb7dd
-#&gt; Status: Downloaded newer image for dombennett/om_hello.world:latest</div><div class='output co'>#&gt; [1] TRUE</div><div class='input'><span class='co'># check if installed</span>
-(<span class='fu'><a href='module_installed.html'>module_installed</a></span>())</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 1 x 2</span><span>
-#&gt;   pkg                         repo                      
-#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>                       </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>                     
-#&gt; </span><span style='color: #BCBCBC;'>1</span><span> om..hello.world..dombennett dombennett/om..hello.world</div><div class='input'><span class='co'># get help</span>
-<span class='fu'><a href='module_help.html'>module_help</a></span>(<span class='kw'>repo</span> <span class='kw'>=</span> <span class='no'>repo</span>)
-<span class='co'># import function</span>
-<span class='no'>hello_world</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='module_import.html'>module_import</a></span>(<span class='kw'>fname</span> <span class='kw'>=</span> <span class='st'>'hello_world'</span>, <span class='kw'>repo</span> <span class='kw'>=</span> <span class='no'>repo</span>)
-<span class='co'># run function</span>
-<span class='fu'>hello_world</span>()</div><div class='output co'>#&gt; 30a685a9795339a99f4fc1094fd577c94d31d7a93f9311bb32197b0d26a80bba
-#&gt; Hello world!
-#&gt; ------------
-#&gt; DISTRIB_ID=Ubuntu
-#&gt; DISTRIB_RELEASE=18.04
-#&gt; DISTRIB_CODENAME=bionic
-#&gt; DISTRIB_DESCRIPTION="Ubuntu 18.04.1 LTS"
-#&gt; hello.world_0
-#&gt; hello.world_0</div><div class='input'><span class='co'># uninstall</span>
-<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/rm'>rm</a></span>(<span class='no'>hello_world</span>)
-<span class='fu'>module_uninstall</span>(<span class='kw'>repo</span> <span class='kw'>=</span> <span class='no'>repo</span>)</div><div class='output co'>#&gt; Untagged: dombennett/om_hello.world:latest
-#&gt; Untagged: dombennett/om_hello.world@sha256:f6770b2eea5e5f3d3934a2b1a14acf696675b2086d11227c27b096c9dfabb7dd
-#&gt; Deleted: sha256:c0cb087733b9adadb450360477d78b2a7e261f0bdec804f36ce3ba41902fc2d0
-#&gt; Deleted: sha256:42732d30db60051011756269795de113c9d8265adc4a5149f1f94bb7a07e4c13
-#&gt; Deleted: sha256:c80459014be1f9d2908724be50a24c545c98a9fb5a4c25a1effcec93ddcac6c8</div></span></pre>
+    <pre class="examples"><div class='input'># NOT RUN
+# library(outsider)
+# # simplest repo
+# repo <- 'dombennett/om..hello.world'
+# # install
+# module_install(repo = repo)
+# hello_world <- module_import(fname = 'hello_world', repo = repo)
+# # get help
+# module_help(repo = repo)
+# # import function
+# hello_world <- module_import(fname = 'hello_world', repo = repo)
+# # run function
+# hello_world()
+# 
+# # uninstall
+# module_uninstall(repo)
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

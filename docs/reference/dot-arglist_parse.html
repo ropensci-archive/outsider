@@ -207,13 +207,13 @@ file path.</p>
 (<span class='fu'>.arglist_parse</span>(<span class='kw'>arglist</span> <span class='kw'>=</span> <span class='no'>arglist</span>, <span class='kw'>vals_to_drop</span> <span class='kw'>=</span> <span class='st'>'--unwanted'</span>,
                 <span class='kw'>normalise_paths</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>))</div><div class='output co'>#&gt; [1] "-a"                      "10"                     
 #&gt; [3] "-b"                      "model2"                 
-#&gt; [5] "-wd"                     "/tmp/Rtmp8w19OF/results"</div><div class='input'><span class='co'># make paths relative, necessary for Docker:</span>
+#&gt; [5] "-wd"                     "/tmp/RtmpnbopyN/results"</div><div class='input'><span class='co'># make paths relative, necessary for Docker:</span>
 <span class='co'>#   paths must be relative to the working directory in the container</span>
 (<span class='fu'>.arglist_parse</span>(<span class='kw'>arglist</span> <span class='kw'>=</span> <span class='no'>arglist</span>, <span class='kw'>normalise_paths</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>))</div><div class='output co'>#&gt; [1] "-a"         "10"         "-b"         "model2"     "-wd"       
 #&gt; [6] "results"    "--unwanted"</div><div class='input'>
 
 <span class='co'># clean-up</span>
-<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/unlink'>unlink</a></span>(<span class='no'>wd</span>)</div></pre>
+<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/unlink'>unlink</a></span>(<span class='no'>wd</span>, <span class='kw'>recursive</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

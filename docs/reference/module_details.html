@@ -176,15 +176,16 @@ If <code>repo</code> is NULL, will return details on all available modules.</p>
 <span class='co'># (available_modules &lt;- module_search())</span>
 
 <span class='co'># look-up whether specific module exists</span>
-<span class='no'>repo</span> <span class='kw'>&lt;-</span> <span class='st'>'dombennett/om..goodbye.world'</span>
-(<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/warning'>suppressWarnings</a></span>(<span class='fu'><a href='module_exists.html'>module_exists</a></span>(<span class='kw'>repo</span> <span class='kw'>=</span> <span class='no'>repo</span>)))</div><div class='output co'>#&gt; dombennett/om..goodbye.world 
-#&gt;                        FALSE </div><div class='input'><span class='no'>repo</span> <span class='kw'>&lt;-</span> <span class='st'>'dombennett/om..hello.world'</span>
+<span class='co'># NOT RUN</span>
+<span class='co'># repo &lt;- 'dombennett/om..goodbye.world'</span>
+<span class='co'># (suppressWarnings(module_exists(repo = repo)))</span>
+<span class='no'>repo</span> <span class='kw'>&lt;-</span> <span class='st'>'dombennett/om..hello.world'</span>
 (<span class='fu'><a href='module_exists.html'>module_exists</a></span>(<span class='kw'>repo</span> <span class='kw'>=</span> <span class='no'>repo</span>))</div><div class='output co'>#&gt; dombennett/om..hello.world 
 #&gt;                       TRUE </div><div class='input'><span class='co'># get details on specific module(s)</span>
 (<span class='fu'>module_details</span>(<span class='kw'>repo</span> <span class='kw'>=</span> <span class='no'>repo</span>))</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 1 x 7</span><span>
 #&gt;   repo    program  details   versions updated_at          watcher_count url     
-#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>   </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>    </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>     </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>    </span><span style='color: #949494;font-style: italic;'>&lt;dttm&gt;</span><span>              </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>         </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>   
-#&gt; </span><span style='color: #BCBCBC;'>1</span><span> domben… hello w… Template… latest   2019-01-09 </span><span style='color: #949494;'>16:43:39</span><span> 0             https:/…</div></span></pre>
+#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>   </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>    </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>     </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>    </span><span style='color: #949494;font-style: italic;'>&lt;dttm&gt;</span><span>                      </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>   
+#&gt; </span><span style='color: #BCBCBC;'>1</span><span> domben… hello w… Template… latest   2019-01-09 </span><span style='color: #949494;'>16:43:39</span><span>             0 https:/…</div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

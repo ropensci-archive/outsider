@@ -175,40 +175,28 @@ docker_err</p></td>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/library'>library</a></span>(<span class='no'>outsider</span>)
-<span class='co'># install and import</span>
-<span class='no'>repo</span> <span class='kw'>&lt;-</span> <span class='st'>'dombennett/om..hello.world'</span>
-<span class='fu'><a href='module_install.html'>module_install</a></span>(<span class='kw'>repo</span> <span class='kw'>=</span> <span class='no'>repo</span>)</div><div class='output co'>#&gt; [1] TRUE</div><div class='input'><span class='no'>hello_world</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='module_import.html'>module_import</a></span>(<span class='kw'>fname</span> <span class='kw'>=</span> <span class='st'>'hello_world'</span>, <span class='kw'>repo</span> <span class='kw'>=</span> <span class='no'>repo</span>)
-
-<span class='co'># control the log stream</span>
-<span class='co'># send output to file</span>
-<span class='no'>tmpfl</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/tempfile'>tempfile</a></span>()
-<span class='fu'>log_set</span>(<span class='kw'>log</span> <span class='kw'>=</span> <span class='st'>'program_out'</span>, <span class='kw'>val</span> <span class='kw'>=</span> <span class='no'>tmpfl</span>)
-<span class='fu'>hello_world</span>()
-(<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/readLines'>readLines</a></span>(<span class='kw'>con</span> <span class='kw'>=</span> <span class='no'>tmpfl</span>))</div><div class='output co'>#&gt; [1] "Hello world!"                              
-#&gt; [2] "------------"                              
-#&gt; [3] "DISTRIB_ID=Ubuntu"                         
-#&gt; [4] "DISTRIB_RELEASE=18.04"                     
-#&gt; [5] "DISTRIB_CODENAME=bionic"                   
-#&gt; [6] "DISTRIB_DESCRIPTION=\"Ubuntu 18.04.1 LTS\""</div><div class='input'><span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/files'>file.remove</a></span>(<span class='no'>tmpfl</span>)</div><div class='output co'>#&gt; [1] TRUE</div><div class='input'><span class='co'># send docker and program output to console</span>
-<span class='fu'>log_set</span>(<span class='kw'>log</span> <span class='kw'>=</span> <span class='st'>'program_out'</span>, <span class='kw'>val</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
-<span class='fu'>log_set</span>(<span class='kw'>log</span> <span class='kw'>=</span> <span class='st'>'docker_out'</span>, <span class='kw'>val</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
-<span class='fu'>hello_world</span>()</div><div class='output co'>#&gt; 86ea5caeec35c75deb82cdc56a909f1494e7e80473abd86d2164d48cb84600f8
-#&gt; Hello world!
-#&gt; ------------
-#&gt; DISTRIB_ID=Ubuntu
-#&gt; DISTRIB_RELEASE=18.04
-#&gt; DISTRIB_CODENAME=bionic
-#&gt; DISTRIB_DESCRIPTION="Ubuntu 18.04.1 LTS"
-#&gt; hello.world_0
-#&gt; hello.world_0</div><div class='input'>
-<span class='co'># uninstall</span>
-<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/rm'>rm</a></span>(<span class='no'>hello_world</span>)
-<span class='fu'><a href='module_uninstall.html'>module_uninstall</a></span>(<span class='kw'>repo</span> <span class='kw'>=</span> <span class='no'>repo</span>)</div><div class='output co'>#&gt; Untagged: dombennett/om_hello.world:latest
-#&gt; Untagged: dombennett/om_hello.world@sha256:f6770b2eea5e5f3d3934a2b1a14acf696675b2086d11227c27b096c9dfabb7dd
-#&gt; Deleted: sha256:c0cb087733b9adadb450360477d78b2a7e261f0bdec804f36ce3ba41902fc2d0
-#&gt; Deleted: sha256:42732d30db60051011756269795de113c9d8265adc4a5149f1f94bb7a07e4c13
-#&gt; Deleted: sha256:c80459014be1f9d2908724be50a24c545c98a9fb5a4c25a1effcec93ddcac6c8</div></pre>
+    <pre class="examples"><div class='input'># NOT RUN
+# library(outsider)
+# repo <- 'dombennett/om..hello.world'
+# # install and import
+# module_install(repo = repo)
+# hello_world <- module_import(fname = 'hello_world', repo = repo)
+# 
+# # control the log stream
+# # send output to file
+# tmpfl <- tempfile()
+# log_set(log = 'program_out', val = tmpfl)
+# hello_world()
+# (readLines(con = tmpfl))
+# file.remove(tmpfl)
+# # send docker and program output to console
+# log_set(log = 'program_out', val = TRUE)
+# log_set(log = 'docker_out', val = TRUE)
+# hello_world()
+# 
+# # clean-up
+# module_uninstall(repo)
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

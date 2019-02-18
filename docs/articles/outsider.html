@@ -132,8 +132,8 @@ install_github('AntonelliLab/outsider')</a></code></pre>
 <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/print">print</a></span>(<span class="kw"><a href="../reference/module_details.html">module_details</a></span>(<span class="dt">repo =</span> <span class="st">'dombennett/om..mafft'</span>))</code></pre></div>
 <pre><code>## # A tibble: 1 x 7
 ##   repo   program details  versions updated_at          watcher_count url   
-##   &lt;chr&gt;  &lt;chr&gt;   &lt;chr&gt;    &lt;chr&gt;    &lt;dttm&gt;              &lt;chr&gt;         &lt;chr&gt; 
-## 1 dombe… mafft   With ex… latest   2019-01-09 16:39:26 0             https…</code></pre>
+##   &lt;chr&gt;  &lt;chr&gt;   &lt;chr&gt;    &lt;chr&gt;    &lt;dttm&gt;                      &lt;int&gt; &lt;chr&gt; 
+## 1 dombe… mafft   With ex… latest   2019-02-15 11:47:19             0 https…</code></pre>
 <p>To install a module, all that is required is to provide the repo name to the function <code><a href="../reference/module_install.html">module_install()</a></code>.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(outsider)
 <span class="kw"><a href="../reference/module_install.html">module_install</a></span>(<span class="dt">repo =</span> <span class="st">'dombennett/om..mafft'</span>)</code></pre></div>
@@ -144,11 +144,12 @@ install_github('AntonelliLab/outsider')</a></code></pre>
 <p>To confirm the module is installed on a computer, it might be useful to use <code><a href="../reference/module_installed.html">module_installed()</a></code>. This function returns a table of all installed modules.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(outsider)
 <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/print">print</a></span>(<span class="kw"><a href="../reference/module_installed.html">module_installed</a></span>())</code></pre></div>
-<pre><code>## # A tibble: 2 x 2
+<pre><code>## # A tibble: 3 x 2
 ##   pkg                         repo                      
 ##   &lt;chr&gt;                       &lt;chr&gt;                     
-## 1 om..hello.world..dombennett dombennett/om..hello.world
-## 2 om..mafft..dombennett       dombennett/om..mafft</code></pre>
+## 1 om..beast..dombennett       dombennett/om..beast      
+## 2 om..hello.world..dombennett dombennett/om..hello.world
+## 3 om..mafft..dombennett       dombennett/om..mafft</code></pre>
 </div>
 <div id="importing" class="section level2">
 <h2 class="hasAnchor">
