@@ -5,7 +5,7 @@
 Install and run programs, outside of R, inside of R <img src="logo.png" height="200" align="right"/>
 ====================================================================================================
 
-[![Build Status](https://travis-ci.org/AntonelliLab/outsider.svg?branch=master)](https://travis-ci.org/AntonelliLab/outsider) [![Coverage Status](https://coveralls.io/repos/github/AntonelliLab/outsider/badge.svg?branch=master)](https://coveralls.io/github/AntonelliLab/outsider?branch=master) [![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active) [![DOI](https://zenodo.org/badge/145114547.svg)](https://zenodo.org/badge/latestdoi/145114547)
+[![Build Status](https://travis-ci.org/AntonelliLab/outsider.svg?branch=master)](https://travis-ci.org/AntonelliLab/outsider) [![Coverage Status](https://coveralls.io/repos/github/AntonelliLab/outsider/badge.svg?branch=master)](https://coveralls.io/github/AntonelliLab/outsider?branch=master) [![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active) [![DOI](https://zenodo.org/badge/145114547.svg)](https://zenodo.org/badge/latestdoi/145114547) [![ropensci](https://badges.ropensci.org/282_status.svg)](https://github.com/ropensci/onboarding/issues/282)
 
 > The Outsider is always unhappy, but he is an agent that ensures the happiness for millions of 'Insiders'.<br><br> *[The Outsider, Wilson, 1956](https://en.wikipedia.org/wiki/The_Outsider_(Colin_Wilson)).*
 
@@ -52,9 +52,13 @@ hello_world()
 Available external programs
 ---------------------------
 
-Modules available since 11:07 12 February 2019 (CET)
+Modules available since 13:35 18 February 2019 (CET)
+
+● astral
 
 ● bamm
+
+● beast
 
 ● blast
 
@@ -65,6 +69,8 @@ Modules available since 11:07 12 February 2019 (CET)
 ● pyrate
 
 ● raxml
+
+● revbayes
 
 For more details, see the [available modules table](https://antonellilab.github.io/outsider/articles/available.html)
 
