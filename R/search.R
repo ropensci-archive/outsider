@@ -165,11 +165,14 @@ module_search <- function() {
 #' @export
 #' @family user
 module_details <- function(repo = NULL) {
+  needed_clnms <- c('full_name', 'updated_at', 'watchers_count', 'url')
   if (!is.null(repo)) {
     github_res <- lapply(X = repo, FUN = repo_search)
-    github_res <- lapply(X = github_res, FUN = as.matrix)
-    ncolmns <- vapply(X = github_res, FUN = ncol, FUN.VALUE = integer(1))
-    github_res <- github_res[ncolmns == max(ncolmns)]
+    pull <- vapply(X = github_res, FUN = function(x) {
+      all(needed_clnms %in% colnames(x))
+      }, FUN.VALUE = logical(1))
+    github_res <- github_res[pull]
+    github_res <- lapply(X = github_res, FUN = function(x) x[, needed_clnms])
     github_res <- do.call(what = rbind, args = github_res)
   } else {
     github_res <- all_search()

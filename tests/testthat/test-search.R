@@ -91,7 +91,7 @@ test_that('module_search() works', {
 })
 test_that('module_details() works', {
   # TODO: with mock?
-  res <- module_details(repo = c(repo, repo))
+  res <- module_details(repo = c(repo, 'dombennett/om..mafft'))
   expect_true(inherits(res, 'tbl_df'))
 })
 test_that('module_exists() works', {
