@@ -1,50 +1,5 @@
 # User friendly install and import functions
 
-# Private ----
-#' @name is_installed
-#' @title Is module installed?
-#' @description Return TRUE if module is installed.
-#' @param repo GitHub repo
-#' @return logical
-#' @family private
-is_installed <- function(repo) {
-  mdl_installed <- module_installed()
-  repo %in% mdl_installed[['repo']]
-}
-
-#' @name install
-#' @title Install module
-#' @description Build/pull Docker image and install R package
-#' @param repo GitHub repository name
-#' @param tag Docker-Hub tag, e.g. 'latest'
-#' @param dockerfile_url URL to Dockerfile
-#' @return logical
-#' @family private
-install <- function(repo, tag, dockerfile_url = NULL) {
-  success <- FALSE
-  on.exit(expr = {
-    if (!success) {
-      module_uninstall(repo = repo)
-    }
-  })
-  devtools::install_github(repo = repo, quiet = TRUE)
-  if (is_installed(repo = repo)) {
-    # Reminder:
-    #     The docker image name is determined from the installed package.
-    #     It requires the Docker username in DESCRIPTION.
-    #     repo_to_img is the only function that requires this.
-    #     repo always refers to the GitHub repo.
-    img <- repo_to_img(repo)
-    if (is.null(dockerfile_url)) {
-      success <- docker_pull(img = img, tag = tag)
-    } else {
-      success <- docker_build(img = img, url_or_path = dockerfile_url,
-                              tag = tag)
-    }
-  }
-  invisible(success)
-}
-
 # Public ----
 #' @name module_install
 #' @title Install an outsider module

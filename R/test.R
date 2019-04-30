@@ -36,11 +36,11 @@ examples_test <- function(repo) {
     res <- tryCatch(expr = {
       ex_source(file = ex_urls[[i]])
       TRUE
-      }, error = function(e) {
-        message('Failed to run example for `', fnames[[i]], '`')
-        message(as.character(e))
-        FALSE
-        })
+    }, error = function(e) {
+      message('Failed to run example for `', fnames[[i]], '`')
+      message(as.character(e))
+      FALSE
+    })
   }
   res
 }
