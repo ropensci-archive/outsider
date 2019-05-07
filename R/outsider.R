@@ -15,5 +15,5 @@
 #'
 #' @docType package
 #' @name outsider
-#' @import outsider.devtools
+#' @import outsider.base
 NULL

@@ -4,7 +4,8 @@
 \alias{module_install}
 \title{Install an outsider module}
 \usage{
-module_install(repo, tag = "latest", manual = FALSE)
+module_install(repo = NULL, url = NULL, filepath = NULL,
+  tag = "latest", manual = FALSE, verbose = FALSE, force = FALSE)
 }
 \arguments{
 \item{repo}{Module repo, character.}
@@ -12,6 +13,10 @@ module_install(repo, tag = "latest", manual = FALSE)
 \item{tag}{Module version, default latest. Character.}
 
 \item{manual}{Build the docker image? Default FALSE. Logical.}
+
+\item{verbose}{Be verbose? Default FALSE.}
+
+\item{force}{Ignore warnings and install anyway? Default FALSE.}
 }
 \value{
 Logical
@@ -38,7 +43,7 @@ Install a module
 # module_uninstall(repo)
 }
 \seealso{
-Other user: \code{\link{log_set}},
+Other user: \code{\link{is_module_installed}},
   \code{\link{module_details}},
   \code{\link{module_exists}}, \code{\link{module_help}},
   \code{\link{module_import}},

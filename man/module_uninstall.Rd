@@ -38,7 +38,7 @@ returned else FALSE.
 # module_uninstall(repo)
 }
 \seealso{
-Other user: \code{\link{log_set}},
+Other user: \code{\link{is_module_installed}},
   \code{\link{module_details}},
   \code{\link{module_exists}}, \code{\link{module_help}},
   \code{\link{module_import}},

@@ -4,7 +4,7 @@
 \alias{module_installed}
 \title{Which outsider modules are installed?}
 \usage{
-module_installed(show_images = FALSE)
+module_installed()
 }
 \arguments{
 \item{show_images}{Look-up the module images? Default FALSE.}
@@ -22,7 +22,7 @@ library(outsider)
 (module_installed())
 }
 \seealso{
-Other user: \code{\link{log_set}},
+Other user: \code{\link{is_module_installed}},
   \code{\link{module_details}},
   \code{\link{module_exists}}, \code{\link{module_help}},
   \code{\link{module_import}},

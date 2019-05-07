@@ -1,5 +1,28 @@
 # User friendly install and import functions
 
+user_warn <- function(address = NULL, url = NULL, flpth = NULL) {
+  # TODO: richer warnings for GitHub, BitBucket and GitLab
+  msg <- readLines(con = system.file("install_warning.txt",
+                                     package = 'outsider'))
+  ncols <- nchar(msg[[1]])
+  msg <- paste0(msg, collapse = '\n')
+  if (!is.null(address)) {
+    msg <- paste0(msg, '\nRepo:\n    ', address[['username']],
+                  address[['repo']])
+    msg <- paste0(msg, '\nOn:\n    ', address[['service']])
+  }
+  if (!is.null(url)) {
+    msg <- paste0(msg, '\nVia:\n    ', url)
+  }
+  if (!is.null(flpth)) {
+    msg <- paste0(msg, '\nVia:\n    ', flpth)
+  }
+  msg <- paste0(msg, '\n', paste0(rep('─', ncols), collapse = ''))
+  message(crayon::silver(msg))
+  readline(prompt = 'Enter any key to continue or press Esc to quit ')
+  TRUE
+}
+
 # Public ----
 #' @name module_install
 #' @title Install an outsider module
@@ -7,38 +30,57 @@
 #' @param repo Module repo, character.
 #' @param tag Module version, default latest. Character.
 #' @param manual Build the docker image? Default FALSE. Logical.
+#' @param verbose Be verbose? Default FALSE.
+#' @param force Ignore warnings and install anyway? Default FALSE.
 #' @return Logical
 #' @example examples/module_install.R
 #' @export
 #' @family user
-module_install <- function(repo, tag = 'latest', manual = FALSE) {
-  if (!is_running_on_travis() && !build_status(repo = repo)) {
-    msg <- paste0('It looks like ', char(repo),
-                  ' is not successfully passing its tests on GitHub.\n',
-                  'The module might not build or function properly. ')
-    warning(msg)
-  }
+module_install <- function(repo = NULL, url = NULL, filepath = NULL,
+                           tag = 'latest', manual = FALSE,
+                           verbose = FALSE, force = FALSE) {
+  res <- FALSE
   is_docker_available()
-  if (is_installed(repo)) {
-    stop(char(repo), ' already installed. Use ', func('module_uninstall'),
-         ' to remove before installing again.', call. = FALSE)
+  if (length(c(repo, url, filepath)) != 1) {
+    msg <- paste0('Must provide just 1 variable to either ', char('repo'), ', ',
+                  char('url'), ' or ', char('filepath'))
+    stop(msg)
   }
-  tag_data <- tags(repos = repo)
-  pull <- tag_data[['tag']] == tag
-  if (sum(pull) != 1) {
-    tags <- vapply(X = tag_data[['tag']], FUN = char,
-                   FUN.VALUE = character(1))
-    stop('Invalid version provided for ', char(repo),
-         "\nAvailable versions are: ", paste0(tags, collapse = ', '))
-  }
-  if (manual) {
-    dockerfile_url <- as.character(tag_data[pull, 'download_url'])
-    success <- install(repo = repo, tag = tag, dockerfile_url = dockerfile_url)
+  if (!is.null(repo)) {
+    address <- address_unpack(repo = repo)
+    url <- url_make(username = address[['username']], repo = address[['repo']],
+                    ref = address[['ref']], service = address[['service']])
   } else {
-    success <- install(repo = repo, tag = tag)
+    address <- NULL
   }
-  success
-  
+  if (!is.null(url)) {
+    if (!force) {
+      user_warn(address = address, url = url)
+    }
+    res <- download_and_install(url = url, tag = tag, pull = !manual,
+                                verbose = verbose)
+  }
+  if (!is.null(filepath)) {
+    if (!force) {
+      user_warn(flpth = filepath)
+    }
+    install(flpth = filepath, tag = tag, pull = !manual, verbose = verbose)
+  }
+  invisible(res)
+}
+
+#' @name is_module_installed
+#' @title Is module installed?
+#' @description Uninstall outsider module and removes it from your docker
+#' @param repo Module repo
+#' @details If program is successfully removed from your system, TRUE is
+#' returned else FALSE.
+#' @example examples/module_install.R
+#' @return Logical
+#' @export
+#' @family user
+is_module_installed <- function(repo) {
+  !is.null(pkgnm_guess(repo = repo, call_error = FALSE))
 }
 
 #' @name module_uninstall
@@ -52,19 +94,10 @@ module_install <- function(repo, tag = 'latest', manual = FALSE) {
 #' @export
 #' @family user
 module_uninstall <- function(repo) {
-  pkgnm <- repo_to_pkgnm(repo)
-  if (pkgnm %in% devtools::loaded_packages()$package) {
-    try(expr = devtools::unload(devtools::inst(pkgnm)), silent = TRUE)
-  }
-  if (is_installed(repo = repo)) {
-    # TODO: are we sure this would remove all tagged version of an image?
-    try(docker_img_rm(img = repo_to_img(repo = repo)), silent = TRUE)
-    pkg_rm(pkgs = pkgnm)
-  }
-  invisible(!is_installed(repo = repo))
-}
-pkg_rm <- function(...) {
-  suppressMessages(utils::remove.packages(...))
+  pkgnm <- pkgnm_guess(repo = repo)
+  message(paste0('Removing ', char(pkgnm)))
+  uninstall(pkgnm = pkgnm)
+  invisible(!is_module_installed(repo = repo))
 }
 
 #' @name module_installed
@@ -76,29 +109,29 @@ pkg_rm <- function(...) {
 #' @example examples/module_installed.R
 #' @export
 #' @family user
-module_installed <- function(show_images = FALSE) {
-  installed <- installed_pkgs()
-  modules <- installed[grepl(pattern = '^om\\.\\.', x = installed)]
-  if (length(modules) == 0) {
-    return(tibble::as_tibble(x = list()))
-  }
-  repos <- vapply(X = modules, FUN = pkgnm_to_repo, character(1))
-  if (show_images) {
-    imgnms <- vapply(X = repos, FUN = function(x) {
-      tryCatch(repo_to_img(x), error = function(e) '')
-    }, character(1))
-    images <- docker_img_ls()
-    img_exists <- imgnms %in% images[['repository']]
-    res <- tibble::as_tibble(list(pkg = modules, repo = repos,
-                                  docker_img = imgnms, img_exists = img_exists))
-  } else {
-    res <- tibble::as_tibble(list(pkg = modules, repo = repos))
-  }
-  res
+# TODO
+module_installed <- function() {
+  NULL
 }
-installed_pkgs <- function(...) {
-  utils::installed.packages(...)
-}
+# module_installed <- function(show_images = FALSE) {
+#   mdls <- modules_list()
+#   if (length(mdls) == 0) {
+#     return(tibble::as_tibble(x = list()))
+#   }
+#   repos <- vapply(X = mdls, FUN = pkgnm_guess, character(1))
+#   if (show_images) {
+#     imgnms <- vapply(X = repos, FUN = function(x) {
+#       tryCatch(repo_to_img(x), error = function(e) '')
+#     }, character(1))
+#     images <- docker_img_ls()
+#     img_exists <- imgnms %in% images[['repository']]
+#     res <- tibble::as_tibble(list(pkg = modules, repo = repos,
+#                                   docker_img = imgnms, img_exists = img_exists))
+#   } else {
+#     res <- tibble::as_tibble(list(pkg = modules, repo = repos))
+#   }
+#   res
+# }
 
 #' @name module_import
 #' @title Import functions from a module
@@ -113,7 +146,7 @@ installed_pkgs <- function(...) {
 #' @export
 #' @family user
 module_import <- function(fname, repo) {
-  pkgnm <- repo_to_pkgnm(repo)
+  pkgnm <- pkgnm_guess(repo = repo)
   if (!pkgnm %in% utils::installed.packages()) {
     stop('Module ', char(repo), ' not found', call. = FALSE)
   }
@@ -134,7 +167,7 @@ nmspc_get <- function(...) {
 #' @export
 #' @family user
 module_help <- function(repo, fname = NULL) {
-  pkgnm <- repo_to_pkgnm(repo)
+  pkgnm <- pkgnm_guess(repo = repo)
   if (!pkgnm %in% utils::installed.packages()) {
     stop('Module ', char(repo), ' not found', call. = FALSE)
   }

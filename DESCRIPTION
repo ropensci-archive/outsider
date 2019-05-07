@@ -7,7 +7,7 @@ Authors@R: person("Dom", "Bennett", role = c("aut", "cre"),
     comment = c(ORCID = "0000-0003-2722-1359"))
 Maintainer: Dom Bennett <dominic.john.bennett@gmail.com>
 Description: Install and run external command-line programs in R through use of
-    'Docker' <https://www.docker.com/> and 'GitHub' <http://github.com/>.
+    'Docker' <https://www.docker.com/> and online repositories.
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
@@ -19,7 +19,7 @@ Language: en-GB
 Depends:
     R (>= 3.3.0)
 Imports:
-    outsider.devtools
+    outsider.base
 Suggests:
     testthat (>= 2.0),
     knitr (>= 1.0)

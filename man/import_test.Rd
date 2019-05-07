@@ -17,8 +17,7 @@ Return TRUE if all of the outsider module functions are
 successfully imported.
 }
 \seealso{
-Other private: \code{\link{default_log_set}},
-  \code{\link{examples_test}}, \code{\link{fnames_get}},
-  \code{\link{install_test}}, \code{\link{log_get}}
+Other private: \code{\link{examples_test}},
+  \code{\link{fnames_get}}, \code{\link{install_test}}
 }
 \concept{private}

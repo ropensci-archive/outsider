@@ -18,8 +18,7 @@ logical
 Return TRUE if the outsider module successfully installs.
 }
 \seealso{
-Other private: \code{\link{default_log_set}},
-  \code{\link{examples_test}}, \code{\link{fnames_get}},
-  \code{\link{import_test}}, \code{\link{log_get}}
+Other private: \code{\link{examples_test}},
+  \code{\link{fnames_get}}, \code{\link{import_test}}
 }
 \concept{private}

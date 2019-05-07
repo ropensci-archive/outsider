@@ -17,8 +17,7 @@ Return function names of all available functions for an
 installed outsider modules
 }
 \seealso{
-Other private: \code{\link{default_log_set}},
-  \code{\link{examples_test}}, \code{\link{import_test}},
-  \code{\link{install_test}}, \code{\link{log_get}}
+Other private: \code{\link{examples_test}},
+  \code{\link{import_test}}, \code{\link{install_test}}
 }
 \concept{private}
