@@ -1,7 +1,13 @@
+#' @name address_unpack
+#' @title Unpack repo address
+#' @description Returns a list of all the elements that make up a repository
+#' address (service, username, repo, ref).
+#' @param username Username of repo
+#' @param repo Repository address
+#' @return list
 address_unpack <- function(repo) {
   # defaults to GitHub and master
   raise_error <- function() {
-    char <- outsider.base:::char
     msg <- paste0("Invalid ", char("repo"), " provided. Must be of the form: ",
                   char("[service]/[username]/[repo]:[ref]"))
     stop(msg, call. = FALSE)
@@ -37,7 +43,6 @@ address_unpack <- function(repo) {
 #' @param repo Repository (e.g. "username/repo") associated with module
 #' @details Raises error if no module discovered.
 #' @return character(1)
-#' @family ids
 pkgnm_guess <- function(repo, call_error = TRUE) {
   mdls <- modules_list()
   metas <- lapply(X = mdls, FUN = meta_get)
