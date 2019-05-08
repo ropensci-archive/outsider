@@ -6,9 +6,6 @@
 \usage{
 module_installed()
 }
-\arguments{
-\item{show_images}{Look-up the module images? Default FALSE.}
-}
 \value{
 tbl_df
 }

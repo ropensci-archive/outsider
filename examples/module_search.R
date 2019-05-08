@@ -8,6 +8,6 @@ library(outsider)
 # repo <- 'dombennett/om..goodbye.world'
 # (suppressWarnings(module_exists(repo = repo)))
 repo <- 'dombennett/om..hello.world'
-(module_exists(repo = repo))
+#(module_exists(repo = repo))
 # get details on specific module(s)
-(module_details(repo = repo))
+#(module_details(repo = repo))

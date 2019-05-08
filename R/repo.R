@@ -2,7 +2,6 @@
 #' @title Unpack repo address
 #' @description Returns a list of all the elements that make up a repository
 #' address (service, username, repo, ref).
-#' @param username Username of repo
 #' @param repo Repository address
 #' @return list
 address_unpack <- function(repo) {
@@ -41,6 +40,7 @@ address_unpack <- function(repo) {
 #' @title Guess package name
 #' @description Return package name from a repo name.
 #' @param repo Repository (e.g. "username/repo") associated with module
+#' @param call_error Call error if no package found? Default, TRUE.
 #' @details Raises error if no module discovered.
 #' @return character(1)
 pkgnm_guess <- function(repo, call_error = TRUE) {

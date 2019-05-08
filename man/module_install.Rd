@@ -10,6 +10,10 @@ module_install(repo = NULL, url = NULL, filepath = NULL,
 \arguments{
 \item{repo}{Module repo, character.}
 
+\item{url}{URL to downloadable .tar.gz of module, character.}
+
+\item{filepath}{Filepath to uncompressed directory of module, character.}
+
 \item{tag}{Module version, default latest. Character.}
 
 \item{manual}{Build the docker image? Default FALSE. Logical.}

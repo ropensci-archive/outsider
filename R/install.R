@@ -10,7 +10,7 @@
 #' @return Logical
 user_warn <- function(address = NULL, url = NULL, flpth = NULL) {
   # TODO: richer warnings for GitHub, BitBucket and GitLab
-  msg <- readLines(con = system.file("install_warning.txt",
+  msg <- readLines(con = system.file('install_warning.txt',
                                      package = 'outsider'))
   ncols <- nchar(msg[[1]])
   msg <- paste0(msg, collapse = '\n')
@@ -25,7 +25,7 @@ user_warn <- function(address = NULL, url = NULL, flpth = NULL) {
   if (!is.null(flpth)) {
     msg <- paste0(msg, '\nVia:\n    ', flpth)
   }
-  msg <- paste0(msg, '\n', paste0(rep('─', ncols), collapse = ''))
+  msg <- paste0(msg, '\n', paste0(rep('-', ncols), collapse = ''))
   message(crayon::silver(msg))
   readline(prompt = 'Enter any key to continue or press Esc to quit ')
   TRUE
@@ -36,6 +36,8 @@ user_warn <- function(address = NULL, url = NULL, flpth = NULL) {
 #' @title Install an outsider module
 #' @description Install a module
 #' @param repo Module repo, character.
+#' @param url URL to downloadable .tar.gz of module, character.
+#' @param filepath Filepath to uncompressed directory of module, character.
 #' @param tag Module version, default latest. Character.
 #' @param manual Build the docker image? Default FALSE. Logical.
 #' @param verbose Be verbose? Default FALSE.
@@ -72,7 +74,8 @@ module_install <- function(repo = NULL, url = NULL, filepath = NULL,
     if (!force) {
       user_warn(flpth = filepath)
     }
-    res <- install(flpth = filepath, tag = tag, pull = !manual, verbose = verbose)
+    res <- install(flpth = filepath, tag = tag, pull = !manual,
+                   verbose = verbose)
   }
   invisible(res)
 }
@@ -112,7 +115,6 @@ module_uninstall <- function(repo) {
 #' @title Which outsider modules are installed?
 #' @description Returns tbl_df of details for all outsider modules
 #' installed on the user's computer.
-#' @param show_images Look-up the module images? Default FALSE.
 #' @return tbl_df
 #' @example examples/module_installed.R
 #' @export

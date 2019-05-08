@@ -1,6 +1,6 @@
-─────────────────────────────────────────────────────
+-----------------------------------------------------
 Warning: You are about to install an outsider module!
-─────────────────────────────────────────────────────
+-----------------------------------------------------
 Outsider modules install and run external programs
 via a virtual machine. These external programs may
 communicate with the internet and could potentially
@@ -10,4 +10,4 @@ Be sure to know the module you are about to install:
 Is it from a trusted developer? Are colleagues using
 it? Is it supposed to download lots of data? Is it
 well used (e.g. check number of stars on GitHub)?
-─────────────────────────────────────────────────────
+-----------------------------------------------------

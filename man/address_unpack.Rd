@@ -8,8 +8,6 @@ address_unpack(repo)
 }
 \arguments{
 \item{repo}{Repository address}
-
-\item{username}{Username of repo}
 }
 \value{
 list
