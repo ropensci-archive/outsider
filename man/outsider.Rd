@@ -9,12 +9,10 @@
 The outsider package facilitates the installation and running of external
 software by interfacing with docker (\url{https://www.docker.com/}).
 External software are contained within mini-R-packages, called "outsider
-modules" and can be installed directly to a user's computer through GitHub
-(\url{https://github.com/}). The outsider package comes with a series of
-functions for identifying and installing these outsider modules ("user"
-functions). The package also comes with helper functions for
-developing new outsider modules for hosting additional external programs
-and software ("developer" functions).
+modules" and can be installed directly to a user's computer through online
+code-sharing services such as GitHub (\url{https://github.com/}). The
+outsider package comes with a series of functions for identifying,
+installing and importing these outsider modules.
 }
 \details{
 For more information visit the outsider website

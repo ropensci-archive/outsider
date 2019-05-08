@@ -4,17 +4,21 @@
 \alias{module_details}
 \title{Look up details on module(s)}
 \usage{
-module_details(repo = NULL)
+module_details(repo = NULL, service = c("github", "bitbucket",
+  "gitlab"))
 }
 \arguments{
 \item{repo}{Vector of one or more outsider module repositories, default NULL.}
+
+\item{service}{Code-sharing service, e.g. GitHub}
 }
 \value{
 tbl_df
 }
 \description{
-Return a tbl_df of information for outsider module(s).
-If \code{repo} is NULL, will return details on all available modules.
+Return a tbl_df of information for outsider module(s) for a
+given code-sharing service. If \code{repo} is NULL, will return details on
+all available modules.
 }
 \examples{
 library(outsider)
@@ -31,13 +35,3 @@ repo <- 'dombennett/om..hello.world'
 # get details on specific module(s)
 (module_details(repo = repo))
 }
-\seealso{
-Other user: \code{\link{is_module_installed}},
-  \code{\link{module_exists}}, \code{\link{module_help}},
-  \code{\link{module_import}},
-  \code{\link{module_installed}},
-  \code{\link{module_install}},
-  \code{\link{module_search}},
-  \code{\link{module_uninstall}}
-}
-\concept{user}

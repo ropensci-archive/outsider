@@ -35,7 +35,6 @@ user_warn <- function(address = NULL, url = NULL, flpth = NULL) {
 #' @return Logical
 #' @example examples/module_install.R
 #' @export
-#' @family user
 module_install <- function(repo = NULL, url = NULL, filepath = NULL,
                            tag = 'latest', manual = FALSE,
                            verbose = FALSE, force = FALSE) {
@@ -47,6 +46,7 @@ module_install <- function(repo = NULL, url = NULL, filepath = NULL,
     stop(msg)
   }
   if (!is.null(repo)) {
+    # TODO: separate service from repo address?
     address <- address_unpack(repo = repo)
     url <- url_make(username = address[['username']], repo = address[['repo']],
                     ref = address[['ref']], service = address[['service']])

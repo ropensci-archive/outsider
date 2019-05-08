@@ -1,13 +1,10 @@
-# URL functions
-
 # Vars ----
 gh_url <- 'https://github.com'
 gh_api_url <- 'https://api.github.com'
 gh_search_repo_url <- paste0(gh_api_url, '/search/repositories')
 gh_raw_url <- 'https://raw.githubusercontent.com/'
-travis_api_url <- 'https://api.travis-ci.org/repos/'
 
-# Auth token
+# Auth ----
 authtoken_get <- function(joiner = c('?', '&')) {
   joiner <- match.arg(joiner)
   tkn <- Sys.getenv("GITHUB_PAT")
@@ -19,14 +16,13 @@ authtoken_get <- function(joiner = c('?', '&')) {
   tkn
 }
 
-# Private ----
-#' @name repo_search
+# Functions ----
+#' @name github_repo_search
 #' @title Search for repository
 #' @description Return GitHub API item for specific repository.
 #' @param repo GitHub repo
 #' @return data.frame
-#' @family private-search
-repo_search <- function(repo) {
+github_repo_search <- function(repo) {
   search_args <- paste0('?q=', repo, '&', 'Type=Repositories',
                         authtoken_get('&'))
   github_res <- jsonlite::fromJSON(paste0(gh_search_repo_url, search_args))
@@ -42,12 +38,11 @@ repo_search <- function(repo) {
   github_res[['items']]
 }
 
-#' @name all_search
-#' @title Search for outsider modules
+#' @name github_search
+#' @title Search for outsider modules in GitHub
 #' @description Returns GitHub API item results for outsider module search.
 #' @return data.frame
-#' @family private-search
-all_search <- function() {
+github_search <- function() {
   search_args <- paste0('?q=om..+in:name+outsider-module+in:description',
                         '&', 'Type=Repositories', authtoken_get('&'))
   github_res <- jsonlite::fromJSON(paste0(gh_search_repo_url, search_args))
@@ -57,49 +52,13 @@ all_search <- function() {
   github_res[['items']]
 }
 
-#' @name build_status
-#' @title Look-up details on program
-#' @description Is build passing? Returns either TRUE or FALSE.
-#' @param repo GitHub repo
-#' @return Logical
-#' @family private-search
-build_status <- function(repo) {
-  res <- repo_search(repo = repo)
-  url <- paste0(travis_api_url, res[['full_name']], '.json')
-  build_info <- try(expr = jsonlite::fromJSON(txt = url), silent = TRUE)
-  !inherits(build_info, 'try-error') &&
-    !is.null(build_info[["last_build_status"]]) &&
-    build_info[["last_build_status"]] == 0
-}
-
-#' @name read_yaml
-#' @title Safely read om.yaml
-#' @description Return list of 'program' and 'details'.
-#' @param repo GitHub repo
-#' @return list
-#' @family private-search
-read_yaml <- function(repo) {
-  yaml_url <- paste0(gh_raw_url, repo, '/master/om.yml')
-  tryCatch(expr = {
-    lines <- readLines(con = yaml_url)
-  }, error = function(e) {
-    lines <- NULL
-  }, warning = function(e) {
-    lines <- NULL
-  })
-  string <- paste(lines, collapse = "\n")
-  res <- yaml::yaml.load(string = string, error.label = NULL)
-  list('program' = res[['program']], 'details' = res[['details']])
-}
-
-#' @name yaml
+#' @name github_yaml
 #' @title Module YAML information
 #' @description Return tbl_df of all YAML information of given outsider
 #' module repos.
-#' @param repos Character vector of outsider module repositories.
+#' @param repos Character vector of outsider module repositories on GitHub.
 #' @return tbl_df
-#' @family private-search
-yaml <- function(repos) {
+github_yaml <- function(repos) {
   extract <- function(x, i) {
     vapply(X = x, FUN = function(x, i) {
       res <- x[[i]]
@@ -108,20 +67,20 @@ yaml <- function(repos) {
     }, FUN.VALUE = character(1),
     i = i)
   }
-  yaml <- lapply(X = repos, FUN = read_yaml)
+  url <- paste0(gh_raw_url, repos, '/master/inst/om.yml')
+  yaml <- lapply(X = url, FUN = yaml_read)
   prgms <- extract(x = yaml, i = 'program')
   dtls <- extract(x = yaml, i = 'details')
   tibble::as_tibble(x = list(repo = repos, program = prgms, details = dtls))
 }
 
-#' @name tags
-#' @title Module tags
+#' @name github_tags
+#' @title Module tags from GitHub
 #' @description Return tbl_df of module tags for a list of outsider
-#' modules.
+#' modules hosted on GitHub.
 #' @param repos Character vector of outsider module repositories.
 #' @return tbl_df
-#' @family private-search
-tags <- function(repos) {
+github_tags <- function(repos) {
   fetch <- function(repo) {
     api_url <- paste0(gh_api_url, '/repos/', repo, '/contents/dockerfiles',
                       authtoken_get('?'))
@@ -140,4 +99,48 @@ tags <- function(repos) {
   res <- lapply(X = repos, FUN = fetch)
   res <- do.call(what = rbind, args = res)
   tibble::as_tibble(x = res)
+}
+
+#' @name github_module_details
+#' @title Look up details of module(s) on GitHub
+#' @description Return a tbl_df of information for outsider module(s).
+#' If \code{repo} is NULL, will return details on all available modules.
+#' @param repo Vector of one or more outsider module repositories, default NULL.
+#' @return tbl_df
+#' @export
+github_module_details <- function(repo = NULL) {
+  needed_clnms <- c('full_name', 'updated_at', 'watchers_count', 'url')
+  if (!is.null(repo)) {
+    github_res <- lapply(X = repo, FUN = github_repo_search)
+    pull <- vapply(X = github_res, FUN = function(x) {
+      all(needed_clnms %in% colnames(x))
+    }, FUN.VALUE = logical(1))
+    github_res <- github_res[pull]
+    github_res <- lapply(X = github_res, FUN = function(x) x[, needed_clnms])
+    github_res <- do.call(what = rbind, args = github_res)
+  } else {
+    github_res <- github_search()
+    repo <- github_res[, 'full_name']
+  }
+  # look up yaml
+  info <- github_yaml(repos = repo)
+  # look up version
+  tags <- github_tags(repos = repo)
+  info$versions <- vapply(X = unique(tags[['repo']]), FUN = function(x) {
+    paste0(sort(tags[tags[['repo']] == x, 'tag'][[1]],
+                decreasing = TRUE), collapse = ', ')
+  }, FUN.VALUE = character(1))
+  # add extra info
+  index <- match(tolower(github_res[, 'full_name']),
+                 tolower(info[['repo']]))
+  info[['updated_at']] <- as.POSIXct(github_res[index, 'updated_at'],
+                                     format = "%Y-%m-%dT%H:%M:%OSZ",
+                                     timezone = 'UTC')
+  info[['watcher_count']] <- github_res[index, 'watchers_count']
+  info[['url']] <- paste0('https://github.com/', info[['repo']])
+  # # order output
+  info <- info[order(info[['program']], decreasing = TRUE), ]
+  info <- info[order(info[['updated_at']], decreasing = TRUE), ]
+  info <- info[order(info[['watcher_count']], decreasing = TRUE), ]
+  info
 }

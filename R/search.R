@@ -1,73 +1,66 @@
+# Private ----
+#' @name yaml_read
+#' @title Safely read om.yaml
+#' @description Return list of 'program' and 'details'.
+#' @param url URL to repo
+#' @return list
+yaml_read <- function(url) {
+  lines <- tryCatch(expr = {
+    readLines(con = url)
+  }, error = function(e) {
+    NULL
+  }, warning = function(e) {
+    NULL
+  })
+  string <- paste(lines, collapse = "\n")
+  res <- yaml::yaml.load(string = string, error.label = NULL)
+  list('program' = res[['program']], 'details' = res[['details']])
+}
+
 # Public ----
 #' @name module_search
 #' @title Search for available outsider modules
 #' @description Return a list of available outsider modules.
+#' @param service Code-sharing service, e.g. GitHub
 #' @return Character vector
 #' @example examples/module_search.R
 #' @export
-#' @family user
-module_search <- function() {
-  res <- all_search()
+module_search <- function(service = c('github', 'bitbucket', 'gitlab')) {
+  service <- match.arg(service)
+  res <- switch(service, github = github_search(), gitlab = gitlab_search(),
+                bitbucket = bitbucket_search())
   res[['full_name']]
 }
 
 #' @name module_details
 #' @title Look up details on module(s)
-#' @description Return a tbl_df of information for outsider module(s).
-#' If \code{repo} is NULL, will return details on all available modules.
+#' @description Return a tbl_df of information for outsider module(s) for a
+#' given code-sharing service. If \code{repo} is NULL, will return details on
+#' all available modules.
 #' @param repo Vector of one or more outsider module repositories, default NULL.
+#' @param service Code-sharing service, e.g. GitHub
 #' @return tbl_df
 #' @example examples/module_search.R
 #' @export
-#' @family user
-module_details <- function(repo = NULL) {
-  needed_clnms <- c('full_name', 'updated_at', 'watchers_count', 'url')
-  if (!is.null(repo)) {
-    github_res <- lapply(X = repo, FUN = repo_search)
-    pull <- vapply(X = github_res, FUN = function(x) {
-      all(needed_clnms %in% colnames(x))
-      }, FUN.VALUE = logical(1))
-    github_res <- github_res[pull]
-    github_res <- lapply(X = github_res, FUN = function(x) x[, needed_clnms])
-    github_res <- do.call(what = rbind, args = github_res)
-  } else {
-    github_res <- all_search()
-    repo <- github_res[, 'full_name']
-  }
-  # look up yaml
-  info <- yaml(repos = repo)
-  # look up version
-  tags <- tags(repos = repo)
-  info$versions <- vapply(X = unique(tags[['repo']]), FUN = function(x) {
-    paste0(sort(tags[tags[['repo']] == x, 'tag'][[1]],
-                decreasing = TRUE), collapse = ', ')
-  }, FUN.VALUE = character(1))
-  # add extra info
-  index <- match(tolower(github_res[, 'full_name']),
-                 tolower(info[['repo']]))
-  info[['updated_at']] <- as.POSIXct(github_res[index, 'updated_at'],
-                                     format = "%Y-%m-%dT%H:%M:%OSZ",
-                                     timezone = 'UTC')
-  info[['watcher_count']] <- github_res[index, 'watchers_count']
-  info[['url']] <- paste0('https://github.com/', info[['repo']])
-  # # order output
-  info <- info[order(info[['program']], decreasing = TRUE), ]
-  info <- info[order(info[['updated_at']], decreasing = TRUE), ]
-  info <- info[order(info[['watcher_count']], decreasing = TRUE), ]
-  info
+module_details <- function(repo = NULL, service = c('github', 'bitbucket',
+                                                    'gitlab')) {
+  service <- match.arg(service)
+  switch(service, github = github_module_details(repo = repo),
+         gitlab = gitlab_module_details(repo = repo),
+         bitbucket = bitbucket_module_details(repo = repo))
 }
 
-#' @name module_exists
-#' @title Does module exist?
-#' @description Does the module(s) exist as a valid outsider module? Repo
-#' must be a valid GitHub repository with an om.yaml and a passing
-#' build status.
-#' @param repo Module repo(s)
-#' @return Logical
-#' @example examples/module_search.R
-#' @export
-#' @family user
-module_exists <- function(repo) {
-  # TODO: om.yaml
-  vapply(X = repo, FUN = build_status, FUN.VALUE = logical(1))
-}
+# @name module_exists
+# @title Does module exist?
+# @description Does the module(s) exist as a valid outsider module? Repo
+# must be a valid GitHub repository with an om.yaml and a passing
+# build status.
+# @param repo Module repo(s)
+# @return Logical
+# @example examples/module_search.R
+# @export
+# @family user
+# module_exists <- function(repo) {
+#   # TODO: om.yaml
+#   vapply(X = repo, FUN = build_status, FUN.VALUE = logical(1))
+# }
