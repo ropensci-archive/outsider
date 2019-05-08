@@ -1,0 +1,13 @@
+# descriptive name of the program
+# (The explicit name of the program is determined from the R package name
+#  specified in the DESCRIPTION.)
+program: hello world
+# any details about the program
+details: Template module for demonstrating outsider
+# the dockerhub username (optional)
+docker: dombennett
+# the github username (optional)
+github: dombennett
+# other options: gitlab, bitbucket
+# the repo URL (optional)
+url: https://github.com/DomBennett/om..hello.world

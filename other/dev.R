@@ -7,12 +7,8 @@ hello_world()
 
 
 # TODO:
-# -- outline development steps
-# -- vignette: phylogenetic pipeline
-# -- backdoor
-# -- facilitate commands via file
-# -- normalize paths: reduce to basename even if not current file
-# -- should be able to provide unparsed R variables
+# -- easier verbosity setting
+# -- gitlab and bitbucket searching
 
 devtools::load_all('.')
 

@@ -1,5 +1,13 @@
-# User friendly install and import functions
 
+#' @name user_warn
+#' @title Warn users on the dangers of outsider modules
+#' @description Warn users on the dangers of installing an outsider module
+#' whose origin is potentially unknown.
+#' @details Prints additional info to screen based on arguments given.
+#' @param address repository address as a list
+#' @param url URL download link
+#' @param flpth Filepath install link
+#' @return Logical
 user_warn <- function(address = NULL, url = NULL, flpth = NULL) {
   # TODO: richer warnings for GitHub, BitBucket and GitLab
   msg <- readLines(con = system.file("install_warning.txt",
@@ -64,7 +72,7 @@ module_install <- function(repo = NULL, url = NULL, filepath = NULL,
     if (!force) {
       user_warn(flpth = filepath)
     }
-    install(flpth = filepath, tag = tag, pull = !manual, verbose = verbose)
+    res <- install(flpth = filepath, tag = tag, pull = !manual, verbose = verbose)
   }
   invisible(res)
 }
