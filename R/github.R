@@ -82,7 +82,7 @@ github_yaml <- function(repos) {
 #' @return tbl_df
 github_tags <- function(repos) {
   fetch <- function(repo) {
-    api_url <- paste0(gh_api_url, '/repos/', repo, '/contents/dockerfiles',
+    api_url <- paste0(gh_api_url, '/repos/', repo, '/contents/inst/dockerfiles',
                       authtoken_get('?'))
     raw_df <- try(jsonlite::fromJSON(api_url), silent = TRUE)
     if (!inherits(raw_df, 'try-error')) {

@@ -8,7 +8,7 @@ knitr::opts_chunk$set(echo = TRUE, comment = '')
 ```
 
 ```{r available, echo=FALSE, results='asis'}
-module_info <- outsider::module_details()
+module_info <- suppressWarnings(outsider::module_details())
 # convert to links
 module_info[['program']] <- paste0('[', module_info[['program']], '](',
                                    module_info[['url']], ')')

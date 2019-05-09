@@ -7,8 +7,6 @@ hello_world()
 
 
 # TODO:
-# -- easier verbosity setting
 # -- gitlab and bitbucket searching
 # -- tidy up website
-# -- move dockerfiles to inst
-# -- check if docker is available on attach
+# -- expand documentation

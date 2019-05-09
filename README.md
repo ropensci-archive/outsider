@@ -51,9 +51,32 @@ hello_world()
 Available external programs
 ---------------------------
 
-Modules available on GitHub since 12:37 09 May 2019 (CEST)
+    #> Warning in FUN(X[[i]], ...): Unable to fetch data from GitHub for
+    #> 'DomBennett/om..mafft'
+    #> Warning in FUN(X[[i]], ...): Unable to fetch data from GitHub for
+    #> 'DomBennett/om..revbayes'
+    #> Warning in FUN(X[[i]], ...): Unable to fetch data from GitHub for
+    #> 'DomBennett/om..pyrate'
+    #> Warning in FUN(X[[i]], ...): Unable to fetch data from GitHub for
+    #> 'DomBennett/om..raxml'
+    #> Warning in FUN(X[[i]], ...): Unable to fetch data from GitHub for
+    #> 'DomBennett/om..bamm'
+    #> Warning in FUN(X[[i]], ...): Unable to fetch data from GitHub for
+    #> 'DomBennett/om..blast'
+    #> Warning in FUN(X[[i]], ...): Unable to fetch data from GitHub for
+    #> 'DomBennett/om..beast'
+    #> Warning in FUN(X[[i]], ...): Unable to fetch data from GitHub for
+    #> 'DomBennett/om..astral'
+    #> Warning in FUN(X[[i]], ...): Unable to fetch data from GitHub for
+    #> 'DomBennett/om..hello.world'
+
+Modules available on GitHub since 14:24 09 May 2019 (CEST)
+
+● astral
 
 ● BAMM
+
+● beast
 
 ● blast
 
@@ -62,6 +85,10 @@ Modules available on GitHub since 12:37 09 May 2019 (CEST)
 ● mafft
 
 ● PyRate
+
+● RAxML
+
+● revbayes
 
 For more details, see the [available modules table](https://antonellilab.github.io/outsider/articles/available.html)
 
