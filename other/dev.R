@@ -9,6 +9,5 @@ hello_world()
 # TODO:
 # -- gitlab and bitbucket searching
 # -- update all current modules
-# -- merge branches
 # -- update website
 # -- expand documentation
