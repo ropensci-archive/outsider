@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Search for available outsider modules — module_search • outsider</title>
+<title>Search for outsider modules in GitLab — gitlab_search • outsider</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -37,9 +37,9 @@
 
 
 
-<meta property="og:title" content="Search for available outsider modules — module_search" />
+<meta property="og:title" content="Search for outsider modules in GitLab — gitlab_search" />
 
-<meta property="og:description" content="Return a list of available outsider modules." />
+<meta property="og:description" content="Returns GitLab API item results for outsider module search." />
 
 <meta property="og:image" content="/logo.png" />
 <meta name="twitter:card" content="summary" />
@@ -124,57 +124,31 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Search for available outsider modules</h1>
+    <h1>Search for outsider modules in GitLab</h1>
     
-    <div class="hidden name"><code>module_search.Rd</code></div>
+    <div class="hidden name"><code>gitlab_search.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Return a list of available outsider modules.</p>
+    <p>Returns GitLab API item results for outsider module search.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>module_search</span>(<span class='kw'>service</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"github"</span>, <span class='st'>"bitbucket"</span>, <span class='st'>"gitlab"</span>))</pre>
-    
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
-    <table class="ref-arguments">
-    <colgroup><col class="name" /><col class="desc" /></colgroup>
-    <tr>
-      <th>service</th>
-      <td><p>Code-sharing service, e.g. GitHub</p></td>
-    </tr>
-    </table>
-    
+    <pre class="usage"><span class='fu'>gitlab_search</span>()</pre>
+        
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>Character vector</p>
+    <p>data.frame</p>
     
 
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/library'>library</a></span>(<span class='no'>outsider</span>)
-<span class='co'># return table of ALL available modules on GitHub</span>
-<span class='co'># NOT RUN - takes too long</span>
-<span class='co'># (available_modules &lt;- module_search())</span>
-
-<span class='co'># look-up whether specific module exists</span>
-<span class='co'># NOT RUN</span>
-<span class='co'># repo &lt;- 'dombennett/om..goodbye.world'</span>
-<span class='co'># (suppressWarnings(module_exists(repo = repo)))</span>
-<span class='no'>repo</span> <span class='kw'>&lt;-</span> <span class='st'>'dombennett/om..hello.world'</span>
-<span class='co'>#(module_exists(repo = repo))</span>
-<span class='co'># get details on specific module(s)</span>
-<span class='co'>#(module_details(repo = repo))</span></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
-      <li><a href="#arguments">Arguments</a></li>
       
       <li><a href="#value">Value</a></li>
-      
-      <li><a href="#examples">Examples</a></li>
-    </ul>
+          </ul>
 
   </div>
 </div>

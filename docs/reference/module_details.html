@@ -39,8 +39,9 @@
 
 <meta property="og:title" content="Look up details on module(s) — module_details" />
 
-<meta property="og:description" content="Return a tbl_df of information for outsider module(s).
-If repo is NULL, will return details on all available modules." />
+<meta property="og:description" content="Return a tbl_df of information for outsider module(s) for a
+given code-sharing service. If repo is NULL, will return details on
+all available modules." />
 
 <meta property="og:image" content="/logo.png" />
 <meta name="twitter:card" content="summary" />
@@ -99,13 +100,7 @@ If repo is NULL, will return details on all available modules." />
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="../articles/advanced_build.html">Advanced: Building a module</a>
-    </li>
-    <li>
       <a href="../articles/available.html">Available modules</a>
-    </li>
-    <li>
-      <a href="../articles/build.html">Basics: Building a module</a>
     </li>
     <li>
       <a href="../articles/phylogenetic_pipeline.html">Phylogenetic pipeline</a>
@@ -138,12 +133,14 @@ If repo is NULL, will return details on all available modules." />
 
     <div class="ref-description">
     
-    <p>Return a tbl_df of information for outsider module(s).
-If <code>repo</code> is NULL, will return details on all available modules.</p>
+    <p>Return a tbl_df of information for outsider module(s) for a
+given code-sharing service. If <code>repo</code> is NULL, will return details on
+all available modules.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>module_details</span>(<span class='kw'>repo</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+    <pre class="usage"><span class='fu'>module_details</span>(<span class='kw'>repo</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>service</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"github"</span>, <span class='st'>"bitbucket"</span>,
+  <span class='st'>"gitlab"</span>))</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -152,21 +149,15 @@ If <code>repo</code> is NULL, will return details on all available modules.</p>
       <th>repo</th>
       <td><p>Vector of one or more outsider module repositories, default NULL.</p></td>
     </tr>
+    <tr>
+      <th>service</th>
+      <td><p>Code-sharing service, e.g. GitHub</p></td>
+    </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>tbl_df</p>
-    
-    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
-
-    <div class='dont-index'><p>Other user: <code><a href='log_set.html'>log_set</a></code>,
-  <code><a href='module_exists.html'>module_exists</a></code>, <code><a href='module_help.html'>module_help</a></code>,
-  <code><a href='module_import.html'>module_import</a></code>,
-  <code><a href='module_installed.html'>module_installed</a></code>,
-  <code><a href='module_install.html'>module_install</a></code>,
-  <code><a href='module_search.html'>module_search</a></code>,
-  <code><a href='module_uninstall.html'>module_uninstall</a></code></p></div>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
@@ -180,12 +171,9 @@ If <code>repo</code> is NULL, will return details on all available modules.</p>
 <span class='co'># repo &lt;- 'dombennett/om..goodbye.world'</span>
 <span class='co'># (suppressWarnings(module_exists(repo = repo)))</span>
 <span class='no'>repo</span> <span class='kw'>&lt;-</span> <span class='st'>'dombennett/om..hello.world'</span>
-(<span class='fu'><a href='module_exists.html'>module_exists</a></span>(<span class='kw'>repo</span> <span class='kw'>=</span> <span class='no'>repo</span>))</div><div class='output co'>#&gt; dombennett/om..hello.world 
-#&gt;                       TRUE </div><div class='input'><span class='co'># get details on specific module(s)</span>
-(<span class='fu'>module_details</span>(<span class='kw'>repo</span> <span class='kw'>=</span> <span class='no'>repo</span>))</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 1 x 7</span><span>
-#&gt;   repo    program  details   versions updated_at          watcher_count url     
-#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>   </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>    </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>     </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>    </span><span style='color: #949494;font-style: italic;'>&lt;dttm&gt;</span><span>                      </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>   
-#&gt; </span><span style='color: #BCBCBC;'>1</span><span> domben… hello w… Template… latest   2019-01-09 </span><span style='color: #949494;'>16:43:39</span><span>             0 https:/…</div></span></pre>
+<span class='co'>#(module_exists(repo = repo))</span>
+<span class='co'># get details on specific module(s)</span>
+<span class='co'>#(module_details(repo = repo))</span></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
@@ -193,8 +181,6 @@ If <code>repo</code> is NULL, will return details on all available modules.</p>
       <li><a href="#arguments">Arguments</a></li>
       
       <li><a href="#value">Value</a></li>
-
-      <li><a href="#see-also">See also</a></li>
       
       <li><a href="#examples">Examples</a></li>
     </ul>
@@ -208,7 +194,7 @@ If <code>repo</code> is NULL, will return details on all available modules.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.3.0.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.2.0.9000.</p>
 </div>
       </footer>
    </div>

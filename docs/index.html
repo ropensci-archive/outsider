@@ -17,7 +17,7 @@
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script><!-- sticky kit --><script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script><!-- pkgdown --><link href="pkgdown.css" rel="stylesheet">
 <script src="pkgdown.js"></script><meta property="og:title" content="Install and run programs, outside of R, inside of R">
 <meta property="og:description" content="Install and run external command-line programs in R through use of
-    'Docker' &lt;https://www.docker.com/&gt; and 'GitHub' &lt;http://github.com/&gt;.">
+    'Docker' &lt;https://www.docker.com/&gt; and online repositories.">
 <meta property="og:image" content="/logo.png">
 <meta name="twitter:card" content="summary">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
@@ -26,7 +26,7 @@
 <![endif]-->
 </head>
 <body>
-    <div class="container template-article">
+    <div class="container template-home">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
     <div class="navbar-header">
@@ -64,13 +64,7 @@
   </a>
   <ul class="dropdown-menu" role="menu">
 <li>
-      <a href="articles/advanced_build.html">Advanced: Building a module</a>
-    </li>
-    <li>
       <a href="articles/available.html">Available modules</a>
-    </li>
-    <li>
-      <a href="articles/build.html">Basics: Building a module</a>
     </li>
     <li>
       <a href="articles/phylogenetic_pipeline.html">Phylogenetic pipeline</a>
@@ -91,11 +85,7 @@
 
       
       </header><div class="row">
-  <div class="col-md-9 contents">
-    
-
-    
-    
+  <div class="contents col-md-9">
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 <!-- devtools::rmarkdown::render("README.Rmd") -->
 <!-- Rscript -e "library(knitr); knit('README.Rmd')" -->
@@ -120,12 +110,11 @@
 <h2 class="hasAnchor">
 <a href="#quick-example" class="anchor"></a>Quick example</h2>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(outsider)
-<span class="co"># outsider modules are hosted on GitHub</span>
+<span class="co"># outsider modules are hosted on GitHub and other code-sharing sites</span>
 <span class="co"># this repo is a demonstration outsider module</span>
 <span class="co"># it contains a function for printing 'Hello World!' in Ubuntu 18.04</span>
 repo &lt;-<span class="st"> 'dombennett/om..hello.world'</span>
-<span class="kw"><a href="reference/module_install.html">module_install</a></span>(<span class="dt">repo =</span> repo)
-<span class="co">#&gt; [1] TRUE</span>
+<span class="kw"><a href="reference/module_install.html">module_install</a></span>(<span class="dt">repo =</span> repo, <span class="dt">force =</span> <span class="ot">TRUE</span>)
 <span class="co"># look up the help files for the module</span>
 <span class="kw"><a href="reference/module_help.html">module_help</a></span>(<span class="dt">repo =</span> repo)
 <span class="co"># import the 'hello_world' function</span>
@@ -142,22 +131,24 @@ hello_world &lt;-<span class="st"> </span><span class="kw"><a href="reference/mo
 <div id="available-external-programs" class="section level2">
 <h2 class="hasAnchor">
 <a href="#available-external-programs" class="anchor"></a>Available external programs</h2>
-<p>Modules available since 13:31 18 February 2019 (CET)</p>
+<pre><code>#&gt; Warning in FUN(X[[i]], ...): Unable to fetch data from GitHub for
+#&gt; 'hrbrmstr/om..nmap'</code></pre>
+<p>Modules available on GitHub since 19:49 09 May 2019 (CEST)</p>
 <p>● astral</p>
-<p>● bamm</p>
+<p>● BAMM</p>
 <p>● beast</p>
 <p>● blast</p>
-<p>● hello.world</p>
+<p>● hello world</p>
 <p>● mafft</p>
-<p>● pyrate</p>
-<p>● raxml</p>
+<p>● PyRate</p>
+<p>● RAxML</p>
 <p>● revbayes</p>
 <p>For more details, see the <a href="https://antonellilab.github.io/outsider/articles/available.html">available modules table</a></p>
 </div>
 <div id="how-does-it-work" class="section level2">
 <h2 class="hasAnchor">
 <a href="#how-does-it-work" class="anchor"></a>How does it work?</h2>
-<p><code>outsider</code> makes use of the program <a href="https://www.docker.com/">docker</a> which allows users to create small, deployable virtual machines, called Docker images. The advantage of these images is that they can be run on any machine that has Docker installed, regardless of operating system. The <code>outsider</code> package makes external programs available in R by facilitating the interaction between Docker and the R console through <strong>outsider modules</strong>. These modules consist of two parts: a Dockerfile that describes the Docker image that contains the external program and an R package for interacting with the Docker image. Upon installing and running a module through <code>outsider</code>, a Docker image is launched and the R code of the module is used to interact with the external program. Anyone can create a module. They are hosted on <a href="https://github.com/">GitHub</a> and can be searched for and downloaded through <code>outsider</code>.</p>
+<p><code>outsider</code> makes use of the program <a href="https://www.docker.com/">docker</a> which allows users to create small, deployable virtual machines, called Docker images. The advantage of these images is that they can be run on any machine that has Docker installed, regardless of operating system. The <code>outsider</code> package makes external programs available in R by facilitating the interaction between Docker and the R console through <strong>outsider modules</strong>. These modules consist of two parts: a Dockerfile that describes the Docker image that contains the external program and an R package for interacting with the Docker image. Upon installing and running a module through <code>outsider</code>, a Docker image is launched and the R code of the module is used to interact with the external program. Anyone can create a module. They are hosted on <a href="https://github.com/">GitHub</a> as well as other code-sharing sites and can be searched for and downloaded through <code>outsider</code>.</p>
 <div class="figure">
 <img src="https://raw.githubusercontent.com/AntonelliLab/outsider/master/other/outline.png" alt="outsider_outline"><p class="caption">outsider_outline</p>
 </div>
@@ -198,7 +189,7 @@ hello_world &lt;-<span class="st"> </span><span class="kw"><a href="reference/mo
 </ul>
 </div>
 
-      <div class="dev-status">
+  <div class="dev-status">
 <h2>Dev status</h2>
 <ul class="list-unstyled">
 <li><a href="https://travis-ci.org/AntonelliLab/outsider"><img src="https://travis-ci.org/AntonelliLab/outsider.svg?branch=master" alt="Build Status"></a></li>
@@ -209,7 +200,6 @@ hello_world &lt;-<span class="st"> </span><span class="kw"><a href="reference/mo
 </ul>
 </div>
 </div>
-
 </div>
 
 
@@ -218,7 +208,7 @@ hello_world &lt;-<span class="st"> </span><span class="kw"><a href="reference/mo
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.3.0.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.2.0.9000.</p>
 </div>
       </footer>
 </div>
