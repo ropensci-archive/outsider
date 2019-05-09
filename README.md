@@ -29,12 +29,11 @@ Quick example
 
 ``` r
 library(outsider)
-# outsider modules are hosted on GitHub
+# outsider modules are hosted on GitHub and other code-sharing sites
 # this repo is a demonstration outsider module
 # it contains a function for printing 'Hello World!' in Ubuntu 18.04
 repo <- 'dombennett/om..hello.world'
-module_install(repo = repo)
-#> [1] TRUE
+module_install(repo = repo, force = TRUE)
 # look up the help files for the module
 module_help(repo = repo)
 # import the 'hello_world' function
@@ -52,32 +51,24 @@ hello_world()
 Available external programs
 ---------------------------
 
-Modules available since 13:35 18 February 2019 (CET)
+Modules available on GitHub since 12:37 09 May 2019 (CEST)
 
-● astral
-
-● bamm
-
-● beast
+● BAMM
 
 ● blast
 
-● hello.world
+● hello world
 
 ● mafft
 
-● pyrate
-
-● raxml
-
-● revbayes
+● PyRate
 
 For more details, see the [available modules table](https://antonellilab.github.io/outsider/articles/available.html)
 
 How does it work?
 -----------------
 
-`outsider` makes use of the program [docker](https://www.docker.com/) which allows users to create small, deployable virtual machines, called Docker images. The advantage of these images is that they can be run on any machine that has Docker installed, regardless of operating system. The `outsider` package makes external programs available in R by facilitating the interaction between Docker and the R console through **outsider modules**. These modules consist of two parts: a Dockerfile that describes the Docker image that contains the external program and an R package for interacting with the Docker image. Upon installing and running a module through `outsider`, a Docker image is launched and the R code of the module is used to interact with the external program. Anyone can create a module. They are hosted on [GitHub](https://github.com/) and can be searched for and downloaded through `outsider`.
+`outsider` makes use of the program [docker](https://www.docker.com/) which allows users to create small, deployable virtual machines, called Docker images. The advantage of these images is that they can be run on any machine that has Docker installed, regardless of operating system. The `outsider` package makes external programs available in R by facilitating the interaction between Docker and the R console through **outsider modules**. These modules consist of two parts: a Dockerfile that describes the Docker image that contains the external program and an R package for interacting with the Docker image. Upon installing and running a module through `outsider`, a Docker image is launched and the R code of the module is used to interact with the external program. Anyone can create a module. They are hosted on [GitHub](https://github.com/) as well as other code-sharing sites and can be searched for and downloaded through `outsider`.
 
 ![outsider\_outline](https://raw.githubusercontent.com/AntonelliLab/outsider/master/other/outline.png)
 

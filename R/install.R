@@ -105,7 +105,10 @@ is_module_installed <- function(repo) {
 #' @export
 #' @family user
 module_uninstall <- function(repo) {
-  pkgnm <- pkgnm_guess(repo = repo)
+  pkgnm <- pkgnm_guess(repo = repo, call_error = FALSE)
+  if (is.null(pkgnm)) {
+    return(invisible(TRUE))
+  }
   message(paste0('Removing ', char(pkgnm)))
   uninstall(pkgnm = pkgnm)
   invisible(!is_module_installed(repo = repo))

@@ -15,3 +15,29 @@
 #' @name outsider
 #' @import outsider.base
 NULL
+
+#' @name verbosity_set
+#' @title Set the verbosity of modules
+#' @description Control console messages of running outsider modules. Allow
+#' either the external program messages to run, the Docker messages or both.
+#' @param show_program Show external program messages? Default TRUE.
+#' @param show_docker Show docker messages? Default FALSE.
+#' @details For more control see \code{\link[outsider.base]{log_set}}
+#' @return data.frame
+verbosity_set <- function(show_program = TRUE,
+                          show_docker = FALSE) {
+  log_set(log = 'program_out', val = show_program)
+  log_set(log = 'program_err', val = show_program)
+  log_set(log = 'docker_out', val = show_docker)
+  log_set(log = 'docker_err', val = show_docker)
+  invisible(TRUE)
+}
+
+.onAttach <- function(...) {
+  if (!is_docker_available(call_error = FALSE)) {
+    msg <- paste0('For full functionality, ',
+                  char('outsider'), ' requires Docker.')
+    message(msg)
+  }
+  verbosity_set()
+}
