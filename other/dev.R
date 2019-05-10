@@ -7,7 +7,7 @@ hello_world()
 
 
 # TODO:
-# -- upon attaching/importing, make sure image associated with package exists
+# -- upon importing, make sure image associated with package exists
 # -- gitlab and bitbucket searching
 # -- update all current modules
 # -- update website

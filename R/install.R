@@ -8,7 +8,7 @@
 #' @param url URL download link
 #' @param flpth Filepath install link
 #' @return Logical
-user_warn <- function(address = NULL, url = NULL, flpth = NULL) {
+user_warn <- function(pkgnm) {
   # TODO: richer warnings for GitHub, BitBucket and GitLab
   msg <- readLines(con = system.file('install_warning.txt',
                                      package = 'outsider'))
@@ -46,6 +46,7 @@ user_warn <- function(address = NULL, url = NULL, flpth = NULL) {
 #' @example examples/module_install.R
 #' @export
 module_install <- function(repo = NULL, url = NULL, filepath = NULL,
+                           service = c('github', 'bitbucket', 'gitlab'),
                            tag = 'latest', manual = FALSE,
                            verbose = FALSE, force = FALSE) {
   res <- FALSE
@@ -56,27 +57,26 @@ module_install <- function(repo = NULL, url = NULL, filepath = NULL,
     stop(msg)
   }
   if (!is.null(repo)) {
-    # TODO: separate service from repo address?
-    address <- address_unpack(repo = repo)
-    url <- url_make(username = address[['username']], repo = address[['repo']],
-                    ref = address[['ref']], service = address[['service']])
-  } else {
-    address <- NULL
+    service <- match.arg(service)
+    install_repo <- switch(service, github = remotes::install_github,
+                           gitlab = remotes::install_gitlab,
+                           bitbucket = remotes::install_bitbucket)
+    pkgnm <- install_repo(repo = repo, force = TRUE, quiet = !verbose,
+                          reload = TRUE, build = FALSE)
   }
   if (!is.null(url)) {
-    if (!force) {
-      user_warn(address = address, url = url)
-    }
-    res <- download_and_install(url = url, tag = tag, pull = !manual,
-                                verbose = verbose)
+    pkgnm <- remotes::install_url(url = url, force = TRUE, quiet = !verbose,
+                                  reload = TRUE, build = FALSE)
   }
   if (!is.null(filepath)) {
-    if (!force) {
-      user_warn(flpth = filepath)
-    }
-    res <- install(flpth = filepath, tag = tag, pull = !manual,
-                   verbose = verbose)
+    pkgnm <- remotes::install_local(path = filepath, force = TRUE,
+                                    quiet = !verbose, reload = TRUE,
+                                    build = FALSE)
   }
+  if (force) {
+    user_warn(pkgnm = pkgnm)
+  }
+  res <- image_install(pkgnm = pkgnm, tag = tag, pull = !manual)
   invisible(res)
 }
 
@@ -159,6 +159,7 @@ module_installed <- function() {
 #' @export
 #' @family user
 module_import <- function(fname, repo) {
+  # TODO: res <- image_install(pkgnm = pkgnm, tag = tag, pull = !manual)
   pkgnm <- pkgnm_guess(repo = repo)
   if (!pkgnm %in% utils::installed.packages()) {
     stop('Module ', char(repo), ' not found', call. = FALSE)
