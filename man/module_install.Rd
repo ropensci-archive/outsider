@@ -5,7 +5,8 @@
 \title{Install an outsider module}
 \usage{
 module_install(repo = NULL, url = NULL, filepath = NULL,
-  tag = "latest", manual = FALSE, verbose = FALSE, force = FALSE)
+  service = c("github", "bitbucket", "gitlab"), tag = "latest",
+  manual = FALSE, verbose = FALSE, force = FALSE)
 }
 \arguments{
 \item{repo}{Module repo, character.}
@@ -13,6 +14,8 @@ module_install(repo = NULL, url = NULL, filepath = NULL,
 \item{url}{URL to downloadable .tar.gz of module, character.}
 
 \item{filepath}{Filepath to uncompressed directory of module, character.}
+
+\item{service}{Code-sharing service. Character.}
 
 \item{tag}{Module version, default latest. Character.}
 
@@ -26,7 +29,7 @@ module_install(repo = NULL, url = NULL, filepath = NULL,
 Logical
 }
 \description{
-Install a module
+Install a module TODO
 }
 \examples{
 # NOT RUN

@@ -4,14 +4,10 @@
 \alias{user_warn}
 \title{Warn users on the dangers of outsider modules}
 \usage{
-user_warn(address = NULL, url = NULL, flpth = NULL)
+user_warn(pkgnm)
 }
 \arguments{
-\item{address}{repository address as a list}
-
-\item{url}{URL download link}
-
-\item{flpth}{Filepath install link}
+\item{pkgnm}{Package name}
 }
 \value{
 Logical

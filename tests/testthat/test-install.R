@@ -2,9 +2,10 @@ context('Testing \'install\'')
 test_that('module_install() works', {
   with_mock(
     `outsider:::is_docker_available` = function(...) TRUE,
-    `outsider.base:::install` = function(...) TRUE,
-    `outsider:::download_and_install` = function(...) TRUE,
-    `outsider:::url_make` = function(...) '',
+    `remotes::install_github` = function(...) TRUE,
+    `remotes::install_url` = function(...) TRUE,
+    `remotes::install_local` = function(...) TRUE,
+    `outsider.base::image_install` = function(...) TRUE,
     expect_true(module_install(repo = repo, force = TRUE)),
     expect_true(module_install(url = '', force = TRUE)),
     expect_true(module_install(filepath = '', force = TRUE)),

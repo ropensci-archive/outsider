@@ -4,9 +4,7 @@
 #' @description Warn users on the dangers of installing an outsider module
 #' whose origin is potentially unknown.
 #' @details Prints additional info to screen based on arguments given.
-#' @param address repository address as a list
-#' @param url URL download link
-#' @param flpth Filepath install link
+#' @param pkgnm Package name
 #' @return Logical
 user_warn <- function(pkgnm) {
   # TODO: richer warnings for GitHub, BitBucket and GitLab
@@ -14,16 +12,9 @@ user_warn <- function(pkgnm) {
                                      package = 'outsider'))
   ncols <- nchar(msg[[1]])
   msg <- paste0(msg, collapse = '\n')
-  if (!is.null(address)) {
-    msg <- paste0(msg, '\nRepo:\n    ', address[['username']],
-                  address[['repo']])
-    msg <- paste0(msg, '\nOn:\n    ', address[['service']])
-  }
-  if (!is.null(url)) {
-    msg <- paste0(msg, '\nVia:\n    ', url)
-  }
-  if (!is.null(flpth)) {
-    msg <- paste0(msg, '\nVia:\n    ', flpth)
+  meta <- meta_get(pkgnm = pkgnm)
+  for (nm in names(meta)) {
+    msg <- paste0(nm, ': ', meta[[nm]], '\n')
   }
   msg <- paste0(msg, '\n', paste0(rep('-', ncols), collapse = ''))
   message(crayon::silver(msg))
@@ -34,10 +25,11 @@ user_warn <- function(pkgnm) {
 # Public ----
 #' @name module_install
 #' @title Install an outsider module
-#' @description Install a module
+#' @description Install a module TODO
 #' @param repo Module repo, character.
 #' @param url URL to downloadable .tar.gz of module, character.
 #' @param filepath Filepath to uncompressed directory of module, character.
+#' @param service Code-sharing service. Character.
 #' @param tag Module version, default latest. Character.
 #' @param manual Build the docker image? Default FALSE. Logical.
 #' @param verbose Be verbose? Default FALSE.
@@ -52,8 +44,8 @@ module_install <- function(repo = NULL, url = NULL, filepath = NULL,
   res <- FALSE
   is_docker_available()
   if (length(c(repo, url, filepath)) != 1) {
-    msg <- paste0('Must provide just 1 variable to either ', char('repo'), ', ',
-                  char('url'), ' or ', char('filepath'))
+    msg <- paste0('Must provide just 1 variable to either ', char('repo'),
+                  ', ', char('url'), ' or ', char('filepath'))
     stop(msg)
   }
   if (!is.null(repo)) {
@@ -73,7 +65,7 @@ module_install <- function(repo = NULL, url = NULL, filepath = NULL,
                                     quiet = !verbose, reload = TRUE,
                                     build = FALSE)
   }
-  if (force) {
+  if (!force) {
     user_warn(pkgnm = pkgnm)
   }
   res <- image_install(pkgnm = pkgnm, tag = tag, pull = !manual)
@@ -159,7 +151,6 @@ module_installed <- function() {
 #' @export
 #' @family user
 module_import <- function(fname, repo) {
-  # TODO: res <- image_install(pkgnm = pkgnm, tag = tag, pull = !manual)
   pkgnm <- pkgnm_guess(repo = repo)
   if (!pkgnm %in% utils::installed.packages()) {
     stop('Module ', char(repo), ' not found', call. = FALSE)
