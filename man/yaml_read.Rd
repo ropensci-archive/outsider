@@ -2,16 +2,20 @@
 % Please edit documentation in R/search.R
 \name{yaml_read}
 \alias{yaml_read}
-\title{Safely read om.yaml}
+\title{Module YAML information}
 \usage{
-yaml_read(url)
+yaml_read(repos, service = c("github", "gitlab", "bitbucket"))
 }
 \arguments{
-\item{url}{URL to repo}
+\item{repos}{Character vector of outsider module repositories on GitHub,
+GitLab or BitBucket.}
+
+\item{service}{Code-sharing service. Character.}
 }
 \value{
-list
+tbl_df
 }
 \description{
-Return list of 'program' and 'details'.
+Return tbl_df of all YAML information of given outsider
+module repos.
 }

@@ -2,19 +2,6 @@
 gh_url <- 'https://github.com'
 gh_api_url <- 'https://api.github.com'
 gh_search_repo_url <- paste0(gh_api_url, '/search/repositories')
-gh_raw_url <- 'https://raw.githubusercontent.com/'
-
-# Auth ----
-authtoken_get <- function(joiner = c('?', '&')) {
-  joiner <- match.arg(joiner)
-  tkn <- Sys.getenv("GITHUB_PAT")
-  if (nchar(tkn) > 0) {
-    tkn <- paste0(joiner, 'access_token=', tkn)
-  } else {
-    tkn <- NULL
-  }
-  tkn
-}
 
 # Functions ----
 #' @name github_repo_search
@@ -52,28 +39,6 @@ github_search <- function() {
   github_res[['items']]
 }
 
-#' @name github_yaml
-#' @title Module YAML information
-#' @description Return tbl_df of all YAML information of given outsider
-#' module repos.
-#' @param repos Character vector of outsider module repositories on GitHub.
-#' @return tbl_df
-github_yaml <- function(repos) {
-  extract <- function(x, i) {
-    vapply(X = x, FUN = function(x, i) {
-      res <- x[[i]]
-      if (length(res) == 0) res <- ''
-      res
-    }, FUN.VALUE = character(1),
-    i = i)
-  }
-  url <- paste0(gh_raw_url, repos, '/master/inst/om.yml')
-  yaml <- lapply(X = url, FUN = yaml_read)
-  prgms <- extract(x = yaml, i = 'program')
-  dtls <- extract(x = yaml, i = 'details')
-  tibble::as_tibble(x = list(repo = repos, program = prgms, details = dtls))
-}
-
 #' @name github_tags
 #' @title Module tags from GitHub
 #' @description Return tbl_df of module tags for a list of outsider
@@ -87,14 +52,11 @@ github_tags <- function(repos) {
     raw_df <- try(jsonlite::fromJSON(api_url), silent = TRUE)
     if (!inherits(raw_df, 'try-error')) {
       tag <- raw_df[ ,'name']
-      download_url <- paste0(gh_raw_url, repo, '/master/dockerfiles/',
-                             raw_df[ ,'name'], '/Dockerfile')
     } else {
       warning('Unable to fetch data from GitHub for ', char(repo))
       download_url <- tag <- ''
     }
-    data.frame(repo = repo, tag = tag, download_url = download_url,
-               stringsAsFactors = FALSE)
+    data.frame(repo = repo, tag = tag, stringsAsFactors = FALSE)
   }
   res <- lapply(X = repos, FUN = fetch)
   res <- do.call(what = rbind, args = res)
@@ -123,7 +85,7 @@ github_module_details <- function(repo = NULL) {
     repo <- github_res[, 'full_name']
   }
   # look up yaml
-  info <- github_yaml(repos = repo)
+  info <- yaml_read(repos = repo, service = 'github')
   # look up version
   tags <- github_tags(repos = repo)
   info$versions <- vapply(X = unique(tags[['repo']]), FUN = function(x) {
