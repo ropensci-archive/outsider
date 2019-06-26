@@ -58,7 +58,8 @@ yaml_read <- function(repos, service = c('github', 'gitlab', 'bitbucket')) {
                                          repos, '/master/inst/om.yml'),
                 gitlab = paste0('https://gitlab.com/', repos,
                                 '/raw/master/inst/om.yml'),
-                bitbucket = '')
+                bitbucket = paste0('https://bitbucket.org/', repos,
+                                   '/raw/master/inst/om.yml'))
   yaml <- lapply(X = url, FUN = yaml_fetch)
   prgms <- extract(x = yaml, i = 'program')
   dtls <- extract(x = yaml, i = 'details')
@@ -68,15 +69,15 @@ yaml_read <- function(repos, service = c('github', 'gitlab', 'bitbucket')) {
 # Public ----
 #' @name module_search
 #' @title Search for available outsider modules
-#' @description Return a list of available outsider modules.
+#' @description Return a list of available outsider modules. (Not possible for
+#' BitBucket.)
 #' @param service Code-sharing service, e.g. GitHub
 #' @return Character vector
 #' @example examples/module_search.R
 #' @export
-module_search <- function(service = c('github', 'bitbucket', 'gitlab')) {
+module_search <- function(service = c('github', 'gitlab')) {
   service <- match.arg(service)
-  res <- switch(service, github = github_search(), gitlab = gitlab_search(),
-                bitbucket = bitbucket_search())
+  res <- switch(service, github = github_search(), gitlab = gitlab_search())
   res[['full_name']]
 }
 
