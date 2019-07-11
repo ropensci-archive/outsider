@@ -2,6 +2,18 @@
 gl_url <- 'https://gitlab.com/'
 gl_api_url <- paste0(gl_url, '/api/v4/')
 
+# Hidden functions ----
+gitlab_reformat <- function(api_res) {
+  data.frame(id = api_res[['id']], full_name = api_res[['path_with_namespace']],
+             updated_at = api_res[['last_activity_at']],
+             star_count = api_res[['star_count']], stringsAsFactors = FALSE)
+}
+gitlab_token_check <- function() {
+  if (!is.null(authtoken_get(service = 'gitlab'))) {
+    warning('No GitLab token.')
+  }
+}
+
 # Functions ----
 #' @name gitlab_repo_search
 #' @title Search for repository
@@ -9,6 +21,7 @@ gl_api_url <- paste0(gl_url, '/api/v4/')
 #' @param repo gitlab repo
 #' @return data.frame
 gitlab_repo_search <- function(repo) {
+  gitlab_token_check()
   # drop username if present
   if (grepl(pattern = '/', x = repo)) {
     user_repo <- strsplit(x = repo, split = '/')[[1]]
@@ -35,7 +48,7 @@ gitlab_repo_search <- function(repo) {
             call. = FALSE)
     return(data.frame())
   }
-  gitlab_res
+  gitlab_reformat(gitlab_res)
 }
 
 #' @name gitlab_search
@@ -43,6 +56,7 @@ gitlab_repo_search <- function(repo) {
 #' @description Returns GitLab API item results for outsider module search.
 #' @return data.frame
 gitlab_search <- function() {
+  gitlab_token_check()
   # https://stackoverflow.com/questions/31822385/how-to-use-gitlab-search-criteria
   search_url <- paste0(gl_api_url, 'search?scope=projects&search=om..',
                        authtoken_get(joiner = '&', service = 'gitlab'))
@@ -51,7 +65,7 @@ gitlab_search <- function() {
   pull <- grepl(pattern = '^om\\.\\.', x = gitlab_res[['name']])
   pull <- grepl(pattern = "outsider-module", x = gitlab_res[['description']]) &
     pull
-  gitlab_res[pull, ]
+  gitlab_reformat(gitlab_res[pull, ])
 }
 
 #' @name gitlab_tags
@@ -80,49 +94,4 @@ gitlab_tags <- function(repo_ids) {
   res <- lapply(X = repo_ids, FUN = fetch)
   res <- do.call(what = rbind, args = res)
   tibble::as_tibble(x = res)
-}
-
-#' @name gitlab_module_details
-#' @title Look up details of module(s) on GitLab
-#' @description Return a tbl_df of information for outsider module(s).
-#' If \code{repo} is NULL, will return details on all available modules.
-#' @param repo Vector of one or more outsider module repositories, default NULL.
-#' @return tbl_df
-#' @export
-gitlab_module_details <- function(repo = NULL) {
-  if (!is.null(repo)) {
-    needed_clnms <- c('id', 'path_with_namespace', 'last_activity_at',
-                      'star_count')
-    gitlab_res <- lapply(X = repo, FUN = gitlab_repo_search)
-    pull <- vapply(X = gitlab_res, FUN = function(x) {
-      all(needed_clnms %in% colnames(x))
-    }, FUN.VALUE = logical(1))
-    gitlab_res <- gitlab_res[pull]
-    gitlab_res <- lapply(X = gitlab_res, FUN = function(x) x[, needed_clnms])
-    gitlab_res <- do.call(what = rbind, args = gitlab_res)
-  } else {
-    gitlab_res <- gitlab_search()
-    repo <- gitlab_res[, 'path_with_namespace']
-  }
-  # look up yaml
-  info <- yaml_read(repos = repo, service = 'gitlab')
-  # look up version
-  tags <- gitlab_tags(repo_ids = gitlab_res[['id']])
-  info$versions <- vapply(X = unique(tags[['repo_id']]), FUN = function(x) {
-    paste0(sort(tags[tags[['repo_id']] == x, 'tag'][[1]],
-                decreasing = TRUE), collapse = ', ')
-  }, FUN.VALUE = character(1))
-  # add extra info
-  index <- match(tolower(gitlab_res[, 'path_with_namespace']),
-                 tolower(info[['repo']]))
-  info[['updated_at']] <- as.POSIXct(gitlab_res[index, 'last_activity_at'],
-                                     format = "%Y-%m-%dT%H:%M:%OSZ",
-                                     timezone = 'UTC')
-  info[['star_count']] <- gitlab_res[index, 'star_count']
-  info[['url']] <- paste0('https://gitlab.com/', info[['repo']])
-  # # order output
-  info <- info[order(info[['program']], decreasing = TRUE), ]
-  info <- info[order(info[['updated_at']], decreasing = TRUE), ]
-  info <- info[order(info[['star_count']], decreasing = TRUE), ]
-  info
 }

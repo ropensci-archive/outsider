@@ -97,47 +97,55 @@ module_details <- function(repo = NULL, service = c('github', 'bitbucket',
   repo_search <- switch(service, github = github_repo_search,
                         gitlab = gitlab_repo_search,
                         bitbucket = bitbucket_repo_search)
+  service_search <- switch(service, github = github_search,
+                           gitlab = gitlab_search,
+                           bitbucket = bitbucket_search)
   tags_search <- switch(service, github = github_tags,
                         gitlab = gitlab_tags,
                         bitbucket = bitbucket_tags)
+  url <- switch(service, github = 'https://github.com/',
+                gitlab = 'https://gitlab.com/',
+                bitbucket = 'https://bitbucket.org/')
   if (!is.null(repo)) {
+    needed_clnms <- c('full_name', 'updated_at', 'watchers_count', 'url')
     if (service == 'gitlab') {
-      needed_clnms <- c('id', 'path_with_namespace', 'last_activity_at',
-                        'star_count')
-    } else {
-      needed_clnms <- c('full_name', 'updated_at', 'watchers_count', 'url')
+      needed_clnms <- c(needed_clnms, 'id')
     }
-    github_res <- lapply(X = repo, FUN = github_repo_search)
-    pull <- vapply(X = github_res, FUN = function(x) {
+    res <- lapply(X = repo, FUN = repo_search)
+    pull <- vapply(X = res, FUN = function(x) {
       all(needed_clnms %in% colnames(x))
     }, FUN.VALUE = logical(1))
-    github_res <- github_res[pull]
-    github_res <- lapply(X = github_res, FUN = function(x) x[, needed_clnms])
-    github_res <- do.call(what = rbind, args = github_res)
+    res <- res[pull]
+    res <- lapply(X = res, FUN = function(x) x[, needed_clnms])
+    res <- do.call(what = rbind, args = res)
   } else {
-    github_res <- github_search()
-    repo <- github_res[, 'full_name']
+    res <- service_search()
+    repo <- res[, 'full_name']
   }
   # look up yaml
   info <- yaml_read(repos = repo, service = service)
-  # look up version
-  tags <- tags_search(repos = repo)
+  # look up version(s)
+  if (service == 'gitlab') {
+    tags <- tags_search(repo_ids = res[['id']])
+    tags[['repo']] <- res[['full_name']][match(tags[['repo_id']], res[['id']])]
+  } else {
+    tags <- tags_search(repos = repo)
+  }
   info$versions <- vapply(X = unique(tags[['repo']]), FUN = function(x) {
     paste0(sort(tags[tags[['repo']] == x, 'tag'][[1]],
                 decreasing = TRUE), collapse = ', ')
   }, FUN.VALUE = character(1))
   # add extra info
-  index <- match(tolower(github_res[, 'full_name']),
-                 tolower(info[['repo']]))
-  info[['updated_at']] <- as.POSIXct(github_res[index, 'updated_at'],
+  index <- match(tolower(res[, 'full_name']), tolower(info[['repo']]))
+  info[['updated_at']] <- as.POSIXct(res[index, 'updated_at'],
                                      format = "%Y-%m-%dT%H:%M:%OSZ",
                                      timezone = 'UTC')
-  info[['watcher_count']] <- github_res[index, 'watchers_count']
-  info[['url']] <- paste0('https://github.com/', info[['repo']])
+  info[['star_count']] <- res[index, 'star_count']
+  info[['url']] <- paste0(url, info[['repo']])
   # # order output
   info <- info[order(info[['program']], decreasing = TRUE), ]
   info <- info[order(info[['updated_at']], decreasing = TRUE), ]
-  info <- info[order(info[['watcher_count']], decreasing = TRUE), ]
+  info <- info[order(info[['star_count']], decreasing = TRUE), ]
   info
 }
 
