@@ -7,8 +7,8 @@ hello_world()
 
 
 # TODO:
-# -- bitbucket searching
 # -- tests
 # -- update all current modules
 # -- update website
 # -- expand documentation
+# -- appveyor

@@ -1,2 +1,3 @@
 *.html linguist-documentation=true
-
+* text=auto
+R/* text=lf
