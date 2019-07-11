@@ -26,10 +26,10 @@ test_that('github_search() works', {
                                         'data.frame')))
   )
 })
-test_that('github_yaml() works', {
+test_that('github_tags() works', {
   # TODO: with mock?
   skip_if_offline()
-  res <- outsider:::github_yaml(repos = repo)
+  res <- outsider:::github_tags(repos = repo)
   expect_true(inherits(res, 'tbl_df'))
 })
 test_that('github_tags() works', {

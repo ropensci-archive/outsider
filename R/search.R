@@ -94,9 +94,51 @@ module_search <- function(service = c('github', 'gitlab')) {
 module_details <- function(repo = NULL, service = c('github', 'bitbucket',
                                                     'gitlab')) {
   service <- match.arg(service)
-  switch(service, github = github_module_details(repo = repo),
-         gitlab = gitlab_module_details(repo = repo),
-         bitbucket = bitbucket_module_details(repo = repo))
+  repo_search <- switch(service, github = github_repo_search,
+                        gitlab = gitlab_repo_search,
+                        bitbucket = bitbucket_repo_search)
+  tags_search <- switch(service, github = github_tags,
+                        gitlab = gitlab_tags,
+                        bitbucket = bitbucket_tags)
+  if (!is.null(repo)) {
+    if (service == 'gitlab') {
+      needed_clnms <- c('id', 'path_with_namespace', 'last_activity_at',
+                        'star_count')
+    } else {
+      needed_clnms <- c('full_name', 'updated_at', 'watchers_count', 'url')
+    }
+    github_res <- lapply(X = repo, FUN = github_repo_search)
+    pull <- vapply(X = github_res, FUN = function(x) {
+      all(needed_clnms %in% colnames(x))
+    }, FUN.VALUE = logical(1))
+    github_res <- github_res[pull]
+    github_res <- lapply(X = github_res, FUN = function(x) x[, needed_clnms])
+    github_res <- do.call(what = rbind, args = github_res)
+  } else {
+    github_res <- github_search()
+    repo <- github_res[, 'full_name']
+  }
+  # look up yaml
+  info <- yaml_read(repos = repo, service = service)
+  # look up version
+  tags <- tags_search(repos = repo)
+  info$versions <- vapply(X = unique(tags[['repo']]), FUN = function(x) {
+    paste0(sort(tags[tags[['repo']] == x, 'tag'][[1]],
+                decreasing = TRUE), collapse = ', ')
+  }, FUN.VALUE = character(1))
+  # add extra info
+  index <- match(tolower(github_res[, 'full_name']),
+                 tolower(info[['repo']]))
+  info[['updated_at']] <- as.POSIXct(github_res[index, 'updated_at'],
+                                     format = "%Y-%m-%dT%H:%M:%OSZ",
+                                     timezone = 'UTC')
+  info[['watcher_count']] <- github_res[index, 'watchers_count']
+  info[['url']] <- paste0('https://github.com/', info[['repo']])
+  # # order output
+  info <- info[order(info[['program']], decreasing = TRUE), ]
+  info <- info[order(info[['updated_at']], decreasing = TRUE), ]
+  info <- info[order(info[['watcher_count']], decreasing = TRUE), ]
+  info
 }
 
 # @name module_exists

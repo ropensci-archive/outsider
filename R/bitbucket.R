@@ -28,13 +28,14 @@ bitbucket_repo_search <- function(repo) {
   res
 }
 
-# @name bitbucket_search
-# @title Search for outsider modules in bitbucket
-# @description Returns bitbucket API item results for outsider module search.
-# @return data.frame
-# bitbucket_search <- function() {
-#   stop('BitBucket does not support search.', call. = FALSE)
-# }
+#' @name bitbucket_search
+#' @title Search for outsider modules in bitbucket
+#' @description Returns bitbucket API item results for outsider module search.
+#' @return data.frame
+bitbucket_search <- function(...) {
+  stop('BitBucket does not support search.', call. = FALSE)
+  invisible(data.frame())
+}
 
 #' @name bitbucket_tags
 #' @title Module tags from bitbucket
