@@ -4,7 +4,7 @@
 \alias{module_search}
 \title{Search for available outsider modules}
 \usage{
-module_search(service = c("github", "bitbucket", "gitlab"))
+module_search(service = c("github", "gitlab"))
 }
 \arguments{
 \item{service}{Code-sharing service, e.g. GitHub}
@@ -13,7 +13,8 @@ module_search(service = c("github", "bitbucket", "gitlab"))
 Character vector
 }
 \description{
-Return a list of available outsider modules.
+Return a list of available outsider modules. (Not possible for
+BitBucket.)
 }
 \examples{
 library(outsider)

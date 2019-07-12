@@ -6,10 +6,10 @@ gl_api_url <- paste0(gl_url, '/api/v4/')
 gitlab_reformat <- function(api_res) {
   data.frame(id = api_res[['id']], full_name = api_res[['path_with_namespace']],
              updated_at = api_res[['last_activity_at']],
-             star_count = api_res[['star_count']], stringsAsFactors = FALSE)
+             watchers_count = api_res[['star_count']], stringsAsFactors = FALSE)
 }
 gitlab_token_check <- function() {
-  if (!is.null(authtoken_get(service = 'gitlab'))) {
+  if (is.null(authtoken_get(service = 'gitlab'))) {
     warning('No GitLab token.')
   }
 }

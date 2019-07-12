@@ -21,10 +21,11 @@ bitbucket_repo_search <- function(repo) {
   }
   # parse into data.frame
   res <- data.frame(uuid = bitbucket_res$uuid,
-                    repo = bitbucket_res$full_name,
+                    full_name = bitbucket_res$full_name,
                     description = bitbucket_res$description,
-                    updated_on = bitbucket_res$updated_on,
-                    watchers_count = length(bitbucket_res$links$watchers))
+                    updated_at = bitbucket_res$updated_on,
+                    watchers_count = length(bitbucket_res$links$watchers),
+                    stringsAsFactors = FALSE)
   res
 }
 

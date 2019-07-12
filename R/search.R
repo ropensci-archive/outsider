@@ -86,6 +86,9 @@ module_search <- function(service = c('github', 'gitlab')) {
 #' @description Return a tbl_df of information for outsider module(s) for a
 #' given code-sharing service. If \code{repo} is NULL, will return details on
 #' all available modules.
+#' @details Module details in tibble format include: repository name
+#' (user/repo), last time repo was updated, number of watchers (or stars in the
+#' case of GitLab), url to web presence, names of tagged versions.
 #' @param repo Vector of one or more outsider module repositories, default NULL.
 #' @param service Code-sharing service, e.g. GitHub
 #' @return tbl_df
@@ -107,7 +110,7 @@ module_details <- function(repo = NULL, service = c('github', 'bitbucket',
                 gitlab = 'https://gitlab.com/',
                 bitbucket = 'https://bitbucket.org/')
   if (!is.null(repo)) {
-    needed_clnms <- c('full_name', 'updated_at', 'watchers_count', 'url')
+    needed_clnms <- c('full_name', 'updated_at', 'watchers_count')
     if (service == 'gitlab') {
       needed_clnms <- c(needed_clnms, 'id')
     }
@@ -137,15 +140,16 @@ module_details <- function(repo = NULL, service = c('github', 'bitbucket',
   }, FUN.VALUE = character(1))
   # add extra info
   index <- match(tolower(res[, 'full_name']), tolower(info[['repo']]))
+  # github, gitlab and bb all have same initial time format
   info[['updated_at']] <- as.POSIXct(res[index, 'updated_at'],
-                                     format = "%Y-%m-%dT%H:%M:%OSZ",
+                                     format = "%Y-%m-%dT%H:%M",
                                      timezone = 'UTC')
-  info[['star_count']] <- res[index, 'star_count']
+  info[['watchers_count']] <- res[index, 'watchers_count']
   info[['url']] <- paste0(url, info[['repo']])
   # # order output
   info <- info[order(info[['program']], decreasing = TRUE), ]
   info <- info[order(info[['updated_at']], decreasing = TRUE), ]
-  info <- info[order(info[['star_count']], decreasing = TRUE), ]
+  info <- info[order(info[['watchers_count']], decreasing = TRUE), ]
   info
 }
 

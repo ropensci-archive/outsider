@@ -4,7 +4,7 @@
 \alias{bitbucket_search}
 \title{Search for outsider modules in bitbucket}
 \usage{
-bitbucket_search()
+bitbucket_search(...)
 }
 \value{
 data.frame

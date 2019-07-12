@@ -1,19 +1,39 @@
 devtools::load_all('.')
 
+# Github ----
 # raw repo search
-repo <- outsider:::vars_get('repo')
-search_args <- paste0('?q=', repo, '&', 'Type=Repositories')
-github_res <- jsonlite::fromJSON(paste0(outsider:::gh_search_repo_url,
-                                        search_args))
-saveRDS(object = github_res, file = file.path('tests', 'testthat', 'data',
-                                              'repo_search.RData'))
+res <- github_repo_search(repo = 'dombennett/om..hello.world')
+saveRDS(object = res, file = file.path('tests', 'testthat', 'data',
+                                              'github_repo_search.RData'))
 # raw all search
-search_args <- paste0('?q=om..+in:name+outsider-module+in:description',
-                      '&', 'Type=Repositories')
-github_res <- jsonlite::fromJSON(paste0(gh_search_repo_url, search_args))
-saveRDS(object = github_res, file = file.path('tests', 'testthat', 'data',
-                                              'all_search.RData'))
+res <- github_search()
+saveRDS(object = res, file = file.path('tests', 'testthat', 'data',
+                                              'github_search.RData'))
 # tags
-tag_data <- outsider:::tags(repos = 'dombennett/om..hello.world')
-saveRDS(object = tag_data, file = file.path('tests', 'testthat', 'data',
-                                            'tag_data.RData'))
+res <- github_tags(repos = 'dombennett/om..hello.world')
+saveRDS(object = res, file = file.path('tests', 'testthat', 'data',
+                                       'github_tags.RData'))
+
+# GitLab ----
+# raw repo search
+res <- gitlab_repo_search(repo = 'dombennett/om..hello.world')
+saveRDS(object = res, file = file.path('tests', 'testthat', 'data',
+                                       'gitlab_repo_search.RData'))
+# raw all search
+res <- gitlab_search()
+saveRDS(object = res, file = file.path('tests', 'testthat', 'data',
+                                       'gitlab_search.RData'))
+# tags
+res <- gitlab_tags(repo_ids  = '12231696')
+saveRDS(object = res, file = file.path('tests', 'testthat', 'data',
+                                       'gitlab_tags.RData'))
+
+# BitBucket ----
+# raw repo search
+res <- bitbucket_repo_search(repo = 'dominicjbennett/om..hello.world')
+saveRDS(object = res, file = file.path('tests', 'testthat', 'data',
+                                       'bitbucket_repo_search.RData'))
+# tags
+res <- bitbucket_tags(repos = 'dominicjbennett/om..hello.world')
+saveRDS(object = res, file = file.path('tests', 'testthat', 'data',
+                                       'bitbucket_tags.RData'))

@@ -1,6 +1,4 @@
 # Vars ----
-repo <- 'dombennett/om..hello.world'
-pkgnm <- 'om..hello.world'
 wd <- getwd()
 if (grepl("testthat", wd)) {
   datadir <- "data"
@@ -8,28 +6,35 @@ if (grepl("testthat", wd)) {
   datadir <- file.path("tests", "testthat", "data")
 }
 
-# Functions ----
-mock_repo_search_0 <- function(...) {
-  readRDS(file = file.path(datadir, 'repo_search.RData'))
+# Mocks ----
+# github
+mock_github_search <- function() {
+  readRDS(file = file.path(datadir, 'github_search.RData'))
 }
-mock_repo_search_1 <- function(...) {
-  res <- mock_repo_search_0()
-  res[['total_count']] <- 0
-  res
+mock_github_repo_search <- function(repo) {
+  readRDS(file = file.path(datadir, 'github_repo_search.RData'))
 }
-mock_repo_search_2 <- function(...) {
-  res <- mock_repo_search_0()
-  res[['total_count']] <- 2
-  res
+mock_github_tags <- function(repos) {
+  readRDS(file = file.path(datadir, 'github_tags.RData'))
 }
-mock_all_search <- function(...) {
-  readRDS(file = file.path(datadir, 'all_search.RData'))
+# gitlab
+mock_gitlab_search <- function() {
+  readRDS(file = file.path(datadir, 'gitlab_search.RData'))
 }
-mock_all_search_bad <- function(...) {
-  res <- mock_all_search()
-  res[['incomplete_results']] <- TRUE
-  res
+mock_gitlab_repo_search <- function(repo) {
+  readRDS(file = file.path(datadir, 'gitlab_repo_search.RData'))
 }
-mock_tags <- function(...) {
-  readRDS(file = outsider:::datadir_get('tag_data.RData'))
+mock_gitlab_tags <- function(repo_ids) {
+  readRDS(file = file.path(datadir, 'gitlab_tags.RData'))
+}
+# bitbucket
+mock_bitbucket_repo_search <- function(repo) {
+  readRDS(file = file.path(datadir, 'bitbucket_repo_search.RData'))
+}
+mock_bitbucket_tags <- function(repos) {
+  readRDS(file = file.path(datadir, 'bitbucket_tags.RData'))
+}
+# yaml
+mock_yaml_fetch <- function(url) {
+  outsider:::yaml_fetch(url = file.path(datadir, 'om.yml'))
 }
