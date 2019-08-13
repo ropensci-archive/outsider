@@ -6,6 +6,9 @@
 \usage{
 bitbucket_search(...)
 }
+\arguments{
+\item{...}{Arguments}
+}
 \value{
 data.frame
 }

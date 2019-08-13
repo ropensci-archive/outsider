@@ -32,6 +32,7 @@ bitbucket_repo_search <- function(repo) {
 #' @name bitbucket_search
 #' @title Search for outsider modules in bitbucket
 #' @description Returns bitbucket API item results for outsider module search.
+#' @param ... Arguments
 #' @return data.frame
 bitbucket_search <- function(...) {
   stop('BitBucket does not support search.', call. = FALSE)

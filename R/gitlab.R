@@ -72,7 +72,7 @@ gitlab_search <- function() {
 #' @title Module tags from GitLab
 #' @description Return tbl_df of module tags for a list of outsider
 #' modules hosted on gitlab.
-#' @param repos Character vector of outsider module repositories.
+#' @param repo_ids Character vector of outsider module repositories ids.
 #' @return tbl_df
 gitlab_tags <- function(repo_ids) {
   fetch <- function(repo_id) {

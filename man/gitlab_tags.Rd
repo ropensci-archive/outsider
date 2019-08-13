@@ -7,7 +7,7 @@
 gitlab_tags(repo_ids)
 }
 \arguments{
-\item{repos}{Character vector of outsider module repositories.}
+\item{repo_ids}{Character vector of outsider module repositories ids.}
 }
 \value{
 tbl_df
