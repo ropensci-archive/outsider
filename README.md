@@ -5,7 +5,7 @@
 Install and run programs, outside of R, inside of R <img src="logo.png" height="200" align="right"/>
 ====================================================================================================
 
-[![Build Status](https://travis-ci.org/AntonelliLab/outsider.svg?branch=master)](https://travis-ci.org/AntonelliLab/outsider) [![Coverage Status](https://coveralls.io/repos/github/AntonelliLab/outsider/badge.svg?branch=master)](https://coveralls.io/github/AntonelliLab/outsider?branch=master) [![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active) [![DOI](https://zenodo.org/badge/145114547.svg)](https://zenodo.org/badge/latestdoi/145114547) [![ropensci](https://badges.ropensci.org/282_status.svg)](https://github.com/ropensci/onboarding/issues/282)
+[![Build Status](https://travis-ci.org/AntonelliLab/outsider.svg?branch=master)](https://travis-ci.org/AntonelliLab/outsider) [![AppVeyor build status](https://ci.appveyor.com/api/projects/status/github/AntonelliLab/outsider?branch=master&svg=true)](https://ci.appveyor.com/project/DomBennett/outsider) [![Coverage Status](https://coveralls.io/repos/github/AntonelliLab/outsider/badge.svg?branch=master)](https://coveralls.io/github/AntonelliLab/outsider?branch=master) [![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active) [![DOI](https://zenodo.org/badge/145114547.svg)](https://zenodo.org/badge/latestdoi/145114547) [![ropensci](https://badges.ropensci.org/282_status.svg)](https://github.com/ropensci/onboarding/issues/282)
 
 > The Outsider is always unhappy, but he is an agent that ensures the happiness for millions of 'Insiders'.<br><br> *[The Outsider, Wilson, 1956](https://en.wikipedia.org/wiki/The_Outsider_(Colin_Wilson)).*
 
@@ -29,6 +29,10 @@ Quick example
 
 ``` r
 library(outsider)
+#> ----------------
+#> outsider v 0.0.1
+#> ----------------
+#> - Note: be sure of which modules you install
 # outsider modules are hosted on GitHub and other code-sharing sites
 # this repo is a demonstration outsider module
 # it contains a function for printing 'Hello World!' in Ubuntu 18.04
@@ -52,25 +56,9 @@ Available external programs
 ---------------------------
 
     #> Warning in FUN(X[[i]], ...): Unable to fetch data from GitHub for
-    #> 'DomBennett/om..mafft'
-    #> Warning in FUN(X[[i]], ...): Unable to fetch data from GitHub for
-    #> 'DomBennett/om..revbayes'
-    #> Warning in FUN(X[[i]], ...): Unable to fetch data from GitHub for
-    #> 'DomBennett/om..pyrate'
-    #> Warning in FUN(X[[i]], ...): Unable to fetch data from GitHub for
-    #> 'DomBennett/om..raxml'
-    #> Warning in FUN(X[[i]], ...): Unable to fetch data from GitHub for
-    #> 'DomBennett/om..bamm'
-    #> Warning in FUN(X[[i]], ...): Unable to fetch data from GitHub for
-    #> 'DomBennett/om..blast'
-    #> Warning in FUN(X[[i]], ...): Unable to fetch data from GitHub for
-    #> 'DomBennett/om..beast'
-    #> Warning in FUN(X[[i]], ...): Unable to fetch data from GitHub for
-    #> 'DomBennett/om..astral'
-    #> Warning in FUN(X[[i]], ...): Unable to fetch data from GitHub for
-    #> 'DomBennett/om..hello.world'
+    #> 'hrbrmstr/om..nmap'
 
-Modules available on GitHub since 14:24 09 May 2019 (CEST)
+Modules available on GitHub since 12:18 13 August 2019 (CEST)
 
 ● astral
 
@@ -89,6 +77,8 @@ Modules available on GitHub since 14:24 09 May 2019 (CEST)
 ● RAxML
 
 ● revbayes
+
+● trimal
 
 For more details, see the [available modules table](https://antonellilab.github.io/outsider/articles/available.html)
 
