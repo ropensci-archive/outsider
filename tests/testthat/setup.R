@@ -5,6 +5,8 @@ if (grepl("testthat", wd)) {
 } else {
   datadir <- file.path("tests", "testthat", "data")
 }
+repo <- 'om..hello.world'
+pkgnm <- 'hello.world'
 
 # Mocks ----
 # github
@@ -35,6 +37,8 @@ mock_bitbucket_tags <- function(repos) {
   readRDS(file = file.path(datadir, 'bitbucket_tags.RData'))
 }
 # yaml
+yf <- outsider:::yaml_fetch
+environment(fun = yf) <- .GlobalEnv
 mock_yaml_fetch <- function(url) {
-  outsider:::yaml_fetch(url = file.path(datadir, 'om.yml'))
+  yf(url = file.path(datadir, 'om.yml'))
 }

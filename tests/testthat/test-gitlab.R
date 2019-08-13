@@ -1,7 +1,7 @@
 context('Testing \'gitlab\'')
 test_that('gitlab_repo_search() works', {
   skip_if_offline()
-  res <- gitlab_repo_search(repo = 'dombennett/om..hello.world')
+  res <- gitlab_repo_search(repo = 'DomBennett/om..hello.world')
   expect_true(inherits(res, 'data.frame'))
 })
 test_that('gitlab_search() works', {

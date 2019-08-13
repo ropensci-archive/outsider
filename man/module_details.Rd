@@ -20,6 +20,11 @@ Return a tbl_df of information for outsider module(s) for a
 given code-sharing service. If \code{repo} is NULL, will return details on
 all available modules.
 }
+\details{
+Module details in tibble format include: repository name
+(user/repo), last time repo was updated, number of watchers (or stars in the
+case of GitLab), url to web presence, names of tagged versions.
+}
 \examples{
 library(outsider)
 # return table of ALL available modules on GitHub

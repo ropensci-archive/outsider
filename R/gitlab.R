@@ -35,7 +35,7 @@ gitlab_repo_search <- function(repo) {
                        repo, authtoken_get(joiner = '&', service = 'gitlab'))
   gitlab_res <- jsonlite::fromJSON(search_url)
   if (!is.na(user)) {
-    pull <- grepl(pattern = user, x = gitlab_res[['namespace']][['name']],
+    pull <- grepl(pattern = user, x = gitlab_res[['namespace']][['path']],
                   ignore.case = TRUE)
     gitlab_res <- gitlab_res[pull, ]
   }
