@@ -127,29 +127,36 @@ module_uninstall <- function(repo) {
 #' @example examples/module_installed.R
 #' @export
 #' @family user
-# TODO
 module_installed <- function() {
-  NULL
+  fetch <- function(x, i) {
+    res <- x[[i]]
+    if (is.null(res)) {
+      res <- ''
+    }
+    res
+  }
+  mdls <- modules_list()
+  if (length(mdls) == 0) {
+    return(tibble::as_tibble(x = list()))
+  }
+  res <- data.frame(package = mdls, image = NA, tag = NA, program = NA,
+                    url = NA, image_created = NA, image_id = NA)
+  meta <- lapply(X = mdls, FUN = meta_get)
+  res[['image']] <- vapply(X = meta, FUN = fetch, i = 'image',
+                           FUN.VALUE = character(1))
+  res[['url']] <- vapply(X = meta, FUN = fetch, i = 'url',
+                         FUN.VALUE = character(1))
+  res[['program']] <- vapply(X = meta, FUN = fetch, i = 'program',
+                             FUN.VALUE = character(1))
+  avl_imgs <- docker_img_ls()
+  avl_imgs <- avl_imgs[avl_imgs[['repository']] %in% res[['image']], ]
+  pull <- match(res[['image']], avl_imgs[['repository']])
+  res[['tag']][pull] <- avl_imgs[['tag']]
+  res[['image_created']][pull] <- avl_imgs[['created']]
+  res[['image_id']][pull] <- avl_imgs[['image_id']]
+  res <- tibble::as_tibble(res)
+  res
 }
-# module_installed <- function(show_images = FALSE) {
-#   mdls <- modules_list()
-#   if (length(mdls) == 0) {
-#     return(tibble::as_tibble(x = list()))
-#   }
-#   repos <- vapply(X = mdls, FUN = pkgnm_guess, character(1))
-#   if (show_images) {
-#     imgnms <- vapply(X = repos, FUN = function(x) {
-#       tryCatch(repo_to_img(x), error = function(e) '')
-#     }, character(1))
-#     images <- docker_img_ls()
-#     img_exists <- imgnms %in% images[['repository']]
-#     res <- tibble::as_tibble(list(pkg = modules, repo = repos,
-#                                   docker_img = imgnms, img_exists = img_exists))
-#   } else {
-#     res <- tibble::as_tibble(list(pkg = modules, repo = repos))
-#   }
-#   res
-# }
 
 #' @name module_import
 #' @title Import functions from a module

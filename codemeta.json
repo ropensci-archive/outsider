@@ -9,7 +9,7 @@
   "name": "outsider: Install and run programs, outside of R, inside of R",
   "issueTracker": "https://github.com/antonellilab/outsider/issues",
   "license": "https://spdx.org/licenses/MIT",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "programmingLanguage": {
     "@type": "ComputerLanguage",
     "name": "R",
@@ -43,7 +43,7 @@
       "@type": "SoftwareApplication",
       "identifier": "testthat",
       "name": "testthat",
-      "version": ">= 2.0",
+      "version": ">= 2.1",
       "provider": {
         "@id": "https://cran.r-project.org",
         "@type": "Organization",
@@ -77,6 +77,19 @@
       "@type": "SoftwareApplication",
       "identifier": "outsider.base",
       "name": "outsider.base"
+    },
+    {
+      "@type": "SoftwareApplication",
+      "identifier": "remotes",
+      "name": "remotes",
+      "version": ">= 2.0",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=remotes"
     },
     {
       "@type": "SoftwareApplication",
@@ -142,7 +155,7 @@
   "codeRepository": "https://antonellilab.github.io/outsider",
   "releaseNotes": "https://github.com/AntonelliLab/outsider/blob/master/NEWS.md",
   "readme": "https://github.com/AntonelliLab/outsider/blob/master/README.md",
-  "fileSize": "20.995KB",
+  "fileSize": "24.635KB",
   "contIntegration": [
     "https://travis-ci.org/AntonelliLab/outsider",
     "https://coveralls.io/github/AntonelliLab/outsider?branch=master"
