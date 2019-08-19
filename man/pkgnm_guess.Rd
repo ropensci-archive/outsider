@@ -7,7 +7,8 @@
 pkgnm_guess(repo, call_error = TRUE)
 }
 \arguments{
-\item{repo}{Repository (e.g. "username/repo") associated with module}
+\item{repo}{Repository (e.g. "username/repo") or package name associated
+with module}
 
 \item{call_error}{Call error if no package found? Default, TRUE.}
 }

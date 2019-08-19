@@ -5,15 +5,18 @@
 \title{Install an outsider module}
 \usage{
 module_install(repo = NULL, url = NULL, filepath = NULL,
-  service = c("github", "bitbucket", "gitlab"), tag = "latest",
-  manual = FALSE, verbose = FALSE, force = FALSE)
+  git = NULL, service = c("github", "bitbucket", "gitlab"),
+  tag = "latest", manual = FALSE, verbose = FALSE, force = FALSE)
 }
 \arguments{
 \item{repo}{Module repo, character.}
 
-\item{url}{URL to downloadable .tar.gz of module, character.}
+\item{url}{URL to downloadable compressed (zip, tar or bzipped/gzipped)
+folder of a module, character.}
 
 \item{filepath}{Filepath to uncompressed directory of module, character.}
+
+\item{git}{URL to git repository}
 
 \item{service}{Code-sharing service. Character.}
 
@@ -29,7 +32,16 @@ module_install(repo = NULL, url = NULL, filepath = NULL,
 Logical
 }
 \description{
-Install a module TODO
+Install a module through multiple different methods: via a code
+sharing site such as GitHub, a URL, a git repository or local filepath.
+The function will first install the R package and then build the Docker
+image. Docker image version is determined by "tag". To avoid pulling
+the image from DockerHub set "manual" to TRUE.
+}
+\details{
+All installation options depend on the installation functions of
+\code{remotes}. E.g. GitHub packages are installed with
+\code{\link[remotes]{install_github}}.
 }
 \examples{
 # NOT RUN

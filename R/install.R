@@ -25,9 +25,18 @@ user_warn <- function(pkgnm) {
 # Public ----
 #' @name module_install
 #' @title Install an outsider module
-#' @description Install a module TODO
+#' @description Install a module through multiple different methods: via a code
+#' sharing site such as GitHub, a URL, a git repository or local filepath.
+#' The function will first install the R package and then build the Docker
+#' image. Docker image version is determined by "tag". To avoid pulling
+#' the image from DockerHub set "manual" to TRUE.
+#' @details All installation options depend on the installation functions of
+#' \code{remotes}. E.g. GitHub packages are installed with
+#' \code{\link[remotes]{install_github}}.
 #' @param repo Module repo, character.
-#' @param url URL to downloadable .tar.gz of module, character.
+#' @param url URL to downloadable compressed (zip, tar or bzipped/gzipped)
+#' folder of a module, character.
+#' @param git URL to git repository
 #' @param filepath Filepath to uncompressed directory of module, character.
 #' @param service Code-sharing service. Character.
 #' @param tag Module version, default latest. Character.
@@ -37,13 +46,13 @@ user_warn <- function(pkgnm) {
 #' @return Logical
 #' @example examples/module_install.R
 #' @export
-module_install <- function(repo = NULL, url = NULL, filepath = NULL,
+module_install <- function(repo = NULL, url = NULL, filepath = NULL, git = NULL,
                            service = c('github', 'bitbucket', 'gitlab'),
                            tag = 'latest', manual = FALSE,
                            verbose = FALSE, force = FALSE) {
   res <- FALSE
   is_docker_available()
-  if (length(c(repo, url, filepath)) != 1) {
+  if (length(c(repo, url, git, filepath)) != 1) {
     msg <- paste0('Must provide just 1 variable to either ', char('repo'),
                   ', ', char('url'), ' or ', char('filepath'))
     stop(msg)
@@ -58,6 +67,10 @@ module_install <- function(repo = NULL, url = NULL, filepath = NULL,
   }
   if (!is.null(url)) {
     pkgnm <- remotes::install_url(url = url, force = TRUE, quiet = !verbose,
+                                  reload = TRUE, build = FALSE)
+  }
+  if (!is.null(git)) {
+    pkgnm <- remotes::install_git(url = git, force = TRUE, quiet = !verbose,
                                   reload = TRUE, build = FALSE)
   }
   if (!is.null(filepath)) {
