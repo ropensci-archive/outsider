@@ -47,5 +47,39 @@ test_that('module_uninstall() works', {
   )
 })
 test_that('module_installed() works', {
-  NULL
+  fake_meta_get <- function(pkgnm) {
+    switch(pkgnm,
+           m1 = list('url' = 'https://cs.org/d1/m1', 'package' = 'm1',
+                     'image' = 'd1/m1', 'program' = 'p1'),
+           m2 = list('url' = 'https://cs.org/d2/m2', 'package' = 'm2',
+                     'github' = 'd2', 'image' = 'd2/m2', 'program' = 'p2'),
+           m3 = list('package' = 'm3', 'github' = 'd3', 'image' = 'd3/m3',
+                     'program' = 'p3'))
+  }
+  avl_imgs <- data.frame(repository = c('d1/m1', 'd2/m2', 'ubuntu'),
+                         tag = c('latest', '1.0', 'latest'),
+                         image_id = as.character(1:3),
+                         created = paste0('t', 1:3),
+                         size = paste0(1:3, 'MB'), stringsAsFactors = FALSE)
+  avl_imgs <- avl_imgs[sample(1:3), ]
+  avl_imgs <- tibble::as_tibble(avl_imgs)
+  res <- with_mock(
+    `outsider.base::modules_list` = function() NULL,
+    `outsider.base::docker_img_ls` = function() avl_imgs,
+    `outsider.base::meta_get` = fake_meta_get,
+    module_installed()
+  )
+  expect_true(nrow(res) == 0)
+  res <- with_mock(
+    `outsider.base::modules_list` = function() sample(paste0('m', 1:3)),
+    `outsider.base::docker_img_ls` = function() avl_imgs,
+    `outsider.base::meta_get` = fake_meta_get,
+    module_installed()
+  )
+  expect_true(nrow(res) == 3)
+  expect_true(sum(is.na(res[['tag']])) == 1)
+  expect_true(sum(is.na(res[['image_created']])) == 1)
+  expect_true(sum(is.na(res[['image_id']])) == 1)
+  expect_true(res[res[['package']] == 'm1', 'tag'][[1]] == 'latest')
+  expect_true(res[res[['package']] == 'm2', 'tag'][[1]] == '1.0')
 })

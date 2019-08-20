@@ -150,7 +150,7 @@ module_installed <- function() {
                              FUN.VALUE = character(1))
   avl_imgs <- docker_img_ls()
   avl_imgs <- avl_imgs[avl_imgs[['repository']] %in% res[['image']], ]
-  pull <- match(res[['image']], avl_imgs[['repository']])
+  pull <- match(avl_imgs[['repository']], res[['image']])
   res[['tag']][pull] <- avl_imgs[['tag']]
   res[['image_created']][pull] <- avl_imgs[['created']]
   res[['image_id']][pull] <- avl_imgs[['image_id']]

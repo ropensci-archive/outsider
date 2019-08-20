@@ -7,17 +7,14 @@
 #' @details Raises error if no module discovered.
 #' @return character(1)
 pkgnm_guess <- function(repo, call_error = TRUE) {
-  check_and_return <- function(x, pull) {
-    if (sum(pull) == 1) {
-      return(mdls[pull])
-    }
-    # return possibles
-    mdls[agrepl(pattern = repo, x = x, max.distance = 0.1)]
-  }
-  repo <- tolower(repo)
   mdls <- modules_list()
+  repo <- tolower(repo)
   # Check against package names
-  possibles <- check_and_return(x = mdls, pull = mdls == repo)
+  pull <- mdls == repo
+  if (sum(pull) == 1) {
+    return(mdls[pull])
+  }
+  possibles <- mdls[agrepl(pattern = repo, x = mdls, max.distance = 0.1)]
   # Check against urls
   metas <- lapply(X = mdls, FUN = meta_get)
   urls <- vapply(X = metas, FUN = function(x) {
@@ -28,7 +25,11 @@ pkgnm_guess <- function(repo, call_error = TRUE) {
     res
   }, FUN.VALUE = character(1))
   pull <- grepl(pattern = repo, x = urls)
-  possibles <- c(check_and_return(x = urls, pull = pull), possibles)
+  if (sum(pull) == 1) {
+    return(mdls[pull])
+  }
+  possibles <- c(mdls[agrepl(pattern = repo, x = urls, max.distance = 0.1)],
+                 possibles)
   # Check against repos
   services <- c('github', 'gitlab', 'bitbucket')
   repos <- vapply(X = metas, FUN = function(x) {
@@ -42,7 +43,11 @@ pkgnm_guess <- function(repo, call_error = TRUE) {
     res
   }, FUN.VALUE = character(1))
   pull <- grepl(pattern = repo, x = repos)
-  possibles <- c(check_and_return(x = repos, pull = pull), possibles)
+  if (sum(pull) == 1) {
+    return(mdls[pull])
+  }
+  possibles <- c(mdls[agrepl(pattern = repo, x = repos, max.distance = 0.1)],
+                 possibles)
   # call error and make suggestions
   if (call_error) {
     possibles <- unique(possibles)
