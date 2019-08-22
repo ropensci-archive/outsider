@@ -39,6 +39,7 @@ returned else FALSE.
 }
 \seealso{
 Other user: \code{\link{is_module_installed}},
+  \code{\link{module_functions}},
   \code{\link{module_help}}, \code{\link{module_import}},
   \code{\link{module_installed}}
 }

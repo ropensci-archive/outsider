@@ -21,11 +21,12 @@ Depends:
 Imports:
     outsider.base,
     remotes (>= 2.0),
-    RCurl,
     crayon,
     jsonlite,
     tibble,
     yaml
 Suggests:
     testthat (>= 2.1),
-    knitr (>= 1.0)
+    knitr (>= 1.0),
+    phylotaR,
+    ape

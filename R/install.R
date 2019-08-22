@@ -85,6 +85,18 @@ module_install <- function(repo = NULL, url = NULL, filepath = NULL, git = NULL,
   invisible(res)
 }
 
+#' @name module_functions
+#' @title List the functions associated with a module
+#' @description Return a vector of functions that can be imported from the
+#' module.
+#' @example examples/module_install.R
+#' @return character
+#' @export
+#' @family user
+module_functions <- function(repo) {
+  ls(suppressMessages(loadNamespace(pkgnm_guess(repo = repo))))
+}
+
 #' @name is_module_installed
 #' @title Is module installed?
 #' @description Uninstall outsider module and removes it from your docker
