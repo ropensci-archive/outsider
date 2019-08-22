@@ -1,4 +1,18 @@
 context('Testing \'install\'')
+test_that('module_functions() works', {
+  res <- with_mock(
+    `outsider:::pkgnm_guess` = function(repo) repo,
+    module_functions(repo = 'outsider')
+  )
+  expect_true("module_functions" %in% res)
+})
+test_that('user_warn() works', {
+  with_mock(
+    `outsider.base::meta_get` = function(pkgnm) list('test' = 'testing'),
+    `outsider:::rl` = function(prompt) NULL,
+    expect_true(outsider:::user_warn(pkgnm = 'test'))
+  )
+})
 test_that('module_install() works', {
   with_mock(
     `outsider:::is_docker_available` = function(...) TRUE,

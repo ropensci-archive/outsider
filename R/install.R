@@ -18,8 +18,11 @@ user_warn <- function(pkgnm) {
   }
   msg <- paste0(msg, '\n', paste0(rep('-', ncols), collapse = ''))
   message(crayon::silver(msg))
-  readline(prompt = 'Enter any key to continue or press Esc to quit ')
+  rl(prompt = 'Enter any key to continue or press Esc to quit ')
   TRUE
+}
+rl <- function(prompt) {
+  readline(prompt = prompt)
 }
 
 # Public ----
@@ -89,6 +92,7 @@ module_install <- function(repo = NULL, url = NULL, filepath = NULL, git = NULL,
 #' @title List the functions associated with a module
 #' @description Return a vector of functions that can be imported from the
 #' module.
+#' @param repo Module repo
 #' @example examples/module_install.R
 #' @return character
 #' @export

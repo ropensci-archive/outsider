@@ -39,7 +39,8 @@ verbosity_set <- function(show_program = TRUE,
   msg_bar <- paste0(rep(x = '-', nchar(msg)), collapse = '')
   msg <- paste0(msg_bar, '\n', msg, '\n', msg_bar)
   # TODO: Maybe not here?
-  msg <- paste0(msg, '\n- Note: be sure of which modules you install')
+  msg <- paste0(msg,
+                '\n- Secutiry notice: be sure of which modules you install')
   if (!is_docker_available(call_error = FALSE)) {
     # TODO: as a warning?
     msg <- paste0(msg, '\n- Warning: no Docker detected!')

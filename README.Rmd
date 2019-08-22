@@ -83,7 +83,7 @@ For more details, see the [available modules table](https://antonellilab.github.
 ## How does it work?
 
 `outsider` makes use of the program [docker](https://www.docker.com/) which
-allows users to create small, deployable virtual machines, called Docker images.
+allows users to create small, deployable machines, called Docker images.
 The advantage of these images is that they can be run on any machine that has
 Docker installed, regardless of operating system. The `outsider` package makes
 external programs available in R by facilitating the interaction between Docker
@@ -98,9 +98,11 @@ other code-sharing sites and can be searched for and downloaded through
 
 ![outsider_outline](https://raw.githubusercontent.com/AntonelliLab/outsider/master/other/outline.png)
 
+To create your own module, check out the [`outsider.devtools`](https://github.com/AntonelliLab/outsider.devtools) package.
+
 ## Version
 
-Development version 0.
+Development version 0.1.
 
 ## Maintainer
 

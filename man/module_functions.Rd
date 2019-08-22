@@ -6,6 +6,9 @@
 \usage{
 module_functions(repo)
 }
+\arguments{
+\item{repo}{Module repo}
+}
 \value{
 character
 }
