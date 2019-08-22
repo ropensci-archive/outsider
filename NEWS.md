@@ -1,6 +1,15 @@
+# outsider 0.1.0
+
+## Post-review version of outsider
+
+* Split into three packages: `outsider.base`, `outsider` and `outsider.devtools`
+* More `module_` functions
+* Modules hostable on more code-sharing sites and available offline
+* More security notices
+
 # outsider 0.0.0
 
 ## Pre-review version of outsider
 
-*Install outsider modules
-*Search outsider modules on GitHub
+* Install outsider modules
+* Search outsider modules on GitHub
