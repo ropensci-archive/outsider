@@ -150,6 +150,6 @@ modules. Fortunately, it is very easy to create and upload your own module.
 The package comes with a range of helper functions for minimising the amount of
 coding for a module developer. If you know how to install an external program on
 your own computer which you would like  would like to run it through `outsider`
-and you have some experience with GitHub, then visit the
-["Building a module"](https://antonellilab.github.io/outsider/articles/build.html)
-page.
+and you have some experience with GitHub, then explore the
+["outsider.devtools"](https://github.com/AntonelliLab/outsider.devtools)
+package.

@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Guess package name — pkgnm_guess • outsider</title>
+<title>Safely fetch om.yaml — yaml_fetch • outsider</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -39,9 +39,9 @@
 
 
 
-<meta property="og:title" content="Guess package name — pkgnm_guess" />
+<meta property="og:title" content="Safely fetch om.yaml — yaml_fetch" />
 
-<meta property="og:description" content="Return package name from a repo name." />
+<meta property="og:description" content="Return list of 'program' and 'details'." />
 
 <meta property="og:image" content="/logo.png" />
 <meta name="twitter:card" content="summary" />
@@ -128,40 +128,31 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Guess package name</h1>
+    <h1>Safely fetch om.yaml</h1>
     
-    <div class="hidden name"><code>pkgnm_guess.Rd</code></div>
+    <div class="hidden name"><code>yaml_fetch.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Return package name from a repo name.</p>
+    <p>Return list of 'program' and 'details'.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>pkgnm_guess</span>(<span class='no'>repo</span>, <span class='kw'>call_error</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
+    <pre class="usage"><span class='fu'>yaml_fetch</span>(<span class='no'>url</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>repo</th>
-      <td><p>Repository (e.g. "username/repo") or package name associated
-with module</p></td>
-    </tr>
-    <tr>
-      <th>call_error</th>
-      <td><p>Call error if no package found? Default, TRUE.</p></td>
+      <th>url</th>
+      <td><p>URL to repo</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>character(1)</p>
-    
-    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
-
-    <p>Raises error if no module discovered.</p>
+    <p>list</p>
     
 
   </div>
@@ -171,8 +162,6 @@ with module</p></td>
       <li><a href="#arguments">Arguments</a></li>
       
       <li><a href="#value">Value</a></li>
-
-      <li><a href="#details">Details</a></li>
           </ul>
 
   </div>

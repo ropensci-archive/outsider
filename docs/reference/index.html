@@ -23,13 +23,15 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
 
 <!-- Font Awesome icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous" />
 
 <!-- clipboard.js -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script>
 
-<!-- sticky kit -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script>
+<!-- headroom.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
@@ -54,6 +56,7 @@
 <![endif]-->
 
 
+
   </head>
 
   <body>
@@ -70,7 +73,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">outsider</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0</span>
       </span>
     </div>
 
@@ -78,7 +81,7 @@
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fa fa-home fa-lg"></span>
+    <span class="fas fa fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -99,7 +102,7 @@
       <a href="../articles/available.html">Available modules</a>
     </li>
     <li>
-      <a href="../articles/phylogenetic_pipeline.html">Phylogenetic pipeline</a>
+      <a href="../articles/phylogenetic_pipeline.html">Pipeline to construct evolutionary trees</a>
     </li>
   </ul>
 </li>
@@ -117,6 +120,7 @@
 </div><!--/.navbar -->
 
       
+
       </header>
 
 <div class="row">
@@ -136,89 +140,11 @@
     <tbody>
       <tr>
         <th colspan="2">
-          <h2 id="section-all-functions" class="hasAnchor"><a href="#section-all-functions" class="anchor"></a>All functions</h2>
-          <p class="section-desc"></p>
+          <h2 id="section-public" class="hasAnchor"><a href="#section-public" class="anchor"></a>Public</h2>
+          <p class="section-desc"><p>Download, install, import, search …</p></p>
         </th>
       </tr>
       <tr>
-        
-        <td>
-          <p><code><a href="address_unpack.html">address_unpack()</a></code> </p>
-        </td>
-        <td><p>Unpack repo address</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="bitbucket_module_details.html">bitbucket_module_details()</a></code> </p>
-        </td>
-        <td><p>Look up details of module(s) on BitBucket</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="bitbucket_repo_search.html">bitbucket_repo_search()</a></code> </p>
-        </td>
-        <td><p>Search for repository</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="bitbucket_search.html">bitbucket_search()</a></code> </p>
-        </td>
-        <td><p>Search for outsider modules in bitbucket</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="download_and_install.html">download_and_install()</a></code> </p>
-        </td>
-        <td><p>Download and install module</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="github_module_details.html">github_module_details()</a></code> </p>
-        </td>
-        <td><p>Look up details of module(s) on GitHub</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="github_repo_search.html">github_repo_search()</a></code> </p>
-        </td>
-        <td><p>Search for repository</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="github_search.html">github_search()</a></code> </p>
-        </td>
-        <td><p>Search for outsider modules in GitHub</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="github_tags.html">github_tags()</a></code> </p>
-        </td>
-        <td><p>Module tags from GitHub</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="github_yaml.html">github_yaml()</a></code> </p>
-        </td>
-        <td><p>Module YAML information</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="gitlab_module_details.html">gitlab_module_details()</a></code> </p>
-        </td>
-        <td><p>Look up details of module(s) on GitLab</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="gitlab_repo_search.html">gitlab_repo_search()</a></code> </p>
-        </td>
-        <td><p>Search for repository</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="gitlab_search.html">gitlab_search()</a></code> </p>
-        </td>
-        <td><p>Search for outsider modules in GitLab</p></td>
-      </tr><tr>
         
         <td>
           <p><code><a href="is_module_installed.html">is_module_installed()</a></code> </p>
@@ -230,6 +156,12 @@
           <p><code><a href="module_details.html">module_details()</a></code> </p>
         </td>
         <td><p>Look up details on module(s)</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="module_functions.html">module_functions()</a></code> </p>
+        </td>
+        <td><p>List the functions associated with a module</p></td>
       </tr><tr>
         
         <td>
@@ -275,6 +207,74 @@
       </tr><tr>
         
         <td>
+          <p><code><a href="verbosity_set.html">verbosity_set()</a></code> </p>
+        </td>
+        <td><p>Set the verbosity of modules</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-private" class="hasAnchor"><a href="#section-private" class="anchor"></a>Private</h2>
+          <p class="section-desc"><p>The functions that do all the work behind the scenes</p></p>
+        </th>
+      </tr>
+      <tr>
+        
+        <td>
+          <p><code><a href="bitbucket_repo_search.html">bitbucket_repo_search()</a></code> </p>
+        </td>
+        <td><p>Search for repository</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="bitbucket_search.html">bitbucket_search()</a></code> </p>
+        </td>
+        <td><p>Search for outsider modules in bitbucket</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="bitbucket_tags.html">bitbucket_tags()</a></code> </p>
+        </td>
+        <td><p>Module tags from bitbucket</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="github_repo_search.html">github_repo_search()</a></code> </p>
+        </td>
+        <td><p>Search for repository</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="github_search.html">github_search()</a></code> </p>
+        </td>
+        <td><p>Search for outsider modules in GitHub</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="github_tags.html">github_tags()</a></code> </p>
+        </td>
+        <td><p>Module tags from GitHub</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="gitlab_repo_search.html">gitlab_repo_search()</a></code> </p>
+        </td>
+        <td><p>Search for repository</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="gitlab_search.html">gitlab_search()</a></code> </p>
+        </td>
+        <td><p>Search for outsider modules in GitLab</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="gitlab_tags.html">gitlab_tags()</a></code> </p>
+        </td>
+        <td><p>Module tags from GitLab</p></td>
+      </tr><tr>
+        
+        <td>
           <p><code><a href="pkgnm_guess.html">pkgnm_guess()</a></code> </p>
         </td>
         <td><p>Guess package name</p></td>
@@ -287,27 +287,21 @@
       </tr><tr>
         
         <td>
-          <p><code><a href="url_make.html">url_make()</a></code> </p>
-        </td>
-        <td><p>Make download URL</p></td>
-      </tr><tr>
-        
-        <td>
           <p><code><a href="user_warn.html">user_warn()</a></code> </p>
         </td>
         <td><p>Warn users on the dangers of outsider modules</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="verbosity_set.html">verbosity_set()</a></code> </p>
+          <p><code><a href="yaml_fetch.html">yaml_fetch()</a></code> </p>
         </td>
-        <td><p>Set the verbosity of modules</p></td>
+        <td><p>Safely fetch om.yaml</p></td>
       </tr><tr>
         
         <td>
           <p><code><a href="yaml_read.html">yaml_read()</a></code> </p>
         </td>
-        <td><p>Safely read om.yaml</p></td>
+        <td><p>Module YAML information</p></td>
       </tr>
     </tbody>
     </table>
@@ -316,10 +310,12 @@
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
-      <li><a href="#section-all-functions">All functions</a></li>
+      <li><a href="#section-public">Public</a></li>
+      <li><a href="#section-private">Private</a></li>
     </ul>
   </div>
 </div>
+
 
       <footer>
       <div class="copyright">
@@ -327,13 +323,16 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.2.0.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.3.0.9100.</p>
 </div>
+
       </footer>
    </div>
 
   
 
+
   </body>
 </html>
+
 

@@ -1,4 +1,12 @@
-# TODO: reference
+reference:
+- title: Public
+  desc: Download, install, import, search ...
+  contents:
+    - matches("(module|outsider|verbosity)")
+- title: Private
+  desc: The functions that do all the work behind the scenes
+  contents:
+    - -matches("(module|outsider|verbosity)")
 
 articles:
 - title: All articles

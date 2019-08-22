@@ -1,5 +1,5 @@
 ---
-title: "Phylogenetic pipeline"
+title: "Pipeline to construct evolutionary trees"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 ---
@@ -10,9 +10,9 @@ knitr::opts_chunk$set(echo = TRUE)
 
 The whole point of `outsider` is to bring lots of programs together into a
 single place to allow the development of analysis pipelines. Let's demonstrate
-this process by creating a simple a pipeline for constructing an evolutionary
-tree. We will generate a tree in three steps: obtain orthologous sequences,
-align sequences and estimate tree.
+this process by creating a simple pipeline for constructing an evolutionary
+tree. We will generate a tree in three steps: obtain orthologous DNA sequences,
+align these sequences and then estimate a tree.
 
 In our example, we will keep it simple and fast and generate a tree of
 [CytB](https://en.wikipedia.org/wiki/Cytochrome_b) sequences in the primate
@@ -76,14 +76,15 @@ module_install(repo = repo, force = TRUE)
 mafft <- module_import(fname = 'mafft', repo = repo)
 # Run our program with normal mafft arguments
 # Note: all arguments must be separate character variables.
-mafft('--auto', 'aotus_cytb.fasta', '>', 'alignment.fasta')
+mafft(arglist = c('--auto', 'aotus_cytb.fasta', '>', 'alignment.fasta'))
 ```
 
 # Phylogeny
 
 We can repeat the same process as we did for `mafft` but instead for
 [`RAxML`](https://github.com/stamatak/standard-RAxML) -- a command-line program
-for estimating phylogenetic trees using maximum likelihood.
+for estimating evolutionary trees from an alignment of DNA sequences using a
+model of molecular evolution (GTRGAMMA) with maximum likelihood.
 
 ```{r raxml}
 library(outsider)
@@ -99,18 +100,19 @@ raxml('-m', 'GTRGAMMA', '-s', 'alignment.fasta', '-p', '1234', '-n',
 
 # Visualisation
 
-Now, let's check out our tree!
+Now, let's check out our tree! We can use the R package
+["Analsis of Phylogenetics and Evolution" or `ape`](http://ape-package.ird.fr/)
+to do this.
 
 ```{r visualise}
 library(ape)
 tree <- read.tree('RAxML_bestTree.aotus_cytb')
-plot(tree, type = 'unrooted')
+plot(tree)
 ```
 
 ```{r cleanup, include = FALSE}
-# TODO: update om..mafft to remove "script" itself
 files_to_remove <- c(list.files(pattern = c('.fasta')),
-                     list.files(pattern = 'RAxML_'), 'script')
+                     list.files(pattern = 'RAxML_'))
 for (file_to_remove in files_to_remove) {
   try(file.remove(file_to_remove), silent = TRUE)
 }

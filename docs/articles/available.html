@@ -13,8 +13,9 @@
 <link rel="apple-touch-icon" type="image/png" sizes="76x76" href="../apple-touch-icon-76x76.png">
 <link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png">
 <!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script><!-- Bootstrap --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous">
-<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script><!-- sticky kit --><script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous">
+<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
 <script src="../pkgdown.js"></script><meta property="og:title" content="Available modules">
 <meta property="og:description" content="">
 <meta property="og:image" content="/logo.png">
@@ -37,7 +38,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">outsider</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0</span>
       </span>
     </div>
 
@@ -45,7 +46,7 @@
       <ul class="nav navbar-nav">
 <li>
   <a href="../index.html">
-    <span class="fa fa-home fa-lg"></span>
+    <span class="fas fa fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -66,7 +67,7 @@
       <a href="../articles/available.html">Available modules</a>
     </li>
     <li>
-      <a href="../articles/phylogenetic_pipeline.html">Phylogenetic pipeline</a>
+      <a href="../articles/phylogenetic_pipeline.html">Pipeline to construct evolutionary trees</a>
     </li>
   </ul>
 </li>
@@ -83,6 +84,7 @@
 <!--/.navbar -->
 
       
+
       </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
@@ -96,7 +98,7 @@
 
     
     
-Last updated: 19:50, 09 May 2019 (CEST)
+Last updated: 20:56, 22 August 2019 (CEST)
 <table class="table">
 <thead><tr>
 <th style="text-align:left;">
@@ -111,6 +113,9 @@ Versions
 <th style="text-align:left;">
 Updated
 </th>
+<th style="text-align:right;">
+NA
+</th>
 </tr></thead>
 <tbody>
 <tr>
@@ -124,7 +129,10 @@ Estimate speciation, extinction, and preservation rates from fossil occurrence d
 latest, 2.0
 </td>
 <td style="text-align:left;">
-09 May 19
+19 Aug 19
+</td>
+<td style="text-align:right;">
+1
 </td>
 </tr>
 <tr>
@@ -138,19 +146,25 @@ latest, 2.0
 <td style="text-align:left;">
 23 Mar 19
 </td>
+<td style="text-align:right;">
+1
+</td>
 </tr>
 <tr>
 <td style="text-align:left;">
-<a href="https://github.com/DomBennett/om..mafft">mafft</a>
+<a href="https://github.com/DomBennett/om..partitionfinder">PartitionFinder2</a>
 </td>
 <td style="text-align:left;">
-With extensions
+PartitionFinder 2 is free open source software to select best-fit partitioning schemes and models of molecular evolution for phylogenetic analyses.
 </td>
 <td style="text-align:left;">
 latest
 </td>
 <td style="text-align:left;">
-09 May 19
+20 Aug 19
+</td>
+<td style="text-align:right;">
+0
 </td>
 </tr>
 <tr>
@@ -164,21 +178,10 @@ RAxML HPC PTHREADS SSE3
 latest
 </td>
 <td style="text-align:left;">
-09 May 19
+19 Aug 19
 </td>
-</tr>
-<tr>
-<td style="text-align:left;">
-<a href="https://github.com/DomBennett/om..revbayes">revbayes</a>
-</td>
-<td style="text-align:left;">
-Bayesian phylogenetic inference using probabilistic graphical models and an interpreted language
-</td>
-<td style="text-align:left;">
-latest
-</td>
-<td style="text-align:left;">
-09 May 19
+<td style="text-align:right;">
+0
 </td>
 </tr>
 <tr>
@@ -192,21 +195,10 @@ Pre-compiled BLAST+, version 2.71.
 latest, 2.7.1
 </td>
 <td style="text-align:left;">
-09 May 19
+19 Aug 19
 </td>
-</tr>
-<tr>
-<td style="text-align:left;">
-<a href="https://github.com/DomBennett/om..beast">beast</a>
-</td>
-<td style="text-align:left;">
-Bayesian Evolutionary Analysis Sampling Trees
-</td>
-<td style="text-align:left;">
-latest
-</td>
-<td style="text-align:left;">
-09 May 19
+<td style="text-align:right;">
+0
 </td>
 </tr>
 <tr>
@@ -220,21 +212,10 @@ Bayesian Analysis of Macroevolutionary Mixtures
 latest, 2.5
 </td>
 <td style="text-align:left;">
-09 May 19
+19 Aug 19
 </td>
-</tr>
-<tr>
-<td style="text-align:left;">
-<a href="https://github.com/DomBennett/om..astral">astral</a>
-</td>
-<td style="text-align:left;">
-Accurate Species TRee ALgorithm
-</td>
-<td style="text-align:left;">
-latest
-</td>
-<td style="text-align:left;">
-09 May 19
+<td style="text-align:right;">
+0
 </td>
 </tr>
 <tr>
@@ -248,7 +229,95 @@ Template module for demonstrating outsider
 latest
 </td>
 <td style="text-align:left;">
-09 May 19
+19 Aug 19
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="https://github.com/DomBennett/om..trimal">trimal</a>
+</td>
+<td style="text-align:left;">
+A tool for automated alignment trimming in large-scale phylogenetic analyses.
+</td>
+<td style="text-align:left;">
+latest
+</td>
+<td style="text-align:left;">
+19 Aug 19
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="https://github.com/DomBennett/om..revbayes">revbayes</a>
+</td>
+<td style="text-align:left;">
+Bayesian phylogenetic inference using probabilistic graphical models and an interpreted language
+</td>
+<td style="text-align:left;">
+latest
+</td>
+<td style="text-align:left;">
+19 Aug 19
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="https://github.com/DomBennett/om..mafft">mafft</a>
+</td>
+<td style="text-align:left;">
+With extensions
+</td>
+<td style="text-align:left;">
+latest
+</td>
+<td style="text-align:left;">
+19 Aug 19
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="https://github.com/DomBennett/om..beast">beast</a>
+</td>
+<td style="text-align:left;">
+Bayesian Evolutionary Analysis Sampling Trees
+</td>
+<td style="text-align:left;">
+latest
+</td>
+<td style="text-align:left;">
+19 Aug 19
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="https://github.com/DomBennett/om..astral">astral</a>
+</td>
+<td style="text-align:left;">
+Accurate Species TRee ALgorithm
+</td>
+<td style="text-align:left;">
+latest
+</td>
+<td style="text-align:left;">
+19 Aug 19
+</td>
+<td style="text-align:right;">
+0
 </td>
 </tr>
 </tbody>
@@ -261,17 +330,20 @@ latest
 </div>
 
 
+
       <footer><div class="copyright">
   <p>Developed by Dom Bennett.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.2.0.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.3.0.9100.</p>
 </div>
+
       </footer>
 </div>
 
   
+
 
   </body>
 </html>

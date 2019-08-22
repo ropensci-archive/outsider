@@ -24,6 +24,7 @@ NULL
 #' @param show_docker Show docker messages? Default FALSE.
 #' @details For more control see \code{\link[outsider.base]{log_set}}
 #' @return data.frame
+#' @export
 verbosity_set <- function(show_program = TRUE,
                           show_docker = FALSE) {
   log_set(log = 'program_out', val = show_program)
