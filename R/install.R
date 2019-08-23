@@ -96,7 +96,7 @@ module_install <- function(repo = NULL, url = NULL, filepath = NULL, git = NULL,
 #' @example examples/module_install.R
 #' @return character
 #' @export
-#' @family user
+#' @family public
 module_functions <- function(repo) {
   ls(suppressMessages(loadNamespace(pkgnm_guess(repo = repo))))
 }
@@ -110,7 +110,7 @@ module_functions <- function(repo) {
 #' @example examples/module_install.R
 #' @return Logical
 #' @export
-#' @family user
+#' @family public
 is_module_installed <- function(repo) {
   !is.null(pkgnm_guess(repo = repo, call_error = FALSE))
 }
@@ -124,7 +124,7 @@ is_module_installed <- function(repo) {
 #' @example examples/module_install.R
 #' @return Logical
 #' @export
-#' @family user
+#' @family public
 module_uninstall <- function(repo) {
   pkgnm <- pkgnm_guess(repo = repo, call_error = FALSE)
   if (is.null(pkgnm)) {
@@ -142,7 +142,7 @@ module_uninstall <- function(repo) {
 #' @return tbl_df
 #' @example examples/module_installed.R
 #' @export
-#' @family user
+#' @family public
 module_installed <- function() {
   fetch <- function(x, i) {
     res <- x[[i]]
@@ -185,7 +185,7 @@ module_installed <- function() {
 #' @example examples/module_install.R
 #' @return Function
 #' @export
-#' @family user
+#' @family public
 module_import <- function(fname, repo) {
   pkgnm <- pkgnm_guess(repo = repo)
   if (!pkgnm %in% utils::installed.packages()) {
@@ -206,7 +206,7 @@ nmspc_get <- function(...) {
 #' @example examples/module_install.R
 #' @return NULL
 #' @export
-#' @family user
+#' @family public
 module_help <- function(repo, fname = NULL) {
   pkgnm <- pkgnm_guess(repo = repo)
   if (!pkgnm %in% utils::installed.packages()) {

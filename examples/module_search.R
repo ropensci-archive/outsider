@@ -3,11 +3,8 @@ library(outsider)
 # NOT RUN - takes too long
 # (available_modules <- module_search())
 
-# look-up whether specific module exists
-# NOT RUN
-# repo <- 'dombennett/om..goodbye.world'
-# (suppressWarnings(module_exists(repo = repo)))
+# look-up specific modules
+repo <- 'dombennett/om..goodbye.world'
+(suppressWarnings(module_details(repo = repo))) # no module exists, expect warning
 repo <- 'dombennett/om..hello.world'
-#(module_exists(repo = repo))
-# get details on specific module(s)
-#(module_details(repo = repo))
+(module_details(repo = repo))

@@ -38,9 +38,11 @@ returned else FALSE.
 # module_uninstall(repo)
 }
 \seealso{
-Other user: \code{\link{module_functions}},
+Other public: \code{\link{module_details}},
+  \code{\link{module_functions}},
   \code{\link{module_help}}, \code{\link{module_import}},
   \code{\link{module_installed}},
+  \code{\link{module_search}},
   \code{\link{module_uninstall}}
 }
-\concept{user}
+\concept{public}

@@ -74,6 +74,7 @@ yaml_read <- function(repos, service = c('github', 'gitlab', 'bitbucket')) {
 #' @param service Code-sharing service, e.g. GitHub
 #' @return Character vector
 #' @example examples/module_search.R
+#' @family public
 #' @export
 module_search <- function(service = c('github', 'gitlab')) {
   service <- match.arg(service)
@@ -93,6 +94,7 @@ module_search <- function(service = c('github', 'gitlab')) {
 #' @param service Code-sharing service, e.g. GitHub
 #' @return tbl_df
 #' @example examples/module_search.R
+#' @family public
 #' @export
 module_details <- function(repo = NULL, service = c('github', 'bitbucket',
                                                     'gitlab')) {
@@ -118,6 +120,9 @@ module_details <- function(repo = NULL, service = c('github', 'bitbucket',
     pull <- vapply(X = res, FUN = function(x) {
       all(needed_clnms %in% colnames(x))
     }, FUN.VALUE = logical(1))
+    if (sum(pull) == 0) {
+      return(tibble::as_tibble(list()))
+    }
     res <- res[pull]
     res <- lapply(X = res, FUN = function(x) x[, needed_clnms])
     res <- do.call(what = rbind, args = res)
