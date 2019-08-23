@@ -21,6 +21,8 @@ library(outsider)
 repo <- 'dombennett/om..hello.world'
 # install
 module_install(repo = repo, force = TRUE, update = 'never')
+# is module_installed?
+(is_module_installed(repo = repo))
 # get help for package
 module_help(repo = repo)
 # list functions available
