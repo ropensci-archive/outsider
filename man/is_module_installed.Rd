@@ -20,22 +20,38 @@ If program is successfully removed from your system, TRUE is
 returned else FALSE.
 }
 \examples{
-# NOT RUN
-# library(outsider)
-# # simplest repo
-# repo <- 'dombennett/om..hello.world'
-# # install
-# module_install(repo = repo)
-# hello_world <- module_import(fname = 'hello_world', repo = repo)
-# # get help
-# module_help(repo = repo)
-# # import function
-# hello_world <- module_import(fname = 'hello_world', repo = repo)
-# # run function
-# hello_world()
-# 
-# # uninstall
-# module_uninstall(repo)
+library(outsider)
+# simplest repo
+repo <- 'dombennett/om..hello.world'
+# install
+module_install(repo = repo, force = TRUE, update = 'never')
+# get help for package
+module_help(repo = repo)
+# list functions available
+module_functions(repo = repo)
+# import
+hello_world <- module_import(fname = 'hello_world', repo = repo)
+# get help for function (both lines work)
+module_help(repo = repo)
+?hello_world
+# run function
+hello_world()
+
+# change verbosity settings
+# print nothing to console
+verbosity_set(show_program = FALSE, show_docker = FALSE)
+hello_world()
+# print everything to console
+verbosity_set(show_program = TRUE, show_docker = TRUE)
+hello_world()
+# write program output to a file
+verbosity_set(show_program = 'log.txt', show_docker = FALSE)
+hello_world()
+(readLines(con = 'log.txt'))
+file.remove('log.txt')
+
+# uninstall
+module_uninstall(repo)
 }
 \seealso{
 Other public: \code{\link{module_details}},

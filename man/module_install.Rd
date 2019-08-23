@@ -6,7 +6,8 @@
 \usage{
 module_install(repo = NULL, url = NULL, filepath = NULL,
   git = NULL, service = c("github", "bitbucket", "gitlab"),
-  tag = "latest", manual = FALSE, verbose = FALSE, force = FALSE)
+  tag = "latest", manual = FALSE, verbose = FALSE, force = FALSE,
+  update = c("default", "ask", "always", "never"))
 }
 \arguments{
 \item{repo}{Module repo, character.}
@@ -27,6 +28,8 @@ folder of a module, character.}
 \item{verbose}{Be verbose? Default FALSE.}
 
 \item{force}{Ignore warnings and install anyway? Default FALSE.}
+
+\item{update}{Update dependent R packages?}
 }
 \value{
 Logical
@@ -41,23 +44,40 @@ the image from DockerHub set "manual" to TRUE.
 \details{
 All installation options depend on the installation functions of
 \code{remotes}. E.g. GitHub packages are installed with
-\code{\link[remotes]{install_github}}.
+\code{\link[remotes]{install_github}}. See these functions for more details
+on the R package installation process.
 }
 \examples{
-# NOT RUN
-# library(outsider)
-# # simplest repo
-# repo <- 'dombennett/om..hello.world'
-# # install
-# module_install(repo = repo)
-# hello_world <- module_import(fname = 'hello_world', repo = repo)
-# # get help
-# module_help(repo = repo)
-# # import function
-# hello_world <- module_import(fname = 'hello_world', repo = repo)
-# # run function
-# hello_world()
-# 
-# # uninstall
-# module_uninstall(repo)
+library(outsider)
+# simplest repo
+repo <- 'dombennett/om..hello.world'
+# install
+module_install(repo = repo, force = TRUE, update = 'never')
+# get help for package
+module_help(repo = repo)
+# list functions available
+module_functions(repo = repo)
+# import
+hello_world <- module_import(fname = 'hello_world', repo = repo)
+# get help for function (both lines work)
+module_help(repo = repo)
+?hello_world
+# run function
+hello_world()
+
+# change verbosity settings
+# print nothing to console
+verbosity_set(show_program = FALSE, show_docker = FALSE)
+hello_world()
+# print everything to console
+verbosity_set(show_program = TRUE, show_docker = TRUE)
+hello_world()
+# write program output to a file
+verbosity_set(show_program = 'log.txt', show_docker = FALSE)
+hello_world()
+(readLines(con = 'log.txt'))
+file.remove('log.txt')
+
+# uninstall
+module_uninstall(repo)
 }

@@ -21,3 +21,6 @@ either the external program messages to run, the Docker messages or both.
 \details{
 For more control see \code{\link[outsider.base]{log_set}}
 }
+\examples{
+examaples/module_install.R
+}

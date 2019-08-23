@@ -35,7 +35,8 @@ rl <- function(prompt) {
 #' the image from DockerHub set "manual" to TRUE.
 #' @details All installation options depend on the installation functions of
 #' \code{remotes}. E.g. GitHub packages are installed with
-#' \code{\link[remotes]{install_github}}.
+#' \code{\link[remotes]{install_github}}. See these functions for more details
+#' on the R package installation process.
 #' @param repo Module repo, character.
 #' @param url URL to downloadable compressed (zip, tar or bzipped/gzipped)
 #' folder of a module, character.
@@ -46,13 +47,15 @@ rl <- function(prompt) {
 #' @param manual Build the docker image? Default FALSE. Logical.
 #' @param verbose Be verbose? Default FALSE.
 #' @param force Ignore warnings and install anyway? Default FALSE.
+#' @param update Update dependent R packages? 
 #' @return Logical
 #' @example examples/module_install.R
 #' @export
 module_install <- function(repo = NULL, url = NULL, filepath = NULL, git = NULL,
                            service = c('github', 'bitbucket', 'gitlab'),
                            tag = 'latest', manual = FALSE,
-                           verbose = FALSE, force = FALSE) {
+                           verbose = FALSE, force = FALSE,
+                           update = c("default", "ask", "always", "never")) {
   res <- FALSE
   is_docker_available()
   if (length(c(repo, url, git, filepath)) != 1) {
