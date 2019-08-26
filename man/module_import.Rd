@@ -36,9 +36,9 @@ module_help(repo = repo)
 module_functions(repo = repo)
 # import
 hello_world <- module_import(fname = 'hello_world', repo = repo)
-# get help for function (both lines work)
+# get help for function
 module_help(repo = repo)
-?hello_world
+# ?hello_world # also works
 # run function
 hello_world()
 

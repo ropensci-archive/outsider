@@ -2,11 +2,11 @@ reference:
 - title: Public
   desc: Download, install, import, search ...
   contents:
-    - matches("(module|outsider|verbosity)")
+    - matches("(module|outsider|verbosity|ssh)")
 - title: Private
   desc: The functions that do all the work behind the scenes
   contents:
-    - -matches("(module|outsider|verbosity)")
+    - -matches("(module|outsider|verbosity|ssh)")
 
 articles:
 - title: All articles

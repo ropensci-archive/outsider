@@ -6,6 +6,7 @@
 * More `module_` functions
 * Modules hostable on more code-sharing sites and available offline
 * More security notices
+* SSH commands to remote host
 
 # outsider 0.0.0
 

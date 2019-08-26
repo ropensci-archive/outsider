@@ -160,7 +160,49 @@ either the external program messages to run, the Docker messages or both.</p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>examaples</span>/<span class='no'>module_install.R</span></div><div class='output co'>#&gt; <span class='error'>Error in eval(expr, envir, enclos): object 'examaples' not found</span></div></pre>
+    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>outsider</span>)
+<span class='co'># simplest repo</span>
+<span class='no'>repo</span> <span class='kw'>&lt;-</span> <span class='st'>'dombennett/om..hello.world'</span>
+<span class='co'># install</span>
+<span class='fu'><a href='module_install.html'>module_install</a></span>(<span class='kw'>repo</span> <span class='kw'>=</span> <span class='no'>repo</span>, <span class='kw'>force</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>update</span> <span class='kw'>=</span> <span class='st'>'never'</span>)
+<span class='co'># is module_installed?</span>
+(<span class='fu'><a href='is_module_installed.html'>is_module_installed</a></span>(<span class='kw'>repo</span> <span class='kw'>=</span> <span class='no'>repo</span>))</div><div class='output co'>#&gt; [1] TRUE</div><div class='input'><span class='co'># get help for package</span>
+<span class='fu'><a href='module_help.html'>module_help</a></span>(<span class='kw'>repo</span> <span class='kw'>=</span> <span class='no'>repo</span>)
+<span class='co'># list functions available</span>
+<span class='fu'><a href='module_functions.html'>module_functions</a></span>(<span class='kw'>repo</span> <span class='kw'>=</span> <span class='no'>repo</span>)</div><div class='output co'>#&gt; [1] "hello_world"</div><div class='input'><span class='co'># import</span>
+<span class='no'>hello_world</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='module_import.html'>module_import</a></span>(<span class='kw'>fname</span> <span class='kw'>=</span> <span class='st'>'hello_world'</span>, <span class='kw'>repo</span> <span class='kw'>=</span> <span class='no'>repo</span>)
+<span class='co'># get help for function</span>
+<span class='fu'><a href='module_help.html'>module_help</a></span>(<span class='kw'>repo</span> <span class='kw'>=</span> <span class='no'>repo</span>)
+<span class='co'># ?hello_world # also works</span>
+<span class='co'># run function</span>
+<span class='fu'>hello_world</span>()
+
+<span class='co'># change verbosity settings</span>
+<span class='co'># print nothing to console</span>
+<span class='fu'>verbosity_set</span>(<span class='kw'>show_program</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>show_docker</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
+<span class='fu'>hello_world</span>()
+<span class='co'># print everything to console</span>
+<span class='fu'>verbosity_set</span>(<span class='kw'>show_program</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>show_docker</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
+<span class='fu'>hello_world</span>()</div><div class='output co'>#&gt; 0b201f1149be620d936c27a054f83c6a119b768093de258d0edccf57ca0f1bb1
+#&gt; Hello world!
+#&gt; ------------
+#&gt; DISTRIB_ID=Ubuntu
+#&gt; DISTRIB_RELEASE=18.04
+#&gt; DISTRIB_CODENAME=bionic
+#&gt; DISTRIB_DESCRIPTION="Ubuntu 18.04.1 LTS"
+#&gt; om_hello_world_0
+#&gt; om_hello_world_0</div><div class='input'><span class='co'># write program output to a file</span>
+<span class='fu'>verbosity_set</span>(<span class='kw'>show_program</span> <span class='kw'>=</span> <span class='st'>'log.txt'</span>, <span class='kw'>show_docker</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
+<span class='fu'>hello_world</span>()
+(<span class='fu'><a href='https://rdrr.io/r/base/readLines.html'>readLines</a></span>(<span class='kw'>con</span> <span class='kw'>=</span> <span class='st'>'log.txt'</span>))</div><div class='output co'>#&gt; [1] "Hello world!"                              
+#&gt; [2] "------------"                              
+#&gt; [3] "DISTRIB_ID=Ubuntu"                         
+#&gt; [4] "DISTRIB_RELEASE=18.04"                     
+#&gt; [5] "DISTRIB_CODENAME=bionic"                   
+#&gt; [6] "DISTRIB_DESCRIPTION=\"Ubuntu 18.04.1 LTS\""</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/files.html'>file.remove</a></span>(<span class='st'>'log.txt'</span>)</div><div class='output co'>#&gt; [1] TRUE</div><div class='input'>
+<span class='co'># uninstall</span>
+<span class='fu'><a href='module_uninstall.html'>module_uninstall</a></span>(<span class='no'>repo</span>)</div><div class='output co'>#&gt; <span class='message'>Removing <span style='color: #00BB00;'>'om..hello.world'</span><span></span></div><div class='output co'>#&gt; <span class='message'>Removing package from ‘/home/dom/R/x86_64-pc-linux-gnu-library/3.6’</span>
+#&gt; <span class='message'>(as ‘lib’ is unspecified)</span></div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

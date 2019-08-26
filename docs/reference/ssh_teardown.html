@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Module YAML information — yaml_read • outsider</title>
+<title>Teardown SSH — ssh_teardown • outsider</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -35,10 +35,10 @@
 
 
 
-<meta property="og:title" content="Module YAML information — yaml_read" />
+<meta property="og:title" content="Teardown SSH — ssh_teardown" />
 
-<meta property="og:description" content="Return tbl_df of all YAML information of given outsider
-module repos." />
+<meta property="og:description" content="Disconnect from a remote host and stop commands being
+transferred." />
 
 <meta property="og:image" content="/logo.png" />
 <meta name="twitter:card" content="summary" />
@@ -123,47 +123,42 @@ module repos." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Module YAML information</h1>
+    <h1>Teardown SSH</h1>
     
-    <div class="hidden name"><code>yaml_read.Rd</code></div>
+    <div class="hidden name"><code>ssh_teardown.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Return tbl_df of all YAML information of given outsider
-module repos.</p>
+    <p>Disconnect from a remote host and stop commands being
+transferred.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>yaml_read</span>(<span class='no'>repos</span>, <span class='kw'>service</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"github"</span>, <span class='st'>"gitlab"</span>, <span class='st'>"bitbucket"</span>))</pre>
-    
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
-    <table class="ref-arguments">
-    <colgroup><col class="name" /><col class="desc" /></colgroup>
-    <tr>
-      <th>repos</th>
-      <td><p>Character vector of outsider module repositories on GitHub,
-GitLab or BitBucket.</p></td>
-    </tr>
-    <tr>
-      <th>service</th>
-      <td><p>Code-sharing service. Character.</p></td>
-    </tr>
-    </table>
-    
+    <pre class="usage"><span class='fu'>ssh_teardown</span>()</pre>
+        
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>tbl_df</p>
+    <p>logical</p>
     
 
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>outsider</span>)
+
+<span class='co'># # NOT RUN</span>
+<span class='co'># session &lt;- ssh::ssh_connect(host = "[IP ADDRESS]")</span>
+<span class='co'># ssh_setup(session)</span>
+<span class='co'># # (Run outsider commands)</span>
+<span class='co'># ssh_teardown()</span></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
-      <li><a href="#arguments">Arguments</a></li>
       
       <li><a href="#value">Value</a></li>
-          </ul>
+      
+      <li><a href="#examples">Examples</a></li>
+    </ul>
 
   </div>
 </div>

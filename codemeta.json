@@ -64,6 +64,42 @@
         "url": "https://cran.r-project.org"
       },
       "sameAs": "https://CRAN.R-project.org/package=knitr"
+    },
+    {
+      "@type": "SoftwareApplication",
+      "identifier": "phylotaR",
+      "name": "phylotaR",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=phylotaR"
+    },
+    {
+      "@type": "SoftwareApplication",
+      "identifier": "ape",
+      "name": "ape",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=ape"
+    },
+    {
+      "@type": "SoftwareApplication",
+      "identifier": "ssh",
+      "name": "ssh",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=ssh"
     }
   ],
   "softwareRequirements": [
@@ -90,18 +126,6 @@
         "url": "https://cran.r-project.org"
       },
       "sameAs": "https://CRAN.R-project.org/package=remotes"
-    },
-    {
-      "@type": "SoftwareApplication",
-      "identifier": "RCurl",
-      "name": "RCurl",
-      "provider": {
-        "@id": "https://cran.r-project.org",
-        "@type": "Organization",
-        "name": "Comprehensive R Archive Network (CRAN)",
-        "url": "https://cran.r-project.org"
-      },
-      "sameAs": "https://CRAN.R-project.org/package=RCurl"
     },
     {
       "@type": "SoftwareApplication",
@@ -155,7 +179,7 @@
   "codeRepository": "https://antonellilab.github.io/outsider",
   "releaseNotes": "https://github.com/AntonelliLab/outsider/blob/master/NEWS.md",
   "readme": "https://github.com/AntonelliLab/outsider/blob/master/README.md",
-  "fileSize": "24.635KB",
+  "fileSize": "26.904KB",
   "contIntegration": [
     "https://travis-ci.org/AntonelliLab/outsider",
     "https://coveralls.io/github/AntonelliLab/outsider?branch=master"
