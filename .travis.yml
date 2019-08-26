@@ -27,6 +27,7 @@ addons:
     packages:
       - libapparmor-dev
       - libssh-dev
+      - r-cran-ape
 
 notifications:
   email:
