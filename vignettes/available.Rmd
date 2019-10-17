@@ -7,10 +7,11 @@ output: rmarkdown::html_vignette
 knitr::opts_chunk$set(echo = TRUE, comment = '')
 ```
 
-## Number of modules available via GitHub
+### Modules on GitHub
 
 ```{r available, echo=FALSE, results='asis'}
 module_info <- suppressWarnings(outsider::module_details(service = 'github'))
+module_info <- module_info[module_info[['program']] != '', ]
 # convert to links
 module_info[['program']] <- paste0('[', module_info[['program']], '](',
                                    module_info[['url']], ')')
