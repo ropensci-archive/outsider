@@ -18,6 +18,3 @@ character(1)
 \description{
 Return package name from a repo name.
 }
-\details{
-Raises error if no module discovered.
-}

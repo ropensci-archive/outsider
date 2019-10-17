@@ -8,7 +8,9 @@ test_that('module_functions() works', {
 })
 test_that('user_warn() works', {
   with_mock(
-    `outsider.base::meta_get` = function(pkgnm) list('test' = 'testing'),
+    `outsider.base::meta_get` = function(pkgnm) list('test' = 'testing',
+                                                     'github' = 'tester'),
+    `outsider::travis_build_status` = function(repo, service) TRUE,
     `outsider:::rl` = function(prompt) NULL,
     expect_true(outsider:::user_warn(pkgnm = 'test'))
   )

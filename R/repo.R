@@ -4,7 +4,6 @@
 #' @param repo Repository (e.g. "username/repo") or package name associated
 #' with module
 #' @param call_error Call error if no package found? Default, TRUE.
-#' @details Raises error if no module discovered.
 #' @return character(1)
 pkgnm_guess <- function(repo, call_error = TRUE) {
   mdls <- modules_list()

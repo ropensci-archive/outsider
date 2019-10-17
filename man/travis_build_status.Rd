@@ -4,16 +4,17 @@
 \alias{travis_build_status}
 \title{Check Travis build status}
 \usage{
-travis_build_status(repo, service = c("github", "bitbucket", "gitlab"))
+travis_build_status(repo)
 }
 \arguments{
 \item{repo}{repo}
-
-\item{service}{Code-sharing service, e.g. GitHub}
 }
 \value{
 Logical
 }
 \description{
 Is build passing on travis? Returns either TRUE or FALSE.
+}
+\details{
+For GitHub-based repositories only.
 }

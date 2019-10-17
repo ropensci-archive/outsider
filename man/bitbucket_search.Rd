@@ -15,3 +15,7 @@ data.frame
 \description{
 Returns bitbucket API item results for outsider module search.
 }
+\details{
+Function is NOT available. This is a stub for when BitBucket API
+updates.
+}

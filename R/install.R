@@ -17,6 +17,15 @@ user_warn <- function(pkgnm) {
   for (nm in names(meta)) {
     msg <- paste0(msg, nm, ': ', meta[[nm]], '\n')
   }
+  if ('github' %in% names(meta)) {
+    is_passing <- travis_build_status(repo = paste0(meta[['github']], '/',
+                                                    meta[['package']]))
+    if (is_passing) {
+      msg <- paste0(msg, 'Travis CI: Passing\n')
+    } else {
+      msg <- paste0(msg, 'Travis CI: Failing/Erroring\n')
+    }
+  }
   msg <- paste0(msg, bar)
   message(crayon::silver(msg))
   res <- tryCatch(expr = {
