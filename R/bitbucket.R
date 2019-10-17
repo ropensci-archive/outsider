@@ -9,7 +9,11 @@ bb_api_url <- 'https://api.bitbucket.org/2.0/'
 #' @return data.frame
 bitbucket_repo_search <- function(repo) {
   search_url <- paste0(bb_api_url, 'repositories/', repo)
-  bitbucket_res <- jsonlite::fromJSON(search_url)
+  bitbucket_res <- try(expr = jsonlite::fromJSON(search_url), silent = TRUE)
+  if (inherits(x = bitbucket_res, what = 'try-error')) {
+    warning('Unable to download ', char(repo), call. = FALSE)
+    return(data.frame())
+  }
   if ('pagelen' %in% names(bitbucket_res)) {
     warning('Too many possible matching repos for ', char(repo), '.',
             call. = FALSE)
@@ -49,7 +53,8 @@ bitbucket_tags <- function(repos) {
   fetch <- function(repo) {
     dockerfiles_url <- paste0(bb_api_url, 'repositories/', repo,
                               '/src/master/inst/dockerfiles')
-    bitbucket_res <- jsonlite::fromJSON(dockerfiles_url)
+    bitbucket_res <- try(expr = jsonlite::fromJSON(dockerfiles_url),
+                         silent = TRUE)
     if (!inherits(bitbucket_res, 'try-error')) {
       paths <- unname(vapply(X = bitbucket_res['values'], FUN = '[[',
                              FUN.VALUE = character(1), i = 1))

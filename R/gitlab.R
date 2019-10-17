@@ -34,6 +34,10 @@ gitlab_repo_search <- function(repo) {
   search_url <- paste0(gl_api_url, 'search?scope=projects&search=',
                        repo, authtoken_get(joiner = '&', service = 'gitlab'))
   gitlab_res <- jsonlite::fromJSON(search_url)
+  if (length(gitlab_res) == 0) {
+    warning('No ', char(repo), ' found.', call. = FALSE)
+    return(data.frame())
+  }
   if (!is.na(user)) {
     pull <- grepl(pattern = user, x = gitlab_res[['namespace']][['path']],
                   ignore.case = TRUE)
@@ -79,7 +83,7 @@ gitlab_tags <- function(repo_ids) {
     tree_url <- paste0(gl_api_url, 'projects/', repo_ids, '/repository/tree',
                        authtoken_get(joiner = '?', service = 'gitlab'),
                        '&path=inst/dockerfiles&recursive=true')
-    gitlab_res <- jsonlite::fromJSON(tree_url)
+    gitlab_res <- try(expr = jsonlite::fromJSON(tree_url), silent = TRUE)
     if (!inherits(gitlab_res, 'try-error')) {
       paths <- gitlab_res[gitlab_res[['name']] == 'Dockerfile', 'path']
       paths <- sub(pattern = 'inst\\/dockerfiles\\/', replacement = '',
