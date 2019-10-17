@@ -127,7 +127,8 @@ For a more complicated example, we could launch a small analysis with `mafft`
 like so.
 
 ``` {r command_analysis, eval = FALSE}
-mafft('--auto', 'input_sequences.fasta', '>', 'output_alignment.fasta')
+mafft(arglist = c('--auto', 'input_sequences.fasta', '>',
+                  'output_alignment.fasta'))
 ```
 
 >**Why the spaces between arguments?** All the arguments of the external,

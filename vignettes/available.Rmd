@@ -7,16 +7,18 @@ output: rmarkdown::html_vignette
 knitr::opts_chunk$set(echo = TRUE, comment = '')
 ```
 
+## Number of modules available via GitHub
+
 ```{r available, echo=FALSE, results='asis'}
-module_info <- suppressWarnings(outsider::module_details())
+module_info <- suppressWarnings(outsider::module_details(service = 'github'))
 # convert to links
 module_info[['program']] <- paste0('[', module_info[['program']], '](',
                                    module_info[['url']], ')')
 module_info[['url']] <- NULL
 module_info[['repo']] <- NULL
-module_info[['watcher_count']] <- NULL
 module_info[['updated_at']] <- format(module_info[['updated_at']], '%d %b %y')
-colnames(module_info) <- c('Program', 'Details', 'Versions', 'Updated')
+colnames(module_info) <- c('Program', 'Details', 'Versions', 'Updated',
+                           'Stars')
 time_date <- as.character(format(Sys.time(), '%H:%M, %d %B %Y (%Z)'))
 cat('Last updated: ', crayon::bold(time_date), '\n')
 knitr::kable(as.data.frame(module_info), format = "html")

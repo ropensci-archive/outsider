@@ -68,9 +68,10 @@ hello_world()
 knitr::opts_chunk$set(
   comment = ""
 )
-avlbl <- outsider::module_details(service = 'github')
+avlbl <- suppressWarnings(outsider::module_details(service = 'github'))
 prgms <- unique(avlbl[['program']])
 prgms <- sort(prgms[prgms != ''])
+prgms <- prgms[prgms != 'hello world']
 time_date <- as.character(format(Sys.time(), '%H:%M %d %B %Y (%Z)'))
 cat('Modules available on GitHub since ', crayon::bold(time_date), '\n\n')
 for (prgm in prgms) {

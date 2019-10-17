@@ -94,8 +94,8 @@ module_install(repo = repo, force = TRUE)
 # Import
 raxml <- module_import(fname = 'raxml', repo = repo)
 # Run
-raxml('-m', 'GTRGAMMA', '-s', 'alignment.fasta', '-p', '1234', '-n',
-      'aotus_cytb', '-T', '2')
+raxml(arglist = c('-m', 'GTRGAMMA', '-s', 'alignment.fasta', '-p', '1234',
+                  '-n', 'aotus_cytb', '-T', '2'))
 ```
 
 # Visualisation

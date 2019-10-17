@@ -34,7 +34,7 @@ library(outsider)
 #> ----------------
 #> outsider v 0.1.0
 #> ----------------
-#> - Note: be sure of which modules you install
+#> - Security notice: be sure of which modules you install
 # outsider modules are hosted on GitHub and other code-sharing sites
 # this repo is a demonstration outsider module
 # it contains a function for printing 'Hello World!' in Ubuntu 18.04
@@ -57,10 +57,7 @@ hello_world()
 Available external programs
 ---------------------------
 
-    #> Warning in FUN(X[[i]], ...): Unable to fetch data from GitHub for
-    #> 'hrbrmstr/om..nmap'
-
-Modules available on GitHub since 19:55 22 August 2019 (CEST)
+Modules available on GitHub since 16:10 17 October 2019 (CEST)
 
 ● astral
 
