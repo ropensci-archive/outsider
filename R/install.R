@@ -3,23 +3,31 @@
 #' @title Warn users on the dangers of outsider modules
 #' @description Warn users on the dangers of installing an outsider module
 #' whose origin is potentially unknown.
-#' @details Prints additional info to screen based on arguments given.
+#' @details Prints additional info to screen based on module YAML file.
 #' @param pkgnm Package name
 #' @return Logical
 user_warn <- function(pkgnm) {
-  # TODO: richer warnings for GitHub, BitBucket and GitLab
   msg <- readLines(con = system.file('install_warning.txt',
                                      package = 'outsider'))
   ncols <- nchar(msg[[1]])
+  bar <- paste0(rep('-', ncols), collapse = '')
   msg <- paste0(msg, collapse = '\n')
+  msg <- paste0(msg, '\n Module information\n', bar, '\n')
   meta <- meta_get(pkgnm = pkgnm)
   for (nm in names(meta)) {
-    msg <- paste0(nm, ': ', meta[[nm]], '\n')
+    msg <- paste0(msg, nm, ': ', meta[[nm]], '\n')
   }
-  msg <- paste0(msg, '\n', paste0(rep('-', ncols), collapse = ''))
+  msg <- paste0(msg, bar)
   message(crayon::silver(msg))
-  rl(prompt = 'Enter any key to continue or press Esc to quit ')
-  TRUE
+  res <- tryCatch(expr = {
+    rl(prompt = 'Enter any key to continue or press Esc to quit ')
+    TRUE
+  }, interrupt = function(e) {
+    message('Halting installation ...')
+    uninstall(pkgnm = pkgnm)
+    FALSE
+  })
+  res
 }
 rl <- function(prompt) {
   readline(prompt = prompt)
@@ -85,7 +93,9 @@ module_install <- function(repo = NULL, url = NULL, filepath = NULL, git = NULL,
                                     build = FALSE)
   }
   if (!force) {
-    user_warn(pkgnm = pkgnm)
+    if (!user_warn(pkgnm = pkgnm)) {
+      return(invisible(FALSE))
+    }
   }
   res <- image_install(pkgnm = pkgnm, tag = tag, pull = !manual)
   invisible(res)
@@ -106,7 +116,7 @@ module_functions <- function(repo) {
 
 #' @name is_module_installed
 #' @title Is module installed?
-#' @description Uninstall outsider module and removes it from your docker
+#' @description Uninstall outsider module and remove it from your docker
 #' @param repo Module repo
 #' @details If program is successfully removed from your system, TRUE is
 #' returned else FALSE.

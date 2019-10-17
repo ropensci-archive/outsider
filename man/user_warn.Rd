@@ -17,5 +17,5 @@ Warn users on the dangers of installing an outsider module
 whose origin is potentially unknown.
 }
 \details{
-Prints additional info to screen based on arguments given.
+Prints additional info to screen based on module YAML file.
 }

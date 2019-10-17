@@ -1,3 +1,9 @@
+
+devtools::load_all()
+
+user_warn('om..hello.world')
+
+
 library(outsider)
 repo <- 'dombennett/om..hello.world'
 module_uninstall(repo = repo)
