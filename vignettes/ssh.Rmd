@@ -1,0 +1,42 @@
+---
+title: "Run commands on a server"
+output: rmarkdown::html_vignette
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, comment = '')
+```
+
+`outsider` allows users to launch commands on a remote machine. This can be
+handy if the user wishes to run their external programs on more powerful
+machines. All that is required is that the remote server has
+[Docker](https://www.docker.com/) and can be connected to via
+[ssh](https://en.wikipedia.org/wiki/Secure_Shell). To then run `outsider`
+module programs on the remote machine, an `ssh` connection must be set up
+using the `ssh_setup` function and the [`ssh`](https://github.com/ropensci/ssh)
+package. Once set-up, all external programs will be run on the external
+machine, not the local, with all input and output files being automatically sent
+and retrieved by `outsider`.
+
+```{r eval=FALSE}
+# Libs
+library(ssh)
+library(outsider)
+
+# SSH
+session <- ssh_connect(host = "username@ip.address:port")
+ssh_setup(session)
+
+# Run
+repo <- 'dombennett/om.hello.world'
+if (!is_module_installed(repo = repo)) {
+  module_install(repo = repo)
+}
+module_import(repo = repo, fname = 'hello_world')
+# hello world will be run on the remote machine
+hello_world()
+
+# Clean up
+ssh_teardown()
+```
+
