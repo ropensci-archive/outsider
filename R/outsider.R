@@ -62,6 +62,16 @@ ssh_teardown <- function() {
   server_disconnect()
 }
 
+#' @name is_outsider_ready
+#' @title Is outsider ready to run?
+#' @description Return TRUE if modules can be installed and run. Provides
+#' helpful messages on what may be missing.
+#' @return logical
+#' @export
+is_outsider_ready <- function() {
+  is_docker_available(call_error = FALSE)
+}
+
 .onAttach <- function(...) {
   v <- utils::packageVersion("outsider")
   msg <- paste0('outsider v ', v)

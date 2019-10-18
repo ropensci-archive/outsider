@@ -15,7 +15,7 @@
 <!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script><!-- Bootstrap --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous">
-<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
+<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
 <script src="../pkgdown.js"></script><meta property="og:title" content="Pipeline to construct evolutionary trees">
 <meta property="og:description" content="">
 <meta property="og:image" content="/logo.png">
@@ -69,6 +69,9 @@
     <li>
       <a href="../articles/phylogenetic_pipeline.html">Pipeline to construct evolutionary trees</a>
     </li>
+    <li>
+      <a href="../articles/ssh.html">Run commands on a server</a>
+    </li>
   </ul>
 </li>
 <li>
@@ -84,13 +87,12 @@
 <!--/.navbar -->
 
       
-
       </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1>Pipeline to construct evolutionary trees</h1>
             
-            <h4 class="date">2019-10-17</h4>
+            <h4 class="date">2019-10-18</h4>
       
       
       <div class="hidden name"><code>phylogenetic_pipeline.Rmd</code></div>
@@ -364,7 +366,7 @@ raxml &lt;-<span class="st"> </span><span class="kw"><a href="../reference/modul
 ## Partition: 0 with name: No Name Provided
 ## Base frequencies: 0.289 0.285 0.120 0.306 
 ## 
-## Inference[0]: Time 0.131239 GAMMA-based likelihood -2591.962827, best rearrangement setting 5
+## Inference[0]: Time 0.053708 GAMMA-based likelihood -2591.962827, best rearrangement setting 5
 ## 
 ## 
 ## Conducting final model optimizations on all 1 trees under GAMMA-based models ....
@@ -379,7 +381,7 @@ raxml &lt;-<span class="st"> </span><span class="kw"><a href="../reference/modul
 ## Program execution info written to /working_dir/RAxML_info.aotus_cytb
 ## Best-scoring ML tree written to: /working_dir/RAxML_bestTree.aotus_cytb
 ## 
-## Overall execution time: 0.173492 secs or 0.000048 hours or 0.000002 days</code></pre>
+## Overall execution time: 0.070258 secs or 0.000020 hours or 0.000001 days</code></pre>
 </div>
 <div id="visualisation" class="section level1">
 <h1 class="hasAnchor">
@@ -409,20 +411,17 @@ tree &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/pkg
 </div>
 
 
-
       <footer><div class="copyright">
   <p>Developed by Dom Bennett.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.3.0.9100.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.3.0.9000.</p>
 </div>
-
       </footer>
 </div>
 
   
-
 
   </body>
 </html>
