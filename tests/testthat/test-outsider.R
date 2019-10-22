@@ -13,3 +13,9 @@ test_that('ssh functions work', {
     expect_true(ssh_teardown())
   )
 })
+test_that('is_outsider_ready() works', {
+  with_mock(
+    `outsider:::is_docker_available` = function(...) TRUE,
+    expect_true(is_outsider_ready())
+  )
+})
