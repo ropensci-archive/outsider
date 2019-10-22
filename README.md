@@ -21,10 +21,14 @@ Installation
 To install the development version of the package ...
 
 ``` r
-devtools::install_github('AntonelliLab/outsider')
+remotes::install_github('AntonelliLab/outsider')
 ```
 
 Additionally, you will also need to install **Docker desktop**. To install Docker visit the Docker website and follow the instructions for your operating system: [Install Docker](https://www.docker.com/products/docker-desktop).
+
+### Compatibility
+
+Tested and functioning on Linux, Mac OS and Windows. (For some older versions of Windows, the legacy [Docker Toolbox](https://docs.docker.com/toolbox/toolbox_install_windows/) may be required instead of Docker Desktop.)
 
 Quick example
 -------------
@@ -57,7 +61,7 @@ hello_world()
 Available external programs
 ---------------------------
 
-Modules available on GitHub since 16:10 17 October 2019 (CEST)
+Modules available on GitHub since 14:37 22 October 2019 (CEST)
 
 ● astral
 
@@ -67,11 +71,11 @@ Modules available on GitHub since 16:10 17 October 2019 (CEST)
 
 ● blast
 
-● hello world
-
 ● mafft
 
 ● PartitionFinder2
+
+● pasta
 
 ● PyRate
 
@@ -91,6 +95,15 @@ How does it work?
 ![outsider\_outline](https://raw.githubusercontent.com/AntonelliLab/outsider/master/other/outline.png)
 
 To create your own module, check out the [`outsider.devtools`](https://github.com/AntonelliLab/outsider.devtools) package.
+
+Outsider CI statuses
+--------------------
+
+|                                                                            |                                                                                                                                                     |                                                                                                                                                                                                        |
+|----------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| [`outsider.base`](https://github.com/AntonelliLab/outsider.base)           | [![Build Status](https://travis-ci.org/AntonelliLab/outsider.base.svg?branch=master)](https://travis-ci.org/AntonelliLab/outsider.base)             | [![AppVeyor build status](https://ci.appveyor.com/api/projects/status/github/AntonelliLab/outsider.base?branch=master&svg=true)](https://ci.appveyor.com/project/DomBennett/outsider.base)             |
+| [`outsider.devtools`](https://github.com/AntonelliLab/outsider.devtools)   | [![Build Status](https://travis-ci.org/AntonelliLab/outsider.devtools.svg?branch=master)](https://travis-ci.org/AntonelliLab/outsider.devtools)     | [![AppVeyor build status](https://ci.appveyor.com/api/projects/status/github/AntonelliLab/outsider.devtools?branch=master&svg=true)](https://ci.appveyor.com/project/DomBennett/outsider.devtools)     |
+| [outsider-testsuites](https://github.com/AntonelliLab/outsider-testsuites) | [![Build Status](https://travis-ci.org/AntonelliLab/outsider-testsuites.svg?branch=master)](https://travis-ci.org/AntonelliLab/outsider-testsuites) | [![AppVeyor build status](https://ci.appveyor.com/api/projects/status/github/AntonelliLab/outsider-testsuites?branch=master&svg=true)](https://ci.appveyor.com/project/DomBennett/outsider-testsuites) |
 
 Version
 -------
