@@ -27,6 +27,7 @@ environment:
     - R_VERSION: stable
     - R_VERSION: patched
     - R_VERSION: devel
+      PKGTYPE: source
 
 build_script:
   - travis-tool.sh install_github AntonelliLab/outsider.base
