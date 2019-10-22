@@ -26,8 +26,10 @@ environment:
   matrix:
     - R_VERSION: stable
     - R_VERSION: patched
-    - R_VERSION: devel
-      PKGTYPE: source
+    # Ignore devel until issue 167 is fixed
+    # https://github.com/krlmlr/r-appveyor/issues/167
+    #- R_VERSION: devel
+    #  PKGTYPE: source
 
 build_script:
   - travis-tool.sh install_github AntonelliLab/outsider.base
