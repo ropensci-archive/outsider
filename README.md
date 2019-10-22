@@ -61,7 +61,7 @@ hello_world()
 Available external programs
 ---------------------------
 
-Modules available on GitHub since 14:42 22 October 2019 (CEST)
+Modules available on GitHub since 15:21 22 October 2019 (CEST)
 
 ● astral
 
@@ -99,17 +99,17 @@ To create your own module, check out the [`outsider.devtools`](https://github.co
 Outsider CI statuses
 --------------------
 
-|                                                                            |                                                                                                                                                     |                                                                                                                                                                                                        |
-|----------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| [`outsider.base`](https://github.com/AntonelliLab/outsider.base)           | [![Build Status](https://travis-ci.org/AntonelliLab/outsider.base.svg?branch=master)](https://travis-ci.org/AntonelliLab/outsider.base)             | [![AppVeyor build status](https://ci.appveyor.com/api/projects/status/github/AntonelliLab/outsider.base?branch=master&svg=true)](https://ci.appveyor.com/project/DomBennett/outsider.base)             |
-| [`outsider`](https://github.com/AntonelliLab/outsider)                     | [![Build Status](https://travis-ci.org/AntonelliLab/outsider.svg?branch=master)](https://travis-ci.org/AntonelliLab/outsider)                       | [![AppVeyor build status](https://ci.appveyor.com/api/projects/status/github/AntonelliLab/outsider?branch=master&svg=true)](https://ci.appveyor.com/project/DomBennett/outsider)                       |
-| [`outsider.devtools`](https://github.com/AntonelliLab/outsider.devtools)   | [![Build Status](https://travis-ci.org/AntonelliLab/outsider.devtools.svg?branch=master)](https://travis-ci.org/AntonelliLab/outsider.devtools)     | [![AppVeyor build status](https://ci.appveyor.com/api/projects/status/github/AntonelliLab/outsider.devtools?branch=master&svg=true)](https://ci.appveyor.com/project/DomBennett/outsider.devtools)     |
-| [outsider-testsuites](https://github.com/AntonelliLab/outsider-testsuites) | [![Build Status](https://travis-ci.org/AntonelliLab/outsider-testsuites.svg?branch=master)](https://travis-ci.org/AntonelliLab/outsider-testsuites) | [![AppVeyor build status](https://ci.appveyor.com/api/projects/status/github/AntonelliLab/outsider-testsuites?branch=master&svg=true)](https://ci.appveyor.com/project/DomBennett/outsider-testsuites) |
+| Repo                                                                     | [Travis CI](https://travis-ci.org/)                                                                                                                 | [Appveyor](https://www.appveyor.com/)                                                                                                                                                                  |
+|--------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| [`outsider.base`](https://github.com/AntonelliLab/outsider.base)         | [![Build Status](https://travis-ci.org/AntonelliLab/outsider.base.svg?branch=master)](https://travis-ci.org/AntonelliLab/outsider.base)             | [![AppVeyor build status](https://ci.appveyor.com/api/projects/status/github/AntonelliLab/outsider.base?branch=master&svg=true)](https://ci.appveyor.com/project/DomBennett/outsider.base)             |
+| [`outsider`](https://github.com/AntonelliLab/outsider)                   | [![Build Status](https://travis-ci.org/AntonelliLab/outsider.svg?branch=master)](https://travis-ci.org/AntonelliLab/outsider)                       | [![AppVeyor build status](https://ci.appveyor.com/api/projects/status/github/AntonelliLab/outsider?branch=master&svg=true)](https://ci.appveyor.com/project/DomBennett/outsider)                       |
+| [`outsider.devtools`](https://github.com/AntonelliLab/outsider.devtools) | [![Build Status](https://travis-ci.org/AntonelliLab/outsider.devtools.svg?branch=master)](https://travis-ci.org/AntonelliLab/outsider.devtools)     | [![AppVeyor build status](https://ci.appveyor.com/api/projects/status/github/AntonelliLab/outsider.devtools?branch=master&svg=true)](https://ci.appveyor.com/project/DomBennett/outsider.devtools)     |
+| ["Test suites"](https://github.com/AntonelliLab/outsider-testsuites)     | [![Build Status](https://travis-ci.org/AntonelliLab/outsider-testsuites.svg?branch=master)](https://travis-ci.org/AntonelliLab/outsider-testsuites) | [![AppVeyor build status](https://ci.appveyor.com/api/projects/status/github/AntonelliLab/outsider-testsuites?branch=master&svg=true)](https://ci.appveyor.com/project/DomBennett/outsider-testsuites) |
 
 Version
 -------
 
-Development version 0.1.
+Post-review version 0.1.
 
 Maintainer
 ----------
