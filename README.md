@@ -61,31 +61,29 @@ hello_world()
 Available external programs
 ---------------------------
 
-Modules available on GitHub since 15:21 22 October 2019 (CEST)
-
-● astral
+Modules available on GitHub since 15:16 23 October 2019 (CEST)
 
 ● BAMM
 
+● astral
+
 ● beast
-
-● blast
-
-● mafft
-
-● PartitionFinder2
-
-● pasta
-
-● PyRate
-
-● RAxML
 
 ● revbayes
 
 ● trimal
 
+.... Plus, at least, 6 more!
+
 For more details, see the [available modules table](https://antonellilab.github.io/outsider/articles/available.html)
+
+### Real-World Example: Aligning biological sequences
+
+Installing and running a multiple sequence alignment program ([mafft](https://mafft.cbrc.jp/alignment/software/)).
+
+![](other/alignment_example.gif)
+
+(See ["Evolutionary tree pipeline"](https://antonellilab.github.io/outsider/articles/phylogenetic_pipeline.html) for running this program yourself.)
 
 How does it work?
 -----------------
