@@ -140,6 +140,11 @@ To create your own module, check out the [`outsider.devtools`](https://github.co
 
 Post-review version 0.1.
 
+## Citation
+
+Bennett et al. (2019). outsider: Install and run programs, outside of R, inside of R.
+*Journal of Open Source Software*, *In review*
+
 ## Maintainer
 
 [Dom Bennett](https://github.com/DomBennett)

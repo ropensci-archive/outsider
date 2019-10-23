@@ -61,17 +61,17 @@ hello_world()
 Available external programs
 ---------------------------
 
-Modules available on GitHub since 15:16 23 October 2019 (CEST)
+Modules available on GitHub since 15:56 23 October 2019 (CEST)
 
-● BAMM
+● PartitionFinder2
 
-● astral
+● trimal
+
+● RAxML
 
 ● beast
 
-● revbayes
-
-● trimal
+● BAMM
 
 .... Plus, at least, 6 more!
 
@@ -108,6 +108,11 @@ Version
 -------
 
 Post-review version 0.1.
+
+Citation
+--------
+
+Bennett et al. (2019). outsider: Install and run programs, outside of R, inside of R. *Journal of Open Source Software*, *In review*
 
 Maintainer
 ----------
