@@ -133,9 +133,9 @@ install_github('AntonelliLab/outsider')</a></code></pre>
 <span class="co">#  (this may take a long time, depends on internet connection and remote server)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/print.html">print</a></span>(<span class="kw"><a href="../reference/module_details.html">module_details</a></span>(<span class="dt">repo =</span> <span class="st">'dombennett/om..mafft'</span>))</code></pre></div>
 <pre><code>## # A tibble: 1 x 7
-##   repo   program details versions updated_at          watchers_count url   
-##   &lt;chr&gt;  &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;    &lt;dttm&gt;                       &lt;int&gt; &lt;chr&gt; 
-## 1 dombe… mafft   With e… latest   2019-09-17 10:03:00              0 https…</code></pre>
+##   repo   program details  versions updated_at          watchers_count url  
+##   &lt;chr&gt;  &lt;chr&gt;   &lt;chr&gt;    &lt;chr&gt;    &lt;dttm&gt;                       &lt;int&gt; &lt;chr&gt;
+## 1 dombe… mafft   Multipl… latest   2019-10-25 12:57:00              0 http…</code></pre>
 <p>To install a module, all that is required is to provide the repo name to the function <code><a href="../reference/module_install.html">module_install()</a></code>.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(outsider)
 <span class="kw"><a href="../reference/module_install.html">module_install</a></span>(<span class="dt">repo =</span> <span class="st">'dombennett/om..mafft'</span>, <span class="dt">force =</span> <span class="ot">TRUE</span>)</code></pre></div>
@@ -145,15 +145,16 @@ install_github('AntonelliLab/outsider')</a></code></pre>
 <p>To confirm the module is installed on a computer, it might be useful to use <code><a href="../reference/module_installed.html">module_installed()</a></code>. This function returns a table of all installed modules.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(outsider)
 <span class="kw"><a href="https://rdrr.io/r/base/print.html">print</a></span>(<span class="kw"><a href="../reference/module_installed.html">module_installed</a></span>())</code></pre></div>
-<pre><code>## # A tibble: 6 x 7
+<pre><code>## # A tibble: 7 x 7
 ##   package    image      tag    program  url          image_created image_id
 ##   &lt;fct&gt;      &lt;chr&gt;      &lt;chr&gt;  &lt;chr&gt;    &lt;chr&gt;        &lt;chr&gt;         &lt;chr&gt;   
 ## 1 om..blast  dombennet… latest blast    https://git… 10 months ago 360a4cf…
 ## 2 om..mafft  dombennet… latest mafft    https://git… 10 months ago 97170a5…
-## 3 om..parti… dombennet… latest Partiti… https://git… 2 months ago  857b6a1…
-## 4 om..pasta  dombennet… latest pasta    https://git… 10 days ago   906572e…
-## 5 om..raxml  dombennet… latest RAxML    https://git… 10 months ago 636778a…
-## 6 om..trimal dombennet… latest trimal   https://git… 4 months ago  055dc87…</code></pre>
+## 3 om..nmap   hrbrmstr/… &lt;none&gt; nmap     https://git… 7 months ago  2229636…
+## 4 om..parti… dombennet… latest Partiti… https://git… 2 months ago  857b6a1…
+## 5 om..pasta  dombennet… latest pasta    https://git… 2 weeks ago   906572e…
+## 6 om..trimal dombennet… latest trimal   https://git… 5 months ago  055dc87…
+## 7 om..wikit  dombennet… latest wikit    https://git… 18 minutes a… 447d01e…</code></pre>
 </div>
 <div id="importing" class="section level2">
 <h2 class="hasAnchor">

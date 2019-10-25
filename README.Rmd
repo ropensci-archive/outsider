@@ -107,6 +107,14 @@ Installing and running a multiple sequence alignment program
 
 (See ["Evolutionary tree pipeline"](https://antonellilab.github.io/outsider/articles/phylogenetic_pipeline.html) for running this program yourself.)
 
+### Not finding a module you need?
+
+Try raising an issue to request someone make a module,
+[Raise an Issue](https://github.com/AntonelliLab/outsider/issues/new).
+
+
+Otherwise, why not make it yourself? Check out the [`outsider.devtools`](https://github.com/AntonelliLab/outsider.devtools) package.
+
 ## How does it work?
 
 `outsider` makes use of the program [docker](https://www.docker.com/) which
@@ -124,8 +132,6 @@ other code-sharing sites and can be searched for and downloaded through
 `outsider`.
 
 ![outsider_outline](https://raw.githubusercontent.com/AntonelliLab/outsider/master/other/outline.png)
-
-To create your own module, check out the [`outsider.devtools`](https://github.com/AntonelliLab/outsider.devtools) package.
 
 ## Outsider CI statuses
 

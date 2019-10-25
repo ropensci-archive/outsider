@@ -27,6 +27,32 @@ select `outsider` as default.)
 
 ## Areas for possible contribution
 
+## More modules!
+
+If you think that you can code up a module that does not yet exist in `outsider`
+module form -- then please it give a go!
+
+A whole other [package](https://github.com/AntonelliLab/outsider.devtools) and
+[website](https://antonellilab.github.io/outsider.devtools/) exists for helping
+uses contribute modules.
+
+## Documentation
+
+Any help with documentation to do with the development of modules would be
+greatly appreciated. In particular, more examples of module designs/structures
+along with descriptions. Additionally, any more tips and tricks or contributions
+to the FAQs would be equally welcomed.
+
+## Scalability
+
+The idea of `outsider` was to allow incorporation of code outside of R into R.
+But some of this integration can come at a computational cost: code that may
+have otherwise been run outside of an R analysis on a powerful desktop or
+a HPC facility could be run on a desktop instead. One solution so far has been
+to enable SSH'ing to remote servers. Any ideas on improving this or
+documentation on setting up hosting services (AWS, Google Cloud, Azure ... etc.)
+that can interact with `outsider` would be greatly welcomed.
+
 ### New test suite
 
 `outsider` aims to make it easier to string pipelines together in R that make

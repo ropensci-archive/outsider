@@ -61,19 +61,19 @@ hello_world()
 Available external programs
 ---------------------------
 
-Modules available on GitHub since 15:56 23 October 2019 (CEST)
-
-● PartitionFinder2
-
-● trimal
-
-● RAxML
+Modules available on GitHub since 16:38 25 October 2019 (CEST)
 
 ● beast
 
+● trimal
+
+● revbayes
+
 ● BAMM
 
-.... Plus, at least, 6 more!
+● RAxML
+
+.... Plus, at least, 8 more!
 
 For more details, see the [available modules table](https://antonellilab.github.io/outsider/articles/available.html)
 
@@ -85,14 +85,18 @@ Installing and running a multiple sequence alignment program ([mafft](https://ma
 
 (See ["Evolutionary tree pipeline"](https://antonellilab.github.io/outsider/articles/phylogenetic_pipeline.html) for running this program yourself.)
 
+### Not finding a module you need?
+
+Try raising an issue to request someone make a module, [Raise an Issue](https://github.com/AntonelliLab/outsider/issues/new).
+
+Otherwise, why not make it yourself? Check out the [`outsider.devtools`](https://github.com/AntonelliLab/outsider.devtools) package.
+
 How does it work?
 -----------------
 
 `outsider` makes use of the program [docker](https://www.docker.com/) which allows users to create small, deployable machines, called Docker images. The advantage of these images is that they can be run on any machine that has Docker installed, regardless of operating system. The `outsider` package makes external programs available in R by facilitating the interaction between Docker and the R console through **outsider modules**. These modules consist of two parts: a Dockerfile that describes the Docker image that contains the external program and an R package for interacting with the Docker image. Upon installing and running a module through `outsider`, a Docker image is launched and the R code of the module is used to interact with the external program. Anyone can create a module. They are hosted on [GitHub](https://github.com/) as well as other code-sharing sites and can be searched for and downloaded through `outsider`.
 
 ![outsider\_outline](https://raw.githubusercontent.com/AntonelliLab/outsider/master/other/outline.png)
-
-To create your own module, check out the [`outsider.devtools`](https://github.com/AntonelliLab/outsider.devtools) package.
 
 Outsider CI statuses
 --------------------
