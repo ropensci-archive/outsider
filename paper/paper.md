@@ -129,7 +129,7 @@ cat(readLines('alignment.fa'), sep = '\n')
 
 # Availability
 
-`outsider` is open source software made available under the MIT license allowing reuse of the software with limited constraints. It can be installed through CRAN [@outsider_cran], `install.package("outsider")`, or from its GitHub source code repository using the `remotes` package, e.g. as follows: `remotes::install_github("ropensci/outsider")`
+`outsider` (and its sister packages) are open source software made available under the MIT license allowing reuse of the software with limited constraints. All packages can be installed through CRAN [@outsider_cran], e.g. `install.package("outsider")`, or from GitHub source code repositories using the `remotes` package, e.g. `remotes::install_github("ropensci/outsider")`
 
 # Funding
 
