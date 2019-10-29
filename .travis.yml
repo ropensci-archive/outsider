@@ -4,7 +4,6 @@ r:
   - oldrel
   - release
 
-
 latex: false
 fortran: false
 pandoc: false
@@ -16,28 +15,36 @@ services:
   - docker
   
 # These packages have been failing to compile on oldrel (Oct. 2019)
+# fs, plyr, xml2, rversions, htmltools, ellipsis
+# Postentially due to a compiler error?
+# https://github.com/wesm/feather/issues/154
+# But why does it work for: https://github.com/AntonelliLab/outsider.devtools
 r_binary_packages:
-  - fs
-  - plyr
-  - xml2
-  - rversions
   - ape
-  - htmltools
-  - ellipsis
 
 r_github_packages:
   - AntonelliLab/outsider.base
   - jimhester/covr
 
 after_success:
-- Rscript -e 'covr::coveralls()'
+  - Rscript -e 'covr::coveralls()'
 
+# https://github.com/wesm/feather/issues/154
 addons:
   apt:
+    sources:
+        - ubuntu-toolchain-r-test
     packages:
+      - gcc-4.9
+      - g++-4.9
       - libapparmor-dev
       - libssh-dev
-      #- r-cran-ape
+
+before_install: |
+  mkdir ~/.R
+  cat <<EOF > ~/.R/Makevars
+  CXX1X=g++-4.9
+  CXX1XSTD=-std=c++11
 
 notifications:
   email:
