@@ -1,7 +1,7 @@
 language: r
 r:
   - devel
-  - oldrel
+  #- oldrel
   - release
 
 latex: false
@@ -18,7 +18,8 @@ services:
 # fs, plyr, xml2, rversions, htmltools, ellipsis
 # Postentially due to a compiler error?
 # https://github.com/wesm/feather/issues/154
-# But why does it work for: https://github.com/AntonelliLab/outsider.devtools
+# Implementing the recommended change in this issue made no difference
+# But why is there not the same error for: https://github.com/AntonelliLab/outsider.devtools
 r_binary_packages:
   - ape
 
@@ -29,22 +30,11 @@ r_github_packages:
 after_success:
   - Rscript -e 'covr::coveralls()'
 
-# https://github.com/wesm/feather/issues/154
 addons:
   apt:
-    sources:
-        - ubuntu-toolchain-r-test
     packages:
-      - gcc-4.9
-      - g++-4.9
       - libapparmor-dev
       - libssh-dev
-
-before_install: |
-  mkdir ~/.R
-  cat <<EOF > ~/.R/Makevars
-  CXX1X=g++-4.9
-  CXX1XSTD=-std=c++11
 
 notifications:
   email:
