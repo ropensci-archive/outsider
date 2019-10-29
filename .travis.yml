@@ -15,11 +15,13 @@ sudo: required
 services:
   - docker
   
-# These pacakges have been failing to compile on oldrel (Oct. 2019)
+# These packages have been failing to compile on oldrel (Oct. 2019)
 r_binary_packages:
   - fs
   - plyr
   - xml2
+  - rversions
+  - ape
 
 r_github_packages:
   - AntonelliLab/outsider.base
@@ -33,7 +35,7 @@ addons:
     packages:
       - libapparmor-dev
       - libssh-dev
-      - r-cran-ape
+      #- r-cran-ape
 
 notifications:
   email:
