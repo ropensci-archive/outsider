@@ -15,6 +15,9 @@ sudo: required
 services:
   - docker
   
+r_binary_packages:
+  - fs
+
 r_github_packages:
   - AntonelliLab/outsider.base
   - jimhester/covr
