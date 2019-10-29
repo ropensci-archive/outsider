@@ -19,6 +19,7 @@ services:
 r_binary_packages:
   - fs
   - plyr
+  - xml2
 
 r_github_packages:
   - AntonelliLab/outsider.base
