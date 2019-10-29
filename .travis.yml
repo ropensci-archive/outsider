@@ -15,8 +15,10 @@ sudo: required
 services:
   - docker
   
+# These pacakges have been failing to compile on oldrel (Oct. 2019)
 r_binary_packages:
   - fs
+  - plyr
 
 r_github_packages:
   - AntonelliLab/outsider.base
