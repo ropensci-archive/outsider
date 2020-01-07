@@ -103,7 +103,7 @@ For more details, see the [available modules table](https://antonellilab.github.
 Installing and running a multiple sequence alignment program 
 ([mafft](https://mafft.cbrc.jp/alignment/software/)).
 
-![](other/alignment_example.gif)
+![](https://raw.githubusercontent.com/AntonelliLab/outsider/master/other/alignment_example.gif)
 
 (See ["Evolutionary tree pipeline"](https://antonellilab.github.io/outsider/articles/phylogenetic_pipeline.html) for running this program yourself.)
 
