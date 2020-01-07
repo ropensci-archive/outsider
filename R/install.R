@@ -125,10 +125,10 @@ module_functions <- function(repo) {
 
 #' @name is_module_installed
 #' @title Is module installed?
-#' @description Uninstall outsider module and remove it from your docker
+#' @description Check if a module is installed on your system.
 #' @param repo Module repo
-#' @details If program is successfully removed from your system, TRUE is
-#' returned else FALSE.
+#' @details Searches for \code{repo} among installed outsider modules. Returns
+#' TRUE if found, else FALSE.
 #' @example examples/module_install.R
 #' @return Logical
 #' @export
