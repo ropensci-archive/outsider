@@ -4,10 +4,18 @@
 \alias{module_install}
 \title{Install an outsider module}
 \usage{
-module_install(repo = NULL, url = NULL, filepath = NULL,
-  git = NULL, service = c("github", "bitbucket", "gitlab"),
-  tag = "latest", manual = FALSE, verbose = FALSE, force = FALSE,
-  update = c("default", "ask", "always", "never"))
+module_install(
+  repo = NULL,
+  url = NULL,
+  filepath = NULL,
+  git = NULL,
+  service = c("github", "bitbucket", "gitlab"),
+  tag = "latest",
+  manual = FALSE,
+  verbose = FALSE,
+  force = FALSE,
+  update = c("default", "ask", "always", "never")
+)
 }
 \arguments{
 \item{repo}{Module repo, character.}

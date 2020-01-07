@@ -13,9 +13,9 @@
 <link rel="apple-touch-icon" type="image/png" sizes="76x76" href="../apple-touch-icon-76x76.png">
 <link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png">
 <!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script><!-- Bootstrap --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous">
-<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.1/css/all.min.css" integrity="sha256-PbSmjxuVAzJ6FPvNYsrXygfGhNJYyZ2GktDbkMBqQZg=" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.1/css/v4-shims.min.css" integrity="sha256-A6jcAdwFD48VMjlI3GDxUd+eCQa7/KWy6G9oe/ovaPA=" crossorigin="anonymous">
+<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
 <script src="../pkgdown.js"></script><meta property="og:title" content="Pipeline to construct evolutionary trees">
 <meta property="og:description" content="">
 <meta property="og:image" content="/logo.png">
@@ -87,12 +87,13 @@
 <!--/.navbar -->
 
       
+
       </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1>Pipeline to construct evolutionary trees</h1>
             
-            <h4 class="date">2019-10-25</h4>
+            <h4 class="date">2020-01-07</h4>
       
       
       <div class="hidden name"><code>phylogenetic_pipeline.Rmd</code></div>
@@ -108,26 +109,26 @@
 <a href="#phylotar" class="anchor"></a>phylotaR</h1>
 <p>To get us started we need DNA sequences that represent the same gene region, i.e. sequences that are orthologous. We can obtain our sequences quickly using the example data from the R package <a href="https://github.com/ropensci/phylotaR"><code>phylotaR</code></a>.</p>
 <p><code>phylotaR</code> provides a pipeline for identifying orthologous sequences from a reputable online biological sequence database. The package comes with a few pre-calculated example sequences. We can extract sequence clusters that represent the gene region <a href="https://en.wikipedia.org/wiki/Cytochrome_b">cytb</a> with the following script.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">aotus &lt;-<span class="st"> </span><span class="ot">NULL</span></code></pre></div>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(phylotaR)
-<span class="co"># Example data</span>
-<span class="kw"><a href="https://rdrr.io/r/utils/data.html">data</a></span>(<span class="st">"aotus"</span>)
-<span class="co"># Generate summary of identified clusters</span>
-smmry &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/summary.html">summary</a></span>(aotus)
-<span class="co"># Extract cluster with 'cytb' in feature name</span>
-cytb &lt;-<span class="st"> </span>smmry<span class="op">$</span>ID[<span class="kw"><a href="https://rdrr.io/r/base/which.html">which</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/grep.html">grepl</a></span>(<span class="st">'cytb'</span>, smmry<span class="op">$</span>Feature))[<span class="dv">1</span>]]
-cytb &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/pkg/phylotaR/man/drop_clstrs.html">drop_clstrs</a></span>(aotus, cytb)
-<span class="co"># Reduce cluster to just one sequence per taxon</span>
-cytb &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/pkg/phylotaR/man/drop_by_rank.html">drop_by_rank</a></span>(cytb, <span class="dt">n =</span> <span class="dv">1</span>)
-<span class="co"># Get taxonomic IDs for taxa in cluster</span>
-txids &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/pkg/phylotaR/man/get_txids.html">get_txids</a></span>(cytb, <span class="dt">cid =</span> cytb<span class="op">@</span>cids[[<span class="dv">1</span>]])
-<span class="co"># Convert IDs to species names</span>
-sp_nms &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/pkg/phylotaR/man/get_tx_slot.html">get_tx_slot</a></span>(cytb, txids, <span class="dt">slt_nm =</span> <span class="st">'scnm'</span>)
-sp_nms &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/grep.html">sub</a></span>(<span class="st">' '</span>, <span class="st">'_'</span>, sp_nms)
-<span class="co"># Write out</span>
-<span class="kw"><a href="https://rdrr.io/pkg/phylotaR/man/write_sqs.html">write_sqs</a></span>(cytb, <span class="st">'aotus_cytb.fasta'</span>, <span class="dt">sq_nm =</span> sp_nms, <span class="dt">sid =</span> <span class="kw"><a href="https://rdrr.io/r/base/names.html">names</a></span>(sp_nms))
-<span class="co"># What do the first 50 lines of the file look like?</span>
-<span class="kw"><a href="https://rdrr.io/r/base/cat.html">cat</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/readLines.html">readLines</a></span>(<span class="st">'aotus_cytb.fasta'</span>, <span class="dt">n =</span> <span class="dv">50</span>), <span class="dt">collapse =</span> <span class="st">'</span><span class="ch">\n</span><span class="st">'</span>))</code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1">aotus &lt;-<span class="st"> </span><span class="ot">NULL</span></a></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(phylotaR)</a>
+<a class="sourceLine" id="cb2-2" data-line-number="2"><span class="co"># Example data</span></a>
+<a class="sourceLine" id="cb2-3" data-line-number="3"><span class="kw"><a href="https://rdrr.io/r/utils/data.html">data</a></span>(<span class="st">"aotus"</span>)</a>
+<a class="sourceLine" id="cb2-4" data-line-number="4"><span class="co"># Generate summary of identified clusters</span></a>
+<a class="sourceLine" id="cb2-5" data-line-number="5">smmry &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/summary.html">summary</a></span>(aotus)</a>
+<a class="sourceLine" id="cb2-6" data-line-number="6"><span class="co"># Extract cluster with 'cytb' in feature name</span></a>
+<a class="sourceLine" id="cb2-7" data-line-number="7">cytb &lt;-<span class="st"> </span>smmry<span class="op">$</span>ID[<span class="kw"><a href="https://rdrr.io/r/base/which.html">which</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/grep.html">grepl</a></span>(<span class="st">'cytb'</span>, smmry<span class="op">$</span>Feature))[<span class="dv">1</span>]]</a>
+<a class="sourceLine" id="cb2-8" data-line-number="8">cytb &lt;-<span class="st"> </span><span class="kw"><a href="https://docs.ropensci.org/phylotaR/reference/drop_clstrs.html">drop_clstrs</a></span>(aotus, cytb)</a>
+<a class="sourceLine" id="cb2-9" data-line-number="9"><span class="co"># Reduce cluster to just one sequence per taxon</span></a>
+<a class="sourceLine" id="cb2-10" data-line-number="10">cytb &lt;-<span class="st"> </span><span class="kw"><a href="https://docs.ropensci.org/phylotaR/reference/drop_by_rank.html">drop_by_rank</a></span>(cytb, <span class="dt">n =</span> <span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb2-11" data-line-number="11"><span class="co"># Get taxonomic IDs for taxa in cluster</span></a>
+<a class="sourceLine" id="cb2-12" data-line-number="12">txids &lt;-<span class="st"> </span><span class="kw"><a href="https://docs.ropensci.org/phylotaR/reference/get_txids.html">get_txids</a></span>(cytb, <span class="dt">cid =</span> cytb<span class="op">@</span>cids[[<span class="dv">1</span>]])</a>
+<a class="sourceLine" id="cb2-13" data-line-number="13"><span class="co"># Convert IDs to species names</span></a>
+<a class="sourceLine" id="cb2-14" data-line-number="14">sp_nms &lt;-<span class="st"> </span><span class="kw"><a href="https://docs.ropensci.org/phylotaR/reference/get_tx_slot.html">get_tx_slot</a></span>(cytb, txids, <span class="dt">slt_nm =</span> <span class="st">'scnm'</span>)</a>
+<a class="sourceLine" id="cb2-15" data-line-number="15">sp_nms &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/grep.html">sub</a></span>(<span class="st">' '</span>, <span class="st">'_'</span>, sp_nms)</a>
+<a class="sourceLine" id="cb2-16" data-line-number="16"><span class="co"># Write out</span></a>
+<a class="sourceLine" id="cb2-17" data-line-number="17"><span class="kw"><a href="https://docs.ropensci.org/phylotaR/reference/write_sqs.html">write_sqs</a></span>(cytb, <span class="st">'aotus_cytb.fasta'</span>, <span class="dt">sq_nm =</span> sp_nms, <span class="dt">sid =</span> <span class="kw"><a href="https://rdrr.io/r/base/names.html">names</a></span>(sp_nms))</a>
+<a class="sourceLine" id="cb2-18" data-line-number="18"><span class="co"># What do the first 50 lines of the file look like?</span></a>
+<a class="sourceLine" id="cb2-19" data-line-number="19"><span class="kw"><a href="https://rdrr.io/r/base/cat.html">cat</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/readLines.html">readLines</a></span>(<span class="st">'aotus_cytb.fasta'</span>, <span class="dt">n =</span> <span class="dv">50</span>), <span class="dt">collapse =</span> <span class="st">'</span><span class="ch">\n</span><span class="st">'</span>))</a></code></pre></div>
 <pre><code>## &gt;Aotus_nancymaae
 ## atgacttctccccgcaaaacacacccactaacaaagatcattaacgaatcattcattgatctacccacaccacccaacat
 ## ttcctcctgatgaaattttggctcactcttaggcatttgcctaattattcaaatcaccaccggcctgttcttagctatac
@@ -178,26 +179,26 @@ sp_nms &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r
 ## actcaaattctattctgaactctagtagctgacctactaactctcacatgaattggaggccaaccggttgaatacccctt
 ## cgtaaccattggccaaaccgcatccattacatacttcttcattattattatcctaatgcccctttccgcctcaatcgaaa
 ## atatattacttaaatgataa</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="https://rdrr.io/r/base/cat.html">cat</a></span>(<span class="st">'...'</span>)</code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/cat.html">cat</a></span>(<span class="st">'...'</span>)</a></code></pre></div>
 <pre><code>## ...</code></pre>
 </div>
 <div id="alignment" class="section level1">
 <h1 class="hasAnchor">
 <a href="#alignment" class="anchor"></a>Alignment</h1>
 <p>Now we have written our sequences to a text-based <code>.fasta</code> file, we need to align them! To do this, we can use <a href="https://mafft.cbrc.jp/alignment/software/"><code>mafft</code></a>. We first need to install the module and then import the key function, <code>mafft</code>. After doing this, we can call the <code>mafft</code> program using the same arguments that we would if it were calling the program via command-line. In our case we can simple run our alignment using the ‘–auto’ parameter.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(outsider)</code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(outsider)</a></code></pre></div>
 <pre><code>## ----------------
 ## outsider v 0.1.0
 ## ----------------
 ## - Security notice: be sure of which modules you install</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Install module</span>
-repo &lt;-<span class="st"> 'dombennett/om..mafft'</span>
-<span class="kw"><a href="../reference/module_install.html">module_install</a></span>(<span class="dt">repo =</span> repo, <span class="dt">force =</span> <span class="ot">TRUE</span>)
-<span class="co"># Import the function</span>
-mafft &lt;-<span class="st"> </span><span class="kw"><a href="../reference/module_import.html">module_import</a></span>(<span class="dt">fname =</span> <span class="st">'mafft'</span>, <span class="dt">repo =</span> repo)
-<span class="co"># Run our program with normal mafft arguments</span>
-<span class="co"># Note: all arguments must be separate character variables.</span>
-<span class="kw">mafft</span>(<span class="dt">arglist =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">'--auto'</span>, <span class="st">'aotus_cytb.fasta'</span>, <span class="st">'&gt;'</span>, <span class="st">'alignment.fasta'</span>))</code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1"><span class="co"># Install module</span></a>
+<a class="sourceLine" id="cb8-2" data-line-number="2">repo &lt;-<span class="st"> 'dombennett/om..mafft'</span></a>
+<a class="sourceLine" id="cb8-3" data-line-number="3"><span class="kw"><a href="https://rdrr.io/pkg/outsider/man/module_install.html">module_install</a></span>(<span class="dt">repo =</span> repo, <span class="dt">force =</span> <span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb8-4" data-line-number="4"><span class="co"># Import the function</span></a>
+<a class="sourceLine" id="cb8-5" data-line-number="5">mafft &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/pkg/outsider/man/module_import.html">module_import</a></span>(<span class="dt">fname =</span> <span class="st">'mafft'</span>, <span class="dt">repo =</span> repo)</a>
+<a class="sourceLine" id="cb8-6" data-line-number="6"><span class="co"># Run our program with normal mafft arguments</span></a>
+<a class="sourceLine" id="cb8-7" data-line-number="7"><span class="co"># Note: all arguments must be separate character variables.</span></a>
+<a class="sourceLine" id="cb8-8" data-line-number="8"><span class="kw">mafft</span>(<span class="dt">arglist =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">'--auto'</span>, <span class="st">'aotus_cytb.fasta'</span>, <span class="st">'&gt;'</span>, <span class="st">'alignment.fasta'</span>))</a></code></pre></div>
 <pre><code>## outputhat23=16
 ## treein = 0
 ## compacttree = 0
@@ -295,15 +296,15 @@ STEP 002-006-1  identical.
 <h1 class="hasAnchor">
 <a href="#phylogeny" class="anchor"></a>Phylogeny</h1>
 <p>We can repeat the same process as we did for <code>mafft</code> but instead for <a href="https://github.com/stamatak/standard-RAxML"><code>RAxML</code></a> – a command-line program for estimating evolutionary trees from an alignment of DNA sequences using a model of molecular evolution (GTRGAMMA) with maximum likelihood.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(outsider)
-<span class="co"># Install</span>
-repo &lt;-<span class="st"> 'dombennett/om..raxml'</span>
-<span class="kw"><a href="../reference/module_install.html">module_install</a></span>(<span class="dt">repo =</span> repo, <span class="dt">force =</span> <span class="ot">TRUE</span>)
-<span class="co"># Import</span>
-raxml &lt;-<span class="st"> </span><span class="kw"><a href="../reference/module_import.html">module_import</a></span>(<span class="dt">fname =</span> <span class="st">'raxml'</span>, <span class="dt">repo =</span> repo)
-<span class="co"># Run</span>
-<span class="kw">raxml</span>(<span class="dt">arglist =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">'-m'</span>, <span class="st">'GTRGAMMA'</span>, <span class="st">'-s'</span>, <span class="st">'alignment.fasta'</span>, <span class="st">'-p'</span>, <span class="st">'1234'</span>,
-                  <span class="st">'-n'</span>, <span class="st">'aotus_cytb'</span>, <span class="st">'-T'</span>, <span class="st">'2'</span>))</code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(outsider)</a>
+<a class="sourceLine" id="cb10-2" data-line-number="2"><span class="co"># Install</span></a>
+<a class="sourceLine" id="cb10-3" data-line-number="3">repo &lt;-<span class="st"> 'dombennett/om..raxml'</span></a>
+<a class="sourceLine" id="cb10-4" data-line-number="4"><span class="kw"><a href="https://rdrr.io/pkg/outsider/man/module_install.html">module_install</a></span>(<span class="dt">repo =</span> repo, <span class="dt">force =</span> <span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb10-5" data-line-number="5"><span class="co"># Import</span></a>
+<a class="sourceLine" id="cb10-6" data-line-number="6">raxml &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/pkg/outsider/man/module_import.html">module_import</a></span>(<span class="dt">fname =</span> <span class="st">'raxml'</span>, <span class="dt">repo =</span> repo)</a>
+<a class="sourceLine" id="cb10-7" data-line-number="7"><span class="co"># Run</span></a>
+<a class="sourceLine" id="cb10-8" data-line-number="8"><span class="kw">raxml</span>(<span class="dt">arglist =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">'-m'</span>, <span class="st">'GTRGAMMA'</span>, <span class="st">'-s'</span>, <span class="st">'alignment.fasta'</span>, <span class="st">'-p'</span>, <span class="st">'1234'</span>,</a>
+<a class="sourceLine" id="cb10-9" data-line-number="9">                  <span class="st">'-n'</span>, <span class="st">'aotus_cytb'</span>, <span class="st">'-T'</span>, <span class="st">'2'</span>))</a></code></pre></div>
 <pre><code>## 
 ## RAxML can't, parse the alignment file as phylip file 
 ## it will now try to parse it as FASTA file
@@ -366,7 +367,7 @@ raxml &lt;-<span class="st"> </span><span class="kw"><a href="../reference/modul
 ## Partition: 0 with name: No Name Provided
 ## Base frequencies: 0.289 0.285 0.120 0.306 
 ## 
-## Inference[0]: Time 0.077363 GAMMA-based likelihood -2591.962827, best rearrangement setting 5
+## Inference[0]: Time 0.043548 GAMMA-based likelihood -2591.962827, best rearrangement setting 5
 ## 
 ## 
 ## Conducting final model optimizations on all 1 trees under GAMMA-based models ....
@@ -381,20 +382,20 @@ raxml &lt;-<span class="st"> </span><span class="kw"><a href="../reference/modul
 ## Program execution info written to /working_dir/RAxML_info.aotus_cytb
 ## Best-scoring ML tree written to: /working_dir/RAxML_bestTree.aotus_cytb
 ## 
-## Overall execution time: 0.096562 secs or 0.000027 hours or 0.000001 days</code></pre>
+## Overall execution time: 0.065850 secs or 0.000018 hours or 0.000001 days</code></pre>
 </div>
 <div id="visualisation" class="section level1">
 <h1 class="hasAnchor">
 <a href="#visualisation" class="anchor"></a>Visualisation</h1>
-<p>Now, let’s check out our tree! We can use the R package <a href="http://ape-package.ird.fr/">“Analsis of Phylogenetics and Evolution” or <code>ape</code></a> to do this.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(ape)
-tree &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/pkg/ape/man/read.tree.html">read.tree</a></span>(<span class="st">'RAxML_bestTree.aotus_cytb'</span>)
-<span class="kw"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(tree)</code></pre></div>
+<p>Now, let’s check out our tree! We can use the R package <a href="http://ape-package.ird.fr/">“Analysis of Phylogenetics and Evolution” or <code>ape</code></a> to do this.</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(ape)</a>
+<a class="sourceLine" id="cb12-2" data-line-number="2">tree &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/pkg/ape/man/read.tree.html">read.tree</a></span>(<span class="st">'RAxML_bestTree.aotus_cytb'</span>)</a>
+<a class="sourceLine" id="cb12-3" data-line-number="3"><span class="kw"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(tree)</a></code></pre></div>
 <p><img src="phylogenetic_pipeline_files/figure-html/visualise-1.png" width="700"></p>
 </div>
   </div>
 
-  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
+  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
 
         <div id="tocnav">
       <h2 class="hasAnchor">
@@ -411,17 +412,20 @@ tree &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/pkg
 </div>
 
 
+
       <footer><div class="copyright">
   <p>Developed by Dom Bennett.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.3.0.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.1.9000.</p>
 </div>
+
       </footer>
 </div>
 
   
+
 
   </body>
 </html>

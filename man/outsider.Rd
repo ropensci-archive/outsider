@@ -3,7 +3,6 @@
 \docType{package}
 \name{outsider}
 \alias{outsider}
-\alias{outsider-package}
 \title{outsider: Install and run programs, outside of R, inside of R}
 \description{
 The outsider package facilitates the installation and running of external

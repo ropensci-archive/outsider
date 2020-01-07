@@ -58,11 +58,13 @@ if (is_outsider_ready()) {
 }
 }
 \seealso{
-Other public: \code{\link{is_module_installed}},
-  \code{\link{module_details}},
-  \code{\link{module_functions}},
-  \code{\link{module_help}}, \code{\link{module_import}},
-  \code{\link{module_installed}},
-  \code{\link{module_search}}
+Other public: 
+\code{\link{is_module_installed}()},
+\code{\link{module_details}()},
+\code{\link{module_functions}()},
+\code{\link{module_help}()},
+\code{\link{module_import}()},
+\code{\link{module_installed}()},
+\code{\link{module_search}()}
 }
 \concept{public}

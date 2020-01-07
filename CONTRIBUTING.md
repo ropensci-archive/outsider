@@ -27,7 +27,7 @@ select `outsider` as default.)
 
 ## Areas for possible contribution
 
-## More modules!
+### More modules!
 
 If you think that you can code up a module that does not yet exist in `outsider`
 module form -- then please it give a go!
@@ -36,14 +36,14 @@ A whole other [package](https://github.com/AntonelliLab/outsider.devtools) and
 [website](https://antonellilab.github.io/outsider.devtools/) exists for helping
 uses contribute modules.
 
-## Documentation
+### Documentation
 
 Any help with documentation to do with the development of modules would be
 greatly appreciated. In particular, more examples of module designs/structures
 along with descriptions. Additionally, any more tips and tricks or contributions
 to the FAQs would be equally welcomed.
 
-## Scalability
+### Scalability
 
 The idea of `outsider` was to allow incorporation of code outside of R into R.
 But some of this integration can come at a computational cost: code that may
@@ -106,3 +106,9 @@ sigNXTprt.p()           # awful
 
 It is best to make functions small, with specific names. Feel free to break up code into multiple separate files (e.g. tools,
 helper functions, stages ...). For more details and better explanations refer to the ROpenSci [guide](https://devguide.ropensci.org/building.html).
+
+## Code of Conduct
+
+Please note that the 'outsider' project is released with a
+[Contributor Code of Conduct](CODE_OF_CONDUCT.md).
+By contributing to this project, you agree to abide by its terms.

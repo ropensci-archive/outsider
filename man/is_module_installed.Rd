@@ -13,11 +13,11 @@ is_module_installed(repo)
 Logical
 }
 \description{
-Uninstall outsider module and remove it from your docker
+Check if a module is installed on your system.
 }
 \details{
-If program is successfully removed from your system, TRUE is
-returned else FALSE.
+Searches for \code{repo} among installed outsider modules. Returns
+TRUE if found, else FALSE.
 }
 \examples{
 library(outsider)
@@ -58,11 +58,13 @@ if (is_outsider_ready()) {
 }
 }
 \seealso{
-Other public: \code{\link{module_details}},
-  \code{\link{module_functions}},
-  \code{\link{module_help}}, \code{\link{module_import}},
-  \code{\link{module_installed}},
-  \code{\link{module_search}},
-  \code{\link{module_uninstall}}
+Other public: 
+\code{\link{module_details}()},
+\code{\link{module_functions}()},
+\code{\link{module_help}()},
+\code{\link{module_import}()},
+\code{\link{module_installed}()},
+\code{\link{module_search}()},
+\code{\link{module_uninstall}()}
 }
 \concept{public}

@@ -18,10 +18,6 @@ Function
 Import specific functions from an outsider module to the
 Global Environment.
 }
-\details{
-If program is successfully removed from your system, TRUE is
-returned else FALSE.
-}
 \examples{
 library(outsider)
 if (is_outsider_ready()) {
@@ -61,12 +57,13 @@ if (is_outsider_ready()) {
 }
 }
 \seealso{
-Other public: \code{\link{is_module_installed}},
-  \code{\link{module_details}},
-  \code{\link{module_functions}},
-  \code{\link{module_help}},
-  \code{\link{module_installed}},
-  \code{\link{module_search}},
-  \code{\link{module_uninstall}}
+Other public: 
+\code{\link{is_module_installed}()},
+\code{\link{module_details}()},
+\code{\link{module_functions}()},
+\code{\link{module_help}()},
+\code{\link{module_installed}()},
+\code{\link{module_search}()},
+\code{\link{module_uninstall}()}
 }
 \concept{public}

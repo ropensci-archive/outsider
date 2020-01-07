@@ -1,12 +1,13 @@
 reference:
-- title: Public
+- title: Module functions
   desc: Download, install, import, search ...
   contents:
-    - matches("(module|outsider|verbosity|ssh)")
-- title: Private
-  desc: The functions that do all the work behind the scenes
+    - matches("module")
+- title: Other functions
+  desc: Set verbosity, connect to server ...
   contents:
-    - -matches("(module|outsider|verbosity|ssh)")
+    - matches("(outsider|verbosity|ssh)")
+# ignoring private functions
 
 articles:
 - title: All articles
@@ -14,3 +15,8 @@ articles:
   contents:
   - '`available`'
   - '`phylogenetic_pipeline`'
+
+navbar:
+  right:
+    - icon: fa-github
+      href: https://github.com/antonellilab/outsider

@@ -13,9 +13,9 @@
 <link rel="apple-touch-icon" type="image/png" sizes="76x76" href="../apple-touch-icon-76x76.png">
 <link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png">
 <!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script><!-- Bootstrap --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous">
-<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.1/css/all.min.css" integrity="sha256-PbSmjxuVAzJ6FPvNYsrXygfGhNJYyZ2GktDbkMBqQZg=" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.1/css/v4-shims.min.css" integrity="sha256-A6jcAdwFD48VMjlI3GDxUd+eCQa7/KWy6G9oe/ovaPA=" crossorigin="anonymous">
+<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
 <script src="../pkgdown.js"></script><meta property="og:title" content="Install and run programs, outside of R, inside of R">
 <meta property="og:description" content="">
 <meta property="og:image" content="/logo.png">
@@ -87,6 +87,7 @@
 <!--/.navbar -->
 
       
+
       </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
@@ -106,7 +107,7 @@
 <a href="#how-it-works" class="anchor"></a>How it works</h2>
 <p>The <code>outsider</code> package acts as an interface between the R environment and external programs that are hosted on virtual machines. A virtual machine is hosted on a user’s computer but acts like an external computer with its own operating system. These virtual machines are run through the program <a href="https://www.docker.com/">Docker</a>. So long as a computer is running Docker, then any of these virtual machines can be downloaded and run without any installation process. Docker runs on multiple operating systems including Windows, OSX and Linux.</p>
 <p>For every external program provided through <code>outsider</code>, a virtual machine, or “Docker image”, needs to be described and specific R code – for launching and interacting with the program – is required. This Docker image and R code are provided through <strong>outsider modules</strong> that are hosted on <a href="https://github.com/">GitHub</a>.</p>
-<p>Users can install any of the available <code>outsider</code> modules. With two commands, a user can install and import an external program for calling within R: <code><a href="../reference/module_install.html">module_install()</a></code> and <code><a href="../reference/module_import.html">module_import()</a></code>.</p>
+<p>Users can install any of the available <code>outsider</code> modules. With two commands, a user can install and import an external program for calling within R: <code><a href="https://rdrr.io/pkg/outsider/man/module_install.html">module_install()</a></code> and <code><a href="https://rdrr.io/pkg/outsider/man/module_import.html">module_import()</a></code>.</p>
 <div class="figure">
 <img src="https://raw.githubusercontent.com/AntonelliLab/outsider/master/other/outline.png" alt="outsider_outline"><p class="caption">outsider_outline</p>
 </div>
@@ -117,58 +118,51 @@
 </h2>
 <p>Before you can make the most of <code>outsider</code> you will need to install and start running Docker. Follow the installation instructions for your specific operating system, <a href="https://www.docker.com/products/docker-desktop">“Install Docker”</a>.</p>
 <p>With Docker installed, you then install <code>outsider</code> via GitHub.</p>
-<pre class="install"><code><a href="https://rdrr.io/r/base/library.html">library(devtools)
-install_github('AntonelliLab/outsider')</a></code></pre>
+<p><code>{install-outsider, eval=FALSE} library(devtools) install_github('AntonelliLab/outsider')</code></p>
 </div>
 <div id="finding-and-installing-modules" class="section level2">
 <h2 class="hasAnchor">
 <a href="#finding-and-installing-modules" class="anchor"></a>Finding and installing modules</h2>
-<p>To see what modules are available you can see the “<a href="https://antonellilab.github.io/outsider/articles/available.html">available modules page</a>”. Alternatively, for the latest available information you can search for modules using the <code><a href="../reference/module_details.html">module_details()</a></code> function.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(outsider)</code></pre></div>
+<p>To see what modules are available you can see the “<a href="https://antonellilab.github.io/outsider/articles/available.html">available modules page</a>”. Alternatively, for the latest available information you can search for modules using the <code><a href="https://rdrr.io/pkg/outsider/man/module_details.html">module_details()</a></code> function.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(outsider)</a></code></pre></div>
 <pre><code>## ----------------
 ## outsider v 0.1.0
 ## ----------------
 ## - Security notice: be sure of which modules you install</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># repo = NULL will search for ALL available modules</span>
-<span class="co">#  (this may take a long time, depends on internet connection and remote server)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/print.html">print</a></span>(<span class="kw"><a href="../reference/module_details.html">module_details</a></span>(<span class="dt">repo =</span> <span class="st">'dombennett/om..mafft'</span>))</code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="co"># repo = NULL will search for ALL available modules</span></a>
+<a class="sourceLine" id="cb3-2" data-line-number="2"><span class="co">#  (this may take a long time, depends on internet connection and remote server)</span></a>
+<a class="sourceLine" id="cb3-3" data-line-number="3"><span class="kw"><a href="https://rdrr.io/r/base/print.html">print</a></span>(<span class="kw"><a href="https://rdrr.io/pkg/outsider/man/module_details.html">module_details</a></span>(<span class="dt">repo =</span> <span class="st">'dombennett/om..mafft'</span>))</a></code></pre></div>
 <pre><code>## # A tibble: 1 x 7
-##   repo   program details  versions updated_at          watchers_count url  
-##   &lt;chr&gt;  &lt;chr&gt;   &lt;chr&gt;    &lt;chr&gt;    &lt;dttm&gt;                       &lt;int&gt; &lt;chr&gt;
-## 1 dombe… mafft   Multipl… latest   2019-10-25 12:57:00              0 http…</code></pre>
-<p>To install a module, all that is required is to provide the repo name to the function <code><a href="../reference/module_install.html">module_install()</a></code>.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(outsider)
-<span class="kw"><a href="../reference/module_install.html">module_install</a></span>(<span class="dt">repo =</span> <span class="st">'dombennett/om..mafft'</span>, <span class="dt">force =</span> <span class="ot">TRUE</span>)</code></pre></div>
+##   repo   program details     versions updated_at          watchers_count url    
+##   &lt;chr&gt;  &lt;chr&gt;   &lt;chr&gt;       &lt;chr&gt;    &lt;dttm&gt;                       &lt;int&gt; &lt;chr&gt;  
+## 1 dombe… mafft   Multiple a… latest   2019-10-25 12:57:00              0 https:…</code></pre>
+<p>To install a module, all that is required is to provide the repo name to the function <code><a href="https://rdrr.io/pkg/outsider/man/module_install.html">module_install()</a></code>.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(outsider)</a>
+<a class="sourceLine" id="cb5-2" data-line-number="2"><span class="kw"><a href="https://rdrr.io/pkg/outsider/man/module_install.html">module_install</a></span>(<span class="dt">repo =</span> <span class="st">'dombennett/om..mafft'</span>, <span class="dt">force =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
 <blockquote>
 <p><strong>What is <code>repo</code>?</strong> The <code>repo</code> is the unique name for a GitHub repository that hosts an <code>outsider</code> module. It consists of two parts: a GitHub username and a project name. Given its uniqueness, all modules are referred to by their <code>repo</code>.</p>
 </blockquote>
-<p>To confirm the module is installed on a computer, it might be useful to use <code><a href="../reference/module_installed.html">module_installed()</a></code>. This function returns a table of all installed modules.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(outsider)
-<span class="kw"><a href="https://rdrr.io/r/base/print.html">print</a></span>(<span class="kw"><a href="../reference/module_installed.html">module_installed</a></span>())</code></pre></div>
-<pre><code>## # A tibble: 7 x 7
-##   package    image      tag    program  url          image_created image_id
-##   &lt;fct&gt;      &lt;chr&gt;      &lt;chr&gt;  &lt;chr&gt;    &lt;chr&gt;        &lt;chr&gt;         &lt;chr&gt;   
-## 1 om..blast  dombennet… latest blast    https://git… 10 months ago 360a4cf…
-## 2 om..mafft  dombennet… latest mafft    https://git… 10 months ago 97170a5…
-## 3 om..nmap   hrbrmstr/… &lt;none&gt; nmap     https://git… 7 months ago  2229636…
-## 4 om..parti… dombennet… latest Partiti… https://git… 2 months ago  857b6a1…
-## 5 om..pasta  dombennet… latest pasta    https://git… 2 weeks ago   906572e…
-## 6 om..trimal dombennet… latest trimal   https://git… 5 months ago  055dc87…
-## 7 om..wikit  dombennet… latest wikit    https://git… 18 minutes a… 447d01e…</code></pre>
+<p>To confirm the module is installed on a computer, it might be useful to use <code><a href="https://rdrr.io/pkg/outsider/man/module_installed.html">module_installed()</a></code>. This function returns a table of all installed modules.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(outsider)</a>
+<a class="sourceLine" id="cb6-2" data-line-number="2"><span class="kw"><a href="https://rdrr.io/r/base/print.html">print</a></span>(<span class="kw"><a href="https://rdrr.io/pkg/outsider/man/module_installed.html">module_installed</a></span>())</a></code></pre></div>
+<pre><code>## # A tibble: 1 x 7
+##   package  image       tag    program url                image_created image_id 
+##   &lt;fct&gt;    &lt;chr&gt;       &lt;chr&gt;  &lt;chr&gt;   &lt;chr&gt;              &lt;chr&gt;         &lt;chr&gt;    
+## 1 om..maf… dombennett… latest mafft   https://github.co… 13 months ago 97170a5f…</code></pre>
 </div>
 <div id="importing" class="section level2">
 <h2 class="hasAnchor">
 <a href="#importing" class="anchor"></a>Importing</h2>
-<p>All modules contain functions for interacting with the external program that they host. To see these functions we can use <code><a href="../reference/module_help.html">module_help()</a></code> to look up the help documents.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(outsider)
-<span class="co"># the whole module</span>
-<span class="kw"><a href="../reference/module_help.html">module_help</a></span>(<span class="dt">repo =</span> <span class="st">'dombennett/om..mafft'</span>)
-<span class="co"># specific function of a module (if known)</span>
-<span class="kw"><a href="../reference/module_help.html">module_help</a></span>(<span class="dt">repo =</span> <span class="st">'dombennett/om..mafft'</span>, <span class="dt">fname =</span> <span class="st">'mafft'</span>)</code></pre></div>
-<p>Once a function name is known of a particular module, the function can be imported with <code><a href="../reference/module_import.html">module_import()</a></code>.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(outsider)
-mafft &lt;-<span class="st"> </span><span class="kw"><a href="../reference/module_import.html">module_import</a></span>(<span class="dt">fname =</span> <span class="st">'mafft'</span>, <span class="dt">repo =</span> <span class="st">'dombennett/om..mafft'</span>)
-<span class="kw"><a href="https://rdrr.io/r/base/print.html">print</a></span>(<span class="kw">is</span>(mafft))</code></pre></div>
+<p>All modules contain functions for interacting with the external program that they host. To see these functions we can use <code><a href="https://rdrr.io/pkg/outsider/man/module_help.html">module_help()</a></code> to look up the help documents.</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(outsider)</a>
+<a class="sourceLine" id="cb8-2" data-line-number="2"><span class="co"># the whole module</span></a>
+<a class="sourceLine" id="cb8-3" data-line-number="3"><span class="kw"><a href="https://rdrr.io/pkg/outsider/man/module_help.html">module_help</a></span>(<span class="dt">repo =</span> <span class="st">'dombennett/om..mafft'</span>)</a>
+<a class="sourceLine" id="cb8-4" data-line-number="4"><span class="co"># specific function of a module (if known)</span></a>
+<a class="sourceLine" id="cb8-5" data-line-number="5"><span class="kw"><a href="https://rdrr.io/pkg/outsider/man/module_help.html">module_help</a></span>(<span class="dt">repo =</span> <span class="st">'dombennett/om..mafft'</span>, <span class="dt">fname =</span> <span class="st">'mafft'</span>)</a></code></pre></div>
+<p>Once a function name is known of a particular module, the function can be imported with <code><a href="https://rdrr.io/pkg/outsider/man/module_import.html">module_import()</a></code>.</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(outsider)</a>
+<a class="sourceLine" id="cb9-2" data-line-number="2">mafft &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/pkg/outsider/man/module_import.html">module_import</a></span>(<span class="dt">fname =</span> <span class="st">'mafft'</span>, <span class="dt">repo =</span> <span class="st">'dombennett/om..mafft'</span>)</a>
+<a class="sourceLine" id="cb9-3" data-line-number="3"><span class="kw"><a href="https://rdrr.io/r/base/print.html">print</a></span>(<span class="kw">is</span>(mafft))</a></code></pre></div>
 <pre><code>## [1] "function"         "OptionalFunction" "PossibleMethod"</code></pre>
 <blockquote>
 <p><strong>What is <code>mafft</code>?</strong> “mafft” is a multiple alignment tool for for biological sequences. Note, a user can use <em>any</em> name they wish for the function when it is imported. For example, <code>mafftymcmafftface &lt;- module_import( ...</code> would work equally well.</p>
@@ -178,9 +172,9 @@ mafft &lt;-<span class="st"> </span><span class="kw"><a href="../reference/modul
 <h2 class="hasAnchor">
 <a href="#commands" class="anchor"></a>Commands</h2>
 <p>The imported functions from modules act like portals to the external programs the modules host. To run a command, a user needs to use the function name and give arguments corresponding to the arguments of the external program. For example, on command-line to list the help information for <code>mafft</code>, we would write <code>mafft --help</code>. With <code>outsider</code> we can do run <code>mafft('--help')</code>.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(outsider)
-mafft &lt;-<span class="st"> </span><span class="kw"><a href="../reference/module_import.html">module_import</a></span>(<span class="dt">fname =</span> <span class="st">'mafft'</span>, <span class="dt">repo =</span> <span class="st">'dombennett/om..mafft'</span>)
-<span class="kw">mafft</span>(<span class="st">'--help'</span>)</code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(outsider)</a>
+<a class="sourceLine" id="cb11-2" data-line-number="2">mafft &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/pkg/outsider/man/module_import.html">module_import</a></span>(<span class="dt">fname =</span> <span class="st">'mafft'</span>, <span class="dt">repo =</span> <span class="st">'dombennett/om..mafft'</span>)</a>
+<a class="sourceLine" id="cb11-3" data-line-number="3"><span class="kw">mafft</span>(<span class="st">'--help'</span>)</a></code></pre></div>
 <pre><code>## ------------------------------------------------------------------------------
 ##   MAFFT v7.407 (2018/Jul/23)
 ##   https://mafft.cbrc.jp/alignment/software/
@@ -206,8 +200,8 @@ mafft &lt;-<span class="st"> </span><span class="kw"><a href="../reference/modul
 ## --quiet :        Do not report progress
 ## --thread # :     Number of threads (if unsure, --thread -1)</code></pre>
 <p>For a more complicated example, we could launch a small analysis with <code>mafft</code> like so.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">mafft</span>(<span class="dt">arglist =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">'--auto'</span>, <span class="st">'input_sequences.fasta'</span>, <span class="st">'&gt;'</span>,
-                  <span class="st">'output_alignment.fasta'</span>))</code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" data-line-number="1"><span class="kw">mafft</span>(<span class="dt">arglist =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">'--auto'</span>, <span class="st">'input_sequences.fasta'</span>, <span class="st">'&gt;'</span>,</a>
+<a class="sourceLine" id="cb13-2" data-line-number="2">                  <span class="st">'output_alignment.fasta'</span>))</a></code></pre></div>
 <blockquote>
 <p><strong>Why the spaces between arguments?</strong> All the arguments of the external, command-line program must be provided as separated characters. This helps <code>outsider</code> parse the elements.</p>
 </blockquote>
@@ -215,11 +209,11 @@ mafft &lt;-<span class="st"> </span><span class="kw"><a href="../reference/modul
 <div id="uninstalling" class="section level2">
 <h2 class="hasAnchor">
 <a href="#uninstalling" class="anchor"></a>Uninstalling</h2>
-<p>Clean up your computer by removing unwanted modules with <code><a href="../reference/module_uninstall.html">module_uninstall()</a></code>.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(outsider)
-<span class="kw"><a href="../reference/module_uninstall.html">module_uninstall</a></span>(<span class="dt">repo =</span> <span class="st">'dombennett/om..mafft'</span>)</code></pre></div>
+<p>Clean up your computer by removing unwanted modules with <code><a href="https://rdrr.io/pkg/outsider/man/module_uninstall.html">module_uninstall()</a></code>.</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(outsider)</a>
+<a class="sourceLine" id="cb14-2" data-line-number="2"><span class="kw"><a href="https://rdrr.io/pkg/outsider/man/module_uninstall.html">module_uninstall</a></span>(<span class="dt">repo =</span> <span class="st">'dombennett/om..mafft'</span>)</a></code></pre></div>
 <pre><code>## Removing 'om..mafft'</code></pre>
-<pre><code>## Removing package from '/home/dom/R/x86_64-pc-linux-gnu-library/3.6'
+<pre><code>## Removing package from '/private/var/folders/x9/m8kwpxps2v93xk52zqzm5lkh0000gp/T/RtmpWlb8ao/temp_libpath15a0651f2e52'
 ## (as 'lib' is unspecified)</code></pre>
 </div>
 <div id="building-your-own-module" class="section level2">
@@ -229,7 +223,7 @@ mafft &lt;-<span class="st"> </span><span class="kw"><a href="../reference/modul
 </div>
   </div>
 
-  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
+  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
 
         <div id="tocnav">
       <h2 class="hasAnchor">
@@ -249,17 +243,20 @@ mafft &lt;-<span class="st"> </span><span class="kw"><a href="../reference/modul
 </div>
 
 
+
       <footer><div class="copyright">
   <p>Developed by Dom Bennett.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.3.0.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.1.9000.</p>
 </div>
+
       </footer>
 </div>
 
   
+
 
   </body>
 </html>

@@ -4,8 +4,7 @@
 \alias{module_details}
 \title{Look up details on module(s)}
 \usage{
-module_details(repo = NULL, service = c("github", "bitbucket",
-  "gitlab"))
+module_details(repo = NULL, service = c("github", "bitbucket", "gitlab"))
 }
 \arguments{
 \item{repo}{Vector of one or more outsider module repositories, default NULL.}
@@ -38,11 +37,13 @@ repo <- 'dombennett/om..hello.world'
 (module_details(repo = repo))
 }
 \seealso{
-Other public: \code{\link{is_module_installed}},
-  \code{\link{module_functions}},
-  \code{\link{module_help}}, \code{\link{module_import}},
-  \code{\link{module_installed}},
-  \code{\link{module_search}},
-  \code{\link{module_uninstall}}
+Other public: 
+\code{\link{is_module_installed}()},
+\code{\link{module_functions}()},
+\code{\link{module_help}()},
+\code{\link{module_import}()},
+\code{\link{module_installed}()},
+\code{\link{module_search}()},
+\code{\link{module_uninstall}()}
 }
 \concept{public}

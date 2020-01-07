@@ -13,9 +13,9 @@
 <link rel="apple-touch-icon" type="image/png" sizes="76x76" href="../apple-touch-icon-76x76.png">
 <link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png">
 <!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script><!-- Bootstrap --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous">
-<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.1/css/all.min.css" integrity="sha256-PbSmjxuVAzJ6FPvNYsrXygfGhNJYyZ2GktDbkMBqQZg=" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.1/css/v4-shims.min.css" integrity="sha256-A6jcAdwFD48VMjlI3GDxUd+eCQa7/KWy6G9oe/ovaPA=" crossorigin="anonymous">
+<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
 <script src="../pkgdown.js"></script><meta property="og:title" content="Run commands on a server">
 <meta property="og:description" content="">
 <meta property="og:image" content="/logo.png">
@@ -87,6 +87,7 @@
 <!--/.navbar -->
 
       
+
       </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
@@ -101,32 +102,33 @@
     
     
 <p><code>outsider</code> allows users to launch commands on a remote machine. This can be handy if the user wishes to run their external programs on more powerful machines. All that is required is that the remote server has <a href="https://www.docker.com/">Docker</a> and can be connected to via <a href="https://en.wikipedia.org/wiki/Secure_Shell">ssh</a>. To then run <code>outsider</code> module programs on the remote machine, an <code>ssh</code> connection must be set up using the <code>ssh_setup</code> function and the <a href="https://github.com/ropensci/ssh"><code>ssh</code></a> package. Once set-up, all external programs will be run on the external machine, not the local, with all input and output files being automatically sent and retrieved by <code>outsider</code>.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Libs</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(ssh)
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(outsider)
-
-<span class="co"># SSH</span>
-session &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/pkg/ssh/man/ssh.html">ssh_connect</a></span>(<span class="dt">host =</span> <span class="st">"username@ip.address:port"</span>)
-<span class="kw"><a href="../reference/ssh_setup.html">ssh_setup</a></span>(session)
-
-<span class="co"># Run</span>
-repo &lt;-<span class="st"> 'dombennett/om.hello.world'</span>
-<span class="cf">if</span> (<span class="op">!</span><span class="kw"><a href="../reference/is_module_installed.html">is_module_installed</a></span>(<span class="dt">repo =</span> repo)) {
-  <span class="kw"><a href="../reference/module_install.html">module_install</a></span>(<span class="dt">repo =</span> repo)
-}
-<span class="kw"><a href="../reference/module_import.html">module_import</a></span>(<span class="dt">repo =</span> repo, <span class="dt">fname =</span> <span class="st">'hello_world'</span>)
-<span class="co"># hello world will be run on the remote machine</span>
-<span class="kw">hello_world</span>()
-
-<span class="co"># Clean up</span>
-<span class="kw"><a href="../reference/ssh_teardown.html">ssh_teardown</a></span>()</code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="co"># Libs</span></a>
+<a class="sourceLine" id="cb1-2" data-line-number="2"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(ssh)</a>
+<a class="sourceLine" id="cb1-3" data-line-number="3"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(outsider)</a>
+<a class="sourceLine" id="cb1-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb1-5" data-line-number="5"><span class="co"># SSH</span></a>
+<a class="sourceLine" id="cb1-6" data-line-number="6">session &lt;-<span class="st"> </span><span class="kw">ssh_connect</span>(<span class="dt">host =</span> <span class="st">"username@ip.address:port"</span>)</a>
+<a class="sourceLine" id="cb1-7" data-line-number="7"><span class="kw"><a href="https://rdrr.io/pkg/outsider/man/ssh_setup.html">ssh_setup</a></span>(session)</a>
+<a class="sourceLine" id="cb1-8" data-line-number="8"></a>
+<a class="sourceLine" id="cb1-9" data-line-number="9"><span class="co"># Run</span></a>
+<a class="sourceLine" id="cb1-10" data-line-number="10">repo &lt;-<span class="st"> 'dombennett/om.hello.world'</span></a>
+<a class="sourceLine" id="cb1-11" data-line-number="11"><span class="cf">if</span> (<span class="op">!</span><span class="kw"><a href="https://rdrr.io/pkg/outsider/man/is_module_installed.html">is_module_installed</a></span>(<span class="dt">repo =</span> repo)) {</a>
+<a class="sourceLine" id="cb1-12" data-line-number="12">  <span class="kw"><a href="https://rdrr.io/pkg/outsider/man/module_install.html">module_install</a></span>(<span class="dt">repo =</span> repo)</a>
+<a class="sourceLine" id="cb1-13" data-line-number="13">}</a>
+<a class="sourceLine" id="cb1-14" data-line-number="14"><span class="kw"><a href="https://rdrr.io/pkg/outsider/man/module_import.html">module_import</a></span>(<span class="dt">repo =</span> repo, <span class="dt">fname =</span> <span class="st">'hello_world'</span>)</a>
+<a class="sourceLine" id="cb1-15" data-line-number="15"><span class="co"># hello world will be run on the remote machine</span></a>
+<a class="sourceLine" id="cb1-16" data-line-number="16"><span class="kw">hello_world</span>()</a>
+<a class="sourceLine" id="cb1-17" data-line-number="17"></a>
+<a class="sourceLine" id="cb1-18" data-line-number="18"><span class="co"># Clean up</span></a>
+<a class="sourceLine" id="cb1-19" data-line-number="19"><span class="kw"><a href="https://rdrr.io/pkg/outsider/man/ssh_teardown.html">ssh_teardown</a></span>()</a></code></pre></div>
   </div>
 
-  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
+  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
 
       </div>
 
 </div>
+
 
 
       <footer><div class="copyright">
@@ -134,12 +136,14 @@ repo &lt;-<span class="st"> 'dombennett/om.hello.world'</span>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.3.0.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.1.9000.</p>
 </div>
+
       </footer>
 </div>
 
   
+
 
   </body>
 </html>

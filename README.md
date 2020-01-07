@@ -1,37 +1,63 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
+
 <!-- devtools::rmarkdown::render("README.Rmd") -->
+
 <!-- Rscript -e "library(knitr); knit('README.Rmd')" -->
-Install and run programs, outside of R, inside of R <img src="logo.png" height="200" align="right"/>
-====================================================================================================
 
-[![Build Status](https://travis-ci.org/AntonelliLab/outsider.svg?branch=master)](https://travis-ci.org/AntonelliLab/outsider) [![AppVeyor build status](https://ci.appveyor.com/api/projects/status/github/AntonelliLab/outsider?branch=master&svg=true)](https://ci.appveyor.com/project/DomBennett/outsider) [![Coverage Status](https://coveralls.io/repos/github/AntonelliLab/outsider/badge.svg?branch=master)](https://coveralls.io/github/AntonelliLab/outsider?branch=master) [![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active) [![DOI](https://zenodo.org/badge/145114547.svg)](https://zenodo.org/badge/latestdoi/145114547) [![ropensci](https://badges.ropensci.org/282_status.svg)](https://github.com/ropensci/onboarding/issues/282)
+# Install and run programs, outside of R, inside of R <img src="logo.png" height="200" align="right"/>
 
-> The Outsider is always unhappy, but he is an agent that ensures the happiness for millions of 'Insiders'.<br><br> *[The Outsider, Wilson, 1956](https://en.wikipedia.org/wiki/The_Outsider_(Colin_Wilson)).*
+[![Build
+Status](https://travis-ci.org/AntonelliLab/outsider.svg?branch=master)](https://travis-ci.org/AntonelliLab/outsider)
+[![AppVeyor build
+status](https://ci.appveyor.com/api/projects/status/github/AntonelliLab/outsider?branch=master&svg=true)](https://ci.appveyor.com/project/DomBennett/outsider)
+[![Coverage
+Status](https://coveralls.io/repos/github/AntonelliLab/outsider/badge.svg?branch=master)](https://coveralls.io/github/AntonelliLab/outsider?branch=master)
+[![Project Status: Active – The project has reached a stable, usable
+state and is being actively
+developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
+[![DOI](https://zenodo.org/badge/145114547.svg)](https://zenodo.org/badge/latestdoi/145114547)
+[![ropensci](https://badges.ropensci.org/282_status.svg)](https://github.com/ropensci/onboarding/issues/282)
 
-<br> Integrating external programs into a deployable, R workflow can be challenging. Although there are many useful functions and packages (e.g. `base::system()`) for calling code and software from alternative languages, these approaches require users to independently install dependant software and may not work across platforms. `outsider` aims to make this easier by allowing users to install, run and control programs *outside of R* across all operating systems.
+> The Outsider is always unhappy, but he is an agent that ensures the
+> happiness for millions of ‘Insiders’.<br><br> *[The Outsider,
+> Wilson, 1956](https://en.wikipedia.org/wiki/The_Outsider_\(Colin_Wilson\)).*
 
-It's like [whalebrew](https://github.com/whalebrew/whalebrew) but exclusively for R.
+<br> Integrating external programs into a deployable, R workflow can be
+challenging. Although there are many useful functions and packages (e.g.
+`base::system()`) for calling code and software from alternative
+languages, these approaches require users to independently install
+dependant software and may not work across platforms. `outsider` aims to
+make this easier by allowing users to install, run and control programs
+*outside of R* across all operating systems.
 
-**For more detailed information, check out the [`outsider` website](https://antonellilab.github.io/outsider/articles/outsider.html)**
+It’s like [whalebrew](https://github.com/whalebrew/whalebrew) but
+exclusively for R.
 
-Installation
-------------
+**For more detailed information, check out the [`outsider`
+website](https://antonellilab.github.io/outsider/articles/outsider.html)**
 
-To install the development version of the package ...
+## Installation
+
+To install the development version of the package …
 
 ``` r
 remotes::install_github('AntonelliLab/outsider')
 ```
 
-Additionally, you will also need to install **Docker desktop**. To install Docker visit the Docker website and follow the instructions for your operating system: [Install Docker](https://www.docker.com/products/docker-desktop).
+Additionally, you will also need to install **Docker desktop**. To
+install Docker visit the Docker website and follow the instructions for
+your operating system: [Install
+Docker](https://www.docker.com/products/docker-desktop).
 
 ### Compatibility
 
-Tested and functioning on Linux, Mac OS and Windows. (For some older versions of Windows, the legacy [Docker Toolbox](https://docs.docker.com/toolbox/toolbox_install_windows/) may be required instead of Docker Desktop.)
+Tested and functioning on Linux, Mac OS and Windows. (For some older
+versions of Windows, the legacy [Docker
+Toolbox](https://docs.docker.com/toolbox/toolbox_install_windows/) may
+be required instead of Docker Desktop.)
 
-Quick example
--------------
+## Quick example
 
 ``` r
 library(outsider)
@@ -58,67 +84,83 @@ hello_world()
 #> DISTRIB_DESCRIPTION="Ubuntu 18.04.1 LTS"
 ```
 
-Available external programs
----------------------------
+## Available external programs
 
-Modules available on GitHub since 16:38 25 October 2019 (CEST)
+Modules available on GitHub since 10:44 07 January 2020 (CET)
 
-● beast
-
-● trimal
-
-● revbayes
+● figlet
 
 ● BAMM
 
 ● RAxML
 
-.... Plus, at least, 8 more!
+● revbayes
 
-For more details, see the [available modules table](https://antonellilab.github.io/outsider/articles/available.html)
+● beast
+
+…. Plus, at least, 9 more\!
+
+For more details, see the [available modules
+table](https://antonellilab.github.io/outsider/articles/available.html)
 
 ### Real-World Example: Aligning biological sequences
 
-Installing and running a multiple sequence alignment program ([mafft](https://mafft.cbrc.jp/alignment/software/)).
+Installing and running a multiple sequence alignment program
+([mafft](https://mafft.cbrc.jp/alignment/software/)).
 
-![](other/alignment_example.gif)
+![](https://raw.githubusercontent.com/AntonelliLab/outsider/master/other/alignment_example.gif)
 
-(See ["Evolutionary tree pipeline"](https://antonellilab.github.io/outsider/articles/phylogenetic_pipeline.html) for running this program yourself.)
+(See [“Evolutionary tree
+pipeline”](https://antonellilab.github.io/outsider/articles/phylogenetic_pipeline.html)
+for running this program yourself.)
 
 ### Not finding a module you need?
 
-Try raising an issue to request someone make a module, [Raise an Issue](https://github.com/AntonelliLab/outsider/issues/new).
+Try raising an issue to request someone make a module, [Raise an
+Issue](https://github.com/AntonelliLab/outsider/issues/new).
 
-Otherwise, why not make it yourself? Check out the [`outsider.devtools`](https://github.com/AntonelliLab/outsider.devtools) package.
+Otherwise, why not make it yourself? Check out the
+[`outsider.devtools`](https://github.com/AntonelliLab/outsider.devtools)
+package.
 
-How does it work?
------------------
+## How does it work?
 
-`outsider` makes use of the program [docker](https://www.docker.com/) which allows users to create small, deployable machines, called Docker images. The advantage of these images is that they can be run on any machine that has Docker installed, regardless of operating system. The `outsider` package makes external programs available in R by facilitating the interaction between Docker and the R console through **outsider modules**. These modules consist of two parts: a Dockerfile that describes the Docker image that contains the external program and an R package for interacting with the Docker image. Upon installing and running a module through `outsider`, a Docker image is launched and the R code of the module is used to interact with the external program. Anyone can create a module. They are hosted on [GitHub](https://github.com/) as well as other code-sharing sites and can be searched for and downloaded through `outsider`.
+`outsider` makes use of the program [docker](https://www.docker.com/)
+which allows users to create small, deployable machines, called Docker
+images. The advantage of these images is that they can be run on any
+machine that has Docker installed, regardless of operating system. The
+`outsider` package makes external programs available in R by
+facilitating the interaction between Docker and the R console through
+**outsider modules**. These modules consist of two parts: a Dockerfile
+that describes the Docker image that contains the external program and
+an R package for interacting with the Docker image. Upon installing and
+running a module through `outsider`, a Docker image is launched and the
+R code of the module is used to interact with the external program.
+Anyone can create a module. They are hosted on
+[GitHub](https://github.com/) as well as other code-sharing sites and
+can be searched for and downloaded through
+`outsider`.
 
 ![outsider\_outline](https://raw.githubusercontent.com/AntonelliLab/outsider/master/other/outline.png)
 
-Outsider CI statuses
---------------------
+## Outsider CI statuses
 
 | Repo                                                                     | [Travis CI](https://travis-ci.org/)                                                                                                                 | [Appveyor](https://www.appveyor.com/)                                                                                                                                                                  |
-|--------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| ------------------------------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | [`outsider.base`](https://github.com/AntonelliLab/outsider.base)         | [![Build Status](https://travis-ci.org/AntonelliLab/outsider.base.svg?branch=master)](https://travis-ci.org/AntonelliLab/outsider.base)             | [![AppVeyor build status](https://ci.appveyor.com/api/projects/status/github/AntonelliLab/outsider.base?branch=master&svg=true)](https://ci.appveyor.com/project/DomBennett/outsider.base)             |
 | [`outsider`](https://github.com/AntonelliLab/outsider)                   | [![Build Status](https://travis-ci.org/AntonelliLab/outsider.svg?branch=master)](https://travis-ci.org/AntonelliLab/outsider)                       | [![AppVeyor build status](https://ci.appveyor.com/api/projects/status/github/AntonelliLab/outsider?branch=master&svg=true)](https://ci.appveyor.com/project/DomBennett/outsider)                       |
 | [`outsider.devtools`](https://github.com/AntonelliLab/outsider.devtools) | [![Build Status](https://travis-ci.org/AntonelliLab/outsider.devtools.svg?branch=master)](https://travis-ci.org/AntonelliLab/outsider.devtools)     | [![AppVeyor build status](https://ci.appveyor.com/api/projects/status/github/AntonelliLab/outsider.devtools?branch=master&svg=true)](https://ci.appveyor.com/project/DomBennett/outsider.devtools)     |
-| ["Test suites"](https://github.com/AntonelliLab/outsider-testsuites)     | [![Build Status](https://travis-ci.org/AntonelliLab/outsider-testsuites.svg?branch=master)](https://travis-ci.org/AntonelliLab/outsider-testsuites) | [![AppVeyor build status](https://ci.appveyor.com/api/projects/status/github/AntonelliLab/outsider-testsuites?branch=master&svg=true)](https://ci.appveyor.com/project/DomBennett/outsider-testsuites) |
+| [“Test suites”](https://github.com/AntonelliLab/outsider-testsuites)     | [![Build Status](https://travis-ci.org/AntonelliLab/outsider-testsuites.svg?branch=master)](https://travis-ci.org/AntonelliLab/outsider-testsuites) | [![AppVeyor build status](https://ci.appveyor.com/api/projects/status/github/AntonelliLab/outsider-testsuites?branch=master&svg=true)](https://ci.appveyor.com/project/DomBennett/outsider-testsuites) |
 
-Version
--------
+## Version
 
 Post-review version 0.1.
 
-Citation
---------
+## Citation
 
-Bennett et al. (2019). outsider: Install and run programs, outside of R, inside of R. *Journal of Open Source Software*, *In review*
+Bennett et al. (2019). outsider: Install and run programs, outside of R,
+inside of R. *Journal of Open Source Software*, *In review*
 
-Maintainer
-----------
+## Maintainer
 
 [Dom Bennett](https://github.com/DomBennett)
