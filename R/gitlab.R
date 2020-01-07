@@ -59,9 +59,9 @@ gitlab_repo_search <- function(repo) {
 #' @title Search for outsider modules in GitLab
 #' @description Returns GitLab API item results for outsider module search.
 #' @return data.frame
+#https://stackoverflow.com/questions/31822385/how-to-use-gitlab-search-criteria
 gitlab_search <- function() {
   gitlab_token_check()
-  # https://stackoverflow.com/questions/31822385/how-to-use-gitlab-search-criteria
   search_url <- paste0(gl_api_url, 'search?scope=projects&search=om..',
                        authtoken_get(joiner = '&', service = 'gitlab'))
   gitlab_res <- jsonlite::fromJSON(search_url)
