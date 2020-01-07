@@ -41,12 +41,25 @@ Before you can make the most of `outsider` you will need to install and start
 running Docker. Follow the installation instructions for your specific operating
 system, ["Install Docker"](https://www.docker.com/products/docker-desktop).
 
-With Docker installed, you then install `outsider` via GitHub.
+> For some operating systems, "Docker Desktop" is not available. If that is the
+case, try ["Docker Toolbox"](https://docs.docker.com/toolbox/). This is a
+legacy Docker for older operating systems. It has similar functionality but
+requires a virtual machine and has greater computational overhead.
+
+With Docker installed, you then can install `outsider` via GitHub.
 
 ```{install-outsider, eval=FALSE}
 library(devtools)
 install_github('AntonelliLab/outsider')
 ```
+
+### Non-R dependencies
+
+* For Windows users you may need to install
+[Rtools](https://cran.r-project.org/bin/windows/Rtools/).
+* For Mac users you may need to install and setup 
+"Xcode command-line tools", by running the command `xcode-select --install` in
+the terminal.
 
 ## Finding and installing modules
 
@@ -117,16 +130,12 @@ give arguments corresponding to the arguments of the external program. For
 example, on command-line to list the help information for `mafft`, we would
 write `mafft --help`. With `outsider` we can do run `mafft('--help')`.
 
-``` {r command_help}
-library(outsider)
-mafft <- module_import(fname = 'mafft', repo = 'dombennett/om..mafft')
-mafft('--help')
-```
-
 For a more complicated example, we could launch a small analysis with `mafft`
 like so.
 
 ``` {r command_analysis, eval = FALSE}
+library(outsider)
+mafft <- module_import(fname = 'mafft', repo = 'dombennett/om..mafft')
 mafft(arglist = c('--auto', 'input_sequences.fasta', '>',
                   'output_alignment.fasta'))
 ```
@@ -134,6 +143,34 @@ mafft(arglist = c('--auto', 'input_sequences.fasta', '>',
 >**Why the spaces between arguments?** All the arguments of the external,
 command-line program must be provided as separated characters. This helps
 `outsider` parse the elements.
+
+### How does that last line work?
+
+```
+mafft(arglist = c('--auto', 'input_sequences.fasta', '>',
+'output_alignment.fasta'))
+```
+describes in R how to call the MAFFT program via command-line/terminal. It is
+equivalent to `mafft --auto input_sequences.fasta > output_alignment.fasta` if
+we were to call the program via command-line/terminal. How do we know how to
+structure the program arguments? In the case of MAFFT we can look-up the
+arguments on their website, [mafft.cbrc.jp](mafft.cbrc.jp/). But often for
+command-line programs we can call for help with `-h` or `--help`. For MAFFT at
+the command-line, we could run `mafft --help` or with `outsider` we can run:
+
+```{r mafft-help}
+mafft(arglist = '--help')
+```
+
+The help page returned tells us how to structure the arguments:
+
+```
+[options] [input_file] > [output_file]
+```
+
+Where the options (e.g. alignment method, number of threads) are always
+indicated first with `--` and the input and output files are indicated second
+with the `>`.
 
 ## Uninstalling
 

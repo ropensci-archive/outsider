@@ -15,6 +15,7 @@ articles:
   contents:
   - '`available`'
   - '`phylogenetic_pipeline`'
+  - '`ssh`'
 
 navbar:
   right:

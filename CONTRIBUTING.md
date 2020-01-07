@@ -107,6 +107,27 @@ sigNXTprt.p()           # awful
 It is best to make functions small, with specific names. Feel free to break up code into multiple separate files (e.g. tools,
 helper functions, stages ...). For more details and better explanations refer to the ROpenSci [guide](https://devguide.ropensci.org/building.html).
 
+## API tokens
+
+The repository search features can make use of private tokens which make
+searching faster and more reliable. In the case of GitLab, however, an
+"access token" is a requirement for using the API.
+
+A token is set up by generating one by logging into your code-sharing service
+and then saving the generated token to an R environment file.
+
+To create a token for your code-sharing site, visit either
+https://github.com/settings/tokens for GitHub or
+https://gitlab.com/profile/personal_access_tokens for GitLab. The generated
+tokens should allow searching of all public repositories. Then add the token to
+your R environment using `usethis::edit_r_environ()`. The `.Renviron` file
+should contain the lines:
+
+```
+GITHUB_PAT=[your private token]
+GITLAB_PAT=[your private token]
+```
+
 ## Code of Conduct
 
 Please note that the 'outsider' project is released with a

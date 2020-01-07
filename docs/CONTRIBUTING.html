@@ -206,6 +206,15 @@ sp.IDS_part2()          # really bad
 sigNXTprt.p()           # awful</code></pre>
 <p>It is best to make functions small, with specific names. Feel free to break up code into multiple separate files (e.g. tools, helper functions, stages …). For more details and better explanations refer to the ROpenSci <a href="https://devguide.ropensci.org/building.html">guide</a>.</p>
 </div>
+<div id="api-tokens" class="section level2">
+<h2 class="hasAnchor">
+<a href="#api-tokens" class="anchor"></a>API tokens</h2>
+<p>The repository search features can make use of private tokens which make searching faster and more reliable. In the case of GitLab, however, an “access token” is a requirement for using the API.</p>
+<p>A token is set up by generating one by logging into your code-sharing service and then saving the generated token to an R environment file.</p>
+<p>To create a token for your code-sharing site, visit either <a href="https://github.com/settings/tokens" class="uri">https://github.com/settings/tokens</a> for GitHub or <a href="https://gitlab.com/profile/personal_access_tokens" class="uri">https://gitlab.com/profile/personal_access_tokens</a> for GitLab. The generated tokens should allow searching of all public repositories. Then add the token to your R environment using <code><a href="https://usethis.r-lib.org/reference/edit.html">usethis::edit_r_environ()</a></code>. The <code>.Renviron</code> file should contain the lines:</p>
+<pre><code>GITHUB_PAT=[your private token]
+GITLAB_PAT=[your private token]</code></pre>
+</div>
 <div id="code-of-conduct" class="section level2">
 <h2 class="hasAnchor">
 <a href="#code-of-conduct" class="anchor"></a>Code of Conduct</h2>

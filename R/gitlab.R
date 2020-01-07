@@ -10,7 +10,8 @@ gitlab_reformat <- function(api_res) {
 }
 gitlab_token_check <- function() {
   if (is.null(authtoken_get(service = 'gitlab'))) {
-    warning('No GitLab token.')
+    stop('GitLab access token is required! See `?module_search`.',
+         call. = FALSE)
   }
 }
 

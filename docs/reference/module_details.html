@@ -120,7 +120,12 @@ all available modules." />
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        
+        <li>
+  <a href="https://github.com/antonellilab/outsider">
+    <span class="fa fa-github"></span>
+     
+  </a>
+</li>
       </ul>
       
     </div><!--/.nav-collapse -->
@@ -171,13 +176,13 @@ case of GitLab), url to web presence, names of tagged versions.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p>Other public: 
-<code><a href='https://rdrr.io/pkg/outsider/man/is_module_installed.html'>is_module_installed</a>()</code>,
-<code><a href='https://rdrr.io/pkg/outsider/man/module_functions.html'>module_functions</a>()</code>,
-<code><a href='https://rdrr.io/pkg/outsider/man/module_help.html'>module_help</a>()</code>,
-<code><a href='https://rdrr.io/pkg/outsider/man/module_import.html'>module_import</a>()</code>,
-<code><a href='https://rdrr.io/pkg/outsider/man/module_installed.html'>module_installed</a>()</code>,
-<code><a href='https://rdrr.io/pkg/outsider/man/module_search.html'>module_search</a>()</code>,
-<code><a href='https://rdrr.io/pkg/outsider/man/module_uninstall.html'>module_uninstall</a>()</code></p></div>
+<code><a href='is_module_installed.html'>is_module_installed</a>()</code>,
+<code><a href='module_functions.html'>module_functions</a>()</code>,
+<code><a href='module_help.html'>module_help</a>()</code>,
+<code><a href='module_import.html'>module_import</a>()</code>,
+<code><a href='module_installed.html'>module_installed</a>()</code>,
+<code><a href='module_search.html'>module_search</a>()</code>,
+<code><a href='module_uninstall.html'>module_uninstall</a>()</code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>outsider</span>)
@@ -187,8 +192,8 @@ case of GitLab), url to web presence, names of tagged versions.</p>
 
 <span class='co'># look-up specific modules</span>
 <span class='no'>repo</span> <span class='kw'>&lt;-</span> <span class='st'>'dombennett/om..goodbye.world'</span>
-(<span class='fu'><a href='https://rdrr.io/r/base/warning.html'>suppressWarnings</a></span>(<span class='fu'><a href='https://rdrr.io/pkg/outsider/man/module_details.html'>module_details</a></span>(<span class='kw'>repo</span> <span class='kw'>=</span> <span class='no'>repo</span>))) <span class='co'># no module exists, expect warning</span></div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 0 x 0</span><span></div><div class='input'><span class='no'>repo</span> <span class='kw'>&lt;-</span> <span class='st'>'dombennett/om..hello.world'</span>
-(<span class='fu'><a href='https://rdrr.io/pkg/outsider/man/module_details.html'>module_details</a></span>(<span class='kw'>repo</span> <span class='kw'>=</span> <span class='no'>repo</span>))</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 1 x 7</span><span>
+(<span class='fu'><a href='https://rdrr.io/r/base/warning.html'>suppressWarnings</a></span>(<span class='fu'>module_details</span>(<span class='kw'>repo</span> <span class='kw'>=</span> <span class='no'>repo</span>))) <span class='co'># no module exists, expect warning</span></div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 0 x 0</span><span></div><div class='input'><span class='no'>repo</span> <span class='kw'>&lt;-</span> <span class='st'>'dombennett/om..hello.world'</span>
+(<span class='fu'>module_details</span>(<span class='kw'>repo</span> <span class='kw'>=</span> <span class='no'>repo</span>))</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 1 x 7</span><span>
 #&gt;   repo    program  details   versions updated_at          watchers_count url    
 #&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;dttm&gt;</span><span>                       </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>  
 #&gt; </span><span style='color: #555555;'>1</span><span> domben… hello w… Template… latest   2019-08-19 </span><span style='color: #555555;'>09:30:00</span><span>              0 https:…</div></span></pre>

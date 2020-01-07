@@ -16,6 +16,18 @@ Character vector
 Return a list of available outsider modules. (Not possible for
 BitBucket.)
 }
+\details{
+Note: To search GitLab an access token is required. To create one:
+1. Visit \url{https://gitlab.com/profile/personal_access_tokens}
+2. Create a new token with api scope
+3. Save the generated token to .Renviron
+(try \code{usethis::edit_r_environ()}) with the line
+"\code{GITLAB_PAT=your access token}"
+
+For increased search relaiability, a token can be created for GitHub as well.
+Visit \url{https://github.com/settings/tokens} to create a token and save
+it to .Renviron as "GITHUB_PAT".
+}
 \examples{
 library(outsider)
 # return table of ALL available modules on GitHub

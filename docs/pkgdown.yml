@@ -1,5 +1,9 @@
 pandoc: 2.3.1
 pkgdown: 1.4.1.9000
 pkgdown_sha: 03fa5022ff360a6f87586145e45f71fe090c64a2
-articles: []
+articles:
+  available: available.html
+  outsider: outsider.html
+  phylogenetic_pipeline: phylogenetic_pipeline.html
+  ssh: ssh.html
 

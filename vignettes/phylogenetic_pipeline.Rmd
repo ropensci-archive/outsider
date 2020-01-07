@@ -64,8 +64,8 @@ align them! To do this, we can use
 [`mafft`](https://mafft.cbrc.jp/alignment/software/). We first need to install
 the module and then import the key function, `mafft`. After doing this, we can
 call the `mafft` program using the same arguments that we would if it were
-calling the program via command-line. In our case we can simple run our
-alignment using the '--auto' parameter.
+calling the program via command-line. For simplicity, we can run our alignment
+using the '--auto' parameter.
 
 ```{r mafft}
 library(outsider)

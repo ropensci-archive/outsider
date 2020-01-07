@@ -1,4 +1,6 @@
 context('Testing \'gitlab\'')
+# if no gitlab token, skip
+skip_if(is.null(outsider:::authtoken_get(service = 'gitlab')))
 test_that('gitlab_repo_search() works', {
   skip_if_offline()
   res <- gitlab_repo_search(repo = 'DomBennett/om..hello.world')

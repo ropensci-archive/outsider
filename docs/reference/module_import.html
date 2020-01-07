@@ -119,7 +119,12 @@ Global Environment." />
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        
+        <li>
+  <a href="https://github.com/antonellilab/outsider">
+    <span class="fa fa-github"></span>
+     
+  </a>
+</li>
       </ul>
       
     </div><!--/.nav-collapse -->
@@ -164,29 +169,29 @@ Global Environment.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p>Other public: 
-<code><a href='https://rdrr.io/pkg/outsider/man/is_module_installed.html'>is_module_installed</a>()</code>,
-<code><a href='https://rdrr.io/pkg/outsider/man/module_details.html'>module_details</a>()</code>,
-<code><a href='https://rdrr.io/pkg/outsider/man/module_functions.html'>module_functions</a>()</code>,
-<code><a href='https://rdrr.io/pkg/outsider/man/module_help.html'>module_help</a>()</code>,
-<code><a href='https://rdrr.io/pkg/outsider/man/module_installed.html'>module_installed</a>()</code>,
-<code><a href='https://rdrr.io/pkg/outsider/man/module_search.html'>module_search</a>()</code>,
-<code><a href='https://rdrr.io/pkg/outsider/man/module_uninstall.html'>module_uninstall</a>()</code></p></div>
+<code><a href='is_module_installed.html'>is_module_installed</a>()</code>,
+<code><a href='module_details.html'>module_details</a>()</code>,
+<code><a href='module_functions.html'>module_functions</a>()</code>,
+<code><a href='module_help.html'>module_help</a>()</code>,
+<code><a href='module_installed.html'>module_installed</a>()</code>,
+<code><a href='module_search.html'>module_search</a>()</code>,
+<code><a href='module_uninstall.html'>module_uninstall</a>()</code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>outsider</span>)
-<span class='kw'>if</span> (<span class='fu'><a href='https://rdrr.io/pkg/outsider/man/is_outsider_ready.html'>is_outsider_ready</a></span>()) {
+<span class='kw'>if</span> (<span class='fu'><a href='is_outsider_ready.html'>is_outsider_ready</a></span>()) {
   <span class='co'># simplest repo</span>
   <span class='no'>repo</span> <span class='kw'>&lt;-</span> <span class='st'>'dombennett/om..hello.world'</span>
   <span class='co'># install</span>
-  <span class='fu'><a href='https://rdrr.io/pkg/outsider/man/module_install.html'>module_install</a></span>(<span class='kw'>repo</span> <span class='kw'>=</span> <span class='no'>repo</span>, <span class='kw'>force</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>update</span> <span class='kw'>=</span> <span class='st'>'never'</span>)
+  <span class='fu'><a href='module_install.html'>module_install</a></span>(<span class='kw'>repo</span> <span class='kw'>=</span> <span class='no'>repo</span>, <span class='kw'>force</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>update</span> <span class='kw'>=</span> <span class='st'>'never'</span>)
   <span class='co'># is module_installed?</span>
-  (<span class='fu'><a href='https://rdrr.io/pkg/outsider/man/is_module_installed.html'>is_module_installed</a></span>(<span class='kw'>repo</span> <span class='kw'>=</span> <span class='no'>repo</span>))
+  (<span class='fu'><a href='is_module_installed.html'>is_module_installed</a></span>(<span class='kw'>repo</span> <span class='kw'>=</span> <span class='no'>repo</span>))
   <span class='co'># get help for package</span>
   <span class='co'>#module_help(repo = repo)</span>
   <span class='co'># list functions available</span>
-  <span class='fu'><a href='https://rdrr.io/pkg/outsider/man/module_functions.html'>module_functions</a></span>(<span class='kw'>repo</span> <span class='kw'>=</span> <span class='no'>repo</span>)
+  <span class='fu'><a href='module_functions.html'>module_functions</a></span>(<span class='kw'>repo</span> <span class='kw'>=</span> <span class='no'>repo</span>)
   <span class='co'># import</span>
-  <span class='no'>hello_world</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/outsider/man/module_import.html'>module_import</a></span>(<span class='kw'>fname</span> <span class='kw'>=</span> <span class='st'>'hello_world'</span>, <span class='kw'>repo</span> <span class='kw'>=</span> <span class='no'>repo</span>)
+  <span class='no'>hello_world</span> <span class='kw'>&lt;-</span> <span class='fu'>module_import</span>(<span class='kw'>fname</span> <span class='kw'>=</span> <span class='st'>'hello_world'</span>, <span class='kw'>repo</span> <span class='kw'>=</span> <span class='no'>repo</span>)
   <span class='co'># get help for function</span>
   <span class='co'>#module_help(repo = repo, fname = 'hello_world')</span>
   <span class='co'># ?hello_world # also works</span>
@@ -195,29 +200,20 @@ Global Environment.</p>
 
   <span class='co'># change verbosity settings</span>
   <span class='co'># print nothing to console</span>
-  <span class='fu'><a href='https://rdrr.io/pkg/outsider/man/verbosity_set.html'>verbosity_set</a></span>(<span class='kw'>show_program</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>show_docker</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
+  <span class='fu'><a href='verbosity_set.html'>verbosity_set</a></span>(<span class='kw'>show_program</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>show_docker</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
   <span class='fu'>hello_world</span>()
   <span class='co'># print everything to console</span>
-  <span class='fu'><a href='https://rdrr.io/pkg/outsider/man/verbosity_set.html'>verbosity_set</a></span>(<span class='kw'>show_program</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>show_docker</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
+  <span class='fu'><a href='verbosity_set.html'>verbosity_set</a></span>(<span class='kw'>show_program</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>show_docker</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
   <span class='fu'>hello_world</span>()
   <span class='co'># write program output to a file</span>
-  <span class='fu'><a href='https://rdrr.io/pkg/outsider/man/verbosity_set.html'>verbosity_set</a></span>(<span class='kw'>show_program</span> <span class='kw'>=</span> <span class='st'>'log.txt'</span>, <span class='kw'>show_docker</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
+  <span class='fu'><a href='verbosity_set.html'>verbosity_set</a></span>(<span class='kw'>show_program</span> <span class='kw'>=</span> <span class='st'>'log.txt'</span>, <span class='kw'>show_docker</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
   <span class='fu'>hello_world</span>()
   (<span class='fu'><a href='https://rdrr.io/r/base/readLines.html'>readLines</a></span>(<span class='kw'>con</span> <span class='kw'>=</span> <span class='st'>'log.txt'</span>))
   <span class='fu'><a href='https://rdrr.io/r/base/files.html'>file.remove</a></span>(<span class='st'>'log.txt'</span>)
 
   <span class='co'># uninstall</span>
-  <span class='fu'><a href='https://rdrr.io/pkg/outsider/man/module_uninstall.html'>module_uninstall</a></span>(<span class='no'>repo</span>)
-}</div><div class='output co'>#&gt; befdeaa7b1392bd4e0796c2b82274892b2ba5e0ed4ee2f5515a4c8714a8ab980
-#&gt; Hello world!
-#&gt; ------------
-#&gt; DISTRIB_ID=Ubuntu
-#&gt; DISTRIB_RELEASE=18.04
-#&gt; DISTRIB_CODENAME=bionic
-#&gt; DISTRIB_DESCRIPTION="Ubuntu 18.04.1 LTS"
-#&gt; om_hello_world_0
-#&gt; om_hello_world_0</div><div class='output co'>#&gt; <span class='message'>Removing <span style='color: #00BB00;'>'om..hello.world'</span><span></span></div><div class='output co'>#&gt; <span class='message'>Removing package from ‘/private/var/folders/x9/m8kwpxps2v93xk52zqzm5lkh0000gp/T/RtmpWlb8ao/temp_libpath15a0651f2e52’</span>
-#&gt; <span class='message'>(as ‘lib’ is unspecified)</span></div></span></pre>
+  <span class='fu'><a href='module_uninstall.html'>module_uninstall</a></span>(<span class='no'>repo</span>)
+}</div><div class='output co'>#&gt; <span class='warning'>Warning: ‘suppressMessages(loadNamespace(pkgnm_guess(repo = repo)))’ converted to character string</span></div><div class='output co'>#&gt; <span class='error'>Error in as.environment(pos): no item called "suppressMessages(loadNamespace(pkgnm_guess(repo = repo)))" on the search list</span></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <h2>Contents</h2>

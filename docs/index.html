@@ -150,12 +150,12 @@
 <div id="available-external-programs" class="section level2">
 <h2 class="hasAnchor">
 <a href="#available-external-programs" class="anchor"></a>Available external programs</h2>
-<p>Modules available on GitHub since 10:44 07 January 2020 (CET)</p>
-<p>● figlet</p>
-<p>● BAMM</p>
-<p>● RAxML</p>
-<p>● revbayes</p>
-<p>● beast</p>
+<p>Modules available on GitHub since 12:12 07 January 2020 (CET)</p>
+<p>● PartitionFinder2</p>
+<p>● trimal</p>
+<p>● pyphlawd</p>
+<p>● astral</p>
+<p>● pasta</p>
 <p>…. Plus, at least, 9 more!</p>
 <p>For more details, see the <a href="https://antonellilab.github.io/outsider/articles/available.html">available modules table</a></p>
 <div id="real-world-example-aligning-biological-sequences" class="section level3">
@@ -171,6 +171,20 @@
 <p>Try raising an issue to request someone make a module, <a href="https://github.com/AntonelliLab/outsider/issues/new">Raise an Issue</a>.</p>
 <p>Otherwise, why not make it yourself? Check out the <a href="https://github.com/AntonelliLab/outsider.devtools"><code>outsider.devtools</code></a> package.</p>
 </div>
+</div>
+<div id="security-notice" class="section level2">
+<h2 class="hasAnchor">
+<a href="#security-notice" class="anchor"></a>Security notice</h2>
+<p>There is a risk that <code>outsider</code> modules may be malicious. Modules make use of the program Docker which allows any program to be efficiently deployed by wrapping the program’s code, along with everything that program requires to run e.g. operating system, dependent libraries, into an executable container.</p>
+<p>While this is useful for providing users with whichever programs they require, there is a potential security risk if, along with the desired program and dependencies, malicious software is also shipped.</p>
+<p>A well-known malicious example of Docker container exploitation is in cryptocurrency mining. A container may ship with a cryptocurrency mining software that would make use of your computer’s resources while you ran you the module.</p>
+<p>To minimise any secuirty risks <strong>Be sure of which modules you install on your machine.</strong> Whenever installing a new module, <code>outsider</code> will alert you to the potential security risks. Before installing a new module, ask yourself:</p>
+<ul>
+<li>Is this module from a well-known developer?</li>
+<li>How many others are using this module?</li>
+</ul>
+<p>Consider checking the stats on the module’s GitHub page (e.g. number of stars/watchers) or looking-up the details of the developer (e.g. email forums, twitter, academic profile).</p>
+<p>Additionally, you may wish to check the Dockerfile of the module. Does it install programs from well-known code repositories (e.g. <code>apt-get</code>)? Or is it running lines of code from unknown/untrackable URL sources?</p>
 </div>
 <div id="how-does-it-work" class="section level2">
 <h2 class="hasAnchor">

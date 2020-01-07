@@ -130,7 +130,7 @@ cryptocurrency mining. A container may ship with a cryptocurrency mining
 software that would make use of your computer's resources while you ran you the
 module.
 
-To minimise any secuirty risks **Be sure of which modules you install on your
+To minimise any security risks **Be sure of which modules you install on your
 machine.** Whenever installing a new module, `outsider` will alert you to the
 potential security risks. Before installing a new module, ask yourself:
 
