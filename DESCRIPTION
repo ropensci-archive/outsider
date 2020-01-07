@@ -31,3 +31,5 @@ Suggests:
     phylotaR,
     ape,
     ssh
+Remotes:
+    AntonelliLab/outsider.base
