@@ -101,7 +101,7 @@ raxml(arglist = c('-m', 'GTRGAMMA', '-s', 'alignment.fasta', '-p', '1234',
 # Visualisation
 
 Now, let's check out our tree! We can use the R package
-["Analsis of Phylogenetics and Evolution" or `ape`](http://ape-package.ird.fr/)
+["Analysis of Phylogenetics and Evolution" or `ape`](http://ape-package.ird.fr/)
 to do this.
 
 ```{r visualise}
