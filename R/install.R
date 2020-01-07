@@ -202,8 +202,6 @@ module_installed <- function() {
 #' Global Environment.
 #' @param repo Module repo
 #' @param fname Function name to import
-#' @details If program is successfully removed from your system, TRUE is
-#' returned else FALSE.
 #' @example examples/module_install.R
 #' @return Function
 #' @export
