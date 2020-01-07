@@ -86,17 +86,17 @@ hello_world()
 
 ## Available external programs
 
-Modules available on GitHub since 10:44 07 January 2020 (CET)
+Modules available on GitHub since 12:12 07 January 2020 (CET)
 
-● figlet
+● PartitionFinder2
 
-● BAMM
+● trimal
 
-● RAxML
+● pyphlawd
 
-● revbayes
+● astral
 
-● beast
+● pasta
 
 …. Plus, at least, 9 more\!
 
@@ -122,6 +122,39 @@ Issue](https://github.com/AntonelliLab/outsider/issues/new).
 Otherwise, why not make it yourself? Check out the
 [`outsider.devtools`](https://github.com/AntonelliLab/outsider.devtools)
 package.
+
+## Security notice
+
+There is a risk that `outsider` modules may be malicious. Modules make
+use of the program Docker which allows any program to be efficiently
+deployed by wrapping the program’s code, along with everything that
+program requires to run e.g. operating system, dependent libraries, into
+an executable container.
+
+While this is useful for providing users with whichever programs they
+require, there is a potential security risk if, along with the desired
+program and dependencies, malicious software is also shipped.
+
+A well-known malicious example of Docker container exploitation is in
+cryptocurrency mining. A container may ship with a cryptocurrency mining
+software that would make use of your computer’s resources while you ran
+you the module.
+
+To minimise any secuirty risks **Be sure of which modules you install on
+your machine.** Whenever installing a new module, `outsider` will alert
+you to the potential security risks. Before installing a new module, ask
+yourself:
+
+  - Is this module from a well-known developer?
+  - How many others are using this module?
+
+Consider checking the stats on the module’s GitHub page (e.g. number of
+stars/watchers) or looking-up the details of the developer (e.g. email
+forums, twitter, academic profile).
+
+Additionally, you may wish to check the Dockerfile of the module. Does
+it install programs from well-known code repositories (e.g. `apt-get`)?
+Or is it running lines of code from unknown/untrackable URL sources?
 
 ## How does it work?
 
