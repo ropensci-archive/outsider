@@ -54,31 +54,38 @@
   <a href="../articles/outsider.html">Get started</a>
 </li>
 <li>
-  <a href="../reference/index.html">Reference</a>
+  <a href="../articles/available.html">Available modules</a>
 </li>
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-    Articles
+    Use examples
      
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
 <li>
-      <a href="../articles/available.html">Available modules</a>
+      <a href="../articles/phylogenetic_pipeline.html">Evolutionary tree</a>
     </li>
     <li>
-      <a href="../articles/phylogenetic_pipeline.html">Pipeline to construct evolutionary trees</a>
-    </li>
-    <li>
-      <a href="../articles/ssh.html">Run commands on a server</a>
+      <a href="../articles/ssh.html">Remote host</a>
     </li>
   </ul>
+</li>
+<li>
+  <a href="../reference/index.html">Reference</a>
 </li>
 <li>
   <a href="../news/index.html">Changelog</a>
 </li>
       </ul>
-<ul class="nav navbar-nav navbar-right"></ul>
+<ul class="nav navbar-nav navbar-right">
+<li>
+  <a href="https://github.com/antonellilab/outsider">
+    <span class="fa fa-github"></span>
+     
+  </a>
+</li>
+      </ul>
 </div>
 <!--/.nav-collapse -->
   </div>
@@ -93,7 +100,7 @@
     <div class="page-header toc-ignore">
       <h1>Pipeline to construct evolutionary trees</h1>
             
-            <h4 class="date">2020-01-07</h4>
+            <h4 class="date">2020-01-15</h4>
       
       
       <div class="hidden name"><code>phylogenetic_pipeline.Rmd</code></div>
@@ -185,7 +192,7 @@
 <div id="alignment" class="section level1">
 <h1 class="hasAnchor">
 <a href="#alignment" class="anchor"></a>Alignment</h1>
-<p>Now we have written our sequences to a text-based <code>.fasta</code> file, we need to align them! To do this, we can use <a href="https://mafft.cbrc.jp/alignment/software/"><code>mafft</code></a>. We first need to install the module and then import the key function, <code>mafft</code>. After doing this, we can call the <code>mafft</code> program using the same arguments that we would if it were calling the program via command-line. In our case we can simple run our alignment using the ‘–auto’ parameter.</p>
+<p>Now we have written our sequences to a text-based <code>.fasta</code> file, we need to align them! To do this, we can use <a href="https://mafft.cbrc.jp/alignment/software/"><code>mafft</code></a>. We first need to install the module and then import the key function, <code>mafft</code>. After doing this, we can call the <code>mafft</code> program using the same arguments that we would if it were calling the program via command-line. For simplicity, we can run our alignment using the ‘–auto’ parameter.</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(outsider)</a></code></pre></div>
 <pre><code>## ----------------
 ## outsider v 0.1.0
@@ -193,9 +200,9 @@
 ## - Security notice: be sure of which modules you install</code></pre>
 <div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1"><span class="co"># Install module</span></a>
 <a class="sourceLine" id="cb8-2" data-line-number="2">repo &lt;-<span class="st"> 'dombennett/om..mafft'</span></a>
-<a class="sourceLine" id="cb8-3" data-line-number="3"><span class="kw"><a href="https://rdrr.io/pkg/outsider/man/module_install.html">module_install</a></span>(<span class="dt">repo =</span> repo, <span class="dt">force =</span> <span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb8-3" data-line-number="3"><span class="kw"><a href="../reference/module_install.html">module_install</a></span>(<span class="dt">repo =</span> repo, <span class="dt">force =</span> <span class="ot">TRUE</span>)</a>
 <a class="sourceLine" id="cb8-4" data-line-number="4"><span class="co"># Import the function</span></a>
-<a class="sourceLine" id="cb8-5" data-line-number="5">mafft &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/pkg/outsider/man/module_import.html">module_import</a></span>(<span class="dt">fname =</span> <span class="st">'mafft'</span>, <span class="dt">repo =</span> repo)</a>
+<a class="sourceLine" id="cb8-5" data-line-number="5">mafft &lt;-<span class="st"> </span><span class="kw"><a href="../reference/module_import.html">module_import</a></span>(<span class="dt">fname =</span> <span class="st">'mafft'</span>, <span class="dt">repo =</span> repo)</a>
 <a class="sourceLine" id="cb8-6" data-line-number="6"><span class="co"># Run our program with normal mafft arguments</span></a>
 <a class="sourceLine" id="cb8-7" data-line-number="7"><span class="co"># Note: all arguments must be separate character variables.</span></a>
 <a class="sourceLine" id="cb8-8" data-line-number="8"><span class="kw">mafft</span>(<span class="dt">arglist =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">'--auto'</span>, <span class="st">'aotus_cytb.fasta'</span>, <span class="st">'&gt;'</span>, <span class="st">'alignment.fasta'</span>))</a></code></pre></div>
@@ -299,9 +306,9 @@ STEP 002-006-1  identical.
 <div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(outsider)</a>
 <a class="sourceLine" id="cb10-2" data-line-number="2"><span class="co"># Install</span></a>
 <a class="sourceLine" id="cb10-3" data-line-number="3">repo &lt;-<span class="st"> 'dombennett/om..raxml'</span></a>
-<a class="sourceLine" id="cb10-4" data-line-number="4"><span class="kw"><a href="https://rdrr.io/pkg/outsider/man/module_install.html">module_install</a></span>(<span class="dt">repo =</span> repo, <span class="dt">force =</span> <span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb10-4" data-line-number="4"><span class="kw"><a href="../reference/module_install.html">module_install</a></span>(<span class="dt">repo =</span> repo, <span class="dt">force =</span> <span class="ot">TRUE</span>)</a>
 <a class="sourceLine" id="cb10-5" data-line-number="5"><span class="co"># Import</span></a>
-<a class="sourceLine" id="cb10-6" data-line-number="6">raxml &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/pkg/outsider/man/module_import.html">module_import</a></span>(<span class="dt">fname =</span> <span class="st">'raxml'</span>, <span class="dt">repo =</span> repo)</a>
+<a class="sourceLine" id="cb10-6" data-line-number="6">raxml &lt;-<span class="st"> </span><span class="kw"><a href="../reference/module_import.html">module_import</a></span>(<span class="dt">fname =</span> <span class="st">'raxml'</span>, <span class="dt">repo =</span> repo)</a>
 <a class="sourceLine" id="cb10-7" data-line-number="7"><span class="co"># Run</span></a>
 <a class="sourceLine" id="cb10-8" data-line-number="8"><span class="kw">raxml</span>(<span class="dt">arglist =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">'-m'</span>, <span class="st">'GTRGAMMA'</span>, <span class="st">'-s'</span>, <span class="st">'alignment.fasta'</span>, <span class="st">'-p'</span>, <span class="st">'1234'</span>,</a>
 <a class="sourceLine" id="cb10-9" data-line-number="9">                  <span class="st">'-n'</span>, <span class="st">'aotus_cytb'</span>, <span class="st">'-T'</span>, <span class="st">'2'</span>))</a></code></pre></div>
@@ -367,7 +374,7 @@ STEP 002-006-1  identical.
 ## Partition: 0 with name: No Name Provided
 ## Base frequencies: 0.289 0.285 0.120 0.306 
 ## 
-## Inference[0]: Time 0.043548 GAMMA-based likelihood -2591.962827, best rearrangement setting 5
+## Inference[0]: Time 0.102025 GAMMA-based likelihood -2591.962827, best rearrangement setting 5
 ## 
 ## 
 ## Conducting final model optimizations on all 1 trees under GAMMA-based models ....
@@ -382,7 +389,7 @@ STEP 002-006-1  identical.
 ## Program execution info written to /working_dir/RAxML_info.aotus_cytb
 ## Best-scoring ML tree written to: /working_dir/RAxML_bestTree.aotus_cytb
 ## 
-## Overall execution time: 0.065850 secs or 0.000018 hours or 0.000001 days</code></pre>
+## Overall execution time: 0.134140 secs or 0.000037 hours or 0.000002 days</code></pre>
 </div>
 <div id="visualisation" class="section level1">
 <h1 class="hasAnchor">

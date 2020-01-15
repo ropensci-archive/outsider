@@ -54,25 +54,25 @@
   <a href="../articles/outsider.html">Get started</a>
 </li>
 <li>
-  <a href="../reference/index.html">Reference</a>
+  <a href="../articles/available.html">Available modules</a>
 </li>
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-    Articles
+    Use examples
      
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
 <li>
-      <a href="../articles/available.html">Available modules</a>
+      <a href="../articles/phylogenetic_pipeline.html">Evolutionary tree</a>
     </li>
     <li>
-      <a href="../articles/phylogenetic_pipeline.html">Pipeline to construct evolutionary trees</a>
-    </li>
-    <li>
-      <a href="../articles/ssh.html">Run commands on a server</a>
+      <a href="../articles/ssh.html">Remote host</a>
     </li>
   </ul>
+</li>
+<li>
+  <a href="../reference/index.html">Reference</a>
 </li>
 <li>
   <a href="../news/index.html">Changelog</a>
@@ -118,6 +118,7 @@
 <div class="figure">
 <img src="https://raw.githubusercontent.com/AntonelliLab/outsider/master/other/outline.png" alt="outsider_outline"><p class="caption">outsider_outline</p>
 </div>
+<hr>
 </div>
 <div id="installing-outsider" class="section level2">
 <h2 class="hasAnchor">
@@ -128,7 +129,8 @@
 <p>For some operating systems, “Docker Desktop” is not available. If that is the case, try <a href="https://docs.docker.com/toolbox/">“Docker Toolbox”</a>. This is a legacy Docker for older operating systems. It has similar functionality but requires a virtual machine and has greater computational overhead.</p>
 </blockquote>
 <p>With Docker installed, you then can install <code>outsider</code> via GitHub.</p>
-<p><code>{install-outsider, eval=FALSE} library(devtools) install_github('AntonelliLab/outsider')</code></p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(devtools)</a>
+<a class="sourceLine" id="cb1-2" data-line-number="2"><span class="kw"><a href="https://rdrr.io/pkg/devtools/man/remote-reexports.html">install_github</a></span>(<span class="st">'AntonelliLab/outsider'</span>)</a></code></pre></div>
 <div id="non-r-dependencies" class="section level3">
 <h3 class="hasAnchor">
 <a href="#non-r-dependencies" class="anchor"></a>Non-R dependencies</h3>
@@ -142,46 +144,46 @@
 <h2 class="hasAnchor">
 <a href="#finding-and-installing-modules" class="anchor"></a>Finding and installing modules</h2>
 <p>To see what modules are available you can see the “<a href="https://antonellilab.github.io/outsider/articles/available.html">available modules page</a>”. Alternatively, for the latest available information you can search for modules using the <code><a href="../reference/module_details.html">module_details()</a></code> function.</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(outsider)</a></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(outsider)</a></code></pre></div>
 <pre><code>## ----------------
 ## outsider v 0.1.0
 ## ----------------
 ## - Security notice: be sure of which modules you install</code></pre>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="co"># repo = NULL will search for ALL available modules</span></a>
-<a class="sourceLine" id="cb3-2" data-line-number="2"><span class="co">#  (this may take a long time, depends on internet connection and remote server)</span></a>
-<a class="sourceLine" id="cb3-3" data-line-number="3"><span class="kw"><a href="https://rdrr.io/r/base/print.html">print</a></span>(<span class="kw"><a href="../reference/module_details.html">module_details</a></span>(<span class="dt">repo =</span> <span class="st">'dombennett/om..mafft'</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="co"># repo = NULL will search for ALL available modules</span></a>
+<a class="sourceLine" id="cb4-2" data-line-number="2"><span class="co">#  (this may take a long time, depends on internet connection and remote server)</span></a>
+<a class="sourceLine" id="cb4-3" data-line-number="3"><span class="kw"><a href="https://rdrr.io/r/base/print.html">print</a></span>(<span class="kw"><a href="../reference/module_details.html">module_details</a></span>(<span class="dt">repo =</span> <span class="st">'dombennett/om..mafft'</span>))</a></code></pre></div>
 <pre><code>## # A tibble: 1 x 7
 ##   repo   program details     versions updated_at          watchers_count url    
 ##   &lt;chr&gt;  &lt;chr&gt;   &lt;chr&gt;       &lt;chr&gt;    &lt;dttm&gt;                       &lt;int&gt; &lt;chr&gt;  
-## 1 dombe… mafft   Multiple a… latest   2019-10-25 12:57:00              0 https:…</code></pre>
+## 1 dombe… mafft   Multiple a… latest   2020-01-10 14:25:00              0 https:…</code></pre>
 <p>To install a module, all that is required is to provide the repo name to the function <code><a href="../reference/module_install.html">module_install()</a></code>.</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(outsider)</a>
-<a class="sourceLine" id="cb5-2" data-line-number="2"><span class="kw"><a href="../reference/module_install.html">module_install</a></span>(<span class="dt">repo =</span> <span class="st">'dombennett/om..mafft'</span>, <span class="dt">force =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(outsider)</a>
+<a class="sourceLine" id="cb6-2" data-line-number="2"><span class="kw"><a href="../reference/module_install.html">module_install</a></span>(<span class="dt">repo =</span> <span class="st">'dombennett/om..mafft'</span>, <span class="dt">force =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
 <blockquote>
 <p><strong>What is <code>repo</code>?</strong> The <code>repo</code> is the unique name for a GitHub repository that hosts an <code>outsider</code> module. It consists of two parts: a GitHub username and a project name. Given its uniqueness, all modules are referred to by their <code>repo</code>.</p>
 </blockquote>
 <p>To confirm the module is installed on a computer, it might be useful to use <code><a href="../reference/module_installed.html">module_installed()</a></code>. This function returns a table of all installed modules.</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(outsider)</a>
-<a class="sourceLine" id="cb6-2" data-line-number="2"><span class="kw"><a href="https://rdrr.io/r/base/print.html">print</a></span>(<span class="kw"><a href="../reference/module_installed.html">module_installed</a></span>())</a></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(outsider)</a>
+<a class="sourceLine" id="cb7-2" data-line-number="2"><span class="kw"><a href="https://rdrr.io/r/base/print.html">print</a></span>(<span class="kw"><a href="../reference/module_installed.html">module_installed</a></span>())</a></code></pre></div>
 <pre><code>## # A tibble: 2 x 7
-##   package    image       tag   program  url              image_created image_id 
-##   &lt;fct&gt;      &lt;chr&gt;       &lt;chr&gt; &lt;chr&gt;    &lt;chr&gt;            &lt;chr&gt;         &lt;chr&gt;    
-## 1 om..hello… dombennett… late… hello w… https://github.… 8 months ago  acdff0a2…
-## 2 om..mafft  dombennett… late… mafft    https://github.… 13 months ago 97170a5f…</code></pre>
+##   package    image       tag    program   url             image_created image_id
+##   &lt;fct&gt;      &lt;chr&gt;       &lt;chr&gt;  &lt;chr&gt;     &lt;chr&gt;           &lt;chr&gt;         &lt;chr&gt;   
+## 1 om..mafft  dombennett… latest mafft     https://github… 13 months ago 97170a5…
+## 2 om..parti… dombennett… &lt;NA&gt;   Partitio… https://github… &lt;NA&gt;          &lt;NA&gt;</code></pre>
 </div>
 <div id="importing" class="section level2">
 <h2 class="hasAnchor">
 <a href="#importing" class="anchor"></a>Importing</h2>
 <p>All modules contain functions for interacting with the external program that they host. To see these functions we can use <code><a href="../reference/module_help.html">module_help()</a></code> to look up the help documents.</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(outsider)</a>
-<a class="sourceLine" id="cb8-2" data-line-number="2"><span class="co"># the whole module</span></a>
-<a class="sourceLine" id="cb8-3" data-line-number="3"><span class="kw"><a href="../reference/module_help.html">module_help</a></span>(<span class="dt">repo =</span> <span class="st">'dombennett/om..mafft'</span>)</a>
-<a class="sourceLine" id="cb8-4" data-line-number="4"><span class="co"># specific function of a module (if known)</span></a>
-<a class="sourceLine" id="cb8-5" data-line-number="5"><span class="kw"><a href="../reference/module_help.html">module_help</a></span>(<span class="dt">repo =</span> <span class="st">'dombennett/om..mafft'</span>, <span class="dt">fname =</span> <span class="st">'mafft'</span>)</a></code></pre></div>
-<p>Once a function name is known of a particular module, the function can be imported with <code><a href="../reference/module_import.html">module_import()</a></code>.</p>
 <div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(outsider)</a>
-<a class="sourceLine" id="cb9-2" data-line-number="2">mafft &lt;-<span class="st"> </span><span class="kw"><a href="../reference/module_import.html">module_import</a></span>(<span class="dt">fname =</span> <span class="st">'mafft'</span>, <span class="dt">repo =</span> <span class="st">'dombennett/om..mafft'</span>)</a>
-<a class="sourceLine" id="cb9-3" data-line-number="3"><span class="kw"><a href="https://rdrr.io/r/base/print.html">print</a></span>(<span class="kw">is</span>(mafft))</a></code></pre></div>
+<a class="sourceLine" id="cb9-2" data-line-number="2"><span class="co"># the whole module</span></a>
+<a class="sourceLine" id="cb9-3" data-line-number="3"><span class="kw"><a href="../reference/module_help.html">module_help</a></span>(<span class="dt">repo =</span> <span class="st">'dombennett/om..mafft'</span>)</a>
+<a class="sourceLine" id="cb9-4" data-line-number="4"><span class="co"># specific function of a module (if known)</span></a>
+<a class="sourceLine" id="cb9-5" data-line-number="5"><span class="kw"><a href="../reference/module_help.html">module_help</a></span>(<span class="dt">repo =</span> <span class="st">'dombennett/om..mafft'</span>, <span class="dt">fname =</span> <span class="st">'mafft'</span>)</a></code></pre></div>
+<p>Once a function name is known of a particular module, the function can be imported with <code><a href="../reference/module_import.html">module_import()</a></code>.</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(outsider)</a>
+<a class="sourceLine" id="cb10-2" data-line-number="2">mafft &lt;-<span class="st"> </span><span class="kw"><a href="../reference/module_import.html">module_import</a></span>(<span class="dt">fname =</span> <span class="st">'mafft'</span>, <span class="dt">repo =</span> <span class="st">'dombennett/om..mafft'</span>)</a>
+<a class="sourceLine" id="cb10-3" data-line-number="3"><span class="kw"><a href="https://rdrr.io/r/base/print.html">print</a></span>(<span class="kw">is</span>(mafft))</a></code></pre></div>
 <pre><code>## [1] "function"         "OptionalFunction" "PossibleMethod"</code></pre>
 <blockquote>
 <p><strong>What is <code>mafft</code>?</strong> “mafft” is a multiple alignment tool for for biological sequences. Note, a user can use <em>any</em> name they wish for the function when it is imported. For example, <code>mafftymcmafftface &lt;- module_import( ...</code> would work equally well.</p>
@@ -192,10 +194,10 @@
 <a href="#commands" class="anchor"></a>Commands</h2>
 <p>The imported functions from modules act like portals to the external programs the modules host. To run a command, a user needs to use the function name and give arguments corresponding to the arguments of the external program. For example, on command-line to list the help information for <code>mafft</code>, we would write <code>mafft --help</code>. With <code>outsider</code> we can do run <code>mafft('--help')</code>.</p>
 <p>For a more complicated example, we could launch a small analysis with <code>mafft</code> like so.</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(outsider)</a>
-<a class="sourceLine" id="cb11-2" data-line-number="2">mafft &lt;-<span class="st"> </span><span class="kw"><a href="../reference/module_import.html">module_import</a></span>(<span class="dt">fname =</span> <span class="st">'mafft'</span>, <span class="dt">repo =</span> <span class="st">'dombennett/om..mafft'</span>)</a>
-<a class="sourceLine" id="cb11-3" data-line-number="3"><span class="kw">mafft</span>(<span class="dt">arglist =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">'--auto'</span>, <span class="st">'input_sequences.fasta'</span>, <span class="st">'&gt;'</span>,</a>
-<a class="sourceLine" id="cb11-4" data-line-number="4">                  <span class="st">'output_alignment.fasta'</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(outsider)</a>
+<a class="sourceLine" id="cb12-2" data-line-number="2">mafft &lt;-<span class="st"> </span><span class="kw"><a href="../reference/module_import.html">module_import</a></span>(<span class="dt">fname =</span> <span class="st">'mafft'</span>, <span class="dt">repo =</span> <span class="st">'dombennett/om..mafft'</span>)</a>
+<a class="sourceLine" id="cb12-3" data-line-number="3"><span class="kw">mafft</span>(<span class="dt">arglist =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">'--auto'</span>, <span class="st">'input_sequences.fasta'</span>, <span class="st">'&gt;'</span>,</a>
+<a class="sourceLine" id="cb12-4" data-line-number="4">                  <span class="st">'output_alignment.fasta'</span>))</a></code></pre></div>
 <blockquote>
 <p><strong>Why the spaces between arguments?</strong> All the arguments of the external, command-line program must be provided as separated characters. This helps <code>outsider</code> parse the elements.</p>
 </blockquote>
@@ -205,7 +207,7 @@
 <pre><code>mafft(arglist = c('--auto', 'input_sequences.fasta', '&gt;',
 'output_alignment.fasta'))</code></pre>
 <p>describes in R how to call the MAFFT program via command-line/terminal. It is equivalent to <code>mafft --auto input_sequences.fasta &gt; output_alignment.fasta</code> if we were to call the program via command-line/terminal. How do we know how to structure the program arguments? In the case of MAFFT we can look-up the arguments on their website, <a href="mafft.cbrc.jp/">mafft.cbrc.jp</a>. But often for command-line programs we can call for help with <code>-h</code> or <code>--help</code>. For MAFFT at the command-line, we could run <code>mafft --help</code> or with <code>outsider</code> we can run:</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" data-line-number="1"><span class="kw">mafft</span>(<span class="dt">arglist =</span> <span class="st">'--help'</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" data-line-number="1"><span class="kw">mafft</span>(<span class="dt">arglist =</span> <span class="st">'--help'</span>)</a></code></pre></div>
 <pre><code>## ------------------------------------------------------------------------------
 ##   MAFFT v7.407 (2018/Jul/23)
 ##   https://mafft.cbrc.jp/alignment/software/
@@ -239,10 +241,10 @@
 <h2 class="hasAnchor">
 <a href="#uninstalling" class="anchor"></a>Uninstalling</h2>
 <p>Clean up your computer by removing unwanted modules with <code><a href="../reference/module_uninstall.html">module_uninstall()</a></code>.</p>
-<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(outsider)</a>
-<a class="sourceLine" id="cb16-2" data-line-number="2"><span class="kw"><a href="../reference/module_uninstall.html">module_uninstall</a></span>(<span class="dt">repo =</span> <span class="st">'dombennett/om..mafft'</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb17-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(outsider)</a>
+<a class="sourceLine" id="cb17-2" data-line-number="2"><span class="kw"><a href="../reference/module_uninstall.html">module_uninstall</a></span>(<span class="dt">repo =</span> <span class="st">'dombennett/om..mafft'</span>)</a></code></pre></div>
 <pre><code>## Removing 'om..mafft'</code></pre>
-<pre><code>## Removing package from '/Library/Frameworks/R.framework/Versions/3.6/Resources/library'
+<pre><code>## Removing package from '/private/var/folders/x9/m8kwpxps2v93xk52zqzm5lkh0000gp/T/RtmpVEd0up/temp_libpath1dac1e84b821'
 ## (as 'lib' is unspecified)</code></pre>
 </div>
 <div id="building-your-own-module" class="section level2">

@@ -54,31 +54,38 @@
   <a href="../articles/outsider.html">Get started</a>
 </li>
 <li>
-  <a href="../reference/index.html">Reference</a>
+  <a href="../articles/available.html">Available modules</a>
 </li>
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-    Articles
+    Use examples
      
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
 <li>
-      <a href="../articles/available.html">Available modules</a>
+      <a href="../articles/phylogenetic_pipeline.html">Evolutionary tree</a>
     </li>
     <li>
-      <a href="../articles/phylogenetic_pipeline.html">Pipeline to construct evolutionary trees</a>
-    </li>
-    <li>
-      <a href="../articles/ssh.html">Run commands on a server</a>
+      <a href="../articles/ssh.html">Remote host</a>
     </li>
   </ul>
+</li>
+<li>
+  <a href="../reference/index.html">Reference</a>
 </li>
 <li>
   <a href="../news/index.html">Changelog</a>
 </li>
       </ul>
-<ul class="nav navbar-nav navbar-right"></ul>
+<ul class="nav navbar-nav navbar-right">
+<li>
+  <a href="https://github.com/antonellilab/outsider">
+    <span class="fa fa-github"></span>
+     
+  </a>
+</li>
+      </ul>
 </div>
 <!--/.nav-collapse -->
   </div>
@@ -107,20 +114,20 @@
 <a class="sourceLine" id="cb1-3" data-line-number="3"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(outsider)</a>
 <a class="sourceLine" id="cb1-4" data-line-number="4"></a>
 <a class="sourceLine" id="cb1-5" data-line-number="5"><span class="co"># SSH</span></a>
-<a class="sourceLine" id="cb1-6" data-line-number="6">session &lt;-<span class="st"> </span><span class="kw">ssh_connect</span>(<span class="dt">host =</span> <span class="st">"username@ip.address:port"</span>)</a>
-<a class="sourceLine" id="cb1-7" data-line-number="7"><span class="kw"><a href="https://rdrr.io/pkg/outsider/man/ssh_setup.html">ssh_setup</a></span>(session)</a>
+<a class="sourceLine" id="cb1-6" data-line-number="6">session &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/pkg/ssh/man/ssh.html">ssh_connect</a></span>(<span class="dt">host =</span> <span class="st">"username@ip.address:port"</span>)</a>
+<a class="sourceLine" id="cb1-7" data-line-number="7"><span class="kw"><a href="../reference/ssh_setup.html">ssh_setup</a></span>(session)</a>
 <a class="sourceLine" id="cb1-8" data-line-number="8"></a>
 <a class="sourceLine" id="cb1-9" data-line-number="9"><span class="co"># Run</span></a>
 <a class="sourceLine" id="cb1-10" data-line-number="10">repo &lt;-<span class="st"> 'dombennett/om.hello.world'</span></a>
-<a class="sourceLine" id="cb1-11" data-line-number="11"><span class="cf">if</span> (<span class="op">!</span><span class="kw"><a href="https://rdrr.io/pkg/outsider/man/is_module_installed.html">is_module_installed</a></span>(<span class="dt">repo =</span> repo)) {</a>
-<a class="sourceLine" id="cb1-12" data-line-number="12">  <span class="kw"><a href="https://rdrr.io/pkg/outsider/man/module_install.html">module_install</a></span>(<span class="dt">repo =</span> repo)</a>
+<a class="sourceLine" id="cb1-11" data-line-number="11"><span class="cf">if</span> (<span class="op">!</span><span class="kw"><a href="../reference/is_module_installed.html">is_module_installed</a></span>(<span class="dt">repo =</span> repo)) {</a>
+<a class="sourceLine" id="cb1-12" data-line-number="12">  <span class="kw"><a href="../reference/module_install.html">module_install</a></span>(<span class="dt">repo =</span> repo)</a>
 <a class="sourceLine" id="cb1-13" data-line-number="13">}</a>
-<a class="sourceLine" id="cb1-14" data-line-number="14"><span class="kw"><a href="https://rdrr.io/pkg/outsider/man/module_import.html">module_import</a></span>(<span class="dt">repo =</span> repo, <span class="dt">fname =</span> <span class="st">'hello_world'</span>)</a>
+<a class="sourceLine" id="cb1-14" data-line-number="14"><span class="kw"><a href="../reference/module_import.html">module_import</a></span>(<span class="dt">repo =</span> repo, <span class="dt">fname =</span> <span class="st">'hello_world'</span>)</a>
 <a class="sourceLine" id="cb1-15" data-line-number="15"><span class="co"># hello world will be run on the remote machine</span></a>
 <a class="sourceLine" id="cb1-16" data-line-number="16"><span class="kw">hello_world</span>()</a>
 <a class="sourceLine" id="cb1-17" data-line-number="17"></a>
 <a class="sourceLine" id="cb1-18" data-line-number="18"><span class="co"># Clean up</span></a>
-<a class="sourceLine" id="cb1-19" data-line-number="19"><span class="kw"><a href="https://rdrr.io/pkg/outsider/man/ssh_teardown.html">ssh_teardown</a></span>()</a></code></pre></div>
+<a class="sourceLine" id="cb1-19" data-line-number="19"><span class="kw"><a href="../reference/ssh_teardown.html">ssh_teardown</a></span>()</a></code></pre></div>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

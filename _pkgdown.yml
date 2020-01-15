@@ -8,16 +8,26 @@ reference:
   contents:
     - matches("(outsider|verbosity|ssh)")
 # ignoring private functions
-
-articles:
-- title: All articles
-  desc: Using `outsider`
-  contents:
-  - '`available`'
-  - '`phylogenetic_pipeline`'
-  - '`ssh`'
-
+  
 navbar:
+  structure:
+    structure:
+    left:  [home, intro, available, uses, reference, news]
+    right: [github]
+  components:
+    articles: ~
+    available:
+      text: "Available modules"
+      href: articles/available.html
+    uses:
+      text: "Use examples"
+      menu:
+        tree:
+          text: "Evolutionary tree"
+          href: articles/phylogenetic_pipeline.html
+        ssh:
+          text: "Remote host"
+          href: articles/ssh.html
   right:
     - icon: fa-github
       href: https://github.com/antonellilab/outsider

@@ -35,6 +35,8 @@ a user can install and import an external program for calling within R:
 
 ![outsider_outline](https://raw.githubusercontent.com/AntonelliLab/outsider/master/other/outline.png)
 
+---
+
 ## Installing `outsider`
 
 Before you can make the most of `outsider` you will need to install and start
@@ -48,7 +50,7 @@ requires a virtual machine and has greater computational overhead.
 
 With Docker installed, you then can install `outsider` via GitHub.
 
-```{install-outsider, eval=FALSE}
+```{r install-outsider, eval=FALSE}
 library(devtools)
 install_github('AntonelliLab/outsider')
 ```
