@@ -30,4 +30,4 @@ navbar:
           href: articles/ssh.html
   right:
     - icon: fa-github
-      href: https://github.com/antonellilab/outsider
+      href: https://github.com/ropensci/outsider

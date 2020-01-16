@@ -38,7 +38,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">outsider</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.1</span>
       </span>
     </div>
 
@@ -80,7 +80,7 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/antonellilab/outsider">
+  <a href="https://github.com/ropensci/outsider">
     <span class="fa fa-github"></span>
      
   </a>
@@ -101,7 +101,7 @@
       <h1>Install and run programs, outside of R, inside of R</h1>
             
       
-      
+      <small class="dont-index">Source: <a href="https://github.com/ropensci/outsider/blob/master/vignettes/outsider.Rmd"><code>vignettes/outsider.Rmd</code></a></small>
       <div class="hidden name"><code>outsider.Rmd</code></div>
 
     </div>
@@ -116,7 +116,7 @@
 <p>For every external program provided through <code>outsider</code>, a virtual machine, or “Docker image”, needs to be described and specific R code – for launching and interacting with the program – is required. This Docker image and R code are provided through <strong>outsider modules</strong> that are hosted on <a href="https://github.com/">GitHub</a>.</p>
 <p>Users can install any of the available <code>outsider</code> modules. With two commands, a user can install and import an external program for calling within R: <code><a href="../reference/module_install.html">module_install()</a></code> and <code><a href="../reference/module_import.html">module_import()</a></code>.</p>
 <div class="figure">
-<img src="https://raw.githubusercontent.com/AntonelliLab/outsider/master/other/outline.png" alt="outsider_outline"><p class="caption">outsider_outline</p>
+<img src="https://raw.githubusercontent.com/ropensci/outsider/master/other/outline.png" alt="outsider_outline"><p class="caption">outsider_outline</p>
 </div>
 <hr>
 </div>
@@ -129,8 +129,8 @@
 <p>For some operating systems, “Docker Desktop” is not available. If that is the case, try <a href="https://docs.docker.com/toolbox/">“Docker Toolbox”</a>. This is a legacy Docker for older operating systems. It has similar functionality but requires a virtual machine and has greater computational overhead.</p>
 </blockquote>
 <p>With Docker installed, you then can install <code>outsider</code> via GitHub.</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(devtools)</a>
-<a class="sourceLine" id="cb1-2" data-line-number="2"><span class="kw"><a href="https://rdrr.io/pkg/devtools/man/remote-reexports.html">install_github</a></span>(<span class="st">'AntonelliLab/outsider'</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(remotes)</a>
+<a class="sourceLine" id="cb1-2" data-line-number="2"><span class="kw">install_remotes</span>(<span class="st">'ropensci/outsider'</span>)</a></code></pre></div>
 <div id="non-r-dependencies" class="section level3">
 <h3 class="hasAnchor">
 <a href="#non-r-dependencies" class="anchor"></a>Non-R dependencies</h3>
@@ -143,10 +143,10 @@
 <div id="finding-and-installing-modules" class="section level2">
 <h2 class="hasAnchor">
 <a href="#finding-and-installing-modules" class="anchor"></a>Finding and installing modules</h2>
-<p>To see what modules are available you can see the “<a href="https://antonellilab.github.io/outsider/articles/available.html">available modules page</a>”. Alternatively, for the latest available information you can search for modules using the <code><a href="../reference/module_details.html">module_details()</a></code> function.</p>
+<p>To see what modules are available you can see the “<a href="https://docs.ropensci.org/outsider/articles/available.html">available modules page</a>”. Alternatively, for the latest available information you can search for modules using the <code><a href="../reference/module_details.html">module_details()</a></code> function.</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(outsider)</a></code></pre></div>
 <pre><code>## ----------------
-## outsider v 0.1.0
+## outsider v 0.1.1
 ## ----------------
 ## - Security notice: be sure of which modules you install</code></pre>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="co"># repo = NULL will search for ALL available modules</span></a>
@@ -165,11 +165,13 @@
 <p>To confirm the module is installed on a computer, it might be useful to use <code><a href="../reference/module_installed.html">module_installed()</a></code>. This function returns a table of all installed modules.</p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(outsider)</a>
 <a class="sourceLine" id="cb7-2" data-line-number="2"><span class="kw"><a href="https://rdrr.io/r/base/print.html">print</a></span>(<span class="kw"><a href="../reference/module_installed.html">module_installed</a></span>())</a></code></pre></div>
-<pre><code>## # A tibble: 2 x 7
+<pre><code>## # A tibble: 4 x 7
 ##   package    image       tag    program   url             image_created image_id
 ##   &lt;fct&gt;      &lt;chr&gt;       &lt;chr&gt;  &lt;chr&gt;     &lt;chr&gt;           &lt;chr&gt;         &lt;chr&gt;   
-## 1 om..mafft  dombennett… latest mafft     https://github… 13 months ago 97170a5…
-## 2 om..parti… dombennett… &lt;NA&gt;   Partitio… https://github… &lt;NA&gt;          &lt;NA&gt;</code></pre>
+## 1 om..hello… dombennett… latest hello wo… https://github… 8 months ago  acdff0a…
+## 2 om..mafft  dombennett… latest mafft     https://github… 13 months ago 97170a5…
+## 3 om..hello… dombennett… &lt;NA&gt;   hello wo… https://github… &lt;NA&gt;          &lt;NA&gt;    
+## 4 om..parti… dombennett… &lt;NA&gt;   Partitio… https://github… &lt;NA&gt;          &lt;NA&gt;</code></pre>
 </div>
 <div id="importing" class="section level2">
 <h2 class="hasAnchor">
@@ -244,13 +246,13 @@
 <div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb17-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(outsider)</a>
 <a class="sourceLine" id="cb17-2" data-line-number="2"><span class="kw"><a href="../reference/module_uninstall.html">module_uninstall</a></span>(<span class="dt">repo =</span> <span class="st">'dombennett/om..mafft'</span>)</a></code></pre></div>
 <pre><code>## Removing 'om..mafft'</code></pre>
-<pre><code>## Removing package from '/private/var/folders/x9/m8kwpxps2v93xk52zqzm5lkh0000gp/T/RtmpVEd0up/temp_libpath1dac1e84b821'
+<pre><code>## Removing package from '/private/var/folders/x9/m8kwpxps2v93xk52zqzm5lkh0000gp/T/RtmpKcsrmL/temp_libpath6dd69512b70'
 ## (as 'lib' is unspecified)</code></pre>
 </div>
 <div id="building-your-own-module" class="section level2">
 <h2 class="hasAnchor">
 <a href="#building-your-own-module" class="anchor"></a>Building your own module</h2>
-<p>Unfortunately, <code>outsider</code>’s utility is limited by the number of available modules. Fortunately, it is very easy to create and upload your own module. The package comes with a range of helper functions for minimising the amount of coding for a module developer. If you know how to install an external program on your own computer which you would like would like to run it through <code>outsider</code> and you have some experience with GitHub, then explore the <a href="https://github.com/AntonelliLab/outsider.devtools">“outsider.devtools”</a> package.</p>
+<p>Unfortunately, <code>outsider</code>’s utility is limited by the number of available modules. Fortunately, it is very easy to create and upload your own module. The package comes with a range of helper functions for minimising the amount of coding for a module developer. If you know how to install an external program on your own computer which you would like would like to run it through <code>outsider</code> and you have some experience with GitHub, then explore the <a href="https://github.com/ropensci/outsider.devtools">“outsider.devtools”</a> package.</p>
 </div>
   </div>
 

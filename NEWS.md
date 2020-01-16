@@ -1,3 +1,11 @@
+# outsider 0.1.1
+
+## ROpenSci accepted version
+
+* Improved documentation
+* Test suites
+* Better security warnings/information
+
 # outsider 0.1.0
 
 ## Post-review version of outsider

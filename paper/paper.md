@@ -54,21 +54,21 @@ The `outsider` packages work through `docker` [@docker] and `GitHub` [@github] t
 `outsider` packages provide an interface to install and run *outsider modules*. These modules are hosted on GitHub [@github] and consist of two parts: an R package and a Dockerfile. The Dockerfile details the installation process for an external program in the form of a Docker image, while the R package comprises functions and documentation for interacting with the external program. By default, a module’s R code simply passes command-line arguments through Docker. After installation, a module’s functions can then be imported and launched using `outsider` functions. Upon running a module’s code, `outsider` code will first launch a Docker container of the image as described by the module’s Dockerfile. `outsider` then facilitates the communication between the module’s R code and the Docker container that hosts the external program (developers of modules have the choice of determining default behaviours for handling generated files). `outsider` modules thus wrap external command-line programs into R functions in a convenient manner. `outsider` functions allow users to look up available modules and determine build statuses (i.e. whether the package is passing its online tests) before installing.
 
 
-At time of writing, `outsider` modules for some of the most popular bioinformatics tools have been developed: BLAST [@blast], MAFFT [@mafft], RAxML [@raxml], bamm [@bamm], pyrate [@pyrate]. (See the `outsider` website for a up-to-date and [complete list](https://antonellilab.github.io/outsider/articles/available.html)).
+At time of writing, `outsider` modules for some of the most popular bioinformatics tools have been developed: BLAST [@blast], MAFFT [@mafft], RAxML [@raxml], bamm [@bamm], pyrate [@pyrate]. (See the `outsider` website for a up-to-date and [complete list](https://docs.ropensci.org/outsider/articles/available.html)).
 
-![An outline of the outsider module ecosystem.](https://raw.githubusercontent.com/antonellilab/outsider/master/other/outline.png)
+![An outline of the outsider module ecosystem.](https://raw.githubusercontent.com/ropensci/outsider/master/other/outline.png)
 
 
 ### Code structure
 
 The code-base of `outsider` is split over three R packages and four repositories:
 
-* [`outsider`](https://github.com/AntonelliLab/outsider): The main package for installing, importing and running **outsider modules**.
-* [`outsider.base`](https://github.com/AntonelliLab/outsider.base): The package for low-level interaction between module R code and Docker containers.
-* [`outsider.devtools`](https://github.com/AntonelliLab/outsider.devtools): The development tools package for facilitating the creation of new modules.
-* [“outsider-testuites”](https://github.com/AntonelliLab/outsider-testsuites): A repository hosting a series of “test” pipelines for ensuring modules can be successfully strung together to form R/non-R workflows.
+* [`outsider`](https://github.com/ropensci/outsider): The main package for installing, importing and running **outsider modules**.
+* [`outsider.base`](https://github.com/ropensci/outsider.base): The package for low-level interaction between module R code and Docker containers.
+* [`outsider.devtools`](https://github.com/ropensci/outsider.devtools): The development tools package for facilitating the creation of new modules.
+* [“outsider-testuites”](https://github.com/ropensci/outsider-testsuites): A repository hosting a series of “test” pipelines for ensuring modules can be successfully strung together to form R/non-R workflows.
 
-![How the outsider packages interact](https://raw.githubusercontent.com/AntonelliLab/outsider.devtools/master/other/package_structures.png)
+![How the outsider packages interact](https://raw.githubusercontent.com/ropensci/outsider.devtools/master/other/package_structures.png)
 
 ------
 

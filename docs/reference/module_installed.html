@@ -78,7 +78,7 @@ installed on the user's computer." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">outsider</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.1</span>
       </span>
     </div>
 
@@ -120,7 +120,7 @@ installed on the user's computer." />
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
-  <a href="https://github.com/antonellilab/outsider">
+  <a href="https://github.com/ropensci/outsider">
     <span class="fa fa-github"></span>
      
   </a>
@@ -139,7 +139,7 @@ installed on the user's computer." />
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Which outsider modules are installed?</h1>
-    
+    <small class="dont-index">Source: <a href='https://github.com/ropensci/outsider/blob/master/R/install.R'><code>R/install.R</code></a></small>
     <div class="hidden name"><code>module_installed.Rd</code></div>
     </div>
 
@@ -168,11 +168,12 @@ installed on the user's computer.</p>
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>outsider</span>)
 <span class='co'># check what modules are installed</span>
-(<span class='fu'>module_installed</span>())</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 2 x 7</span><span>
+(<span class='fu'>module_installed</span>())</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 3 x 7</span><span>
 #&gt;   package    image       tag    program   url             image_created image_id
 #&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;fct&gt;</span><span>      </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>       </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>           </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>         </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>   
-#&gt; </span><span style='color: #555555;'>1</span><span> om..echo   om_echo     latest echo      </span><span style='color: #555555;'>""</span><span>              5 seconds ago 04f9b49…
-#&gt; </span><span style='color: #555555;'>2</span><span> om..parti… dombennett… </span><span style='color: #BB0000;'>NA</span><span>     Partitio… </span><span style='color: #555555;'>"</span><span>https://githu… </span><span style='color: #BB0000;'>NA</span><span>            </span><span style='color: #BB0000;'>NA</span><span>      </div></span></pre>
+#&gt; </span><span style='color: #555555;'>1</span><span> om..hello… dombennett… latest hello wo… https://github… 8 months ago  acdff0a…
+#&gt; </span><span style='color: #555555;'>2</span><span> om..hello… dombennett… </span><span style='color: #BB0000;'>NA</span><span>     hello wo… https://github… </span><span style='color: #BB0000;'>NA</span><span>            </span><span style='color: #BB0000;'>NA</span><span>      
+#&gt; </span><span style='color: #555555;'>3</span><span> om..parti… dombennett… </span><span style='color: #BB0000;'>NA</span><span>     Partitio… https://github… </span><span style='color: #BB0000;'>NA</span><span>            </span><span style='color: #BB0000;'>NA</span><span>      </div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <h2>Contents</h2>

@@ -33,7 +33,7 @@ Users can install any of the available `outsider` modules. With two commands,
 a user can install and import an external program for calling within R:
 `module_install()` and `module_import()`.
 
-![outsider_outline](https://raw.githubusercontent.com/AntonelliLab/outsider/master/other/outline.png)
+![outsider_outline](https://raw.githubusercontent.com/ropensci/outsider/master/other/outline.png)
 
 ---
 
@@ -51,8 +51,8 @@ requires a virtual machine and has greater computational overhead.
 With Docker installed, you then can install `outsider` via GitHub.
 
 ```{r install-outsider, eval=FALSE}
-library(devtools)
-install_github('AntonelliLab/outsider')
+library(remotes)
+install_remotes('ropensci/outsider')
 ```
 
 ### Non-R dependencies
@@ -65,7 +65,7 @@ the terminal.
 
 ## Finding and installing modules
 
-To see what modules are available you can see the "[available modules page](https://antonellilab.github.io/outsider/articles/available.html)".
+To see what modules are available you can see the "[available modules page](https://docs.ropensci.org/outsider/articles/available.html)".
 Alternatively, for the latest available information you can search for modules
 using the `module_details()` function.
 
@@ -191,5 +191,5 @@ The package comes with a range of helper functions for minimising the amount of
 coding for a module developer. If you know how to install an external program on
 your own computer which you would like  would like to run it through `outsider`
 and you have some experience with GitHub, then explore the
-["outsider.devtools"](https://github.com/AntonelliLab/outsider.devtools)
+["outsider.devtools"](https://github.com/ropensci/outsider.devtools)
 package.

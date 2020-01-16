@@ -19,12 +19,12 @@ services:
 # Postentially due to a compiler error?
 # https://github.com/wesm/feather/issues/154
 # Implementing the recommended change in this issue made no difference
-# But why is there not the same error for: https://github.com/AntonelliLab/outsider.devtools
+# But why is there not the same error for: https://github.com/ropensci/outsider.devtools
 r_binary_packages:
   - ape
 
 r_github_packages:
-  - AntonelliLab/outsider.base
+  - ropensci/outsider.base
   - jimhester/covr
 
 after_success:

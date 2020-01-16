@@ -32,7 +32,7 @@ environment:
     #  PKGTYPE: source
 
 build_script:
-  - travis-tool.sh install_github AntonelliLab/outsider.base
+  - travis-tool.sh install_github ropensci/outsider.base
   - travis-tool.sh install_github ropensci/ssh
   - travis-tool.sh install_deps
 

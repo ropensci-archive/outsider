@@ -1,7 +1,7 @@
 Package: outsider
 Type: Package
 Title: Install and run programs, outside of R, inside of R
-Version: 0.1.0
+Version: 0.1.1
 Authors@R: c(
             person("Dom", "Bennett",
                     role = c("aut", "cre"),
@@ -31,13 +31,15 @@ Authors@R: c(
 Maintainer: Dom Bennett <dominic.john.bennett@gmail.com>
 Description: Install and run external command-line programs in R through use of
     'Docker' <https://www.docker.com/> and online repositories.
+ This package has been peer-reviewed by rOpenSci (v. 0.1.0).
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 7.0.2
 SystemRequirements: docker (>=18.0.0)
-URL: https://antonellilab.github.io/outsider
-BugReports: https://github.com/antonellilab/outsider/issues
+URL: https://github.com/ropensci/outsider#readme,
+    https://docs.ropensci.org/outsider
+BugReports: https://github.com/ropensci/outsider/issues
 Language: en-GB
 Depends:
     R (>= 3.3.0)
@@ -55,4 +57,4 @@ Suggests:
     ape,
     ssh
 Remotes:
-    AntonelliLab/outsider.base
+    ropensci/outsider.base

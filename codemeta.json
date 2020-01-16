@@ -5,18 +5,18 @@
   ],
   "@type": "SoftwareSourceCode",
   "identifier": "outsider",
-  "description": "Install and run external command-line programs in R through use of\n    'Docker' <https://www.docker.com/> and online repositories.",
+  "description": "Install and run external command-line programs in R through use of\n    'Docker' <https://www.docker.com/> and online repositories.\n This package has been peer-reviewed by rOpenSci (v. 0.1.0).",
   "name": "outsider: Install and run programs, outside of R, inside of R",
-  "issueTracker": "https://github.com/antonellilab/outsider/issues",
+  "issueTracker": "https://github.com/ropensci/outsider/issues",
   "license": "https://spdx.org/licenses/MIT",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "programmingLanguage": {
     "@type": "ComputerLanguage",
     "name": "R",
-    "version": "3.6.0",
+    "version": "3.6.2",
     "url": "https://r-project.org"
   },
-  "runtimePlatform": "R version 3.6.0 (2019-04-26)",
+  "runtimePlatform": "R version 3.6.2 (2019-12-12)",
   "author": [
     {
       "@type": "Person",
@@ -26,7 +26,32 @@
       "@id": "https://orcid.org/0000-0003-2722-1359"
     }
   ],
-  "contributor": {},
+  "contributor": [
+    {
+      "@type": "Person",
+      "givenName": "Hannes",
+      "familyName": "Hettling",
+      "@id": "https://orcid.org/0000-0003-4144-2238"
+    },
+    {
+      "@type": "Person",
+      "givenName": "Daniele",
+      "familyName": "Silvestro",
+      "@id": "https://orcid.org/0000-0003-0100-0961"
+    },
+    {
+      "@type": "Person",
+      "givenName": "Rutger",
+      "familyName": "Vos",
+      "@id": "https://orcid.org/0000-0001-9254-7318"
+    },
+    {
+      "@type": "Person",
+      "givenName": "Alexandre",
+      "familyName": "Antonelli",
+      "@id": "https://orcid.org/0000-0003-1842-9297"
+    }
+  ],
   "copyrightHolder": {},
   "funder": {},
   "maintainer": [
@@ -112,7 +137,8 @@
     {
       "@type": "SoftwareApplication",
       "identifier": "outsider.base",
-      "name": "outsider.base"
+      "name": "outsider.base",
+      "sameAs": "https://github.com/ropensci/outsider.base"
     },
     {
       "@type": "SoftwareApplication",
@@ -176,9 +202,9 @@
       "sameAs": "https://CRAN.R-project.org/package=yaml"
     }
   ],
-  "codeRepository": "https://antonellilab.github.io/outsider",
-  "releaseNotes": "https://github.com/AntonelliLab/outsider/blob/master/NEWS.md",
-  "readme": "https://github.com/AntonelliLab/outsider/blob/master/README.md",
+  "codeRepository": "https://github.com/ropensci/outsider",
+  "releaseNotes": "https://github.com/ropensci/outsider/blob/master/NEWS.md",
+  "readme": "https://github.com/ropensci/outsider/blob/master/README.md",
   "fileSize": "26.904KB",
   "contIntegration": [
     "https://travis-ci.org/AntonelliLab/outsider",
@@ -189,5 +215,29 @@
     "@type": "Review",
     "url": "https://github.com/ropensci/onboarding/issues/282",
     "provider": "http://ropensci.org"
-  }
+  },
+  "relatedLink": ["https://github.com/ropensci/outsider#readme", "https://docs.ropensci.org/outsider"],
+  "keywords": ["docker", "rstats", "reproducibility"],
+  "citation": [
+    {
+      "@type": "ScholarlyArticle",
+      "datePublished": "2019",
+      "author": [
+        {
+          "@type": "Person",
+          "givenName": ["Bennett", "et"],
+          "familyName": "al."
+        }
+      ],
+      "name": "outsider: Install and run programs, outside of R, inside of R.",
+      "isPartOf": {
+        "@type": "PublicationIssue",
+        "datePublished": "2019",
+        "isPartOf": {
+          "@type": ["PublicationVolume", "Periodical"],
+          "name": "Journal of Open Source Software"
+        }
+      }
+    }
+  ]
 }

@@ -10,13 +10,13 @@ and fix/create, then please fork and send a pull request!
 
 The `outsider` universe is split between four different entities:
 
-* [`outsider.base`](https://github.com/AntonelliLab/outsider.base): low-level
+* [`outsider.base`](https://github.com/ropensci/outsider.base): low-level
 interface between Docker and modules.
-* [`outsider`](https://github.com/AntonelliLab/outsider): the user-friendly
+* [`outsider`](https://github.com/ropensci/outsider): the user-friendly
 functions for running and installing modules.
-* [`outsider.devtools`](https://github.com/AntonelliLab/outsider.devtools):
+* [`outsider.devtools`](https://github.com/ropensci/outsider.devtools):
 toolkit for making it easier to develop modules.
-* ["Test suites"](https://github.com/AntonelliLab/outsider-testsuites):
+* ["Test suites"](https://github.com/ropensci/outsider-testsuites):
 pipelines connecting modules to test holistic functionality.
 
 If you wish to raise an issue or create a pull-request, please first
@@ -32,8 +32,8 @@ select `outsider` as default.)
 If you think that you can code up a module that does not yet exist in `outsider`
 module form -- then please it give a go!
 
-A whole other [package](https://github.com/AntonelliLab/outsider.devtools) and
-[website](https://antonellilab.github.io/outsider.devtools/) exists for helping
+A whole other [package](https://github.com/ropensci/outsider.devtools) and
+[website](https://docs.ropensci.org/outsider.devtools/) exists for helping
 uses contribute modules.
 
 ### Documentation
@@ -65,7 +65,7 @@ analysis for inferring an evolutionary tree of pineapple-like plants.
 If you have created a series of `outsider` modules for a specific domain and
 think they would make for a given test suite, then please add a new pipeline to
 the
-["outsider-testsuites"](https://github.com/AntonelliLab/outsider-testsuites)!
+["outsider-testsuites"](https://github.com/ropensci/outsider-testsuites)!
 
 ## How to contribute to an R package
 

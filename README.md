@@ -8,11 +8,11 @@
 # Install and run programs, outside of R, inside of R <img src="logo.png" height="200" align="right"/>
 
 [![Build
-Status](https://travis-ci.org/AntonelliLab/outsider.svg?branch=master)](https://travis-ci.org/AntonelliLab/outsider)
+Status](https://travis-ci.org/ropensci/outsider.svg?branch=master)](https://travis-ci.org/ropensci/outsider)
 [![AppVeyor build
-status](https://ci.appveyor.com/api/projects/status/github/AntonelliLab/outsider?branch=master&svg=true)](https://ci.appveyor.com/project/DomBennett/outsider)
+status](https://ci.appveyor.com/api/projects/status/github/ropensci/outsider?branch=master&svg=true)](https://ci.appveyor.com/project/DomBennett/outsider)
 [![Coverage
-Status](https://coveralls.io/repos/github/AntonelliLab/outsider/badge.svg?branch=master)](https://coveralls.io/github/AntonelliLab/outsider?branch=master)
+Status](https://coveralls.io/repos/github/ropensci/outsider/badge.svg?branch=master)](https://coveralls.io/github/ropensci/outsider?branch=master)
 [![Project Status: Active – The project has reached a stable, usable
 state and is being actively
 developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
@@ -35,14 +35,14 @@ It’s like [whalebrew](https://github.com/whalebrew/whalebrew) but
 exclusively for R.
 
 **For more detailed information, check out the [`outsider`
-website](https://antonellilab.github.io/outsider/articles/outsider.html)**
+website](https://docs.ropensci.org/outsider/articles/outsider.html)**
 
 ## Installation
 
 To install the development version of the package …
 
 ``` r
-remotes::install_github('AntonelliLab/outsider')
+remotes::install_github('ropensci/outsider')
 ```
 
 Additionally, you will also need to install **Docker desktop**. To
@@ -86,41 +86,41 @@ hello_world()
 
 ## Available external programs
 
-Modules available on GitHub since 12:12 07 January 2020 (CET)
-
-● PartitionFinder2
-
-● trimal
+Modules available on GitHub since 10:10 16 January 2020 (CET)
 
 ● pyphlawd
 
-● astral
+● PartitionFinder2
+
+● PyRate
 
 ● pasta
 
-…. Plus, at least, 9 more\!
+● mafft
+
+…. Plus, at least, 10 more\!
 
 For more details, see the [available modules
-table](https://antonellilab.github.io/outsider/articles/available.html)
+table](https://docs.ropensci.org/outsider/articles/available.html)
 
 ### Real-World Example: Aligning biological sequences
 
 Installing and running a multiple sequence alignment program
 ([mafft](https://mafft.cbrc.jp/alignment/software/)).
 
-![](https://raw.githubusercontent.com/AntonelliLab/outsider/master/other/alignment_example.gif)
+![](https://raw.githubusercontent.com/ropensci/outsider/master/other/alignment_example.gif)
 
 (See [“Evolutionary tree
-pipeline”](https://antonellilab.github.io/outsider/articles/phylogenetic_pipeline.html)
+pipeline”](https://ropensci.github.io/outsider/articles/phylogenetic_pipeline.html)
 for running this program yourself.)
 
 ### Not finding a module you need?
 
 Try raising an issue to request someone make a module, [Raise an
-Issue](https://github.com/AntonelliLab/outsider/issues/new).
+Issue](https://github.com/ropensci/outsider/issues/new).
 
 Otherwise, why not make it yourself? Check out the
-[`outsider.devtools`](https://github.com/AntonelliLab/outsider.devtools)
+[`outsider.devtools`](https://github.com/ropensci/outsider.devtools)
 package.
 
 ## Security notice
@@ -140,7 +140,7 @@ cryptocurrency mining. A container may ship with a cryptocurrency mining
 software that would make use of your computer’s resources while you ran
 you the module.
 
-To minimise any secuirty risks **Be sure of which modules you install on
+To minimise any security risks **Be sure of which modules you install on
 your machine.** Whenever installing a new module, `outsider` will alert
 you to the potential security risks. Before installing a new module, ask
 yourself:
@@ -174,16 +174,16 @@ Anyone can create a module. They are hosted on
 can be searched for and downloaded through
 `outsider`.
 
-![outsider\_outline](https://raw.githubusercontent.com/AntonelliLab/outsider/master/other/outline.png)
+![outsider\_outline](https://raw.githubusercontent.com/ropensci/outsider/master/other/outline.png)
 
 ## Outsider CI statuses
 
-| Repo                                                                     | [Travis CI](https://travis-ci.org/)                                                                                                                 | [Appveyor](https://www.appveyor.com/)                                                                                                                                                                  |
-| ------------------------------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| [`outsider.base`](https://github.com/AntonelliLab/outsider.base)         | [![Build Status](https://travis-ci.org/AntonelliLab/outsider.base.svg?branch=master)](https://travis-ci.org/AntonelliLab/outsider.base)             | [![AppVeyor build status](https://ci.appveyor.com/api/projects/status/github/AntonelliLab/outsider.base?branch=master&svg=true)](https://ci.appveyor.com/project/DomBennett/outsider.base)             |
-| [`outsider`](https://github.com/AntonelliLab/outsider)                   | [![Build Status](https://travis-ci.org/AntonelliLab/outsider.svg?branch=master)](https://travis-ci.org/AntonelliLab/outsider)                       | [![AppVeyor build status](https://ci.appveyor.com/api/projects/status/github/AntonelliLab/outsider?branch=master&svg=true)](https://ci.appveyor.com/project/DomBennett/outsider)                       |
-| [`outsider.devtools`](https://github.com/AntonelliLab/outsider.devtools) | [![Build Status](https://travis-ci.org/AntonelliLab/outsider.devtools.svg?branch=master)](https://travis-ci.org/AntonelliLab/outsider.devtools)     | [![AppVeyor build status](https://ci.appveyor.com/api/projects/status/github/AntonelliLab/outsider.devtools?branch=master&svg=true)](https://ci.appveyor.com/project/DomBennett/outsider.devtools)     |
-| [“Test suites”](https://github.com/AntonelliLab/outsider-testsuites)     | [![Build Status](https://travis-ci.org/AntonelliLab/outsider-testsuites.svg?branch=master)](https://travis-ci.org/AntonelliLab/outsider-testsuites) | [![AppVeyor build status](https://ci.appveyor.com/api/projects/status/github/AntonelliLab/outsider-testsuites?branch=master&svg=true)](https://ci.appveyor.com/project/DomBennett/outsider-testsuites) |
+| Repo                                                                 | [Travis CI](https://travis-ci.org/)                                                                                                         | [Appveyor](https://www.appveyor.com/)                                                                                                                                                              |
+| -------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [`outsider.base`](https://github.com/ropensci/outsider.base)         | [![Build Status](https://travis-ci.org/ropensci/outsider.base.svg?branch=master)](https://travis-ci.org/ropensci/outsider.base)             | [![AppVeyor build status](https://ci.appveyor.com/api/projects/status/github/ropensci/outsider.base?branch=master&svg=true)](https://ci.appveyor.com/project/DomBennett/outsider.base)             |
+| [`outsider`](https://github.com/ropensci/outsider)                   | [![Build Status](https://travis-ci.org/ropensci/outsider.svg?branch=master)](https://travis-ci.org/ropensci/outsider)                       | [![AppVeyor build status](https://ci.appveyor.com/api/projects/status/github/ropensci/outsider?branch=master&svg=true)](https://ci.appveyor.com/project/DomBennett/outsider)                       |
+| [`outsider.devtools`](https://github.com/ropensci/outsider.devtools) | [![Build Status](https://travis-ci.org/ropensci/outsider.devtools.svg?branch=master)](https://travis-ci.org/ropensci/outsider.devtools)     | [![AppVeyor build status](https://ci.appveyor.com/api/projects/status/github/ropensci/outsider.devtools?branch=master&svg=true)](https://ci.appveyor.com/project/DomBennett/outsider.devtools)     |
+| [“Test suites”](https://github.com/ropensci/outsider-testsuites)     | [![Build Status](https://travis-ci.org/ropensci/outsider-testsuites.svg?branch=master)](https://travis-ci.org/ropensci/outsider-testsuites) | [![AppVeyor build status](https://ci.appveyor.com/api/projects/status/github/ropensci/outsider-testsuites?branch=master&svg=true)](https://ci.appveyor.com/project/DomBennett/outsider-testsuites) |
 
 ## Version
 
@@ -196,4 +196,9 @@ inside of R. *Journal of Open Source Software*, *In review*
 
 ## Maintainer
 
-[Dom Bennett](https://github.com/DomBennett)
+[Dom
+Bennett](https://github.com/DomBennett)
+
+-----
+
+[![ropensci\_footer](https://ropensci.org/public_images/ropensci_footer.png)](https://ropensci.org)

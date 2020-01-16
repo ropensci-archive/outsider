@@ -18,7 +18,8 @@
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="pkgdown.css" rel="stylesheet">
 <script src="pkgdown.js"></script><meta property="og:title" content="Install and run programs, outside of R, inside of R">
 <meta property="og:description" content="Install and run external command-line programs in R through use of
-    Docker &lt;https://www.docker.com/&gt; and online repositories.">
+    Docker &lt;https://www.docker.com/&gt; and online repositories.
+ This package has been peer-reviewed by rOpenSci (v. 0.1.0).">
 <meta property="og:image" content="/logo.png">
 <meta name="twitter:card" content="summary">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
@@ -39,7 +40,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">outsider</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.1</span>
       </span>
     </div>
 
@@ -81,7 +82,7 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/antonellilab/outsider">
+  <a href="https://github.com/ropensci/outsider">
     <span class="fa fa-github"></span>
      
   </a>
@@ -108,12 +109,12 @@
 </blockquote>
 <p><br> Integrating external programs into a deployable, R workflow can be challenging. Although there are many useful functions and packages (e.g. <code><a href="https://rdrr.io/r/base/system.html">base::system()</a></code>) for calling code and software from alternative languages, these approaches require users to independently install dependant software and may not work across platforms. <code>outsider</code> aims to make this easier by allowing users to install, run and control programs <em>outside of R</em> across all operating systems.</p>
 <p>It’s like <a href="https://github.com/whalebrew/whalebrew">whalebrew</a> but exclusively for R.</p>
-<p><strong>For more detailed information, check out the <a href="https://antonellilab.github.io/outsider/articles/outsider.html"><code>outsider</code> website</a></strong></p>
+<p><strong>For more detailed information, check out the <a href="https://docs.ropensci.org/outsider/articles/outsider.html"><code>outsider</code> website</a></strong></p>
 <div id="installation" class="section level2">
 <h2 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h2>
 <p>To install the development version of the package …</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1">remotes<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/remotes/man/install_github.html">install_github</a></span>(<span class="st">'AntonelliLab/outsider'</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1">remotes<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/remotes/man/install_github.html">install_github</a></span>(<span class="st">'ropensci/outsider'</span>)</a></code></pre></div>
 <p>Additionally, you will also need to install <strong>Docker desktop</strong>. To install Docker visit the Docker website and follow the instructions for your operating system: <a href="https://www.docker.com/products/docker-desktop">Install Docker</a>.</p>
 <div id="compatibility" class="section level3">
 <h3 class="hasAnchor">
@@ -150,26 +151,26 @@
 <div id="available-external-programs" class="section level2">
 <h2 class="hasAnchor">
 <a href="#available-external-programs" class="anchor"></a>Available external programs</h2>
-<p>Modules available on GitHub since 12:12 07 January 2020 (CET)</p>
-<p>● PartitionFinder2</p>
-<p>● trimal</p>
+<p>Modules available on GitHub since 10:10 16 January 2020 (CET)</p>
 <p>● pyphlawd</p>
-<p>● astral</p>
+<p>● PartitionFinder2</p>
+<p>● PyRate</p>
 <p>● pasta</p>
-<p>…. Plus, at least, 9 more!</p>
-<p>For more details, see the <a href="https://antonellilab.github.io/outsider/articles/available.html">available modules table</a></p>
+<p>● mafft</p>
+<p>…. Plus, at least, 10 more!</p>
+<p>For more details, see the <a href="https://docs.ropensci.org/outsider/articles/available.html">available modules table</a></p>
 <div id="real-world-example-aligning-biological-sequences" class="section level3">
 <h3 class="hasAnchor">
 <a href="#real-world-example-aligning-biological-sequences" class="anchor"></a>Real-World Example: Aligning biological sequences</h3>
 <p>Installing and running a multiple sequence alignment program (<a href="https://mafft.cbrc.jp/alignment/software/">mafft</a>).</p>
-<p><img src="https://raw.githubusercontent.com/AntonelliLab/outsider/master/other/alignment_example.gif"></p>
-<p>(See <a href="https://antonellilab.github.io/outsider/articles/phylogenetic_pipeline.html">“Evolutionary tree pipeline”</a> for running this program yourself.)</p>
+<p><img src="https://raw.githubusercontent.com/ropensci/outsider/master/other/alignment_example.gif"></p>
+<p>(See <a href="https://ropensci.github.io/outsider/articles/phylogenetic_pipeline.html">“Evolutionary tree pipeline”</a> for running this program yourself.)</p>
 </div>
 <div id="not-finding-a-module-you-need" class="section level3">
 <h3 class="hasAnchor">
 <a href="#not-finding-a-module-you-need" class="anchor"></a>Not finding a module you need?</h3>
-<p>Try raising an issue to request someone make a module, <a href="https://github.com/AntonelliLab/outsider/issues/new">Raise an Issue</a>.</p>
-<p>Otherwise, why not make it yourself? Check out the <a href="https://github.com/AntonelliLab/outsider.devtools"><code>outsider.devtools</code></a> package.</p>
+<p>Try raising an issue to request someone make a module, <a href="https://github.com/ropensci/outsider/issues/new">Raise an Issue</a>.</p>
+<p>Otherwise, why not make it yourself? Check out the <a href="https://github.com/ropensci/outsider.devtools"><code>outsider.devtools</code></a> package.</p>
 </div>
 </div>
 <div id="security-notice" class="section level2">
@@ -178,7 +179,7 @@
 <p>There is a risk that <code>outsider</code> modules may be malicious. Modules make use of the program Docker which allows any program to be efficiently deployed by wrapping the program’s code, along with everything that program requires to run e.g. operating system, dependent libraries, into an executable container.</p>
 <p>While this is useful for providing users with whichever programs they require, there is a potential security risk if, along with the desired program and dependencies, malicious software is also shipped.</p>
 <p>A well-known malicious example of Docker container exploitation is in cryptocurrency mining. A container may ship with a cryptocurrency mining software that would make use of your computer’s resources while you ran you the module.</p>
-<p>To minimise any secuirty risks <strong>Be sure of which modules you install on your machine.</strong> Whenever installing a new module, <code>outsider</code> will alert you to the potential security risks. Before installing a new module, ask yourself:</p>
+<p>To minimise any security risks <strong>Be sure of which modules you install on your machine.</strong> Whenever installing a new module, <code>outsider</code> will alert you to the potential security risks. Before installing a new module, ask yourself:</p>
 <ul>
 <li>Is this module from a well-known developer?</li>
 <li>How many others are using this module?</li>
@@ -190,7 +191,7 @@
 <h2 class="hasAnchor">
 <a href="#how-does-it-work" class="anchor"></a>How does it work?</h2>
 <p><code>outsider</code> makes use of the program <a href="https://www.docker.com/">docker</a> which allows users to create small, deployable machines, called Docker images. The advantage of these images is that they can be run on any machine that has Docker installed, regardless of operating system. The <code>outsider</code> package makes external programs available in R by facilitating the interaction between Docker and the R console through <strong>outsider modules</strong>. These modules consist of two parts: a Dockerfile that describes the Docker image that contains the external program and an R package for interacting with the Docker image. Upon installing and running a module through <code>outsider</code>, a Docker image is launched and the R code of the module is used to interact with the external program. Anyone can create a module. They are hosted on <a href="https://github.com/">GitHub</a> as well as other code-sharing sites and can be searched for and downloaded through <code>outsider</code>.</p>
-<p><img src="https://raw.githubusercontent.com/AntonelliLab/outsider/master/other/outline.png" alt="outsider_outline"></p>
+<p><img src="https://raw.githubusercontent.com/ropensci/outsider/master/other/outline.png" alt="outsider_outline"></p>
 </div>
 <div id="outsider-ci-statuses" class="section level2">
 <h2 class="hasAnchor">
@@ -203,24 +204,24 @@
 </tr></thead>
 <tbody>
 <tr class="odd">
-<td><a href="https://github.com/AntonelliLab/outsider.base"><code>outsider.base</code></a></td>
-<td><a href="https://travis-ci.org/AntonelliLab/outsider.base"><img src="https://travis-ci.org/AntonelliLab/outsider.base.svg?branch=master" alt="Build Status"></a></td>
-<td><a href="https://ci.appveyor.com/project/DomBennett/outsider.base"><embed src="https://ci.appveyor.com/api/projects/status/github/AntonelliLab/outsider.base?branch=master&amp;svg=true"></embed></a></td>
+<td><a href="https://github.com/ropensci/outsider.base"><code>outsider.base</code></a></td>
+<td><a href="https://travis-ci.org/ropensci/outsider.base"><img src="https://travis-ci.org/ropensci/outsider.base.svg?branch=master" alt="Build Status"></a></td>
+<td><a href="https://ci.appveyor.com/project/DomBennett/outsider.base"><embed src="https://ci.appveyor.com/api/projects/status/github/ropensci/outsider.base?branch=master&amp;svg=true"></embed></a></td>
 </tr>
 <tr class="even">
-<td><a href="https://github.com/AntonelliLab/outsider"><code>outsider</code></a></td>
-<td><a href="https://travis-ci.org/AntonelliLab/outsider"><img src="https://travis-ci.org/AntonelliLab/outsider.svg?branch=master" alt="Build Status"></a></td>
-<td><a href="https://ci.appveyor.com/project/DomBennett/outsider"><img src="https://ci.appveyor.com/api/projects/status/github/AntonelliLab/outsider?branch=master&amp;svg=true" alt="AppVeyor build status"></a></td>
+<td><a href="https://github.com/ropensci/outsider"><code>outsider</code></a></td>
+<td><a href="https://travis-ci.org/ropensci/outsider"><img src="https://travis-ci.org/ropensci/outsider.svg?branch=master" alt="Build Status"></a></td>
+<td><a href="https://ci.appveyor.com/project/DomBennett/outsider"><img src="https://ci.appveyor.com/api/projects/status/github/ropensci/outsider?branch=master&amp;svg=true" alt="AppVeyor build status"></a></td>
 </tr>
 <tr class="odd">
-<td><a href="https://github.com/AntonelliLab/outsider.devtools"><code>outsider.devtools</code></a></td>
-<td><a href="https://travis-ci.org/AntonelliLab/outsider.devtools"><img src="https://travis-ci.org/AntonelliLab/outsider.devtools.svg?branch=master" alt="Build Status"></a></td>
-<td><a href="https://ci.appveyor.com/project/DomBennett/outsider.devtools"><embed src="https://ci.appveyor.com/api/projects/status/github/AntonelliLab/outsider.devtools?branch=master&amp;svg=true"></embed></a></td>
+<td><a href="https://github.com/ropensci/outsider.devtools"><code>outsider.devtools</code></a></td>
+<td><a href="https://travis-ci.org/ropensci/outsider.devtools"><img src="https://travis-ci.org/ropensci/outsider.devtools.svg?branch=master" alt="Build Status"></a></td>
+<td><a href="https://ci.appveyor.com/project/DomBennett/outsider.devtools"><embed src="https://ci.appveyor.com/api/projects/status/github/ropensci/outsider.devtools?branch=master&amp;svg=true"></embed></a></td>
 </tr>
 <tr class="even">
-<td><a href="https://github.com/AntonelliLab/outsider-testsuites">“Test suites”</a></td>
-<td><a href="https://travis-ci.org/AntonelliLab/outsider-testsuites"><img src="https://travis-ci.org/AntonelliLab/outsider-testsuites.svg?branch=master" alt="Build Status"></a></td>
-<td><a href="https://ci.appveyor.com/project/DomBennett/outsider-testsuites"><img src="https://ci.appveyor.com/api/projects/status/github/AntonelliLab/outsider-testsuites?branch=master&amp;svg=true" alt="AppVeyor build status"></a></td>
+<td><a href="https://github.com/ropensci/outsider-testsuites">“Test suites”</a></td>
+<td><a href="https://travis-ci.org/ropensci/outsider-testsuites"><img src="https://travis-ci.org/ropensci/outsider-testsuites.svg?branch=master" alt="Build Status"></a></td>
+<td><a href="https://ci.appveyor.com/project/DomBennett/outsider-testsuites"><img src="https://ci.appveyor.com/api/projects/status/github/ropensci/outsider-testsuites?branch=master&amp;svg=true" alt="AppVeyor build status"></a></td>
 </tr>
 </tbody>
 </table>
@@ -239,6 +240,8 @@
 <h2 class="hasAnchor">
 <a href="#maintainer" class="anchor"></a>Maintainer</h2>
 <p><a href="https://github.com/DomBennett">Dom Bennett</a></p>
+<hr>
+<p><a href="https://ropensci.org"><img src="https://ropensci.org/public_images/ropensci_footer.png" alt="ropensci_footer"></a></p>
 </div>
 </div>
   </div>
@@ -247,7 +250,9 @@
     <div class="links">
 <h2>Links</h2>
 <ul class="list-unstyled">
-<li>Report a bug at <br><a href="https://github.com/antonellilab/outsider/issues">https://​github.com/​antonellilab/​outsider/​issues</a>
+<li>Browse source code at <br><a href="https://github.com/ropensci/outsider">https://​github.com/​ropensci/​outsider</a>
+</li>
+<li>Report a bug at <br><a href="https://github.com/ropensci/outsider/issues">https://​github.com/​ropensci/​outsider/​issues</a>
 </li>
 </ul>
 </div>

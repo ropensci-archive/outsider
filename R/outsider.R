@@ -9,7 +9,7 @@
 #' installing and importing these outsider modules.
 #' 
 #' For more information visit the outsider website
-#' (\url{https://antonellilab.github.io/outsider/}).
+#' (\url{https://docs.ropensci.org/outsider/}).
 #'
 #' @docType package
 #' @name outsider
