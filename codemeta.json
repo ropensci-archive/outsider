@@ -207,8 +207,8 @@
   "readme": "https://github.com/ropensci/outsider/blob/master/README.md",
   "fileSize": "26.904KB",
   "contIntegration": [
-    "https://travis-ci.org/AntonelliLab/outsider",
-    "https://coveralls.io/github/AntonelliLab/outsider?branch=master"
+    "https://travis-ci.org/ropensci/outsider",
+    "https://coveralls.io/github/ropensci/outsider?branch=master"
   ],
   "developmentStatus": "https://www.repostatus.org/#active",
   "review": {
@@ -216,8 +216,15 @@
     "url": "https://github.com/ropensci/onboarding/issues/282",
     "provider": "http://ropensci.org"
   },
-  "relatedLink": ["https://github.com/ropensci/outsider#readme", "https://docs.ropensci.org/outsider"],
-  "keywords": ["docker", "rstats", "reproducibility"],
+  "relatedLink": [
+    "https://github.com/ropensci/outsider#readme",
+    "https://docs.ropensci.org/outsider"
+  ],
+  "keywords": [
+    "docker",
+    "rstats",
+    "reproducibility"
+  ],
   "citation": [
     {
       "@type": "ScholarlyArticle",
