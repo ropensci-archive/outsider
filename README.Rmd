@@ -61,10 +61,13 @@ library(outsider)
 # it contains a function for printing 'Hello World!' in Ubuntu 18.04
 repo <- 'dombennett/om..hello.world'
 module_install(repo = repo, force = TRUE)
+
 # look up the help files for the module
 module_help(repo = repo)
+
 # import the 'hello_world' function
 hello_world <- module_import(fname = 'hello_world', repo = repo)
+
 # run the imported function
 hello_world()
 ```

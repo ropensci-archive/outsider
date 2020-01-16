@@ -70,10 +70,13 @@ library(outsider)
 # it contains a function for printing 'Hello World!' in Ubuntu 18.04
 repo <- 'dombennett/om..hello.world'
 module_install(repo = repo, force = TRUE)
+
 # look up the help files for the module
 module_help(repo = repo)
+
 # import the 'hello_world' function
 hello_world <- module_import(fname = 'hello_world', repo = repo)
+
 # run the imported function
 hello_world()
 #> Hello world!
@@ -86,17 +89,17 @@ hello_world()
 
 ## Available external programs
 
-Modules available on GitHub since 10:10 16 January 2020 (CET)
+Modules available on GitHub since 15:15 16 January 2020 (CET)
 
-● pyphlawd
+● pathd8
 
-● PartitionFinder2
+● blast
 
-● PyRate
+● wikit
 
 ● pasta
 
-● mafft
+● BAMM
 
 …. Plus, at least, 10 more\!
 
