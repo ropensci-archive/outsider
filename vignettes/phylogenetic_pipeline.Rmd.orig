@@ -1,0 +1,123 @@
+---
+title: "Pipeline to construct evolutionary trees"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+The whole point of `outsider` is to bring lots of programs together into a
+single place to allow the development of analysis pipelines. Let's demonstrate
+this process by creating a simple pipeline for constructing an evolutionary
+tree. We will generate a tree in three steps: obtain orthologous DNA sequences,
+align these sequences and then estimate a tree.
+
+In our example, we will keep it simple and fast and generate a tree of
+[CytB](https://en.wikipedia.org/wiki/Cytochrome_b) sequences in the primate
+genus of Night Monkeys, **Aotus**.
+
+# phylotaR
+
+To get us started we need DNA sequences that represent the same gene region,
+i.e. sequences that are orthologous. We can obtain our sequences quickly using
+the example data from the R package
+[`phylotaR`](https://github.com/ropensci/phylotaR).
+
+`phylotaR` provides a pipeline for identifying orthologous sequences from a
+reputable online biological sequence database. The package comes with a few
+pre-calculated example sequences. We can extract sequence clusters that
+represent the gene region [cytb](https://en.wikipedia.org/wiki/Cytochrome_b)
+with the following script.
+
+```{r prephylotar}
+aotus <- NULL
+```
+```{r phylotar}
+library(phylotaR)
+# Example data
+data("aotus")
+# Generate summary of identified clusters
+smmry <- summary(aotus)
+# Extract cluster with 'cytb' in feature name
+cytb <- smmry$ID[which(grepl('cytb', smmry$Feature))[1]]
+cytb <- drop_clstrs(aotus, cytb)
+# Reduce cluster to just one sequence per taxon
+cytb <- drop_by_rank(cytb, n = 1)
+# Get taxonomic IDs for taxa in cluster
+txids <- get_txids(cytb, cid = cytb@cids[[1]])
+# Convert IDs to species names
+sp_nms <- get_tx_slot(cytb, txids, slt_nm = 'scnm')
+sp_nms <- sub(' ', '_', sp_nms)
+# Write out
+write_sqs(cytb, 'aotus_cytb.fasta', sq_nm = sp_nms, sid = names(sp_nms))
+# What do the first 50 lines of the file look like?
+cat(paste0(readLines('aotus_cytb.fasta', n = 50), collapse = '\n'))
+cat('...')
+```
+
+# Alignment
+
+Now we have written our sequences to a text-based `.fasta` file, we need to
+align them! To do this, we can use
+[`mafft`](https://mafft.cbrc.jp/alignment/software/). We first need to install
+the module and then import the key function, `mafft`. After doing this, we can
+call the `mafft` program using the same arguments that we would if it were
+calling the program via command-line. For simplicity, we can run our alignment
+using the '--auto' parameter.
+
+```{r mafft}
+library(outsider)
+# Install module
+repo <- 'dombennett/om..mafft'
+module_install(repo = repo, force = TRUE)
+# Import the function
+mafft <- module_import(fname = 'mafft', repo = repo)
+# Run our program with normal mafft arguments
+# Note: all arguments must be separate character variables.
+mafft(arglist = c('--auto', 'aotus_cytb.fasta', '>', 'alignment.fasta'))
+```
+
+# Phylogeny
+
+We can repeat the same process as we did for `mafft` but instead for
+[`RAxML`](https://github.com/stamatak/standard-RAxML) -- a command-line program
+for estimating evolutionary trees from an alignment of DNA sequences using a
+model of molecular evolution (GTRGAMMA) with maximum likelihood.
+
+```{r raxml}
+library(outsider)
+# Install
+repo <- 'dombennett/om..raxml'
+module_install(repo = repo, force = TRUE)
+# Import
+raxml <- module_import(fname = 'raxml', repo = repo)
+# Run
+raxml(arglist = c('-m', 'GTRGAMMA', '-s', 'alignment.fasta', '-p', '1234',
+                  '-n', 'aotus_cytb', '-T', '2'))
+```
+
+# Visualisation
+
+Now, let's check out our tree! We can use the R package
+["Analysis of Phylogenetics and Evolution" or `ape`](http://ape-package.ird.fr/)
+to do this.
+
+```{r visualise}
+library(ape)
+tree <- read.tree('RAxML_bestTree.aotus_cytb')
+plot(tree)
+```
+
+```{r cleanup, include = FALSE}
+files_to_remove <- c(list.files(pattern = c('.fasta')),
+                     list.files(pattern = 'RAxML_'))
+for (file_to_remove in files_to_remove) {
+  try(file.remove(file_to_remove), silent = TRUE)
+}
+repos <- c('dombennett/om..raxml', 'dombennett/om..mafft')
+for (repo in repos) {
+  try(module_uninstall(repo), silent = TRUE)
+}
+```

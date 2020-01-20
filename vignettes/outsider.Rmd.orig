@@ -3,7 +3,9 @@ title: "Install and run programs, outside of R, inside of R"
 output: html_document
 ---
 
-
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
 
 Many data science, statistical and academic projects require running models on
 external software and then performing subsequent analyses of the results in R 
@@ -48,8 +50,7 @@ requires a virtual machine and has greater computational overhead.
 
 With Docker installed, you then can install `outsider` via GitHub.
 
-
-```r
+```{r install-outsider, eval=FALSE}
 library(remotes)
 install_remotes('ropensci/outsider')
 ```
@@ -68,26 +69,17 @@ To see what modules are available you can see the "[available modules page](http
 Alternatively, for the latest available information you can search for modules
 using the `module_details()` function.
 
-
-```r
+``` {r module_details}
 library(outsider)
 # repo = NULL will search for ALL available modules
 #  (this may take a long time, depends on internet connection and remote server)
 print(module_details(repo = 'dombennett/om..mafft'))
 ```
 
-```
-## # A tibble: 1 x 7
-##   repo         program details                         versions updated_at          watchers_count url               
-##   <chr>        <chr>   <chr>                           <chr>    <dttm>                       <int> <chr>             
-## 1 dombennett/… mafft   Multiple alignment program for… latest   2020-01-16 10:36:00              0 https://github.co…
-```
-
 To install a module, all that is required is to provide the repo name to the
 function `module_install()`.
 
-
-```r
+``` {r module_install, results='hide'}
 library(outsider)
 module_install(repo = 'dombennett/om..mafft', force = TRUE)
 ```
@@ -99,19 +91,9 @@ project name. Given its uniqueness, all modules are referred to by their `repo`.
 To confirm the module is installed on a computer, it might be useful to use
 `module_installed()`. This function returns a table of all installed modules.
 
-
-```r
+``` {r module_installed}
 library(outsider)
 print(module_installed())
-```
-
-```
-## # A tibble: 3 x 7
-##   package         image                 tag    program      url                              image_created image_id  
-##   <fct>           <chr>                 <chr>  <chr>        <chr>                            <chr>         <chr>     
-## 1 om..hello.world dombennett/om_hello_… latest hello world  https://github.com/DomBennett/o… 8 months ago  acdff0a24…
-## 2 om..mafft       dombennett/om_mafft   latest mafft        https://github.com/DomBennett/o… 13 months ago 97170a5f7…
-## 3 om..partitionf… dombennett/om_partit… <NA>   PartitionFi… https://github.com/DomBennett/o… <NA>          <NA>
 ```
 
 ## Importing
@@ -120,8 +102,7 @@ All modules contain functions for interacting with the external program that
 they host. To see these functions we can use `module_help()` to look up the help
 documents.
 
-
-```r
+``` {r module_help, eval = FALSE}
 library(outsider)
 # the whole module
 module_help(repo = 'dombennett/om..mafft')
@@ -132,15 +113,10 @@ module_help(repo = 'dombennett/om..mafft', fname = 'mafft')
 Once a function name is known of a particular module, the function can be
 imported with `module_import()`.
 
-
-```r
+``` {r module_import}
 library(outsider)
 mafft <- module_import(fname = 'mafft', repo = 'dombennett/om..mafft')
 print(is(mafft))
-```
-
-```
-## [1] "function"         "OptionalFunction" "PossibleMethod"
 ```
 
 > **What is `mafft`?** "mafft" is a multiple alignment tool for for biological
@@ -159,8 +135,7 @@ write `mafft --help`. With `outsider` we can do run `mafft('--help')`.
 For a more complicated example, we could launch a small analysis with `mafft`
 like so.
 
-
-```r
+``` {r command_analysis, eval = FALSE, results='hold'}
 library(outsider)
 mafft <- module_import(fname = 'mafft', repo = 'dombennett/om..mafft')
 mafft(arglist = c('--auto', 'input_sequences.fasta', '>',
@@ -185,40 +160,8 @@ arguments on their website, [mafft.cbrc.jp](mafft.cbrc.jp/). But often for
 command-line programs we can call for help with `-h` or `--help`. For MAFFT at
 the command-line, we could run `mafft --help` or with `outsider` we can run:
 
-
-```r
+```{r mafft-help}
 mafft(arglist = '--help')
-```
-
-```
-## 
-------------------------------------------------------------------------------
-##   MAFFT v7.407 (2018/Jul/23)
-## 
--
-  https://mafft.cbrc.jp/alignment/software/
-##   MBE 30:772-780 (2013), NAR 30:3059-3066 (2002)
-## ------------------------------------------------------------------------------
-## High speed:
-##   % mafft in > out
-##   % mafft --retree 1 in > out (fast)
-## 
-## High accuracy (for <~200 sequences x <~2,000 aa/nt):
-##   % mafft --maxiterate 1000 --localpair  in > out (% linsi in > out is also ok)
-##   % mafft --maxiterate 1000 --genafpair  in > out (% einsi in > out)
-##   % mafft --maxiterate 1000 --globalpair in > out (% ginsi in > out)
-## 
-## If unsure which option to use:
-##   % mafft --auto in > out
-## 
-## --op # :         Gap opening penalty, default: 1.53
-## --ep # :         Offset (works like gap extension penalty), default: 0.0
-## --maxiterate # : Maximum number of iterative refinement, default: 0
-## --clustalout :   Output: clustal format, default: fasta
-## --reorder :      Outorder: aligned, default: input order
-## --quiet :        Do not report progress
-## --thread # :     Number of threads (if unsure, --thread -1)
-## 
 ```
 
 The help page returned tells us how to structure the arguments:
@@ -235,7 +178,7 @@ with the `>`.
 
 Clean up your computer by removing unwanted modules with `module_uninstall()`.
 
-```r
+```{r uninstall}
 library(outsider)
 module_uninstall(repo = 'dombennett/om..mafft')
 ```
