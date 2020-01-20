@@ -83,9 +83,9 @@ Docker Desktop [@docker_desktop] can be installed for all operating systems but 
 
 The code-base that allows for the installation, execution and development of `outsider` modules is held across three different R packages. For end-users of modules, however, only the `outsider` module is required. For those who wish to develop their own modules, the `outsider.devtools` package provides helper functions for doing so. In addition, there is a test suites repository that hosts mock analysis pipelines that initiate several modules in sequence to test the interaction of all the packages.
 
-* [`outsider`](https://github.com/ropensci/outsider): The main package for installing, importing and running **outsider modules**.
-* [`outsider.base`](https://github.com/ropensci/outsider.base): The package for low-level interaction between module R code and Docker containers (not user-facing).
-* [`outsider.devtools`](https://github.com/ropensci/outsider.devtools): The development tools package for facilitating the creation of new modules.
+* [`outsider`](https://github.com/ropensci/outsider): The main package for installing, importing and running **outsider modules** [@outsider_z].
+* [`outsider.base`](https://github.com/ropensci/outsider.base): The package for low-level interaction between module R code and Docker containers (not user-facing) [@outsiderbase_z].
+* [`outsider.devtools`](https://github.com/ropensci/outsider.devtools): The development tools package for facilitating the creation of new modules [@outsiderdev_z].
 * ["outsider-testuites"](https://github.com/ropensci/outsider-testsuites): A repository hosting a series of "test" pipelines for ensuring modules can be successfully strung together to form R/non-R workflows.
 
 ![How the outsider packages interact](https://raw.githubusercontent.com/ropensci/outsider.devtools/master/other/package_structures.png)
