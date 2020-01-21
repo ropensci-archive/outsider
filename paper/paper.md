@@ -86,7 +86,7 @@ The code-base that allows for the installation, execution and development of `ou
 * [`outsider`](https://github.com/ropensci/outsider): The main package for installing, importing and running **outsider modules** [@outsider_z].
 * [`outsider.base`](https://github.com/ropensci/outsider.base): The package for low-level interaction between module R code and Docker containers (not user-facing) [@outsiderbase_z].
 * [`outsider.devtools`](https://github.com/ropensci/outsider.devtools): The development tools package for facilitating the creation of new modules [@outsiderdev_z].
-* ["outsider-testuites"](https://github.com/ropensci/outsider-testsuites): A repository hosting a series of "test" pipelines for ensuring modules can be successfully strung together to form R/non-R workflows.
+* ["outsider-testuites"](https://github.com/ropensci/outsider-testsuites): A repository hosting a series of "test" pipelines for ensuring modules can be successfully strung together to form R/non-R workflows [@outsiderts_z].
 
 ![How the outsider packages interact](https://raw.githubusercontent.com/ropensci/outsider.devtools/master/other/package_structures.png)
 
