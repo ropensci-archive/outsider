@@ -30,7 +30,7 @@ affiliations:
    index: 1
  - name: Department of Biological and Environmental Sciences, University of Gothenburg, Box 461, SE-405 30 Gothenburg, Sweden
    index: 2
-- name: Naturalis Biodiversity Center, P.O. Box 9517, 2300 RA Leiden, The Netherlands
+ - name: Naturalis Biodiversity Center, P.O. Box 9517, 2300 RA Leiden, The Netherlands
    index: 3
  - name: Royal Botanic Gardens, Kew, TW9 3AE, Richmond, Surrey, UK
    index: 4
