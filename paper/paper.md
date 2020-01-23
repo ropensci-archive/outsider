@@ -164,7 +164,7 @@ Currently, all are available from GitHub source code repositories using the `rem
 
 # Funding
 
-This package has been developed as part of the supersmartR project [@supersmart] which has received funding through A.A. (from the Swedish Research Council [B0569601], the Swedish Foundation for Strategic Research and a Wallenberg Academy Fellowship) and through D.S. (from the Swedish Research Council [2015-04748]).
+This package has been developed as part of the supersmartR project [@supersmartR] which has received funding through A.A. (from the Swedish Research Council [B0569601], the Swedish Foundation for Strategic Research and a Wallenberg Academy Fellowship) and through D.S. (from the Swedish Research Council [2015-04748]).
 
 # Acknowledgements
 
