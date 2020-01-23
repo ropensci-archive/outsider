@@ -51,10 +51,10 @@ Pipelines also make it easier to demonstrate the reproducibility of one’s rese
 Not all analyses, however, can necessarily be run or coded in one’s favoured programming language as different parts of an analysis may require external software or packages.
 Integrating a variety of programs and software can lead to issues of portability (additional software may not run across all operating systems) and versioning errors (differing arguments across additional software versions).
 For the ideal pipeline, it should be possible to install and run any command-line software, within the main programming language of the pipeline, without concern for software versions or operating system.
-R [@cran] is one of the most popular computer languages amongst researchers, and many packages exist for calling programs and code from non-R sources (e.g. [@sys] for shell commands, [@reticulate] for `python` and [@rJava] for `Java`).
+R [@cran] is one of the most popular computer languages amongst researchers, and many packages exist for calling programs and code from non-R sources (e.g. `sys` [@sys] for shell commands, `reticulate` [@reticulate] for `python` and `rJava` [@rJava] for `Java`).
 To our knowledge, however, no R package exists with the ability to launch external programs originating from *any* UNIX command-line source.
 
-The `outsider` packages work through `docker` [@docker] – a service that, through OS-level virtualization, enables deployment of isolated software "containers" – and a code-sharing service (e.g. GitHub [@github]) to allow a user to install and run, in theory, any external, command-line program or package, on any of the major operating systems (Windows, Linux, OSX).
+The `outsider` packages work through `docker` [@docker] – a service that, through OS-level virtualization, enables deployment of isolated software "containers" – and a code-sharing service, e.g. GitHub [@github], to allow a user to install and run, in theory, any external, command-line program or package, on any of the major operating systems (Windows, Linux, OSX).
 
 ## How it works
 
@@ -158,7 +158,7 @@ cat(readLines('alignment.fa'), sep = '\n')
 
 # Availability
 
-`outsider` (and its sister packages) are open source software made available under the MIT licence allowing reuse of the software with limited constraints.
+`outsider` (and its sister packages) are open-source software made available under the MIT licence allowing reuse of the software with limited constraints.
 It is aimed that all packages will be made available through CRAN [@cran], e.g. `install.package("outsider")`.
 Currently, all are available from GitHub source code repositories using the `remotes` package, e.g. `remotes::install_github("ropensci/outsider")`
 
