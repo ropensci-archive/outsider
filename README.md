@@ -17,7 +17,7 @@ Status](https://coveralls.io/repos/github/ropensci/outsider/badge.svg?branch=mas
 state and is being actively
 developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.3615177.svg)](https://doi.org/10.5281/zenodo.3615177)
-[![ropensci](https://badges.ropensci.org/282_status.svg)](https://github.com/ropensci/onboarding/issues/282)
+[![ropensci](https://badges.ropensci.org/282_status.svg)](https://github.com/ropensci/onboarding/issues/282) [![DOI](https://joss.theoj.org/papers/10.21105/joss.02038/status.svg)](https://doi.org/10.21105/joss.02038)
 
 > The Outsider is always unhappy, but he is an agent that ensures the
 > happiness for millions of ‘Insiders’.<br><br> *[The Outsider,
