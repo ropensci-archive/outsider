@@ -1,15 +1,15 @@
-citHeader("To cite outsider in publications use:")
+citHeader("To cite outsider and its sister packages in publications use:")
 
 citEntry(
   entry    = "Article",
   title    = "outsider: Install and run programs, outside of R, inside of R.",
-  author   = "Bennett et al.",
+  author   = "Bennett, D.J. and Hettling, H. and Silvestro, D. and Vos, R. and Antonelli, A.",
   journal  = "Journal of Open Source Software",
-  year     = "2019",
-  volume   = "",
-  number   = "",
-  pages    = "",
-  url      = "",
+  year     = "2020",
+  volume   = "5",
+  number   = "45",
+  pages    = "2038",
+  url      = "https://doi.org/10.21105/joss.02038",
   textVersion = paste(
-  "Bennett et al. (2019). outsider: Install and run programs, outside of R, inside of R. Journal of Open Source Software, In review")
+  "Bennett et al., (2020). outsider: Install and run programs, outside of R, inside of R. Journal of Open Source Software, 5(45), 2038, https://doi.org/10.21105/joss.02038")
 )

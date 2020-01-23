@@ -190,12 +190,11 @@ can be searched for and downloaded through
 
 ## Version
 
-Post-review version 0.1.
+Released version 0.1.
 
 ## Citation
 
-Bennett et al. (2019). outsider: Install and run programs, outside of R,
-inside of R. *Journal of Open Source Software*, *In review*
+Bennett et al., (2020). outsider: Install and run programs, outside of R, inside of R. Journal of Open Source Software, 5(45), 2038, https://doi.org/10.21105/joss.02038
 
 ## Maintainer
 
