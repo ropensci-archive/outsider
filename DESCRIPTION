@@ -1,6 +1,6 @@
 Package: outsider
 Type: Package
-Title: Install and run programs, outside of R, inside of R
+Title: Install and Run Programs, Outside of R, Inside of R
 Version: 0.1.1
 Authors@R: c(
             person("Dom", "Bennett",
@@ -50,5 +50,4 @@ Suggests:
     phylotaR,
     ape,
     ssh
-Remotes:
-    ropensci/outsider.base
+Additional_repositories: https://github.com/ropensci/phylotaR

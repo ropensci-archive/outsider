@@ -117,7 +117,7 @@ Installing and running a multiple sequence alignment program
 ![](https://raw.githubusercontent.com/ropensci/outsider/master/other/alignment_example.gif)
 
 (See [“Evolutionary tree
-pipeline”](https://ropensci.github.io/outsider/articles/phylogenetic_pipeline.html)
+pipeline”](https://docs.ropensci.org/outsider/articles/phylogenetic_pipeline.html)
 for running this program yourself.)
 
 ### Not finding a module you need?
