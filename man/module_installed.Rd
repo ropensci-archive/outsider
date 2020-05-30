@@ -16,7 +16,9 @@ installed on the user's computer.
 \examples{
 library(outsider)
 # check what modules are installed
-(module_installed())
+if (is_outsider_ready()) {
+  (module_installed())
+}
 }
 \seealso{
 Other public: 

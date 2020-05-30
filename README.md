@@ -17,7 +17,10 @@ Status](https://coveralls.io/repos/github/ropensci/outsider/badge.svg?branch=mas
 state and is being actively
 developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.3615177.svg)](https://doi.org/10.5281/zenodo.3615177)
-[![ropensci](https://badges.ropensci.org/282_status.svg)](https://github.com/ropensci/onboarding/issues/282) [![DOI](https://joss.theoj.org/papers/10.21105/joss.02038/status.svg)](https://doi.org/10.21105/joss.02038)
+[![ropensci](https://badges.ropensci.org/282_status.svg)](https://github.com/ropensci/onboarding/issues/282)
+[![DOI](https://joss.theoj.org/papers/10.21105/joss.02038/status.svg)](https://doi.org/10.21105/joss.02038)
+[![CRAN
+downloads](http://cranlogs.r-pkg.org/badges/grand-total/outsider)](https://CRAN.R-project.org/package=outsider)
 
 > The Outsider is always unhappy, but he is an agent that ensures the
 > happiness for millions of ‘Insiders’.<br><br> *[The Outsider,
@@ -62,7 +65,7 @@ be required instead of Docker Desktop.)
 ``` r
 library(outsider)
 #> ----------------
-#> outsider v 0.1.0
+#> outsider v 0.1.1
 #> ----------------
 #> - Security notice: be sure of which modules you install
 # outsider modules are hosted on GitHub and other code-sharing sites
@@ -89,17 +92,17 @@ hello_world()
 
 ## Available external programs
 
-Modules available on GitHub since 15:15 16 January 2020 (CET)
+Modules available on GitHub since 12:08 30 May 2020 (CEST)
 
-● pathd8
+● astral
 
-● blast
+● beast
 
-● wikit
+● PyRate
+
+● RAxML
 
 ● pasta
-
-● BAMM
 
 …. Plus, at least, 10 more\!
 
@@ -126,7 +129,7 @@ Otherwise, why not make it yourself? Check out the
 [`outsider.devtools`](https://github.com/ropensci/outsider.devtools)
 package.
 
-## Security notice
+## Security notice :rotating\_light:
 
 There is a risk that `outsider` modules may be malicious. Modules make
 use of the program Docker which allows any program to be efficiently
@@ -181,20 +184,28 @@ can be searched for and downloaded through
 
 ## Outsider CI statuses
 
-| Repo                                                                 | [Travis CI](https://travis-ci.org/)                                                                                                         | [Appveyor](https://www.appveyor.com/)                                                                                                                                                              |
-| -------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [`outsider.base`](https://github.com/ropensci/outsider.base)         | [![Build Status](https://travis-ci.org/ropensci/outsider.base.svg?branch=master)](https://travis-ci.org/ropensci/outsider.base)             | [![AppVeyor build status](https://ci.appveyor.com/api/projects/status/github/ropensci/outsider.base?branch=master&svg=true)](https://ci.appveyor.com/project/DomBennett/outsider.base)             |
-| [`outsider`](https://github.com/ropensci/outsider)                   | [![Build Status](https://travis-ci.org/ropensci/outsider.svg?branch=master)](https://travis-ci.org/ropensci/outsider)                       | [![AppVeyor build status](https://ci.appveyor.com/api/projects/status/github/ropensci/outsider?branch=master&svg=true)](https://ci.appveyor.com/project/DomBennett/outsider)                       |
-| [`outsider.devtools`](https://github.com/ropensci/outsider.devtools) | [![Build Status](https://travis-ci.org/ropensci/outsider.devtools.svg?branch=master)](https://travis-ci.org/ropensci/outsider.devtools)     | [![AppVeyor build status](https://ci.appveyor.com/api/projects/status/github/ropensci/outsider.devtools?branch=master&svg=true)](https://ci.appveyor.com/project/DomBennett/outsider.devtools)     |
-| [“Test suites”](https://github.com/ropensci/outsider-testsuites)     | [![Build Status](https://travis-ci.org/ropensci/outsider-testsuites.svg?branch=master)](https://travis-ci.org/ropensci/outsider-testsuites) | [![AppVeyor build status](https://ci.appveyor.com/api/projects/status/github/ropensci/outsider-testsuites?branch=master&svg=true)](https://ci.appveyor.com/project/DomBennett/outsider-testsuites) |
+*Statuses of package building checks and tests, run
+monthly.*
+
+| Repo                                                                      | Linux ([Travis CI](https://travis-ci.org/))                                                                                                 | Windows 10 ([Appveyor](https://www.appveyor.com/))                                                                                                                                                 |
+| ------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [`outsider.base`](https://github.com/ropensci/outsider.base)              | [![Build Status](https://travis-ci.org/ropensci/outsider.base.svg?branch=master)](https://travis-ci.org/ropensci/outsider.base)             | [![AppVeyor build status](https://ci.appveyor.com/api/projects/status/github/ropensci/outsider.base?branch=master&svg=true)](https://ci.appveyor.com/project/DomBennett/outsider.base)             |
+| [`outsider`](https://github.com/ropensci/outsider)                        | [![Build Status](https://travis-ci.org/ropensci/outsider.svg?branch=master)](https://travis-ci.org/ropensci/outsider)                       | [![AppVeyor build status](https://ci.appveyor.com/api/projects/status/github/ropensci/outsider?branch=master&svg=true)](https://ci.appveyor.com/project/DomBennett/outsider)                       |
+| [`outsider.devtools`](https://github.com/ropensci/outsider.devtools)      | [![Build Status](https://travis-ci.org/ropensci/outsider.devtools.svg?branch=master)](https://travis-ci.org/ropensci/outsider.devtools)     | [![AppVeyor build status](https://ci.appveyor.com/api/projects/status/github/ropensci/outsider.devtools?branch=master&svg=true)](https://ci.appveyor.com/project/DomBennett/outsider.devtools)     |
+| [Outsider Test suites](https://github.com/ropensci/outsider-testsuites)\* | [![Build Status](https://travis-ci.org/ropensci/outsider-testsuites.svg?branch=master)](https://travis-ci.org/ropensci/outsider-testsuites) | [![AppVeyor build status](https://ci.appveyor.com/api/projects/status/github/ropensci/outsider-testsuites?branch=master&svg=true)](https://ci.appveyor.com/project/DomBennett/outsider-testsuites) |
+
+*\*Mock pipelines to test the interaction of all the packages.*
 
 ## Version
 
-Released version 0.1.
+Released version 0.1, see
+[NEWS](https://github.com/ropensci/outsider/blob/master/NEWS.md).
 
 ## Citation
 
-Bennett et al., (2020). outsider: Install and run programs, outside of R, inside of R. Journal of Open Source Software, 5(45), 2038, https://doi.org/10.21105/joss.02038
+Bennett et al., (2020). outsider: Install and run programs, outside of
+R, inside of R. Journal of Open Source Software, 5(45), 2038,
+<https://doi.org/10.21105/joss.02038>
 
 ## Maintainer
 

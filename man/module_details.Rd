@@ -28,7 +28,9 @@ case of GitLab), url to web presence, names of tagged versions.
 library(outsider)
 # return table of ALL available modules on GitHub
 # NOT RUN - takes too long
-# (available_modules <- module_search())
+\dontrun{
+  (available_modules <- module_search())
+}
 
 # look-up specific modules
 repo <- 'dombennett/om..goodbye.world'
