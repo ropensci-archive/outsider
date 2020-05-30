@@ -25,7 +25,6 @@ Authors@R: c(
 Maintainer: Dom Bennett <dominic.john.bennett@gmail.com>
 Description: Install and run external command-line programs in R through use of
     'Docker' <https://www.docker.com/> and online repositories.
- This package has been peer-reviewed by rOpenSci (v. 0.1.0).
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
