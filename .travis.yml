@@ -1,7 +1,7 @@
 language: r
 r:
   - devel
-  #- oldrel
+  - oldrel
   - release
 
 latex: false
@@ -20,8 +20,8 @@ services:
 # https://github.com/wesm/feather/issues/154
 # Implementing the recommended change in this issue made no difference
 # But why is there not the same error for: https://github.com/ropensci/outsider.devtools
-r_binary_packages:
-  - ape
+#r_binary_packages:
+#  - ape
 
 r_github_packages:
   - ropensci/outsider.base
