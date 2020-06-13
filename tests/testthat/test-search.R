@@ -12,6 +12,7 @@ test_that('yaml_fetch() works', {
 })
 test_that('yaml_read() works', {
   skip_if_offline()
+  skip_on_cran()
   res <- outsider:::yaml_read(repos = 'dombennett/om..hello.world',
                               service = 'github')
   expect_true(inherits(res, 'tbl_df'))
