@@ -1,7 +1,21 @@
 # Vars ----
-gh_url <- 'https://github.com'
 gh_api_url <- 'https://api.github.com'
 gh_search_repo_url <- paste0(gh_api_url, '/search/repositories')
+
+api_request <- function(url, warn = TRUE) {
+  tkn <- Sys.getenv("GITHUB_PAT")
+  h <- curl::new_handle()
+  if (nchar(tkn) > 0)
+  {
+    # From Oct 2020, GitHub API requires token to be provided via curl header
+    curl::handle_setheaders(h, "Authorization-token" = tkn)
+  }
+  req <- try(curl::curl_fetch_memory(url, handle = h), silent = TRUE)
+  if (warn && inherits(req, 'try-error') || req$status_code != 200) {
+    warning("Unable to make URL request for ", char(url))
+  }
+  req
+}
 
 # Functions ----
 #' @name github_repo_search
@@ -10,9 +24,9 @@ gh_search_repo_url <- paste0(gh_api_url, '/search/repositories')
 #' @param repo GitHub repo
 #' @return data.frame
 github_repo_search <- function(repo) {
-  search_args <- paste0('?q=', repo, '&', 'Type=Repositories',
-                        authtoken_get('&'))
-  github_res <- jsonlite::fromJSON(paste0(gh_search_repo_url, search_args))
+  search_args <- paste0('?q=', repo, '&', 'Type=Repositories')
+  req <- api_request(paste0(gh_search_repo_url, search_args))
+  github_res <- jsonlite::fromJSON(rawToChar(req$content))
   if (github_res[['total_count']] == 0) {
     warning('No ', char(repo), ' found.', call. = FALSE)
     return(data.frame())
@@ -31,8 +45,9 @@ github_repo_search <- function(repo) {
 #' @return data.frame
 github_search <- function() {
   search_args <- paste0('?q=om..+in:name+outsider-module+in:description',
-                        '&', 'Type=Repositories', authtoken_get('&'))
-  github_res <- jsonlite::fromJSON(paste0(gh_search_repo_url, search_args))
+                        '&', 'Type=Repositories')
+  req <- api_request(paste0(gh_search_repo_url, search_args))
+  github_res <- jsonlite::fromJSON(rawToChar(req$content))
   if (github_res[['incomplete_results']]) {
     warning('Not all repos discovered.')
   }
@@ -46,18 +61,11 @@ github_search <- function() {
 #' @param repos Character vector of outsider module repositories.
 #' @return tbl_df
 github_tags <- function(repos) {
-  tkn <- Sys.getenv("GITHUB_PAT")
-  h <- curl::new_handle()
-  if (nchar(tkn) > 0)
-  {
-    # From Oct 2020, GitHub API requires token to be provided via curl header
-    curl::handle_setheaders(h, "Authorization-token" = tkn)
-  }
   fetch <- function(repo) {
     api_url <- paste0(gh_api_url, '/repos/', repo, '/contents/inst/dockerfiles')
-    req <- try(curl::curl_fetch_memory(api_url, handle = h), silent = TRUE)
+    req <- api_request(url = api_url, warn = FALSE)
     if (!inherits(req, 'try-error') && req$status_code == 200) {
-      raw_df <- try(jsonlite::fromJSON(rawToChar(req$content)), silent = TRUE)
+      raw_df <- jsonlite::fromJSON(rawToChar(req$content))
       tag <- raw_df[ ,'name']
     } else {
       warning('Unable to fetch data from GitHub for ', char(repo))
