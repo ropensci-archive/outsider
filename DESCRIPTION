@@ -50,4 +50,3 @@ Suggests:
     phylotaR,
     ape,
     ssh
-Additional_repositories: https://github.com/ropensci/phylotaR

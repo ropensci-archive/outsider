@@ -25,6 +25,11 @@ i.e. sequences that are orthologous. We can obtain our sequences quickly using
 the example data from the R package
 [`phylotaR`](https://github.com/ropensci/phylotaR).
 
+```{r install-phylotar, eval=FALSE, include=TRUE}
+# phylotaR is currently not avaialble on CRAN but can be install from Github
+remotes::install_github("ropensci/phylotaR")
+```
+
 `phylotaR` provides a pipeline for identifying orthologous sequences from a
 reputable online biological sequence database. The package comes with a few
 pre-calculated example sequences. We can extract sequence clusters that
