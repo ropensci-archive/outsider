@@ -41,6 +41,7 @@ verbosity_set <- function(show_program = TRUE,
 #' \code{ssh} session to this function and all subsequent commands will be run
 #' on the host rather than the local machine. When finished it is always good
 #' practice to disconnect from the remote host by running \code{ssh_teardown}.
+#' It is required that the remote host has Docker running.
 #' @param session \code{ssh} session, see \code{\link[ssh]{ssh_connect}}
 #' @return logical
 #' @example examples/ssh.R

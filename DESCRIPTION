@@ -4,7 +4,7 @@ Title: Install and Run Programs, Outside of R, Inside of R
 Version: 0.1.1
 Authors@R: c(
             person("Dom", "Bennett",
-                    role = c("aut", "cre"),
+                    role = c("aut", "cre", "cph"),
                     email = "dominic.john.bennett@gmail.com",
                     comment = c(ORCID = "0000-0003-2722-1359")),
             person("Hannes", "Hettling",
@@ -48,4 +48,5 @@ Suggests:
     testthat (>= 2.1),
     knitr (>= 1.0),
     ape,
+    rlang,
     ssh

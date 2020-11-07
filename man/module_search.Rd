@@ -50,6 +50,7 @@ Other public:
 \code{\link{module_help}()},
 \code{\link{module_import}()},
 \code{\link{module_installed}()},
+\code{\link{module_install}()},
 \code{\link{module_uninstall}()}
 }
 \concept{public}

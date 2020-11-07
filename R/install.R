@@ -68,6 +68,7 @@ rl <- function(prompt) {
 #' @return Logical
 #' @example examples/module_install.R
 #' @export
+#' @family public
 module_install <- function(repo = NULL, url = NULL, filepath = NULL, git = NULL,
                            service = c('github', 'bitbucket', 'gitlab'),
                            tag = 'latest', manual = FALSE,
@@ -115,7 +116,7 @@ module_install <- function(repo = NULL, url = NULL, filepath = NULL, git = NULL,
 #' @description Return a vector of functions that can be imported from the
 #' module.
 #' @param repo Module repo
-#' @example examples/module_install.R
+#' @example examples/module_.R
 #' @return character
 #' @export
 #' @family public
@@ -202,7 +203,7 @@ module_installed <- function() {
 #' Global Environment.
 #' @param repo Module repo
 #' @param fname Function name to import
-#' @example examples/module_install.R
+#' @example examples/module_.R
 #' @return Function
 #' @export
 #' @family public
@@ -223,7 +224,7 @@ nmspc_get <- function(...) {
 #' whole modules.
 #' @param repo Module repo
 #' @param fname Function name
-#' @example examples/module_install.R
+#' @example examples/module_.R
 #' @return NULL
 #' @export
 #' @family public

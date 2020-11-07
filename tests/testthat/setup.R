@@ -37,8 +37,7 @@ mock_bitbucket_tags <- function(repos) {
   readRDS(file = file.path(datadir, 'bitbucket_tags.RData'))
 }
 # yaml
-yf <- outsider:::yaml_fetch
-environment(fun = yf) <- .GlobalEnv
+yf <- rlang::duplicate(outsider:::yaml_fetch)
 mock_yaml_fetch <- function(url) {
   yf(url = file.path(datadir, 'om.yml'))
 }
