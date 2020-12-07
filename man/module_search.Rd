@@ -18,7 +18,8 @@ BitBucket.)
 }
 \details{
 Note: To search GitLab an access token is required. To create one:
-1. Visit \url{https://gitlab.com/profile/personal_access_tokens/}
+1. Visit the personal access tokens section of your GitLab profile
+\url{https://about.gitlab.com/}
 2. Create a new token with api scope
 3. Save the generated token to .Renviron
 (try \code{usethis::edit_r_environ()}) with the line
