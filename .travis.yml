@@ -5,11 +5,9 @@ r:
   - release
 
 latex: false
-fortran: false
 pandoc: false
 
 warnings_are_errors: true
-sudo: required
 
 services:
   - docker
